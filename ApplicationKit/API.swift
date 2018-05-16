@@ -6,7 +6,8 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import Foundation
+import WMNetworkKit
+import WMJSONKit
 
 public class API {
   
@@ -18,7 +19,7 @@ public class API {
   public static var productBasePath: String = ""
   
   /// 接口请求方式
-  private var method: HTTPMethod
+  private var method: WMNetwork.HTTPMethod
   /// 接口路径
   private var path: String
   
@@ -27,7 +28,7 @@ public class API {
   /// 请求体参数
   private var bodyParameters: Any?
   
-  public init(method: HTTPMethod, path: String? = nil, version: String? = nil, customPath: String? = nil) {
+  public init(method: WMNetwork.HTTPMethod, path: String? = nil, version: String? = nil, customPath: String? = nil) {
     
     let base = API.isDevelop ? API.developBasePath : API.productBasePath
     
@@ -56,18 +57,6 @@ public class API {
 
 public extension API {
   
-  enum HTTPMethod {
-    
-    case get
-    case post
-    case put
-    case delete
-  }
-  
-}
-
-public extension API {
-  
   /// 设置查询参数
   func query(_ parameters: Any) -> Self {
     
@@ -81,9 +70,50 @@ public extension API {
     self.bodyParameters = parameters
     return self
   }
+ 
+  typealias ProgressHandle = (_ progress: Float) -> Void
+  typealias CompleteHandle = (_ result: WMJSON) -> Void
+  /// 进行请求
+  func request(handle: @escaping CompleteHandle) {
+    
+    let api = self
+    var network = WMNetwork.request(api.method, api.path, isDebug: true)
+    if let query = api.queryParameters { network = network.query(query) }
+    if let body = api.bodyParameters { network = network.body(body) }
+    network.data({ (data, status) in
+      
+      guard let data = data else { return }
+      var json = WMJSON()
+      json.update(with: data)
+      
+      // 调试
+      self.debugLog(json)
+      DispatchQueue.main.async(execute: {
+        
+        handle(json)
+      })
+      
+    })
+    
+  }
   
 }
 
+// MARK: - Utility
+private extension API {
+  
+  func debugLog(_ json: WMJSON) {
+    
+    let api = self
+    #if DEBUG
+    DebugLog(api.path)
+    if let query = api.queryParameters { DebugLog(query) }
+    if let body = api.bodyParameters { DebugLog(body) }
+    DebugLog(json)
+    #endif
+  }
+  
+}
 
 
 

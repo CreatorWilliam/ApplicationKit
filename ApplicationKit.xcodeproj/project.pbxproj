@@ -11,6 +11,7 @@
 		BBC73AE920A5B08900781F00 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* Listable.swift */; };
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
 		BBC73C1820A5C63200781F00 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC73BFD20A5C42400781F00 /* ComponentKit.framework */; };
+		BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0B26720AC3550007FB9BA /* Debug.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		BBC73B1520A5B6B500781F00 /* WMJSONKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMJSONKit.xcodeproj; path = ../WMJSONKit/WMJSONKit.xcodeproj; sourceTree = "<group>"; };
 		BBC73B9220A5B6F900781F00 /* ComponentKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ComponentKit.xcodeproj; path = ../ComponentKit/ComponentKit.xcodeproj; sourceTree = "<group>"; };
 		BBC73BF120A5BC3000781F00 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BBD0B26720AC3550007FB9BA /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 				BBC73ADB20A56DE400781F00 /* ApplicationKit.h */,
 				BBC73AE820A5B08900781F00 /* Listable.swift */,
 				BBC73BF120A5BC3000781F00 /* API.swift */,
+				BBD0B26720AC3550007FB9BA /* Debug.swift */,
 				BBC73ADC20A56DE400781F00 /* Info.plist */,
 			);
 			path = ApplicationKit;
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBC73BF220A5BC3000781F00 /* API.swift in Sources */,
+				BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */,
 				BBC73AE920A5B08900781F00 /* Listable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

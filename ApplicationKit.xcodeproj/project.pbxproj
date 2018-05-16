@@ -49,6 +49,13 @@
 			remoteGlobalIDString = 73AF90881F8B7D0300A7E8A4;
 			remoteInfo = WMJSONKit;
 		};
+		BBE52F3E20ABB9F000C2B3D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BBFCD8DD2052309F00978E44;
+			remoteInfo = OpenKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +69,7 @@
 		BBC73B1520A5B6B500781F00 /* WMJSONKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMJSONKit.xcodeproj; path = ../WMJSONKit/WMJSONKit.xcodeproj; sourceTree = "<group>"; };
 		BBC73B9220A5B6F900781F00 /* ComponentKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ComponentKit.xcodeproj; path = ../ComponentKit/ComponentKit.xcodeproj; sourceTree = "<group>"; };
 		BBC73BF120A5BC3000781F00 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,7 @@
 				BBC73ADA20A56DE400781F00 /* ApplicationKit */,
 				BBC73AD920A56DE400781F00 /* Products */,
 				BBC73B9820A5B71B00781F00 /* Frameworks */,
+				BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */,
 				BBC73B9220A5B6F900781F00 /* ComponentKit.xcodeproj */,
 				BBC73B0320A5B69B00781F00 /* WMNetworkKit.xcodeproj */,
 				BBC73B0920A5B6A100781F00 /* WMNetImageKit.xcodeproj */,
@@ -156,6 +165,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BBE52F3A20ABB9F000C2B3D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BBE52F3F20ABB9F000C2B3D9 /* OpenKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -222,6 +239,10 @@
 					ProjectRef = BBC73B9220A5B6F900781F00 /* ComponentKit.xcodeproj */;
 				},
 				{
+					ProductGroup = BBE52F3A20ABB9F000C2B3D9 /* Products */;
+					ProjectRef = BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */;
+				},
+				{
 					ProductGroup = BBC73C0D20A5C46900781F00 /* Products */;
 					ProjectRef = BBC73B1520A5B6B500781F00 /* WMJSONKit.xcodeproj */;
 				},
@@ -279,6 +300,13 @@
 			fileType = wrapper.framework;
 			path = WMJSONKit.framework;
 			remoteRef = BBC73C1020A5C46900781F00 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BBE52F3F20ABB9F000C2B3D9 /* OpenKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OpenKit.framework;
+			remoteRef = BBE52F3E20ABB9F000C2B3D9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -15,6 +15,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BB07B41120AF0B33000AFB88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BBFCD8DD2052309F00978E44;
+			remoteInfo = OpenKit;
+		};
 		BBC73BFC20A5C42400781F00 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBC73B9220A5B6F900781F00 /* ComponentKit.xcodeproj */;
@@ -49,13 +56,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 73AF90881F8B7D0300A7E8A4;
 			remoteInfo = WMJSONKit;
-		};
-		BBE52F3E20ABB9F000C2B3D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BBFCD8DD2052309F00978E44;
-			remoteInfo = OpenKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -171,7 +171,7 @@
 		BBE52F3A20ABB9F000C2B3D9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BBE52F3F20ABB9F000C2B3D9 /* OpenKit.framework */,
+				BB07B41220AF0B33000AFB88 /* OpenKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -270,6 +270,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		BB07B41220AF0B33000AFB88 /* OpenKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OpenKit.framework;
+			remoteRef = BB07B41120AF0B33000AFB88 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BBC73BFD20A5C42400781F00 /* ComponentKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -303,13 +310,6 @@
 			fileType = wrapper.framework;
 			path = WMJSONKit.framework;
 			remoteRef = BBC73C1020A5C46900781F00 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BBE52F3F20ABB9F000C2B3D9 /* OpenKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = OpenKit.framework;
-			remoteRef = BBE52F3E20ABB9F000C2B3D9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

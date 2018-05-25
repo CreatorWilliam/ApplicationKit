@@ -12,7 +12,7 @@ import WMJSONKit
 public class API {
   
   /// 是否为开发版
-  public static let isDevelop: Bool = false
+  public static var isDevelop: Bool = false
   /// 开发版本基地址
   public static var developBasePath: String = ""
   /// 生产版本基地址

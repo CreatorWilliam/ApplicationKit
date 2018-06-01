@@ -15,6 +15,28 @@ public protocol DataModelListable {
   var pageNo: Int { set get }
   /// 是否有下一页
   var hasNextPage: Bool { set get }
+  /// 分页请求参数
+  func parameters(_ isNext: Bool) -> [String: Any]
+}
+
+// MARK: - 默认实现
+public extension DataModelListable {
+  
+  func parameters(_ isNext: Bool) -> [String: Any] {
+    
+    var parameters: [String: Any] = [:]
+    if isNext == true {
+      
+      parameters["pageNo"] = self.pageNo + 1
+      
+    } else {
+      
+      parameters["pageNo"] = 1
+    }
+    parameters["pageSize"] = 10
+    
+    return parameters
+  }
   
 }
 
@@ -34,15 +56,15 @@ public protocol ViewControllerListable: class {
   /// 初始化，用于配置列表视图默认的下拉刷新，上拉加载
   func setupListView(autoLoad: Bool, canRefresh: Bool, canLoadMore: Bool, hasLoadingView: Bool)
   /// 内部自动调用获取数据的方法：loadData，使用默认的视图样式处理
-  func list(isMore: Bool, hasLoadingView: Bool)
+  func list(isNext: Bool, hasLoadingView: Bool)
   /// 准备获取列表
-  func prepareList(_ isMore: Bool, _ hasLoadingView: Bool) -> Bool
+  func prepareList(_ isNext: Bool, _ hasLoadingView: Bool) -> Bool
   /// 完成获取列表
-  func completeList(_ isMore: Bool, _ hasLoadingView: Bool)
+  func completeList(_ isNext: Bool, _ hasLoadingView: Bool)
   
   // MARK: 👉需自行实现
   /// 实际请求获取数据，需要自行实现，必须执行compketion回调
-  func loadData(_ isMore: Bool, completion handle: @escaping () -> Void)
+  func loadData(_ isNext: Bool, completion handle: @escaping () -> Void)
 
 }
 
@@ -56,7 +78,7 @@ public extension ViewControllerListable {
       
       self.listView.es.addPullToRefresh { [weak self] in
         
-        self?.list(isMore: false, hasLoadingView: hasLoadingView)
+        self?.list(isNext: false, hasLoadingView: hasLoadingView)
       }
     }
     
@@ -64,31 +86,31 @@ public extension ViewControllerListable {
       
       self.listView.es.addInfiniteScrolling { [weak self] in
         
-        self?.list(isMore: true, hasLoadingView: hasLoadingView)
+        self?.list(isNext: true, hasLoadingView: hasLoadingView)
       }
     }
     
     if canRefresh == true && autoLoad == true {
      
-      self.list(isMore: false, hasLoadingView: hasLoadingView)
+      self.list(isNext: false, hasLoadingView: hasLoadingView)
     }
   }
   
-  func list(isMore: Bool, hasLoadingView: Bool) {
+  func list(isNext: Bool, hasLoadingView: Bool) {
     
-    guard self.prepareList(isMore, hasLoadingView) == true else { return }
+    guard self.prepareList(isNext, hasLoadingView) == true else { return }
     
-    self.loadData(isMore, completion: {
+    self.loadData(isNext, completion: {
       
-      self.completeList(isMore, hasLoadingView)
+      self.completeList(isNext, hasLoadingView)
       
     })
     
   }
   
-  func prepareList(_ isMore: Bool, _ hasLoadingView: Bool) -> Bool {
+  func prepareList(_ isNext: Bool, _ hasLoadingView: Bool) -> Bool {
     
-    if isMore == false {
+    if isNext == false {
       
       if hasLoadingView == true {
         
@@ -109,9 +131,9 @@ public extension ViewControllerListable {
     return true
   }
   
-  func completeList(_ isMore: Bool, _ hasLoadingView: Bool) {
+  func completeList(_ isNext: Bool, _ hasLoadingView: Bool) {
     
-    if isMore == false {
+    if isNext == false {
       
       if hasLoadingView == true {
         

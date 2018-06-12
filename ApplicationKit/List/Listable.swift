@@ -47,7 +47,7 @@ public protocol ViewControllerListable: class {
   /// 列表控制器，列表视图所在的视图控制器，用于显示一些HUD
   var listController: UIViewController { get }
   /// 列表视图，用于操作下拉刷新，上拉加载
-  var listView: UITableView { get }
+  var listView: UIScrollView { get }
   /// 数据源
   var listDataModel: DataModelListable { get }
   //var listData: Array<Item> { get }

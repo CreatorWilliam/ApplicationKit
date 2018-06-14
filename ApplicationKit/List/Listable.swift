@@ -90,7 +90,7 @@ public extension ViewControllerListable {
       }
     }
     
-    if canRefresh == true && autoLoad == true {
+    if autoLoad == true {
      
       self.list(isNext: false, hasLoadingView: hasLoadingView)
     }

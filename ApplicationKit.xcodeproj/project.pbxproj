@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0A5C0E20DB4A2F004906CD /* WMNetImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC73C0C20A5C45D00781F00 /* WMNetImageKit.framework */; };
+		BB0A5C1420DB4A3B004906CD /* WMNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC73C0220A5C43900781F00 /* WMNetworkKit.framework */; };
+		BB0A5C1520DB4A44004906CD /* WMJSONKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC73C1120A5C46900781F00 /* WMJSONKit.framework */; };
+		BB0A5C1620DB4A7B004906CD /* WMLayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC73C0720A5C45100781F00 /* WMLayoutKit.framework */; };
 		BBC73ADD20A56DE400781F00 /* ApplicationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC73ADB20A56DE400781F00 /* ApplicationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BBC73AE920A5B08900781F00 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* Listable.swift */; };
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
@@ -79,6 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0A5C1620DB4A7B004906CD /* WMLayoutKit.framework in Frameworks */,
+				BB0A5C1520DB4A44004906CD /* WMJSONKit.framework in Frameworks */,
+				BB0A5C1420DB4A3B004906CD /* WMNetworkKit.framework in Frameworks */,
+				BB0A5C0E20DB4A2F004906CD /* WMNetImageKit.framework in Frameworks */,
 				BBC73C1820A5C63200781F00 /* ComponentKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,7 +502,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.william.ApplicationKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -522,7 +530,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.william.ApplicationKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

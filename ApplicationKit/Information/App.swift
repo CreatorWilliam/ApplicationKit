@@ -13,11 +13,11 @@ public struct App {
   /// 应用信息
   public var info: [String: Any]? { return Bundle.main.infoDictionary }
   /// 应用名称
-  public var name: String? { return self.info?["CFBundleName"] as? String }
+  public var name: String { return self.info?["CFBundleName"] as? String ?? "- -" }
   /// 应用版本号
-  public var version: String? { return self.info?["CFBundleShortVersionString"] as? String }
+  public var version: String { return self.info?["CFBundleShortVersionString"] as? String ?? "1.0" }
   /// 应用Build版本
-  public var build: String? { return self.info?["CFBundleVersion"] as? String }
+  public var build: String { return self.info?["CFBundleVersion"] as? String ?? "1" }
   
   public init() { }
 }

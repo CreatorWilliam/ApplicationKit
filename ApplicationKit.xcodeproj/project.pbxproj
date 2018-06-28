@@ -189,9 +189,9 @@
 		BBC73ADA20A56DE400781F00 /* ApplicationKit */ = {
 			isa = PBXGroup;
 			children = (
-				BBF221C720E4B1ED007A5FA2 /* Information */,
 				BBC73ADB20A56DE400781F00 /* ApplicationKit.h */,
 				BBD26ABD20B7B0CF00BB0657 /* List */,
+				BBF221C720E4B1ED007A5FA2 /* Information */,
 				BBC73BF120A5BC3000781F00 /* API.swift */,
 				BBD26ABC20B7B0C200BB0657 /* Debug */,
 				BBC73ADC20A56DE400781F00 /* Info.plist */,

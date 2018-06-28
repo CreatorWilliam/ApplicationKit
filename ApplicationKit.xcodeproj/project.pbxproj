@@ -17,6 +17,7 @@
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
 		BBC73C1820A5C63200781F00 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC73BFD20A5C42400781F00 /* ComponentKit.framework */; };
 		BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0B26720AC3550007FB9BA /* Debug.swift */; };
+		BBF221D620E4B218007A5FA2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF221D520E4B218007A5FA2 /* App.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		BBC73BF120A5BC3000781F00 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BBD0B26720AC3550007FB9BA /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		BBE52F3920ABB9F000C2B3D9 /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
+		BBF221D520E4B218007A5FA2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 		BBC73ADA20A56DE400781F00 /* ApplicationKit */ = {
 			isa = PBXGroup;
 			children = (
+				BBF221C720E4B1ED007A5FA2 /* Information */,
 				BBC73ADB20A56DE400781F00 /* ApplicationKit.h */,
 				BBD26ABD20B7B0CF00BB0657 /* List */,
 				BBC73BF120A5BC3000781F00 /* API.swift */,
@@ -265,6 +268,14 @@
 				BB07B41220AF0B33000AFB88 /* OpenKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BBF221C720E4B1ED007A5FA2 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				BBF221D520E4B218007A5FA2 /* App.swift */,
+			);
+			path = Information;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -474,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBC73BF220A5BC3000781F00 /* API.swift in Sources */,
+				BBF221D620E4B218007A5FA2 /* App.swift in Sources */,
 				BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */,
 				BBC73AE920A5B08900781F00 /* Listable.swift in Sources */,
 			);

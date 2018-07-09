@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BBC6DD0320F34B8600CF885F /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */; };
+		BBC6DD0420F34B8600CF885F /* WMNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */; };
+		BBC6DD0520F34B8600CF885F /* WMNetImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DCFF20F34B8600CF885F /* WMNetImageKit.framework */; };
+		BBC6DD0620F34B8600CF885F /* WMLayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0020F34B8600CF885F /* WMLayoutKit.framework */; };
+		BBC6DD0720F34B8600CF885F /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0120F34B8600CF885F /* ComponentKit.framework */; };
+		BBC6DD0820F34B8600CF885F /* WMJSONKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0220F34B8600CF885F /* WMJSONKit.framework */; };
 		BBC73ADD20A56DE400781F00 /* ApplicationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC73ADB20A56DE400781F00 /* ApplicationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BBC73AE920A5B08900781F00 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* Listable.swift */; };
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
@@ -15,6 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetworkKit.framework; path = Carthage/Build/iOS/WMNetworkKit.framework; sourceTree = "<group>"; };
+		BBC6DCFF20F34B8600CF885F /* WMNetImageKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetImageKit.framework; path = Carthage/Build/iOS/WMNetImageKit.framework; sourceTree = "<group>"; };
+		BBC6DD0020F34B8600CF885F /* WMLayoutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMLayoutKit.framework; path = Carthage/Build/iOS/WMLayoutKit.framework; sourceTree = "<group>"; };
+		BBC6DD0120F34B8600CF885F /* ComponentKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComponentKit.framework; path = Carthage/Build/iOS/ComponentKit.framework; sourceTree = "<group>"; };
+		BBC6DD0220F34B8600CF885F /* WMJSONKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMJSONKit.framework; path = Carthage/Build/iOS/WMJSONKit.framework; sourceTree = "<group>"; };
 		BBC73AD820A56DE400781F00 /* ApplicationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApplicationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC73ADB20A56DE400781F00 /* ApplicationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationKit.h; sourceTree = "<group>"; };
 		BBC73ADC20A56DE400781F00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -29,6 +41,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBC6DD0320F34B8600CF885F /* Kingfisher.framework in Frameworks */,
+				BBC6DD0420F34B8600CF885F /* WMNetworkKit.framework in Frameworks */,
+				BBC6DD0520F34B8600CF885F /* WMNetImageKit.framework in Frameworks */,
+				BBC6DD0620F34B8600CF885F /* WMLayoutKit.framework in Frameworks */,
+				BBC6DD0720F34B8600CF885F /* ComponentKit.framework in Frameworks */,
+				BBC6DD0820F34B8600CF885F /* WMJSONKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +86,12 @@
 		BBC73B9820A5B71B00781F00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBC6DD0120F34B8600CF885F /* ComponentKit.framework */,
+				BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */,
+				BBC6DD0220F34B8600CF885F /* WMJSONKit.framework */,
+				BBC6DD0020F34B8600CF885F /* WMLayoutKit.framework */,
+				BBC6DCFF20F34B8600CF885F /* WMNetImageKit.framework */,
+				BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -320,6 +344,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ApplicationKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -348,6 +376,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ApplicationKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

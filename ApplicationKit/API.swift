@@ -84,7 +84,7 @@ public extension API {
       
       guard let data = data else { return }
       var json = WMJSON()
-      json.update(with: data)
+      json.update(from: data)
       
       // 调试
       self.debugLog(json)

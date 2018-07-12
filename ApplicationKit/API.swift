@@ -58,14 +58,14 @@ public class API {
 public extension API {
   
   /// 设置查询参数
-  func query(_ parameters: Any) -> Self {
+  func query(_ parameters: Any?) -> Self {
     
     self.queryParameters = parameters
     return self
   }
   
   /// 设置请求题参数
-  func body(_ parameters: Any) -> Self {
+  func body(_ parameters: Any?) -> Self {
     
     self.bodyParameters = parameters
     return self

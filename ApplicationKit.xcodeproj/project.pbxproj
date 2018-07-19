@@ -21,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BBAB8A732100D56600B89C44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB87EB6520F784A700E0C966;
+			remoteInfo = TecentCloud;
+		};
 		BBC6DD0E20F35AB800CF885F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */;
@@ -122,6 +129,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TecentCloud.xcodeproj; path = ../TecentCloud/TecentCloud.xcodeproj; sourceTree = "<group>"; };
 		BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetworkKit.framework; path = Carthage/Build/iOS/WMNetworkKit.framework; sourceTree = "<group>"; };
 		BBC6DCFF20F34B8600CF885F /* WMNetImageKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetImageKit.framework; path = Carthage/Build/iOS/WMNetImageKit.framework; sourceTree = "<group>"; };
@@ -161,6 +169,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBAB8A662100D56600B89C44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BBAB8A742100D56600B89C44 /* TecentCloud.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BBC6DD0B20F35AB800CF885F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +243,7 @@
 		BBC73ACE20A56DE400781F00 = {
 			isa = PBXGroup;
 			children = (
+				BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */,
 				BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */,
 				BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */,
 				BBC6DD2220F35ACB00CF885F /* WMJSONKit.xcodeproj */,
@@ -372,6 +389,10 @@
 					ProjectRef = BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */;
 				},
 				{
+					ProductGroup = BBAB8A662100D56600B89C44 /* Products */;
+					ProjectRef = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
+				},
+				{
 					ProductGroup = BBC6DD2320F35ACB00CF885F /* Products */;
 					ProjectRef = BBC6DD2220F35ACB00CF885F /* WMJSONKit.xcodeproj */;
 				},
@@ -396,6 +417,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		BBAB8A742100D56600B89C44 /* TecentCloud.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TecentCloud.framework;
+			remoteRef = BBAB8A732100D56600B89C44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BBC6DD0F20F35AB800CF885F /* ComponentKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

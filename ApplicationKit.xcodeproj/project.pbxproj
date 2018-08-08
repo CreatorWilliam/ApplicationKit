@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
 		BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0F20F35AB800CF885F /* ComponentKit.framework */; };
 		BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD3C20F35AD600CF885F /* Kingfisher.framework */; };
 		BBA7168920F35B5D000BB9C4 /* WMJSONKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD2720F35ACB00CF885F /* WMJSONKit.framework */; };
@@ -21,6 +22,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		73494FE6211B419900EB41C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1ED2D0B1AD2CFA600CFC3EB;
+			remoteInfo = "Kingfisher-Demo";
+		};
+		73494FE8211B419900EB41C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D13F49C21BEDA53F00CE335D;
+			remoteInfo = "Kingfisher-tvOS-Demo";
+		};
+		73494FEA211B419900EB41C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4B2944551C3D03880088C3E7;
+			remoteInfo = "Kingfisher-macOS-Demo";
+		};
+		73494FEC211B419900EB41C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1679A391C4E78B20020FD12;
+			remoteInfo = "Kingfisher-watchOS-Demo";
+		};
+		73494FEE211B419900EB41C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1679A451C4E78B20020FD12;
+			remoteInfo = "Kingfisher-watchOS-Demo Extension";
+		};
 		BBAB8A732100D56600B89C44 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
@@ -129,6 +165,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
 		BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TecentCloud.xcodeproj; path = ../TecentCloud/TecentCloud.xcodeproj; sourceTree = "<group>"; };
 		BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetworkKit.framework; path = Carthage/Build/iOS/WMNetworkKit.framework; sourceTree = "<group>"; };
@@ -233,6 +270,11 @@
 				BBC6DD3E20F35AD600CF885F /* Kingfisher.framework */,
 				BBC6DD4020F35AD600CF885F /* Kingfisher.framework */,
 				BBC6DD4220F35AD600CF885F /* Kingfisher.framework */,
+				73494FE7211B419900EB41C4 /* Kingfisher-Demo.app */,
+				73494FE9211B419900EB41C4 /* Kingfisher-tvOS-Demo.app */,
+				73494FEB211B419900EB41C4 /* Kingfisher-macOS-Demo.app */,
+				73494FED211B419900EB41C4 /* Kingfisher-watchOS-Demo.app */,
+				73494FEF211B419900EB41C4 /* Kingfisher-watchOS-Demo Extension.appex */,
 				BBC6DD4420F35AD600CF885F /* KingfisherTests.xctest */,
 				BBC6DD4620F35AD600CF885F /* KingfisherTests-tvOS.xctest */,
 				BBC6DD4820F35AD600CF885F /* KingfisherTests-macOS.xctest */,
@@ -303,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC73AE820A5B08900781F00 /* Listable.swift */,
+				73494FD7211B419900EB41C4 /* ListDataModel.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -417,6 +460,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		73494FE7211B419900EB41C4 /* Kingfisher-Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Kingfisher-Demo.app";
+			remoteRef = 73494FE6211B419900EB41C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73494FE9211B419900EB41C4 /* Kingfisher-tvOS-Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Kingfisher-tvOS-Demo.app";
+			remoteRef = 73494FE8211B419900EB41C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73494FEB211B419900EB41C4 /* Kingfisher-macOS-Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Kingfisher-macOS-Demo.app";
+			remoteRef = 73494FEA211B419900EB41C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73494FED211B419900EB41C4 /* Kingfisher-watchOS-Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Kingfisher-watchOS-Demo.app";
+			remoteRef = 73494FEC211B419900EB41C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73494FEF211B419900EB41C4 /* Kingfisher-watchOS-Demo Extension.appex */ = {
+			isa = PBXReferenceProxy;
+			fileType = "wrapper.app-extension";
+			path = "Kingfisher-watchOS-Demo Extension.appex";
+			remoteRef = 73494FEE211B419900EB41C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BBAB8A742100D56600B89C44 /* TecentCloud.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -542,6 +620,7 @@
 				BBC73BF220A5BC3000781F00 /* API.swift in Sources */,
 				BBF221D620E4B218007A5FA2 /* App.swift in Sources */,
 				BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */,
+				73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */,
 				BBC73AE920A5B08900781F00 /* Listable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

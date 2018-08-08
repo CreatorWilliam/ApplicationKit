@@ -7,7 +7,17 @@
 //
 
 import ComponentKit
+import WMJSONKit
 
+// MARK: - ItemListable
+/// 列表数据协议
+public protocol ItemListable {
+  
+  init(_ json: WMJSON)
+  
+}
+
+// MARK: - DataModelListable
 /// 列表数据模型协议
 public protocol DataModelListable {
   
@@ -19,7 +29,7 @@ public protocol DataModelListable {
   func parameters(_ isNext: Bool) -> [String: Any]
 }
 
-// MARK: - 默认实现
+// MARK: - DataModelListable默认实现
 public extension DataModelListable {
   
   func parameters(_ isNext: Bool) -> [String: Any] {
@@ -40,6 +50,7 @@ public extension DataModelListable {
   
 }
 
+// MARK: - ViewControllerListable
 /// 列表视图控制器协议
 public protocol ViewControllerListable: class {
   
@@ -52,7 +63,7 @@ public protocol ViewControllerListable: class {
   var listDataModel: DataModelListable { get }
   //var listData: Array<Item> { get }
   
-  // MARK: 👉默认实现
+  // MARK: 👉以下有默认实现
   /// 初始化，用于配置列表视图默认的下拉刷新，上拉加载
   func setupListView(autoLoad: Bool, canRefresh: Bool, canLoadMore: Bool, hasLoadingView: Bool)
   /// 内部自动调用获取数据的方法：loadData，使用默认的视图样式处理
@@ -62,13 +73,13 @@ public protocol ViewControllerListable: class {
   /// 完成获取列表
   func completeList(_ isNext: Bool, _ hasLoadingView: Bool)
   
-  // MARK: 👉需自行实现
+  // MARK: 👉以下需自行实现
   /// 实际请求获取数据，需要自行实现，必须执行compketion回调
   func loadData(_ isNext: Bool, completion handle: @escaping () -> Void)
 
 }
 
-// MARK: - 默认实现
+// MARK: - ViewControllerListable默认实现
 public extension ViewControllerListable {
   
   /// 默认的初始化

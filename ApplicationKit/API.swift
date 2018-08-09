@@ -7,7 +7,7 @@
 //
 
 import WMNetworkKit
-import WMJSONKit
+import JSONKit
 
 public class API {
   
@@ -72,7 +72,7 @@ public extension API {
   }
  
   typealias ProgressHandle = (_ progress: Float) -> Void
-  typealias CompleteHandle = (_ result: WMJSON) -> Void
+  typealias CompleteHandle = (_ result: JSON) -> Void
   /// 进行请求
   func request(handle: @escaping CompleteHandle) {
     
@@ -83,8 +83,8 @@ public extension API {
     network.data({ (data, status) in
       
       guard let data = data else { return }
-      var json = WMJSON()
-      json.update(from: data)
+      var json = JSON()
+      json.update(fromData: data)
       
       // 调试
       self.debugLog(json)
@@ -102,7 +102,7 @@ public extension API {
 // MARK: - Utility
 private extension API {
   
-  func debugLog(_ json: WMJSON) {
+  func debugLog(_ json: JSON) {
     
     let api = self
     #if DEBUG

@@ -25,7 +25,7 @@ public extension Layout where Target: UIView {
   ///
   /// - Parameter constraintMake: 构造要添加的约束
   func add(_ constraintMake: (ConstraintMaker) -> Void) {
-    
+
     self.target.translatesAutoresizingMaskIntoConstraints = false
     let maker = ConstraintMaker(target: self.target)
     constraintMake(maker)
@@ -59,8 +59,8 @@ public extension Layout where Target: UIView {
 /// 符合AutoLayoutCompatible的对象能使用便捷方式创建约束
 public protocol AutoLayoutCompatible {
   
-  associatedtype CompatibleType
-  var layout: CompatibleType { get }
+  associatedtype AutoLayoutCompatibleType
+  var layout: AutoLayoutCompatibleType { get }
   
 }
 

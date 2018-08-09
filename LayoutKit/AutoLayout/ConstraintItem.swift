@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct ConstraintItem {
   
@@ -49,21 +49,21 @@ internal extension ConstraintItem {
   
   /// 更新约束
   func update() {
-    
+
+    /*
     var constraints: [NSLayoutConstraint] = self.firstTarget.constraints
     if let hostConstraints = self.firstTarget.superview?.constraints {
-      
+
       constraints += hostConstraints
     }
-    for constraint in constraints {
+    */
+    
+    for constraint in self.firstTarget.constraints {
       
-      if isSimilar(constraint) {
-        
-        constraint.constant = self.constant
-        constraint.priority = self.priority
-        
-        return
-      }
+      guard self.isSimilar(constraint) else { continue }
+      constraint.constant = self.constant
+      constraint.isActive = true
+      return
     }
     
     self.install()
@@ -71,23 +71,23 @@ internal extension ConstraintItem {
   
   /// 卸载约束
   func uninstall() {
-    
+
+    /*
     var constraints: [NSLayoutConstraint] = self.firstTarget.constraints
     if let hostConstraints = self.firstTarget.superview?.constraints {
-      
+
       constraints += hostConstraints
     }
-    
-    constraints.forEach({ (constraint) in
-      
-      if self.isSimilar(constraint) {
-        
-        constraint.isActive = false
-        return
-      }
-    })
+    */
+    for constraint in self.firstTarget.constraints {
+  
+      guard self.isSimilar(constraint) else { continue }
+      constraint.isActive = false
+      return
+    }
     
   }
+  
 }
 
 // MARK: - Utitilty
@@ -105,6 +105,7 @@ private extension ConstraintItem {
     if self.multiplier != compared.multiplier { return false }
     if self.secondTarget !== compared.secondItem { return false }
     if self.secondAttribute != compared.secondAttribute { return false }
+    if self.priority != compared.priority { return false }
     
     return true
   }

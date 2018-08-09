@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct AttributeItem {
   
@@ -14,7 +14,7 @@ struct AttributeItem {
   
   let offset: CGFloat
   
-  init(_ attribute: NSLayoutAttribute, offset: CGFloat = 0) {
+  init(_ attribute: NSLayoutAttribute, _ offset: CGFloat = 0) {
     
     self.attribute = attribute
     self.offset = offset

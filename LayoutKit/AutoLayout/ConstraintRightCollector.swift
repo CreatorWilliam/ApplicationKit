@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class ConstraintRightCollector {
   

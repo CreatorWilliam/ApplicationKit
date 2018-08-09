@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class ConstraintLeftCollector {
   
@@ -16,15 +16,14 @@ public class ConstraintLeftCollector {
   private var firstAttributes: [AttributeItem] = []
   /// 元素间关系
   private var relation: NSLayoutRelation = .equal
-  /// 右侧约束收集者
+  /// 右侧约束收集者，用于收集第二元素及第二属性，约束优先级，约束计算系数
   private var rightCollector = ConstraintRightCollector()
   
   
   init(target: UIView ,attribute: NSLayoutAttribute, constant: CGFloat) {
     
     self.firstTarget = target
-    
-    self.add(attribute, constant)
+    self.firstAttributes.append(AttributeItem(attribute, constant))
   }
   
 }
@@ -36,7 +35,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func height(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.height, offset)
+    self.firstAttributes.append(AttributeItem(.height, offset))
     return self
   }
   
@@ -44,7 +43,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func width(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.width, offset)
+    self.firstAttributes.append(AttributeItem(.width, offset))
     return self
   }
   
@@ -52,7 +51,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func top(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.top, offset)
+    self.firstAttributes.append(AttributeItem(.top, offset))
     return self
   }
   
@@ -60,7 +59,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func bottom(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.bottom, offset)
+    self.firstAttributes.append(AttributeItem(.bottom, offset))
     return self
   }
   
@@ -68,7 +67,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func leading(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.leading, offset)
+    self.firstAttributes.append(AttributeItem(.leading, offset))
     return self
   }
   
@@ -76,7 +75,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func trailing(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.trailing, offset)
+    self.firstAttributes.append(AttributeItem(.trailing, offset))
     return self
   }
   
@@ -84,7 +83,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func left(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.left, offset)
+    self.firstAttributes.append(AttributeItem(.left, offset))
     return self
   }
   
@@ -92,7 +91,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func right(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.right, offset)
+    self.firstAttributes.append(AttributeItem(.right, offset))
     return self
   }
   
@@ -100,7 +99,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func centerX(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.centerX, offset)
+    self.firstAttributes.append(AttributeItem(.centerX, offset))
     return self
   }
   
@@ -108,7 +107,7 @@ public extension ConstraintLeftCollector {
   @discardableResult
   func centerY(_ offset: CGFloat = 0) -> Self {
     
-    self.add(.centerY, offset)
+    self.firstAttributes.append(AttributeItem(.centerY, offset))
     return self
   }
   
@@ -117,10 +116,10 @@ public extension ConstraintLeftCollector {
   /// - Parameter scale: 系数
   /// - Returns: 约束
   @discardableResult
-  public func multiplier(_ multiplier: CGFloat) -> Self {
+  public func multiplier(_ multiplier: CGFloat) -> ConstraintRightCollector {
     
     self.rightCollector.multiplier(multiplier)
-    return self
+    return self.rightCollector
   }
   
   /// 设置优先级
@@ -128,10 +127,10 @@ public extension ConstraintLeftCollector {
   /// - Parameter priority: 优先级
   /// - Returns: 约束
   @discardableResult
-  public func priority(_ priority: UILayoutPriority) -> Self {
+  public func priority(_ priority: UILayoutPriority) -> ConstraintRightCollector {
     
     self.rightCollector.priority(priority)
-    return self
+    return self.rightCollector
   }
   
 }
@@ -204,7 +203,25 @@ private extension ConstraintLeftCollector {
       
       // 配置第二元素及属性
       constraint.secondTarget = self.rightCollector.target
-      constraint.secondAttribute = self.rightCollector.attribute
+      if self.rightCollector.target == nil {
+        
+        self.rightCollector.attribute = .notAnAttribute
+      }
+      
+      // 如果第二元素为空，则第二属性必须为notAnAttribute，否则是错误的约束条件
+      if self.rightCollector.target == nil {
+        
+        constraint.secondAttribute = .notAnAttribute
+        
+      } else if self.rightCollector.target != nil, self.rightCollector.attribute == .notAnAttribute {
+        // 如果第二元素不为空，则第二属性不能为notAnAttribute，否则是错误的约束条件
+        
+        constraint.secondAttribute = item.attribute
+        
+      } else {
+        
+        constraint.secondAttribute = self.rightCollector.attribute
+      }
 
       // 配置计算系数及常量
       constraint.multiplier = self.rightCollector.multiplier
@@ -214,11 +231,6 @@ private extension ConstraintLeftCollector {
     }
     
     return constraints
-  }
-  
-  func add(_ attribute: NSLayoutAttribute, _ offset: CGFloat) {
-    
-    self.firstAttributes.append(AttributeItem(attribute, offset: offset))
   }
   
 }

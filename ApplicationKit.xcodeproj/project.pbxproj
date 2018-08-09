@@ -10,8 +10,6 @@
 		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
 		BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0F20F35AB800CF885F /* ComponentKit.framework */; };
 		BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD3C20F35AD600CF885F /* Kingfisher.framework */; };
-		BBA7168920F35B5D000BB9C4 /* WMJSONKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD2720F35ACB00CF885F /* WMJSONKit.framework */; };
-		BBA7168A20F35B5D000BB9C4 /* WMLayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD2120F35AC700CF885F /* WMLayoutKit.framework */; };
 		BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */; };
 		BBA7168C20F35B5D000BB9C4 /* WMNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD1520F35ABE00CF885F /* WMNetworkKit.framework */; };
 		BBC73ADD20A56DE400781F00 /* ApplicationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC73ADB20A56DE400781F00 /* ApplicationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,6 +25,7 @@
 		BBF1F047211BD9B700424FEA /* ConstraintLeftCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF1F046211BD9B700424FEA /* ConstraintLeftCollector.swift */; };
 		BBF1F049211BDA4600424FEA /* ConstraintRightCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF1F048211BDA4600424FEA /* ConstraintRightCollector.swift */; };
 		BBF1F053211BF23300424FEA /* AttributeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF1F052211BF23300424FEA /* AttributeItem.swift */; };
+		BBF1F066211C076E00424FEA /* JSONIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF1F065211C076E00424FEA /* JSONIterator.swift */; };
 		BBF221D620E4B218007A5FA2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF221D520E4B218007A5FA2 /* App.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,20 +57,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 73F2E9A01F09394800A5CC62;
 			remoteInfo = WMNetImageKit;
-		};
-		BBC6DD2020F35AC700CF885F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD1C20F35AC700CF885F /* WMLayoutKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 73F2E9B51F09399F00A5CC62;
-			remoteInfo = WMLayoutKit;
-		};
-		BBC6DD2620F35ACB00CF885F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD2220F35ACB00CF885F /* WMJSONKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 73AF90881F8B7D0300A7E8A4;
-			remoteInfo = WMJSONKit;
 		};
 		BBC6DD2D20F35AD000CF885F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -150,8 +135,6 @@
 		BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ComponentKit.xcodeproj; path = ../ComponentKit/ComponentKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD1020F35ABD00CF885F /* WMNetworkKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMNetworkKit.xcodeproj; path = ../WMNetworkKit/WMNetworkKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMNetImageKit.xcodeproj; path = ../WMNetImageKit/WMNetImageKit.xcodeproj; sourceTree = "<group>"; };
-		BBC6DD1C20F35AC700CF885F /* WMLayoutKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMLayoutKit.xcodeproj; path = ../WMLayoutKit/WMLayoutKit.xcodeproj; sourceTree = "<group>"; };
-		BBC6DD2220F35ACB00CF885F /* WMJSONKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMJSONKit.xcodeproj; path = ../WMJSONKit/WMJSONKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = ../Kingfisher/Kingfisher.xcodeproj; sourceTree = "<group>"; };
 		BBC73AD820A56DE400781F00 /* ApplicationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApplicationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +156,7 @@
 		BBF1F046211BD9B700424FEA /* ConstraintLeftCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintLeftCollector.swift; sourceTree = "<group>"; };
 		BBF1F048211BDA4600424FEA /* ConstraintRightCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintRightCollector.swift; sourceTree = "<group>"; };
 		BBF1F052211BF23300424FEA /* AttributeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributeItem.swift; sourceTree = "<group>"; };
+		BBF1F065211C076E00424FEA /* JSONIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONIterator.swift; sourceTree = "<group>"; };
 		BBF221D520E4B218007A5FA2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,8 +167,6 @@
 			files = (
 				BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */,
 				BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */,
-				BBA7168920F35B5D000BB9C4 /* WMJSONKit.framework in Frameworks */,
-				BBA7168A20F35B5D000BB9C4 /* WMLayoutKit.framework in Frameworks */,
 				BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */,
 				BBA7168C20F35B5D000BB9C4 /* WMNetworkKit.framework in Frameworks */,
 			);
@@ -239,22 +221,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BBC6DD1D20F35AC700CF885F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BBC6DD2120F35AC700CF885F /* WMLayoutKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BBC6DD2320F35ACB00CF885F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BBC6DD2720F35ACB00CF885F /* WMJSONKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		BBC6DD2920F35AD000CF885F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,8 +250,6 @@
 				BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */,
 				BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */,
 				BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */,
-				BBC6DD2220F35ACB00CF885F /* WMJSONKit.xcodeproj */,
-				BBC6DD1C20F35AC700CF885F /* WMLayoutKit.xcodeproj */,
 				BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */,
 				BBC6DD1020F35ABD00CF885F /* WMNetworkKit.xcodeproj */,
 				BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */,
@@ -355,6 +319,7 @@
 			children = (
 				BBF1F018211BD2F600424FEA /* JSONKit.h */,
 				BBF1F02D211BD30200424FEA /* JSON.swift */,
+				BBF1F065211C076E00424FEA /* JSONIterator.swift */,
 				BBF1F019211BD2F600424FEA /* Info.plist */,
 			);
 			path = JSONKit;
@@ -529,14 +494,6 @@
 					ProjectRef = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
 				},
 				{
-					ProductGroup = BBC6DD2320F35ACB00CF885F /* Products */;
-					ProjectRef = BBC6DD2220F35ACB00CF885F /* WMJSONKit.xcodeproj */;
-				},
-				{
-					ProductGroup = BBC6DD1D20F35AC700CF885F /* Products */;
-					ProjectRef = BBC6DD1C20F35AC700CF885F /* WMLayoutKit.xcodeproj */;
-				},
-				{
 					ProductGroup = BBC6DD1720F35AC300CF885F /* Products */;
 					ProjectRef = BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */;
 				},
@@ -581,20 +538,6 @@
 			fileType = wrapper.framework;
 			path = WMNetImageKit.framework;
 			remoteRef = BBC6DD1A20F35AC300CF885F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BBC6DD2120F35AC700CF885F /* WMLayoutKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = WMLayoutKit.framework;
-			remoteRef = BBC6DD2020F35AC700CF885F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BBC6DD2720F35ACB00CF885F /* WMJSONKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = WMJSONKit.framework;
-			remoteRef = BBC6DD2620F35ACB00CF885F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BBC6DD2E20F35AD000CF885F /* OpenWithPayKit.framework */ = {
@@ -704,6 +647,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBF1F02E211BD30200424FEA /* JSON.swift in Sources */,
+				BBF1F066211C076E00424FEA /* JSONIterator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

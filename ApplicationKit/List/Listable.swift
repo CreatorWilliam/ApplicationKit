@@ -7,13 +7,13 @@
 //
 
 import ComponentKit
-import WMJSONKit
+import JSONKit
 
 // MARK: - ItemListable
 /// 列表数据协议
 public protocol ItemListable {
   
-  init(_ json: WMJSON)
+  init(_ json: JSON)
   
 }
 

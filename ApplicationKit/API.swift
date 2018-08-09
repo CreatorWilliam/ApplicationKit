@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import WMNetworkKit
+import NetworkKit
 import JSONKit
 
 public class API {
@@ -19,16 +19,17 @@ public class API {
   public static var productBasePath: String = ""
   
   /// 接口请求方式
-  private var method: WMNetwork.HTTPMethod
+  private var method: Network.HTTPMethod
   /// 接口路径
   private var path: String
-  
+  /// 请求头参数
+  private var headerFieldParameters: [String: String]?
   /// 查询参数
   private var queryParameters: Any?
   /// 请求体参数
   private var bodyParameters: Any?
   
-  public init(method: WMNetwork.HTTPMethod, path: String? = nil, version: String? = nil, customPath: String? = nil) {
+  public init(method: Network.HTTPMethod, path: String? = nil, version: String? = nil, customPath: String? = nil) {
     
     let base = API.isDevelop ? API.developBasePath : API.productBasePath
     
@@ -57,6 +58,12 @@ public class API {
 
 public extension API {
   
+  func headerField(_ parameters: [String: String]) -> Self {
+    
+    self.headerFieldParameters = parameters
+    return self
+  }
+  
   /// 设置查询参数
   func query(_ parameters: Any?) -> Self {
     
@@ -77,9 +84,13 @@ public extension API {
   func request(handle: @escaping CompleteHandle) {
     
     let api = self
-    var network = WMNetwork.request(api.method, api.path, isDebug: true)
-    if let query = api.queryParameters { network = network.query(query) }
-    if let body = api.bodyParameters { network = network.body(body) }
+    
+    let network = Network.request(api.method, api.path, isDebug: true)
+    
+    if let query = api.queryParameters { network.query(query) }
+    if let body = api.bodyParameters { network.body(body) }
+    if let headerField = api.headerFieldParameters { network.httpHeaderField(headerField) }
+    
     network.data({ (data, status) in
       
       guard let data = data else { return }

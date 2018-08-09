@@ -8,10 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
+		BB8227F8211C50B400D5B2C0 /* NetworkKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BB8227F6211C50B400D5B2C0 /* NetworkKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BB82282E211C50D900D5B2C0 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82280E211C50D900D5B2C0 /* NetworkStatus.swift */; };
+		BB82282F211C50D900D5B2C0 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82281C211C50D900D5B2C0 /* NetworkResult.swift */; };
+		BB822830211C50D900D5B2C0 /* NetworkDelegate+URLSessionDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82281E211C50D900D5B2C0 /* NetworkDelegate+URLSessionDataDelegate.swift */; };
+		BB822831211C50D900D5B2C0 /* NetworkDelegate+URLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82281F211C50D900D5B2C0 /* NetworkDelegate+URLSessionDelegate.swift */; };
+		BB822832211C50D900D5B2C0 /* NetworkDelegate+URLSessionDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822820211C50D900D5B2C0 /* NetworkDelegate+URLSessionDownloadDelegate.swift */; };
+		BB822833211C50D900D5B2C0 /* NetworkDelegate+URLSessionStreamDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822821211C50D900D5B2C0 /* NetworkDelegate+URLSessionStreamDelegate.swift */; };
+		BB822834211C50D900D5B2C0 /* NetworkDelegate+URLSessionTaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822822211C50D900D5B2C0 /* NetworkDelegate+URLSessionTaskDelegate.swift */; };
+		BB822835211C50D900D5B2C0 /* NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822823211C50D900D5B2C0 /* NetworkDelegate.swift */; };
+		BB822836211C50D900D5B2C0 /* Network+DataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822825211C50D900D5B2C0 /* Network+DataTask.swift */; };
+		BB822837211C50D900D5B2C0 /* Network+DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822826211C50D900D5B2C0 /* Network+DownloadTask.swift */; };
+		BB822838211C50D900D5B2C0 /* Network+Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822827211C50D900D5B2C0 /* Network+Task.swift */; };
+		BB822839211C50D900D5B2C0 /* Network+UploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822828211C50D900D5B2C0 /* Network+UploadTask.swift */; };
+		BB82283A211C50D900D5B2C0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB822829211C50D900D5B2C0 /* Network.swift */; };
+		BB82283B211C50D900D5B2C0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82282B211C50D900D5B2C0 /* Reachability.swift */; };
+		BB82283C211C50D900D5B2C0 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82282D211C50D900D5B2C0 /* NetworkRequest.swift */; };
+		BB82283D211C515400D5B2C0 /* NetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8227F4211C50B400D5B2C0 /* NetworkKit.framework */; };
+		BB82283E211C527F00D5B2C0 /* JSONKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F016211BD2F600424FEA /* JSONKit.framework */; };
+		BB82283F211C527F00D5B2C0 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F034211BD3AA00424FEA /* LayoutKit.framework */; };
+		BB822841211C52A700D5B2C0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB822840211C52A700D5B2C0 /* SystemConfiguration.framework */; };
 		BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0F20F35AB800CF885F /* ComponentKit.framework */; };
 		BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD3C20F35AD600CF885F /* Kingfisher.framework */; };
 		BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */; };
-		BBA7168C20F35B5D000BB9C4 /* WMNetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD1520F35ABE00CF885F /* WMNetworkKit.framework */; };
 		BBC73ADD20A56DE400781F00 /* ApplicationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC73ADB20A56DE400781F00 /* ApplicationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BBC73AE920A5B08900781F00 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* Listable.swift */; };
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
@@ -43,13 +62,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 73B74CF11FE3AD2800BAE93A;
 			remoteInfo = ComponentKit;
-		};
-		BBC6DD1420F35ABE00CF885F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD1020F35ABD00CF885F /* WMNetworkKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 73F2E96A1F0934A900A5CC62;
-			remoteInfo = WMNetworkKit;
 		};
 		BBC6DD1A20F35AC300CF885F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -125,6 +137,25 @@
 
 /* Begin PBXFileReference section */
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
+		BB8227F4211C50B400D5B2C0 /* NetworkKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB8227F6211C50B400D5B2C0 /* NetworkKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkKit.h; sourceTree = "<group>"; };
+		BB8227F7211C50B400D5B2C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB82280E211C50D900D5B2C0 /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
+		BB82281C211C50D900D5B2C0 /* NetworkResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		BB82281E211C50D900D5B2C0 /* NetworkDelegate+URLSessionDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkDelegate+URLSessionDataDelegate.swift"; sourceTree = "<group>"; };
+		BB82281F211C50D900D5B2C0 /* NetworkDelegate+URLSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkDelegate+URLSessionDelegate.swift"; sourceTree = "<group>"; };
+		BB822820211C50D900D5B2C0 /* NetworkDelegate+URLSessionDownloadDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkDelegate+URLSessionDownloadDelegate.swift"; sourceTree = "<group>"; };
+		BB822821211C50D900D5B2C0 /* NetworkDelegate+URLSessionStreamDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkDelegate+URLSessionStreamDelegate.swift"; sourceTree = "<group>"; };
+		BB822822211C50D900D5B2C0 /* NetworkDelegate+URLSessionTaskDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkDelegate+URLSessionTaskDelegate.swift"; sourceTree = "<group>"; };
+		BB822823211C50D900D5B2C0 /* NetworkDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDelegate.swift; sourceTree = "<group>"; };
+		BB822825211C50D900D5B2C0 /* Network+DataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network+DataTask.swift"; sourceTree = "<group>"; };
+		BB822826211C50D900D5B2C0 /* Network+DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network+DownloadTask.swift"; sourceTree = "<group>"; };
+		BB822827211C50D900D5B2C0 /* Network+Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network+Task.swift"; sourceTree = "<group>"; };
+		BB822828211C50D900D5B2C0 /* Network+UploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network+UploadTask.swift"; sourceTree = "<group>"; };
+		BB822829211C50D900D5B2C0 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		BB82282B211C50D900D5B2C0 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		BB82282D211C50D900D5B2C0 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		BB822840211C52A700D5B2C0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TecentCloud.xcodeproj; path = ../TecentCloud/TecentCloud.xcodeproj; sourceTree = "<group>"; };
 		BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetworkKit.framework; path = Carthage/Build/iOS/WMNetworkKit.framework; sourceTree = "<group>"; };
@@ -133,7 +164,6 @@
 		BBC6DD0120F34B8600CF885F /* ComponentKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComponentKit.framework; path = Carthage/Build/iOS/ComponentKit.framework; sourceTree = "<group>"; };
 		BBC6DD0220F34B8600CF885F /* WMJSONKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMJSONKit.framework; path = Carthage/Build/iOS/WMJSONKit.framework; sourceTree = "<group>"; };
 		BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ComponentKit.xcodeproj; path = ../ComponentKit/ComponentKit.xcodeproj; sourceTree = "<group>"; };
-		BBC6DD1020F35ABD00CF885F /* WMNetworkKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMNetworkKit.xcodeproj; path = ../WMNetworkKit/WMNetworkKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMNetImageKit.xcodeproj; path = ../WMNetImageKit/WMNetImageKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = ../Kingfisher/Kingfisher.xcodeproj; sourceTree = "<group>"; };
@@ -161,14 +191,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BB8227F0211C50B400D5B2C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB822841211C52A700D5B2C0 /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBC73AD420A56DE400781F00 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB82283E211C527F00D5B2C0 /* JSONKit.framework in Frameworks */,
+				BB82283F211C527F00D5B2C0 /* LayoutKit.framework in Frameworks */,
+				BB82283D211C515400D5B2C0 /* NetworkKit.framework in Frameworks */,
 				BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */,
 				BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */,
 				BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */,
-				BBA7168C20F35B5D000BB9C4 /* WMNetworkKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +229,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB8227F5211C50B400D5B2C0 /* NetworkKit */ = {
+			isa = PBXGroup;
+			children = (
+				BB8227F6211C50B400D5B2C0 /* NetworkKit.h */,
+				BB82282A211C50D900D5B2C0 /* Reachability */,
+				BB822824211C50D900D5B2C0 /* Network */,
+				BB82280D211C50D900D5B2C0 /* Status */,
+				BB82282C211C50D900D5B2C0 /* Request */,
+				BB82281D211C50D900D5B2C0 /* Delegate */,
+				BB82281B211C50D900D5B2C0 /* Result */,
+				BB8227F7211C50B400D5B2C0 /* Info.plist */,
+			);
+			path = NetworkKit;
+			sourceTree = "<group>";
+		};
+		BB82280D211C50D900D5B2C0 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				BB82280E211C50D900D5B2C0 /* NetworkStatus.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		BB82281B211C50D900D5B2C0 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				BB82281C211C50D900D5B2C0 /* NetworkResult.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		BB82281D211C50D900D5B2C0 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				BB822823211C50D900D5B2C0 /* NetworkDelegate.swift */,
+				BB82281F211C50D900D5B2C0 /* NetworkDelegate+URLSessionDelegate.swift */,
+				BB822822211C50D900D5B2C0 /* NetworkDelegate+URLSessionTaskDelegate.swift */,
+				BB82281E211C50D900D5B2C0 /* NetworkDelegate+URLSessionDataDelegate.swift */,
+				BB822820211C50D900D5B2C0 /* NetworkDelegate+URLSessionDownloadDelegate.swift */,
+				BB822821211C50D900D5B2C0 /* NetworkDelegate+URLSessionStreamDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		BB822824211C50D900D5B2C0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BB822829211C50D900D5B2C0 /* Network.swift */,
+				BB822827211C50D900D5B2C0 /* Network+Task.swift */,
+				BB822825211C50D900D5B2C0 /* Network+DataTask.swift */,
+				BB822826211C50D900D5B2C0 /* Network+DownloadTask.swift */,
+				BB822828211C50D900D5B2C0 /* Network+UploadTask.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BB82282A211C50D900D5B2C0 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				BB82282B211C50D900D5B2C0 /* Reachability.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		BB82282C211C50D900D5B2C0 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				BB82282D211C50D900D5B2C0 /* NetworkRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		BBAB8A662100D56600B89C44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,14 +313,6 @@
 			isa = PBXGroup;
 			children = (
 				BBC6DD0F20F35AB800CF885F /* ComponentKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BBC6DD1120F35ABD00CF885F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BBC6DD1520F35ABE00CF885F /* WMNetworkKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,11 +355,11 @@
 				BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */,
 				BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */,
 				BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */,
-				BBC6DD1020F35ABD00CF885F /* WMNetworkKit.xcodeproj */,
 				BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */,
 				BBC73ADA20A56DE400781F00 /* ApplicationKit */,
 				BBF1F017211BD2F600424FEA /* JSONKit */,
 				BBF1F035211BD3AA00424FEA /* LayoutKit */,
+				BB8227F5211C50B400D5B2C0 /* NetworkKit */,
 				BBC73AD920A56DE400781F00 /* Products */,
 				BBC73B9820A5B71B00781F00 /* Frameworks */,
 			);
@@ -267,6 +371,7 @@
 				BBC73AD820A56DE400781F00 /* ApplicationKit.framework */,
 				BBF1F016211BD2F600424FEA /* JSONKit.framework */,
 				BBF1F034211BD3AA00424FEA /* LayoutKit.framework */,
+				BB8227F4211C50B400D5B2C0 /* NetworkKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,9 +380,9 @@
 			isa = PBXGroup;
 			children = (
 				BBC73ADB20A56DE400781F00 /* ApplicationKit.h */,
+				BBC73BF120A5BC3000781F00 /* API.swift */,
 				BBD26ABD20B7B0CF00BB0657 /* List */,
 				BBF221C720E4B1ED007A5FA2 /* Information */,
-				BBC73BF120A5BC3000781F00 /* API.swift */,
 				BBD26ABC20B7B0C200BB0657 /* Debug */,
 				BBC73ADC20A56DE400781F00 /* Info.plist */,
 			);
@@ -287,6 +392,7 @@
 		BBC73B9820A5B71B00781F00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB822840211C52A700D5B2C0 /* SystemConfiguration.framework */,
 				BBC6DD0120F34B8600CF885F /* ComponentKit.framework */,
 				BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */,
 				BBC6DD0220F34B8600CF885F /* WMJSONKit.framework */,
@@ -359,6 +465,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		BB8227F1211C50B400D5B2C0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB8227F8211C50B400D5B2C0 /* NetworkKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBC73AD520A56DE400781F00 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -386,6 +500,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		BB8227F3211C50B400D5B2C0 /* NetworkKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB822807211C50B400D5B2C0 /* Build configuration list for PBXNativeTarget "NetworkKit" */;
+			buildPhases = (
+				BB8227EF211C50B400D5B2C0 /* Sources */,
+				BB8227F0211C50B400D5B2C0 /* Frameworks */,
+				BB8227F1211C50B400D5B2C0 /* Headers */,
+				BB8227F2211C50B400D5B2C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetworkKit;
+			productName = NetworkKit;
+			productReference = BB8227F4211C50B400D5B2C0 /* NetworkKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		BBC73AD720A56DE400781F00 /* ApplicationKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBC73AE020A56DE400781F00 /* Build configuration list for PBXNativeTarget "ApplicationKit" */;
@@ -449,6 +581,9 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "William Lee";
 				TargetAttributes = {
+					BB8227F3211C50B400D5B2C0 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
 					BBC73AD720A56DE400781F00 = {
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
@@ -497,16 +632,13 @@
 					ProductGroup = BBC6DD1720F35AC300CF885F /* Products */;
 					ProjectRef = BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */;
 				},
-				{
-					ProductGroup = BBC6DD1120F35ABD00CF885F /* Products */;
-					ProjectRef = BBC6DD1020F35ABD00CF885F /* WMNetworkKit.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
 				BBC73AD720A56DE400781F00 /* ApplicationKit */,
 				BBF1F015211BD2F600424FEA /* JSONKit */,
 				BBF1F033211BD3AA00424FEA /* LayoutKit */,
+				BB8227F3211C50B400D5B2C0 /* NetworkKit */,
 			);
 		};
 /* End PBXProject section */
@@ -524,13 +656,6 @@
 			fileType = wrapper.framework;
 			path = ComponentKit.framework;
 			remoteRef = BBC6DD0E20F35AB800CF885F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BBC6DD1520F35ABE00CF885F /* WMNetworkKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = WMNetworkKit.framework;
-			remoteRef = BBC6DD1420F35ABE00CF885F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */ = {
@@ -606,6 +731,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BB8227F2211C50B400D5B2C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBC73AD620A56DE400781F00 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -630,6 +762,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BB8227EF211C50B400D5B2C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB82283B211C50D900D5B2C0 /* Reachability.swift in Sources */,
+				BB82283A211C50D900D5B2C0 /* Network.swift in Sources */,
+				BB822839211C50D900D5B2C0 /* Network+UploadTask.swift in Sources */,
+				BB82282E211C50D900D5B2C0 /* NetworkStatus.swift in Sources */,
+				BB82283C211C50D900D5B2C0 /* NetworkRequest.swift in Sources */,
+				BB822837211C50D900D5B2C0 /* Network+DownloadTask.swift in Sources */,
+				BB822833211C50D900D5B2C0 /* NetworkDelegate+URLSessionStreamDelegate.swift in Sources */,
+				BB822831211C50D900D5B2C0 /* NetworkDelegate+URLSessionDelegate.swift in Sources */,
+				BB82282F211C50D900D5B2C0 /* NetworkResult.swift in Sources */,
+				BB822834211C50D900D5B2C0 /* NetworkDelegate+URLSessionTaskDelegate.swift in Sources */,
+				BB822835211C50D900D5B2C0 /* NetworkDelegate.swift in Sources */,
+				BB822830211C50D900D5B2C0 /* NetworkDelegate+URLSessionDataDelegate.swift in Sources */,
+				BB822836211C50D900D5B2C0 /* Network+DataTask.swift in Sources */,
+				BB822838211C50D900D5B2C0 /* Network+Task.swift in Sources */,
+				BB822832211C50D900D5B2C0 /* NetworkDelegate+URLSessionDownloadDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BBC73AD320A56DE400781F00 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -667,6 +821,56 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		BB8227F9211C50B400D5B2C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = NetworkKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.william.NetworkKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BB8227FA211C50B400D5B2C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = NetworkKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.william.NetworkKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		BBC73ADE20A56DE400781F00 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -961,6 +1165,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BB822807211C50B400D5B2C0 /* Build configuration list for PBXNativeTarget "NetworkKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB8227F9211C50B400D5B2C0 /* Debug */,
+				BB8227FA211C50B400D5B2C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BBC73AD220A56DE400781F00 /* Build configuration list for PBXProject "ApplicationKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

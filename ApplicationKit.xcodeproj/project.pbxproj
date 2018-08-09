@@ -18,45 +18,12 @@
 		BBC73AE920A5B08900781F00 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* Listable.swift */; };
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
 		BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0B26720AC3550007FB9BA /* Debug.swift */; };
+		BBF1F01A211BD2F600424FEA /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF1F018211BD2F600424FEA /* JSONKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BBF1F02E211BD30200424FEA /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF1F02D211BD30200424FEA /* JSON.swift */; };
 		BBF221D620E4B218007A5FA2 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF221D520E4B218007A5FA2 /* App.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		73494FE6211B419900EB41C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1ED2D0B1AD2CFA600CFC3EB;
-			remoteInfo = "Kingfisher-Demo";
-		};
-		73494FE8211B419900EB41C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D13F49C21BEDA53F00CE335D;
-			remoteInfo = "Kingfisher-tvOS-Demo";
-		};
-		73494FEA211B419900EB41C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4B2944551C3D03880088C3E7;
-			remoteInfo = "Kingfisher-macOS-Demo";
-		};
-		73494FEC211B419900EB41C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1679A391C4E78B20020FD12;
-			remoteInfo = "Kingfisher-watchOS-Demo";
-		};
-		73494FEE211B419900EB41C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1679A451C4E78B20020FD12;
-			remoteInfo = "Kingfisher-watchOS-Demo Extension";
-		};
 		BBAB8A732100D56600B89C44 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
@@ -186,6 +153,10 @@
 		BBC73AE820A5B08900781F00 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
 		BBC73BF120A5BC3000781F00 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BBD0B26720AC3550007FB9BA /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		BBF1F016211BD2F600424FEA /* JSONKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBF1F018211BD2F600424FEA /* JSONKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		BBF1F019211BD2F600424FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBF1F02D211BD30200424FEA /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		BBF221D520E4B218007A5FA2 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +171,13 @@
 				BBA7168A20F35B5D000BB9C4 /* WMLayoutKit.framework in Frameworks */,
 				BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */,
 				BBA7168C20F35B5D000BB9C4 /* WMNetworkKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBF1F012211BD2F600424FEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,11 +248,6 @@
 				BBC6DD3E20F35AD600CF885F /* Kingfisher.framework */,
 				BBC6DD4020F35AD600CF885F /* Kingfisher.framework */,
 				BBC6DD4220F35AD600CF885F /* Kingfisher.framework */,
-				73494FE7211B419900EB41C4 /* Kingfisher-Demo.app */,
-				73494FE9211B419900EB41C4 /* Kingfisher-tvOS-Demo.app */,
-				73494FEB211B419900EB41C4 /* Kingfisher-macOS-Demo.app */,
-				73494FED211B419900EB41C4 /* Kingfisher-watchOS-Demo.app */,
-				73494FEF211B419900EB41C4 /* Kingfisher-watchOS-Demo Extension.appex */,
 				BBC6DD4420F35AD600CF885F /* KingfisherTests.xctest */,
 				BBC6DD4620F35AD600CF885F /* KingfisherTests-tvOS.xctest */,
 				BBC6DD4820F35AD600CF885F /* KingfisherTests-macOS.xctest */,
@@ -294,6 +267,7 @@
 				BBC6DD1020F35ABD00CF885F /* WMNetworkKit.xcodeproj */,
 				BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */,
 				BBC73ADA20A56DE400781F00 /* ApplicationKit */,
+				BBF1F017211BD2F600424FEA /* JSONKit */,
 				BBC73AD920A56DE400781F00 /* Products */,
 				BBC73B9820A5B71B00781F00 /* Frameworks */,
 			);
@@ -303,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC73AD820A56DE400781F00 /* ApplicationKit.framework */,
+				BBF1F016211BD2F600424FEA /* JSONKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +325,16 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		BBF1F017211BD2F600424FEA /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				BBF1F018211BD2F600424FEA /* JSONKit.h */,
+				BBF1F02D211BD30200424FEA /* JSON.swift */,
+				BBF1F019211BD2F600424FEA /* Info.plist */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
 		BBF221C720E4B1ED007A5FA2 /* Information */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +351,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBC73ADD20A56DE400781F00 /* ApplicationKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBF1F013211BD2F600424FEA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBF1F01A211BD2F600424FEA /* JSONKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +383,24 @@
 			productReference = BBC73AD820A56DE400781F00 /* ApplicationKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		BBF1F015211BD2F600424FEA /* JSONKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBF1F02C211BD2F600424FEA /* Build configuration list for PBXNativeTarget "JSONKit" */;
+			buildPhases = (
+				BBF1F011211BD2F600424FEA /* Sources */,
+				BBF1F012211BD2F600424FEA /* Frameworks */,
+				BBF1F013211BD2F600424FEA /* Headers */,
+				BBF1F014211BD2F600424FEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JSONKit;
+			productName = JSONKit;
+			productReference = BBF1F016211BD2F600424FEA /* JSONKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -402,6 +413,10 @@
 					BBC73AD720A56DE400781F00 = {
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
+					};
+					BBF1F015211BD2F600424FEA = {
+						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -455,46 +470,12 @@
 			projectRoot = "";
 			targets = (
 				BBC73AD720A56DE400781F00 /* ApplicationKit */,
+				BBF1F015211BD2F600424FEA /* JSONKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		73494FE7211B419900EB41C4 /* Kingfisher-Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Kingfisher-Demo.app";
-			remoteRef = 73494FE6211B419900EB41C4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		73494FE9211B419900EB41C4 /* Kingfisher-tvOS-Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Kingfisher-tvOS-Demo.app";
-			remoteRef = 73494FE8211B419900EB41C4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		73494FEB211B419900EB41C4 /* Kingfisher-macOS-Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Kingfisher-macOS-Demo.app";
-			remoteRef = 73494FEA211B419900EB41C4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		73494FED211B419900EB41C4 /* Kingfisher-watchOS-Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Kingfisher-watchOS-Demo.app";
-			remoteRef = 73494FEC211B419900EB41C4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		73494FEF211B419900EB41C4 /* Kingfisher-watchOS-Demo Extension.appex */ = {
-			isa = PBXReferenceProxy;
-			fileType = "wrapper.app-extension";
-			path = "Kingfisher-watchOS-Demo Extension.appex";
-			remoteRef = 73494FEE211B419900EB41C4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		BBAB8A742100D56600B89C44 /* TecentCloud.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -610,6 +591,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BBF1F014211BD2F600424FEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -622,6 +610,14 @@
 				BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */,
 				73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */,
 				BBC73AE920A5B08900781F00 /* Listable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBF1F011211BD2F600424FEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBF1F02E211BD30200424FEA /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,6 +809,59 @@
 			};
 			name = Release;
 		};
+		BBF1F01B211BD2F600424FEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JSONKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.william.JSONKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BBF1F01C211BD2F600424FEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JSONKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.william.JSONKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -830,6 +879,15 @@
 			buildConfigurations = (
 				BBC73AE120A56DE400781F00 /* Debug */,
 				BBC73AE220A56DE400781F00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBF1F02C211BD2F600424FEA /* Build configuration list for PBXNativeTarget "JSONKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBF1F01B211BD2F600424FEA /* Debug */,
+				BBF1F01C211BD2F600424FEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

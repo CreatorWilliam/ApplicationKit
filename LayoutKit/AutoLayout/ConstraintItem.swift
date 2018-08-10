@@ -49,16 +49,15 @@ internal extension ConstraintItem {
   
   /// 更新约束
   func update() {
-
-    /*
+    
     var constraints: [NSLayoutConstraint] = self.firstTarget.constraints
+
     if let hostConstraints = self.firstTarget.superview?.constraints {
 
       constraints += hostConstraints
     }
-    */
     
-    for constraint in self.firstTarget.constraints {
+    for constraint in constraints {
       
       guard self.isSimilar(constraint) else { continue }
       constraint.constant = self.constant
@@ -71,15 +70,14 @@ internal extension ConstraintItem {
   
   /// 卸载约束
   func uninstall() {
-
-    /*
+    
     var constraints: [NSLayoutConstraint] = self.firstTarget.constraints
     if let hostConstraints = self.firstTarget.superview?.constraints {
 
       constraints += hostConstraints
     }
-    */
-    for constraint in self.firstTarget.constraints {
+ 
+    for constraint in constraints {
   
       guard self.isSimilar(constraint) else { continue }
       constraint.isActive = false
@@ -109,6 +107,7 @@ private extension ConstraintItem {
     
     return true
   }
+  
 }
 
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
+		BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */; };
 		BB8227F8211C50B400D5B2C0 /* NetworkKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BB8227F6211C50B400D5B2C0 /* NetworkKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB82282E211C50D900D5B2C0 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82280E211C50D900D5B2C0 /* NetworkStatus.swift */; };
 		BB82282F211C50D900D5B2C0 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82281C211C50D900D5B2C0 /* NetworkResult.swift */; };
@@ -27,7 +28,6 @@
 		BB82283D211C515400D5B2C0 /* NetworkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8227F4211C50B400D5B2C0 /* NetworkKit.framework */; };
 		BB82283E211C527F00D5B2C0 /* JSONKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F016211BD2F600424FEA /* JSONKit.framework */; };
 		BB82283F211C527F00D5B2C0 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F034211BD3AA00424FEA /* LayoutKit.framework */; };
-		BB822841211C52A700D5B2C0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB822840211C52A700D5B2C0 /* SystemConfiguration.framework */; };
 		BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0F20F35AB800CF885F /* ComponentKit.framework */; };
 		BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD3C20F35AD600CF885F /* Kingfisher.framework */; };
 		BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */; };
@@ -137,6 +137,7 @@
 
 /* Begin PBXFileReference section */
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
+		BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BB8227F4211C50B400D5B2C0 /* NetworkKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB8227F6211C50B400D5B2C0 /* NetworkKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkKit.h; sourceTree = "<group>"; };
 		BB8227F7211C50B400D5B2C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -155,14 +156,7 @@
 		BB822829211C50D900D5B2C0 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		BB82282B211C50D900D5B2C0 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		BB82282D211C50D900D5B2C0 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
-		BB822840211C52A700D5B2C0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TecentCloud.xcodeproj; path = ../TecentCloud/TecentCloud.xcodeproj; sourceTree = "<group>"; };
-		BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
-		BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetworkKit.framework; path = Carthage/Build/iOS/WMNetworkKit.framework; sourceTree = "<group>"; };
-		BBC6DCFF20F34B8600CF885F /* WMNetImageKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMNetImageKit.framework; path = Carthage/Build/iOS/WMNetImageKit.framework; sourceTree = "<group>"; };
-		BBC6DD0020F34B8600CF885F /* WMLayoutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMLayoutKit.framework; path = Carthage/Build/iOS/WMLayoutKit.framework; sourceTree = "<group>"; };
-		BBC6DD0120F34B8600CF885F /* ComponentKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ComponentKit.framework; path = Carthage/Build/iOS/ComponentKit.framework; sourceTree = "<group>"; };
-		BBC6DD0220F34B8600CF885F /* WMJSONKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WMJSONKit.framework; path = Carthage/Build/iOS/WMJSONKit.framework; sourceTree = "<group>"; };
 		BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ComponentKit.xcodeproj; path = ../ComponentKit/ComponentKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMNetImageKit.xcodeproj; path = ../WMNetImageKit/WMNetImageKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
@@ -195,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB822841211C52A700D5B2C0 /* SystemConfiguration.framework in Frameworks */,
+				BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,13 +386,7 @@
 		BBC73B9820A5B71B00781F00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BB822840211C52A700D5B2C0 /* SystemConfiguration.framework */,
-				BBC6DD0120F34B8600CF885F /* ComponentKit.framework */,
-				BBC6DCFD20F34B8600CF885F /* Kingfisher.framework */,
-				BBC6DD0220F34B8600CF885F /* WMJSONKit.framework */,
-				BBC6DD0020F34B8600CF885F /* WMLayoutKit.framework */,
-				BBC6DCFF20F34B8600CF885F /* WMNetImageKit.framework */,
-				BBC6DCFE20F34B8600CF885F /* WMNetworkKit.framework */,
+				BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

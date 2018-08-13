@@ -8,19 +8,6 @@
 
 import Foundation
 
-public struct JSONIteratorElement {
-  
-  public let key: String
-  public let json: JSON
-  
-  init(_ key: String, _ json: JSON) {
-    
-    self.key = key
-    self.json = json
-  }
-  
-}
-
 public struct JSONIterator {
   
   var arrayIterator: IndexingIterator<[Any]>?
@@ -31,8 +18,6 @@ public struct JSONIterator {
     self.arrayIterator = json.array?.makeIterator()
     self.dictionaryIterator = json.dictionary?.makeIterator()
   }
-  
-  
   
 }
 
@@ -59,6 +44,7 @@ extension JSONIterator: IteratorProtocol {
   }
   
 }
+
 
 
 

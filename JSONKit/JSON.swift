@@ -31,7 +31,7 @@ public struct JSON {
   
 }
 
-// MARK: - Type Value
+// MARK: - Special Type Value
 public extension JSON {
   
   var int: Int? {
@@ -71,44 +71,10 @@ public extension JSON {
   
 }
 
-// MARK: - JSON Save
-public extension JSON {
-  
-  /// 保存JSON到指定URL
-  ///
-  /// - Parameter url: url
-  /// - Returns: false: 保存失败，true：保存成功
-  @discardableResult
-  func save(to url: URL) -> Bool {
-    
-    guard let objcet = self.data else { return false }
-    
-    do {
-      
-      let data = try JSONSerialization.data(withJSONObject: objcet, options: .prettyPrinted)
-      
-      if FileManager.default.fileExists(atPath: url.absoluteString) {
-        
-        try FileManager.default.removeItem(at: url)
-      }
-      
-      try data.write(to: url)
-      
-      return true
-      
-    } catch {
-      
-      return false
-    }
-    
-  }
-  
-}
-
 // MARK: - Update From Different Source
 public extension JSON {
   
-  /// 接收URL/Data/JSONObject进行更新JSON数据
+  /// 接收URL/Data/[String: Any]/[Any]进行更新JSON数据,Any必须是JSON支持的类型
   ///
   /// - Parameter source: URL/Data/JSONO对象
   mutating func update(fromAny source: Any?) {
@@ -116,7 +82,7 @@ public extension JSON {
     self.messages.append("Update from Source Successfully")
     guard let source = source else {
 
-      self.messages.append("Source is Empty")
+      self.messages.append("Source is nil")
       return
     }
 
@@ -168,7 +134,12 @@ public extension JSON {
   
   mutating func update(fromString string: String) {
     
-    
+    guard let data = string.data(using: .utf8) else {
+      
+      self.messages.append("\(string) isn't json string")
+      return
+    }
+    self.update(fromData: data)
   }
   
   /// 使用二进制的JSON数据更新
@@ -198,7 +169,7 @@ public extension JSON {
     }
   }
   
-  /// 使用字典进行数据更新
+  /// 使用JSON字典进行数据更新
   ///
   /// - Parameter dictionary: JSON字典[String: Any]
   mutating func update(fromDictionary dictionary: [String: Any]) {
@@ -226,6 +197,7 @@ public extension JSON {
     self.data = json.data
     self.array = json.array
     self.dictionary = json.dictionary
+    self.messages.append("Update Json from other json successfully")
   }
   
 }
@@ -279,18 +251,6 @@ public extension JSON {
   
 }
 
-// MARK: - Sequence
-extension JSON: Sequence {
-  
-  public typealias Iterator = JSONIterator
-  
-  public func makeIterator() -> JSON.Iterator {
-    
-    return JSONIterator(self)
-  }
-  
-}
-
 // MARK: - CustomStringConvertible
 extension JSON: CustomStringConvertible {
   
@@ -308,7 +268,6 @@ extension JSON: CustomDebugStringConvertible {
     
     return self.customDescription()
   }
-  
   
 }
 

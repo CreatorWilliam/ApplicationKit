@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
 		BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */; };
+		BB5CB9E121212713001701CC /* JSONIteratorElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9E021212713001701CC /* JSONIteratorElement.swift */; };
+		BB5CB9EF2121286C001701CC /* JSON+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9EE2121286C001701CC /* JSON+File.swift */; };
+		BB5CB9F1212128E2001701CC /* JSON+Squence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9F0212128E2001701CC /* JSON+Squence.swift */; };
 		BB8227F8211C50B400D5B2C0 /* NetworkKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BB8227F6211C50B400D5B2C0 /* NetworkKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB82282E211C50D900D5B2C0 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82280E211C50D900D5B2C0 /* NetworkStatus.swift */; };
 		BB82282F211C50D900D5B2C0 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB82281C211C50D900D5B2C0 /* NetworkResult.swift */; };
@@ -138,6 +141,9 @@
 /* Begin PBXFileReference section */
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
 		BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BB5CB9E021212713001701CC /* JSONIteratorElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONIteratorElement.swift; sourceTree = "<group>"; };
+		BB5CB9EE2121286C001701CC /* JSON+File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+File.swift"; sourceTree = "<group>"; };
+		BB5CB9F0212128E2001701CC /* JSON+Squence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Squence.swift"; sourceTree = "<group>"; };
 		BB8227F4211C50B400D5B2C0 /* NetworkKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB8227F6211C50B400D5B2C0 /* NetworkKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkKit.h; sourceTree = "<group>"; };
 		BB8227F7211C50B400D5B2C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -223,6 +229,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB5CB9F22121290A001701CC /* Squence */ = {
+			isa = PBXGroup;
+			children = (
+				BB5CB9F0212128E2001701CC /* JSON+Squence.swift */,
+				BBF1F065211C076E00424FEA /* JSONIterator.swift */,
+				BB5CB9E021212713001701CC /* JSONIteratorElement.swift */,
+			);
+			path = Squence;
+			sourceTree = "<group>";
+		};
+		BB5CB9F321212924001701CC /* FileHandle */ = {
+			isa = PBXGroup;
+			children = (
+				BB5CB9EE2121286C001701CC /* JSON+File.swift */,
+			);
+			path = FileHandle;
+			sourceTree = "<group>";
+		};
 		BB8227F5211C50B400D5B2C0 /* NetworkKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,7 +437,8 @@
 			children = (
 				BBF1F018211BD2F600424FEA /* JSONKit.h */,
 				BBF1F02D211BD30200424FEA /* JSON.swift */,
-				BBF1F065211C076E00424FEA /* JSONIterator.swift */,
+				BB5CB9F321212924001701CC /* FileHandle */,
+				BB5CB9F22121290A001701CC /* Squence */,
 				BBF1F019211BD2F600424FEA /* Info.plist */,
 			);
 			path = JSONKit;
@@ -788,8 +813,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5CB9E121212713001701CC /* JSONIteratorElement.swift in Sources */,
+				BB5CB9F1212128E2001701CC /* JSON+Squence.swift in Sources */,
 				BBF1F02E211BD30200424FEA /* JSON.swift in Sources */,
 				BBF1F066211C076E00424FEA /* JSONIterator.swift in Sources */,
+				BB5CB9EF2121286C001701CC /* JSON+File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -400,7 +400,7 @@
 				BBC73ADB20A56DE400781F00 /* ApplicationKit.h */,
 				BBC73BF120A5BC3000781F00 /* API.swift */,
 				BBD26ABD20B7B0CF00BB0657 /* List */,
-				BBF221C720E4B1ED007A5FA2 /* Information */,
+				BBF221C720E4B1ED007A5FA2 /* Application */,
 				BBD26ABC20B7B0C200BB0657 /* Debug */,
 				BBC73ADC20A56DE400781F00 /* Info.plist */,
 			);
@@ -467,12 +467,12 @@
 			path = AutoLayout;
 			sourceTree = "<group>";
 		};
-		BBF221C720E4B1ED007A5FA2 /* Information */ = {
+		BBF221C720E4B1ED007A5FA2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				BBF221D520E4B218007A5FA2 /* App.swift */,
 			);
-			path = Information;
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

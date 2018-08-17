@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
+		BB0E65332126D01E00C862EF /* JSON+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E65322126D01E00C862EF /* JSON+Description.swift */; };
 		BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */; };
 		BB5CB9E121212713001701CC /* JSONIteratorElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9E021212713001701CC /* JSONIteratorElement.swift */; };
 		BB5CB9EF2121286C001701CC /* JSON+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9EE2121286C001701CC /* JSON+File.swift */; };
@@ -156,6 +157,7 @@
 
 /* Begin PBXFileReference section */
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
+		BB0E65322126D01E00C862EF /* JSON+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Description.swift"; sourceTree = "<group>"; };
 		BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BB5CB9E021212713001701CC /* JSONIteratorElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONIteratorElement.swift; sourceTree = "<group>"; };
 		BB5CB9EE2121286C001701CC /* JSON+File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+File.swift"; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 			children = (
 				BBF1F018211BD2F600424FEA /* JSONKit.h */,
 				BBF1F02D211BD30200424FEA /* JSON.swift */,
+				BB0E65322126D01E00C862EF /* JSON+Description.swift */,
 				BB5CB9F321212924001701CC /* FileHandle */,
 				BB5CB9F22121290A001701CC /* Squence */,
 				BBF1F019211BD2F600424FEA /* Info.plist */,
@@ -947,6 +950,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB5CB9E121212713001701CC /* JSONIteratorElement.swift in Sources */,
+				BB0E65332126D01E00C862EF /* JSON+Description.swift in Sources */,
 				BB5CB9F1212128E2001701CC /* JSON+Squence.swift in Sources */,
 				BBF1F02E211BD30200424FEA /* JSON.swift in Sources */,
 				BBF1F066211C076E00424FEA /* JSONIterator.swift in Sources */,

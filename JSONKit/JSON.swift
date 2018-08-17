@@ -79,10 +79,10 @@ public extension JSON {
   /// - Parameter source: URL/Data/JSONO对象
   mutating func update(fromAny source: Any?) {
 
-    self.messages.append("Update from Source Successfully")
+    self.append("Will Update from Source")
     guard let source = source else {
 
-      self.messages.append("Source is nil")
+      self.append("Source is nil")
       return
     }
 
@@ -91,7 +91,13 @@ public extension JSON {
       self.update(fromURL: url)
       return
     }
-
+    
+    if let string = source as? String {
+      
+      self.update(fromString: string)
+      return
+    }
+    
     if let data = source as? Data {
 
       self.update(fromData: data)
@@ -116,7 +122,7 @@ public extension JSON {
       return
     }
 
-    self.messages.append("Source isn't URL, Data, [String: Any], [Any], JSON")
+    self.append("Source isn't URL, JSON String, Data, [String: Any], [Any], JSON")
   }
   
   /// 从指定URL地址获取JSON数据
@@ -126,9 +132,10 @@ public extension JSON {
     
     guard let data = try? Data(contentsOf: url) else {
       
-      self.messages.append("Fetch json data failed from URL: \(url)")
+      self.append("Fetch json data failed from URL: \(url)")
       return
     }
+    self.append("Update from URL\(url)")
     self.update(fromData: data)
   }
   
@@ -136,9 +143,10 @@ public extension JSON {
     
     guard let data = string.data(using: .utf8) else {
       
-      self.messages.append("\(string) isn't json string")
+      self.append("\(string) isn't json string")
       return
     }
+    self.append("Update from String\(string)")
     self.update(fromData: data)
   }
   
@@ -151,6 +159,7 @@ public extension JSON {
       
       let jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
       
+      self.append("Update from Data")
       if let dictionary = jsonObject as? [String : Any] {
         
         self.update(fromDictionary: dictionary)
@@ -165,7 +174,7 @@ public extension JSON {
       
     } catch {
       
-      self.messages.append("Json Serialization failed reason: \(error.localizedDescription)")
+      self.append("Json Serialization failed reason: \(error.localizedDescription)")
     }
   }
   
@@ -176,7 +185,7 @@ public extension JSON {
     
     self.data = dictionary
     self.dictionary = dictionary
-    self.messages.append("Update Json from dictionary successfully")
+    self.append("Update Json from dictionary successfully")
   }
   
   /// 使用JSON数组进行数据更新
@@ -186,7 +195,7 @@ public extension JSON {
     
     self.data = array
     self.array = array
-    self.messages.append("Update Json from array successfully")
+    self.append("Update Json from array successfully")
   }
   
   /// 使用另一个JSON对象进行数据更新
@@ -197,7 +206,7 @@ public extension JSON {
     self.data = json.data
     self.array = json.array
     self.dictionary = json.dictionary
-    self.messages.append("Update Json from other json successfully")
+    self.append("Update Json from other json successfully")
   }
   
 }
@@ -251,42 +260,20 @@ public extension JSON {
   
 }
 
-// MARK: - CustomStringConvertible
-extension JSON: CustomStringConvertible {
-  
-  public var description: String {
-    
-    return self.customDescription()
-  }
-  
-}
-
-// MARK: - CustomDebugStringConvertible
-extension JSON: CustomDebugStringConvertible {
-  
-  public var debugDescription: String {
-    
-    return self.customDescription()
-  }
-  
-}
-
-// MARK: - PrettyJSONDescription
+// MARK: - Utility
 private extension JSON {
   
-  func customDescription(options: JSONSerialization.WritingOptions = .prettyPrinted) -> String {
-    
-    var jsonObject: Any
-    if let object = self.dictionary { jsonObject = object }
-    else if let object = self.array { jsonObject = object }
-    else { return "ERROR: Empty" }
-    
-    guard let descriptionData = try? JSONSerialization.data(withJSONObject: jsonObject, options: options) else { return "ERROR: JSONSerialization FAILED" }
-    return String(data: descriptionData, encoding: .utf8) ?? "ERROR: ENCODING FAILED"
+  /// 用于记录解析过程中，每一步的信息
+  ///
+  /// - Parameter message: 解析的消息
+  mutating func append(_ message: String) {
+   
+    #if DEBUG
+    self.messages.append(message)
+    #endif
   }
   
 }
-
 
 
 

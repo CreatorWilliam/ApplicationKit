@@ -12,7 +12,6 @@ public struct JSON {
   
   /// 表示JSON解析过程中的消息
   public private(set) var messages: [String] = []
-  
   /// JSON原始数据
   public private(set) var data: Any?
   /// JSON为字典的时候，有值
@@ -74,86 +73,98 @@ public extension JSON {
 // MARK: - Update From Different Source
 public extension JSON {
   
+  // MARK: From Any
   /// 接收URL/Data/[String: Any]/[Any]进行更新JSON数据,Any必须是JSON支持的类型
   ///
   /// - Parameter source: URL/Data/JSONO对象
   mutating func update(fromAny source: Any?) {
-
+    
     self.append("Will Update from Source")
+    
     guard let source = source else {
-
+      
       self.append("Source is nil")
       return
     }
-
+    
+    self.data = source
+    
     if let url = source as? URL {
-
-      self.update(fromURL: url)
+      
+      self.update(from: url)
       return
     }
     
     if let string = source as? String {
       
-      self.update(fromString: string)
+      self.update(from: string)
       return
     }
     
     if let data = source as? Data {
-
-      self.update(fromData: data)
+      
+      self.update(from: data)
       return
     }
-
+    
     if let dictionary = source as? [String : Any] {
-
-      self.update(fromDictionary: dictionary)
+      
+      self.update(from: dictionary)
       return
     }
-
+    
     if let array = source as? [Any] {
-
-      self.update(fromArray: array)
+      
+      self.update(from: array)
       return
     }
-
+    
     if let json = source as? JSON {
-
-      self.update(fromJSON: json)
+      
+      self.update(from: json)
       return
     }
-
+    
     self.append("Source isn't URL, JSON String, Data, [String: Any], [Any], JSON")
   }
   
+  // MARK: From URL
   /// 从指定URL地址获取JSON数据
   ///
   /// - Parameter url: 获取JSON数据的URL
-  mutating func update(fromURL url: URL) {
+  mutating func update(from url: URL) {
     
+    self.data = url
     guard let data = try? Data(contentsOf: url) else {
       
       self.append("Fetch json data failed from URL: \(url)")
       return
     }
     self.append("Update from URL\(url)")
-    self.update(fromData: data)
+    self.update(from: data)
   }
   
-  mutating func update(fromString string: String) {
+  // MARK: From String
+  /// 根据JSON字符串转成JSON
+  ///
+  /// - Parameter string: JSON字符串
+  mutating func update(from string: String) {
     
+    self.data = string
     guard let data = string.data(using: .utf8) else {
       
       self.append("\(string) isn't json string")
       return
     }
     self.append("Update from String\(string)")
-    self.update(fromData: data)
+    self.update(from: data)
   }
   
+  // MARK: From Data
   /// 使用二进制的JSON数据更新
   ///
   /// - Parameter jsonData: JSON数据：[Any]、[String: Any]
-  mutating func update(fromData data: Data) {
+  mutating func update(from data: Data) {
     
     do {
       
@@ -162,15 +173,17 @@ public extension JSON {
       self.append("Update from Data")
       if let dictionary = jsonObject as? [String : Any] {
         
-        self.update(fromDictionary: dictionary)
+        self.update(from: dictionary)
         return
       }
       
       if let array = jsonObject as? [Any] {
         
-        self.update(fromArray: array)
+        self.update(from: array)
         return
       }
+      
+      self.data = jsonObject
       
     } catch {
       
@@ -178,30 +191,33 @@ public extension JSON {
     }
   }
   
+  // MARK: From Dictionary
   /// 使用JSON字典进行数据更新
   ///
   /// - Parameter dictionary: JSON字典[String: Any]
-  mutating func update(fromDictionary dictionary: [String: Any]) {
+  mutating func update(from dictionary: [String: Any]) {
     
     self.data = dictionary
     self.dictionary = dictionary
     self.append("Update Json from dictionary successfully")
   }
   
+  // MARK: From Array
   /// 使用JSON数组进行数据更新
   ///
   /// - Parameter array: JSON数组
-  mutating func update(fromArray array: [Any]) {
+  mutating func update(from array: [Any]) {
     
     self.data = array
     self.array = array
     self.append("Update Json from array successfully")
   }
   
+  // MARK: From JSON
   /// 使用另一个JSON对象进行数据更新
   ///
   /// - Parameter json: JSON对象
-  mutating func update(fromJSON json: JSON) {
+  mutating func update(from json: JSON) {
     
     self.data = json.data
     self.array = json.array
@@ -267,7 +283,7 @@ private extension JSON {
   ///
   /// - Parameter message: 解析的消息
   mutating func append(_ message: String) {
-   
+    
     #if DEBUG
     self.messages.append(message)
     #endif

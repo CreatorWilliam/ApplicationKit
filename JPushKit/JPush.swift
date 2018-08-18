@@ -65,7 +65,7 @@ public extension JPush {
   }
   
   class func getAlias(_ handle: (String?) -> Void) {
-
+    
     JPUSHService.getAlias({ (code, alias, seq) in
       
     }, seq: 3)
@@ -95,30 +95,30 @@ public extension JPush {
 
 // MARK: - JPUSHRegisterDelegate
 extension JPush: JPUSHRegisterDelegate {
-
+  
   @available(iOS 10.0, *)
   public func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
-
+    
     let userInfo = response.notification.request.content.userInfo
     if response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) ?? false {
       JPUSHService.handleRemoteNotification(userInfo)
     }
     completionHandler()
   }
-
+  
   @available(iOS 10.0, *)
   public func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
-
+    
     // Required
     let userInfo = notification.request.content.userInfo
     if notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self) ?? false {
-
+      
       JPUSHService.handleRemoteNotification(userInfo)
     }
-
+    
     completionHandler(Int(UNNotificationPresentationOptions.alert.rawValue)) // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
   }
-
+  
 }
 
 

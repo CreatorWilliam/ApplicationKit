@@ -95,7 +95,7 @@ public extension API {
       
       guard let data = data else { return }
       var json = JSON()
-      json.update(fromData: data)
+      json.update(from: data)
       
       // 调试
       self.debugLog(json)

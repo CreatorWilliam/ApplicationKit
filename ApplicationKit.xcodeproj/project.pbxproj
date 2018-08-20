@@ -10,6 +10,8 @@
 		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
 		BB0E65332126D01E00C862EF /* JSON+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E65322126D01E00C862EF /* JSON+Description.swift */; };
 		BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */; };
+		BB393CD2212A999F00F57F50 /* ItemListable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB393CD1212A999F00F57F50 /* ItemListable.swift */; };
+		BB393CE0212A99C200F57F50 /* DataModelListable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB393CDF212A99C200F57F50 /* DataModelListable.swift */; };
 		BB5CB9E121212713001701CC /* JSONIteratorElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9E021212713001701CC /* JSONIteratorElement.swift */; };
 		BB5CB9EF2121286C001701CC /* JSON+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9EE2121286C001701CC /* JSON+File.swift */; };
 		BB5CB9F1212128E2001701CC /* JSON+Squence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9F0212128E2001701CC /* JSON+Squence.swift */; };
@@ -52,7 +54,7 @@
 		BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD3C20F35AD600CF885F /* Kingfisher.framework */; };
 		BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */; };
 		BBC73ADD20A56DE400781F00 /* ApplicationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC73ADB20A56DE400781F00 /* ApplicationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BBC73AE920A5B08900781F00 /* Listable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* Listable.swift */; };
+		BBC73AE920A5B08900781F00 /* ViewControllerListable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* ViewControllerListable.swift */; };
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
 		BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0B26720AC3550007FB9BA /* Debug.swift */; };
 		BBF1F01A211BD2F600424FEA /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBF1F018211BD2F600424FEA /* JSONKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -159,6 +161,8 @@
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
 		BB0E65322126D01E00C862EF /* JSON+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Description.swift"; sourceTree = "<group>"; };
 		BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BB393CD1212A999F00F57F50 /* ItemListable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListable.swift; sourceTree = "<group>"; };
+		BB393CDF212A99C200F57F50 /* DataModelListable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelListable.swift; sourceTree = "<group>"; };
 		BB5CB9E021212713001701CC /* JSONIteratorElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONIteratorElement.swift; sourceTree = "<group>"; };
 		BB5CB9EE2121286C001701CC /* JSON+File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+File.swift"; sourceTree = "<group>"; };
 		BB5CB9F0212128E2001701CC /* JSON+Squence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Squence.swift"; sourceTree = "<group>"; };
@@ -205,7 +209,7 @@
 		BBC73AD820A56DE400781F00 /* ApplicationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApplicationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC73ADB20A56DE400781F00 /* ApplicationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationKit.h; sourceTree = "<group>"; };
 		BBC73ADC20A56DE400781F00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBC73AE820A5B08900781F00 /* Listable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listable.swift; sourceTree = "<group>"; };
+		BBC73AE820A5B08900781F00 /* ViewControllerListable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerListable.swift; sourceTree = "<group>"; };
 		BBC73BF120A5BC3000781F00 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BBD0B26720AC3550007FB9BA /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		BBF1F016211BD2F600424FEA /* JSONKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -514,7 +518,9 @@
 		BBD26ABD20B7B0CF00BB0657 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				BBC73AE820A5B08900781F00 /* Listable.swift */,
+				BBC73AE820A5B08900781F00 /* ViewControllerListable.swift */,
+				BB393CDF212A99C200F57F50 /* DataModelListable.swift */,
+				BB393CD1212A999F00F57F50 /* ItemListable.swift */,
 				73494FD7211B419900EB41C4 /* ListDataModel.swift */,
 			);
 			path = List;
@@ -937,11 +943,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB393CD2212A999F00F57F50 /* ItemListable.swift in Sources */,
 				BBC73BF220A5BC3000781F00 /* API.swift in Sources */,
 				BBF221D620E4B218007A5FA2 /* App.swift in Sources */,
 				BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */,
 				73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */,
-				BBC73AE920A5B08900781F00 /* Listable.swift in Sources */,
+				BBC73AE920A5B08900781F00 /* ViewControllerListable.swift in Sources */,
+				BB393CE0212A99C200F57F50 /* DataModelListable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

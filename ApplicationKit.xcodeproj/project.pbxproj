@@ -52,7 +52,6 @@
 		BB82283F211C527F00D5B2C0 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F034211BD3AA00424FEA /* LayoutKit.framework */; };
 		BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD0F20F35AB800CF885F /* ComponentKit.framework */; };
 		BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD3C20F35AD600CF885F /* Kingfisher.framework */; };
-		BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */; };
 		BBC73ADD20A56DE400781F00 /* ApplicationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC73ADB20A56DE400781F00 /* ApplicationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BBC73AE920A5B08900781F00 /* ViewControllerListable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73AE820A5B08900781F00 /* ViewControllerListable.swift */; };
 		BBC73BF220A5BC3000781F00 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC73BF120A5BC3000781F00 /* API.swift */; };
@@ -84,13 +83,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 73B74CF11FE3AD2800BAE93A;
 			remoteInfo = ComponentKit;
-		};
-		BBC6DD1A20F35AC300CF885F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 73F2E9A01F09394800A5CC62;
-			remoteInfo = WMNetImageKit;
 		};
 		BBC6DD2D20F35AD000CF885F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -203,7 +195,6 @@
 		BB82282D211C50D900D5B2C0 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TecentCloud.xcodeproj; path = ../TecentCloud/TecentCloud.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ComponentKit.xcodeproj; path = ../ComponentKit/ComponentKit.xcodeproj; sourceTree = "<group>"; };
-		BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WMNetImageKit.xcodeproj; path = ../WMNetImageKit/WMNetImageKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = ../Kingfisher/Kingfisher.xcodeproj; sourceTree = "<group>"; };
 		BBC73AD820A56DE400781F00 /* ApplicationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApplicationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,7 +258,6 @@
 				BB82283D211C515400D5B2C0 /* NetworkKit.framework in Frameworks */,
 				BBA7168720F35B5D000BB9C4 /* ComponentKit.framework in Frameworks */,
 				BBA7168820F35B5D000BB9C4 /* Kingfisher.framework in Frameworks */,
-				BBA7168B20F35B5D000BB9C4 /* WMNetImageKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,14 +405,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BBC6DD1720F35AC300CF885F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		BBC6DD2920F35AD000CF885F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,7 +434,6 @@
 				BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */,
 				BBC6DD3120F35AD600CF885F /* Kingfisher.xcodeproj */,
 				BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */,
-				BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */,
 				BBC6DD0A20F35AB800CF885F /* ComponentKit.xcodeproj */,
 				BBC73ADA20A56DE400781F00 /* ApplicationKit */,
 				BBF1F017211BD2F600424FEA /* JSONKit */,
@@ -767,10 +748,6 @@
 					ProductGroup = BBAB8A662100D56600B89C44 /* Products */;
 					ProjectRef = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
 				},
-				{
-					ProductGroup = BBC6DD1720F35AC300CF885F /* Products */;
-					ProjectRef = BBC6DD1620F35AC300CF885F /* WMNetImageKit.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -796,13 +773,6 @@
 			fileType = wrapper.framework;
 			path = ComponentKit.framework;
 			remoteRef = BBC6DD0E20F35AB800CF885F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BBC6DD1B20F35AC300CF885F /* WMNetImageKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = WMNetImageKit.framework;
-			remoteRef = BBC6DD1A20F35AC300CF885F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BBC6DD2E20F35AD000CF885F /* OpenWithPayKit.framework */ = {

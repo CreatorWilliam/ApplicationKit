@@ -12,7 +12,7 @@ import JSONKit
 
 public struct App {
   
-  public var shared: App { return App() }
+  public static var shared: App { return App() }
   
   private init() { }
   
@@ -70,18 +70,14 @@ public extension App {
 public extension App {
   
   /// 导航栏Frame
-  public var navigationBar: CGRect { return CGRect(x: 0, y: self.statusBar.height, width: self.screenWidht, height: 44) }
+  public var navigationBar: CGRect { return CGRect(x: 0, y: self.statusBar.height, width: self.screen.width, height: 44) }
 }
 
 // MARK: - Screen
 public extension App {
   
-  /// 屏幕size
-  public var screenSize: CGSize { return UIScreen.main.bounds.size }
-  /// 屏幕Width
-  public var screenWidht: CGFloat { return self.screenSize.width }
-  /// 屏幕Hidht
-  public var screenHeight: CGFloat { return self.screenSize.height }
+  /// 屏幕Size
+  public var screen: CGSize { return UIScreen.main.bounds.size }
 }
 
 

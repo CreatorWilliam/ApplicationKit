@@ -10,7 +10,10 @@ import UIKit
 
 public struct App {
   
-  public init() { }
+  public var shared: App { return App() }
+  
+  private init() { }
+  
 }
 
 // MARK: - Info
@@ -30,20 +33,16 @@ public extension App {
 // MARK: - StatusBar
 public extension App {
   
-  /// 状态栏Height
-  public var statusBarHeight: CGFloat { return UIApplication.shared.statusBarFrame.height }
-  /// 状态栏Widht
-  public var statusBarWidth: CGFloat { return UIApplication.shared.statusBarFrame.width }
-
+  /// 状态栏Frame
+  public var statusBar: CGRect { return UIApplication.shared.statusBarFrame }
+  
 }
 
 // MARK: - NavigationBar
 public extension App {
   
-  /// 导航栏Height
-  public var navigationBarHeight: CGFloat { return 44 }
-  /// 导航栏Width
-  public var navigationBarWidth: CGFloat { return self.screenWidht }
+  /// 导航栏Frame
+  public var navigationBar: CGRect { return CGRect(x: 0, y: self.statusBar.height, width: self.screenWidht, height: 44) }
 }
 
 // MARK: - Screen

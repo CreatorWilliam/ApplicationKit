@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import NetworkKit
+import JSONKit
 
 public struct App {
   
@@ -27,6 +29,32 @@ public extension App {
   public var version: String { return self.info?["CFBundleShortVersionString"] as? String ?? "1.0" }
   /// 应用Build版本
   public var build: String { return self.info?["CFBundleVersion"] as? String ?? "1" }
+  
+}
+
+// MARK: - AppStore
+public extension App {
+  
+  func fromAppStore(withApp id: String, handle: @escaping (_ info: JSON) -> Void) {
+    
+    var parameters: [String: Any] = [:]
+    parameters["id"] = id
+    Network.request(.get, "http://itunes.apple.com/lookup").query(parameters).data({ (data, status) in
+      
+      guard let data = data else { return }
+      var json = JSON(data)
+      json = json["results"]
+      
+      // 调试
+      DebugLog(json)
+      //let version: String? = json["version"]
+      //let url: String? = json["trackViewUrl"]
+      DispatchQueue.main.async(execute: {
+        
+        handle(json)
+      })
+    })
+  }
   
 }
 

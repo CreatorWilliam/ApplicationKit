@@ -30,7 +30,7 @@ private extension JSON {
     var jsonObject: Any
     if let object = self.dictionary { jsonObject = object }
     else if let object = self.array { jsonObject = object }
-    else { return "ERROR: Empty" }
+    else { return "\(self.data ?? "ERROR: Empty")" }
     
     guard let descriptionData = try? JSONSerialization.data(withJSONObject: jsonObject, options: options) else { return "ERROR: JSONSerialization FAILED" }
     return String(data: descriptionData, encoding: .utf8) ?? "ERROR: ENCODING FAILED"

@@ -112,7 +112,7 @@ public extension ConstraintMaker {
   /// - Parameters:
   ///   - axis: 抗压缩的方向
   ///   - priority: 约束等级
-  public func compression(axis: UILayoutConstraintAxis,
+  public func compression(axis: NSLayoutConstraint.Axis,
                           priority: UILayoutPriority = UILayoutPriority.required) -> Void{
     
     self.target.setContentCompressionResistancePriority(priority, for: axis)
@@ -123,7 +123,7 @@ public extension ConstraintMaker {
   /// - Parameters:
   ///   - axis: 抗拉伸的方向
   ///   - priority: 约束等级
-  public func hugging(axis: UILayoutConstraintAxis,
+  public func hugging(axis: NSLayoutConstraint.Axis,
                       priority: UILayoutPriority = UILayoutPriority.required) -> Void {
     
     self.target.setContentHuggingPriority(priority, for: axis)

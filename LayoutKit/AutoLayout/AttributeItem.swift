@@ -10,11 +10,11 @@ import UIKit
 
 struct AttributeItem {
   
-  let attribute: NSLayoutAttribute
+  let attribute: NSLayoutConstraint.Attribute
   
   let offset: CGFloat
   
-  init(_ attribute: NSLayoutAttribute, _ offset: CGFloat = 0) {
+  init(_ attribute: NSLayoutConstraint.Attribute, _ offset: CGFloat = 0) {
     
     self.attribute = attribute
     self.offset = offset

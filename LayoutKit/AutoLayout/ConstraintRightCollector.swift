@@ -13,7 +13,7 @@ public class ConstraintRightCollector {
   /// 约束对象
   var target: AnyObject?
   /// 约束属性
-  var attribute: NSLayoutAttribute = .notAnAttribute
+  var attribute: NSLayoutConstraint.Attribute = .notAnAttribute
   
   /// 约束计算系数
   var multiplier: CGFloat = 1

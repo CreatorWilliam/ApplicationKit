@@ -15,12 +15,12 @@ public class ConstraintLeftCollector {
   /// 左侧约束相关的约束属性对应的计算常量
   private var firstAttributes: [AttributeItem] = []
   /// 元素间关系
-  private var relation: NSLayoutRelation = .equal
+  private var relation: NSLayoutConstraint.Relation = .equal
   /// 右侧约束收集者，用于收集第二元素及第二属性，约束优先级，约束计算系数
   private var rightCollector = ConstraintRightCollector()
   
   
-  init(target: UIView ,attribute: NSLayoutAttribute, constant: CGFloat) {
+  init(target: UIView ,attribute: NSLayoutConstraint.Attribute, constant: CGFloat) {
     
     self.firstTarget = target
     self.firstAttributes.append(AttributeItem(attribute, constant))

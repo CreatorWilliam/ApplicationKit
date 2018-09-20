@@ -11,17 +11,17 @@ import UIKit
 struct ConstraintItem {
   
   let firstTarget: UIView
-  let firstAttribute: NSLayoutAttribute
-  var relation: NSLayoutRelation = NSLayoutRelation.equal
+  let firstAttribute: NSLayoutConstraint.Attribute
+  var relation: NSLayoutConstraint.Relation = NSLayoutConstraint.Relation.equal
   var secondTarget: AnyObject? = nil
-  var secondAttribute: NSLayoutAttribute = .notAnAttribute
+  var secondAttribute: NSLayoutConstraint.Attribute = .notAnAttribute
   var multiplier: CGFloat = 1
   var constant: CGFloat = 0
   var priority: UILayoutPriority = UILayoutPriority.required
   
   var isSafeArea: Bool = true
   
-  init(target: UIView ,attribute: NSLayoutAttribute, constant: CGFloat) {
+  init(target: UIView ,attribute: NSLayoutConstraint.Attribute, constant: CGFloat) {
     
     self.firstTarget = target
     self.firstAttribute = attribute

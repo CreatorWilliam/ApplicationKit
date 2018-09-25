@@ -26,7 +26,7 @@ public extension JPush {
   /// - Parameters:
   ///   - appKey: 极光后台获取
   ///   - options: 应用启动时的参数
-  class func register(appKey: String, with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+  class func register(appKey: String, with launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
     
     let entity = JPUSHRegisterEntity()
     entity.types = Int(JPAuthorizationOptions.alert.rawValue | JPAuthorizationOptions.badge.rawValue | JPAuthorizationOptions.sound.rawValue)

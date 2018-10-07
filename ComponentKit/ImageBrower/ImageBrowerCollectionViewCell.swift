@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-import Kingfisher
+import ImageKit
 
 class ImageBrowerCollectionViewCell: UICollectionViewCell {
 

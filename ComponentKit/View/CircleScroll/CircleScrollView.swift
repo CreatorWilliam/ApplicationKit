@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import ImageKit
 
 public protocol CircleScrollViewDelegate: class {
   

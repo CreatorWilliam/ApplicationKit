@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D2EBB022169DC1A000BFCB0 /* DebugKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D2EBB002169DC1A000BFCB0 /* DebugKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D2EBB0B2169E7FA000BFCB0 /* SandBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB0A2169E7FA000BFCB0 /* SandBox.swift */; };
+		3D2EBB0D2169EAF5000BFCB0 /* SandBoxFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB0C2169EAF5000BFCB0 /* SandBoxFileItem.swift */; };
+		3D2EBB11216A4270000BFCB0 /* SandBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB10216A4270000BFCB0 /* SandBoxViewController.swift */; };
+		3D2EBB13216A45AE000BFCB0 /* SandBoxFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB12216A45AE000BFCB0 /* SandBoxFileCell.swift */; };
 		3D36F9472169CE9100A791C0 /* ImageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D36F9452169CE9100A791C0 /* ImageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D36F9712169CF0A00A791C0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D36F9562169CF0800A791C0 /* Image.swift */; };
 		3D36F9722169CF0A00A791C0 /* UIButton+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D36F9572169CF0800A791C0 /* UIButton+Kingfisher.swift */; };
@@ -229,6 +234,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D2EBAFE2169DC1A000BFCB0 /* DebugKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DebugKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D2EBB002169DC1A000BFCB0 /* DebugKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugKit.h; sourceTree = "<group>"; };
+		3D2EBB012169DC1A000BFCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D2EBB0A2169E7FA000BFCB0 /* SandBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBox.swift; sourceTree = "<group>"; };
+		3D2EBB0C2169EAF5000BFCB0 /* SandBoxFileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxFileItem.swift; sourceTree = "<group>"; };
+		3D2EBB10216A4270000BFCB0 /* SandBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxViewController.swift; sourceTree = "<group>"; };
+		3D2EBB12216A45AE000BFCB0 /* SandBoxFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxFileCell.swift; sourceTree = "<group>"; };
 		3D36F9432169CE9100A791C0 /* ImageKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ImageKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D36F9452169CE9100A791C0 /* ImageKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageKit.h; sourceTree = "<group>"; };
 		3D36F9462169CE9100A791C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -438,6 +450,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3D2EBAFB2169DC1A000BFCB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D36F9402169CE9100A791C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,6 +533,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D2EBAFF2169DC1A000BFCB0 /* DebugKit */ = {
+			isa = PBXGroup;
+			children = (
+				3D2EBB002169DC1A000BFCB0 /* DebugKit.h */,
+				3D2EBB062169E4F9000BFCB0 /* Sandbox */,
+				3D2EBB012169DC1A000BFCB0 /* Info.plist */,
+			);
+			path = DebugKit;
+			sourceTree = "<group>";
+		};
+		3D2EBB062169E4F9000BFCB0 /* Sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				3D2EBB0A2169E7FA000BFCB0 /* SandBox.swift */,
+				3D2EBB0F216A4250000BFCB0 /* UserInterface */,
+				3D2EBB072169E7B5000BFCB0 /* Function */,
+			);
+			path = Sandbox;
+			sourceTree = "<group>";
+		};
+		3D2EBB072169E7B5000BFCB0 /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				3D2EBB0C2169EAF5000BFCB0 /* SandBoxFileItem.swift */,
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
+		3D2EBB0F216A4250000BFCB0 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				3D2EBB10216A4270000BFCB0 /* SandBoxViewController.swift */,
+				3D2EBB12216A45AE000BFCB0 /* SandBoxFileCell.swift */,
+			);
+			path = UserInterface;
+			sourceTree = "<group>";
+		};
 		3D36F9442169CE9100A791C0 /* ImageKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,8 +1118,9 @@
 				BBF1F017211BD2F600424FEA /* JSONKit */,
 				BBF1F035211BD3AA00424FEA /* LayoutKit */,
 				BB8227F5211C50B400D5B2C0 /* NetworkKit */,
-				BB7A1B3121259D7B008508CA /* JPushKit */,
 				3D36F9442169CE9100A791C0 /* ImageKit */,
+				BB7A1B3121259D7B008508CA /* JPushKit */,
+				3D2EBAFF2169DC1A000BFCB0 /* DebugKit */,
 				BBC73AD920A56DE400781F00 /* Products */,
 				BBC73B9820A5B71B00781F00 /* Frameworks */,
 			);
@@ -1079,6 +1136,7 @@
 				BB7A1B3021259D7B008508CA /* JPushKit.framework */,
 				3DD8319F215A3130003B2C19 /* ComponentKit.framework */,
 				3D36F9432169CE9100A791C0 /* ImageKit.framework */,
+				3D2EBAFE2169DC1A000BFCB0 /* DebugKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1184,6 +1242,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3D2EBAF92169DC1A000BFCB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D2EBB022169DC1A000BFCB0 /* DebugKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D36F93E2169CE9100A791C0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1244,6 +1310,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3D2EBAFD2169DC1A000BFCB0 /* DebugKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D2EBB032169DC1A000BFCB0 /* Build configuration list for PBXNativeTarget "DebugKit" */;
+			buildPhases = (
+				3D2EBAF92169DC1A000BFCB0 /* Headers */,
+				3D2EBAFA2169DC1A000BFCB0 /* Sources */,
+				3D2EBAFB2169DC1A000BFCB0 /* Frameworks */,
+				3D2EBAFC2169DC1A000BFCB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DebugKit;
+			productName = DebugKit;
+			productReference = 3D2EBAFE2169DC1A000BFCB0 /* DebugKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		3D36F9422169CE9100A791C0 /* ImageKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D36F9542169CE9100A791C0 /* Build configuration list for PBXNativeTarget "ImageKit" */;
@@ -1379,6 +1463,10 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "William Lee";
 				TargetAttributes = {
+					3D2EBAFD2169DC1A000BFCB0 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+					};
 					3D36F9422169CE9100A791C0 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1000;
@@ -1435,11 +1523,12 @@
 			targets = (
 				BBC73AD720A56DE400781F00 /* ApplicationKit */,
 				3DD8319E215A3130003B2C19 /* ComponentKit */,
+				BBF1F015211BD2F600424FEA /* JSONKit */,
 				BBF1F033211BD3AA00424FEA /* LayoutKit */,
 				BB8227F3211C50B400D5B2C0 /* NetworkKit */,
-				BBF1F015211BD2F600424FEA /* JSONKit */,
 				3D36F9422169CE9100A791C0 /* ImageKit */,
 				BB7A1B2F21259D7B008508CA /* JPushKit */,
+				3D2EBAFD2169DC1A000BFCB0 /* DebugKit */,
 			);
 		};
 /* End PBXProject section */
@@ -1469,6 +1558,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3D2EBAFC2169DC1A000BFCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D36F9412169CE9100A791C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1529,6 +1625,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3D2EBAFA2169DC1A000BFCB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D2EBB0B2169E7FA000BFCB0 /* SandBox.swift in Sources */,
+				3D2EBB0D2169EAF5000BFCB0 /* SandBoxFileItem.swift in Sources */,
+				3D2EBB11216A4270000BFCB0 /* SandBoxViewController.swift in Sources */,
+				3D2EBB13216A45AE000BFCB0 /* SandBoxFileCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3D36F93F2169CE9100A791C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1749,6 +1856,62 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3D2EBB042169DC1A000BFCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DebugKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.william.DebugKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3D2EBB052169DC1A000BFCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DebugKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.william.DebugKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3D36F9482169CE9100A791C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2257,6 +2420,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3D2EBB032169DC1A000BFCB0 /* Build configuration list for PBXNativeTarget "DebugKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D2EBB042169DC1A000BFCB0 /* Debug */,
+				3D2EBB052169DC1A000BFCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3D36F9542169CE9100A791C0 /* Build configuration list for PBXNativeTarget "ImageKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

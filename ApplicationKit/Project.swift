@@ -1,0 +1,118 @@
+//
+//  Project.swift
+//  ApplicationKit
+//
+//  Created by William Lee on 2018/10/9.
+//  Copyright © 2018 William Lee. All rights reserved.
+//
+
+import UIKit
+import NetworkKit
+import ComponentKit
+
+public class Project {
+  
+  public static let `default` = Project()
+  
+  /// 用于检测网路可达性
+  private var reachability: Reachability?
+  
+  private init() { }
+}
+
+// MARK: - 项目初始化
+public extension Project {
+  
+  /// 配置UIApplication中window
+  var window: UIWindow {
+    
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.backgroundColor = .white
+    //window.rootViewController = UIViewController()
+    window.makeKeyAndVisible()
+    return window
+  }
+  
+  /// 设置导航栏默认的样式
+  ///
+  /// - Parameters:
+  ///   - titleColor: 导航栏文字颜色
+  ///   - titleFont: 导航栏字体
+  ///   - backgroundColor: 导航栏背景色
+  ///   - backgroundImage: 导航栏背景图片
+  func setupNavigation(titleColor: UIColor, titleFont: UIFont, backgroundColor: UIColor, backgroundImage: UIImage?) {
+    
+    // Custom Navigation
+    NavigationView.defaultTitleColor = titleColor
+    NavigationView.defaultTitleFont = titleFont
+    NavigationView.defaultBackgroundColor = backgroundColor
+    NavigationView.defaultBackgroundImage = backgroundImage
+    
+    // NavigationBar
+    UINavigationBar.appearance().barTintColor = backgroundColor
+    UINavigationBar.appearance().setBackgroundImage(backgroundImage, for: .default)
+    UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: titleColor, .font: titleFont]
+    UINavigationBar.appearance().shadowImage = UIImage()
+  }
+  
+  /// 配置网络接口，同时根据网络可达性，发出相应的通知：NetworkKit.Reachability.changedNotification
+  ///
+  /// - Parameters:
+  ///   - isDevelop: 是否是开发环境
+  ///   - developBasePath: 开发环境基地址
+  ///   - productBasePath: 生产环境基地址
+  func setupApi(isDevelop: Bool,
+                develop developBasePath: String,
+                product productBasePath: String) {
+    
+    API.isDevelop = true
+    API.developBasePath = developBasePath
+    API.productBasePath = productBasePath
+    
+    // 网络可达性监控
+    self.reachability = Reachability(host: isDevelop ? developBasePath : productBasePath)
+    self.reachability?.startMonitor()
+  }
+  
+  /// 向指定TabBarController中添加控制器
+  ///
+  /// - Parameters:
+  ///   - viewController: 要添加的控制器
+  ///   - title: 标签名称
+  ///   - normalImage: 标签图片（未选中）
+  ///   - normalColor: 标签名称颜色（选中）
+  ///   - selectedImage: 标签图片（未选中）
+  ///   - selectedColor: 标签名称颜色（选中）
+  ///   - isEmbeddedNavigation: 是否嵌套一个导航栏后再加入UITabBarController
+  ///   - tabBarController: 指定的UITabBarController
+  func addController(_ viewController: UIViewController,
+                     title: String,
+                     normalImage: String,
+                     normalColor: UIColor,
+                     selectedImage: String,
+                     selectedColor: UIColor,
+                     isEmbeddedNavigation: Bool = true,
+                     to tabBarController: UITabBarController) -> Void {
+    
+    viewController.navigationItem.title = title
+    viewController.tabBarItem.title = title
+    viewController.tabBarItem.setTitleTextAttributes([.foregroundColor: normalColor], for: .normal)
+    viewController.tabBarItem.setTitleTextAttributes([.foregroundColor: selectedColor], for: .selected)
+    viewController.tabBarItem.image = UIImage(named: normalImage)?.withRenderingMode(.alwaysOriginal)
+    viewController.tabBarItem.selectedImage = UIImage(named: selectedImage)?.withRenderingMode(.alwaysOriginal)
+    
+    if isEmbeddedNavigation == true {
+      
+      let navigationController = UINavigationController(rootViewController: viewController)
+      tabBarController.addChild(navigationController)
+      
+    } else {
+      
+      tabBarController.addChild(viewController)
+    }
+    
+  }
+  
+}
+
+

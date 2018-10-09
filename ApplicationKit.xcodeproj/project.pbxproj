@@ -150,6 +150,7 @@
 		3DD832A6215A315C003B2C19 /* addressCode in Resources */ = {isa = PBXBuildFile; fileRef = 3DD8323C215A315C003B2C19 /* addressCode */; };
 		3DD832A7215A326B003B2C19 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F034211BD3AA00424FEA /* LayoutKit.framework */; };
 		3DE7FAB2216CB26E0089F110 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FAB1216CB26E0089F110 /* Project.swift */; };
+		3DE7FABD216CB60B0089F110 /* ImageKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FABC216CB60B0089F110 /* ImageKit.swift */; };
 		73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73494FD7211B419900EB41C4 /* ListDataModel.swift */; };
 		BB0E65332126D01E00C862EF /* JSON+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E65322126D01E00C862EF /* JSON+Description.swift */; };
 		BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */; };
@@ -383,6 +384,7 @@
 		3DD8323B215A315C003B2C19 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		3DD8323C215A315C003B2C19 /* addressCode */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addressCode; sourceTree = "<group>"; };
 		3DE7FAB1216CB26E0089F110 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		3DE7FABC216CB60B0089F110 /* ImageKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKit.swift; sourceTree = "<group>"; };
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
 		BB0E65322126D01E00C862EF /* JSON+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Description.swift"; sourceTree = "<group>"; };
 		BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -576,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				3D36F9452169CE9100A791C0 /* ImageKit.h */,
+				3DE7FABC216CB60B0089F110 /* ImageKit.swift */,
 				3D36F9552169CEEE00A791C0 /* Kingfisher */,
 				3D36F9462169CE9100A791C0 /* Info.plist */,
 			);
@@ -1655,6 +1658,7 @@
 				3D36F9882169CF0A00A791C0 /* FormatIndicatedCacheSerializer.swift in Sources */,
 				3D36F9892169CF0A00A791C0 /* Resource.swift in Sources */,
 				3D36F9772169CF0A00A791C0 /* ImageProcessor.swift in Sources */,
+				3DE7FABD216CB60B0089F110 /* ImageKit.swift in Sources */,
 				3D36F9762169CF0A00A791C0 /* ImageDownloader.swift in Sources */,
 				3D36F9812169CF0A00A791C0 /* RequestModifier.swift in Sources */,
 				3D36F9852169CF0A00A791C0 /* Indicator.swift in Sources */,

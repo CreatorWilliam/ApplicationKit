@@ -57,12 +57,12 @@ public final class Kingfisher<Base> {
 /**
  A type that has Kingfisher extensions.
  */
-public protocol KingfisherCompatible {
+ protocol KingfisherCompatible {
     associatedtype CompatibleType
     var kf: CompatibleType { get }
 }
 
-public extension KingfisherCompatible {
+extension KingfisherCompatible {
     public var kf: Kingfisher<Self> {
         return Kingfisher(self)
     }

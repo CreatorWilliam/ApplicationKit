@@ -45,7 +45,7 @@ extension ImageBrowerCollectionViewCell {
       
     } else if let string = image as? String, let url = URL(string: string) {
       
-      self.imageView.setImage(url: url) { (image) in
+      self.imageView.setImage(with: url) { (image) in
        
         self.resetSize()
       }

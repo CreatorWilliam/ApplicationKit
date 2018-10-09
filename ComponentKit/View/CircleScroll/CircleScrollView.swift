@@ -401,7 +401,7 @@ private extension CircleScrollView {
     if let urlString = content as? String {
       
       guard let url = URL(string: urlString) else { return }
-      imageView.setImage(url: url)
+      imageView.setImage(with: url)
       
     } else if let image = content as? UIImage {
       

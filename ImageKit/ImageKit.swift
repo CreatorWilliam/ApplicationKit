@@ -10,39 +10,37 @@ import UIKit
 
 public extension UIImageView {
   
-  func setImage(url: Any?, placeholder: String? = nil, ignore: Bool = false) {
+  /// 设置图片
+  ///
+  /// - Parameters:
+  ///   - url: 要设置的图片地址，类型包括URL，可以转化为URL的String
+  ///   - placeholder: 占位图，可以是UIImage，也可以是通过能通过UIImage(named:)生成图片的本地图片名
+  ///   - isForceRefresh: 是否强制刷新
+  func setImage(with url: Any?, placeholder: Any? = nil, isForceRefresh: Bool = false) {
     
-    var placeholderImage: UIImage?
-    if let placeholder = placeholder { placeholderImage = UIImage(named: placeholder) }
-    
-    var imageURL: URL?
-    // String to URL
-    if let urlString = url as? String { imageURL = URL(string: urlString) }
-    // Set URL
-    else if let url = url as? URL { imageURL = url }
-    else { }
+    let placeholder: UIImage? = self.prepare(with: placeholder)
+    let imageURL: URL? = self.prepare(with: url)
     
     var options: KingfisherOptionsInfo?
-    if ignore == true { options = [.forceRefresh] }
-    self.kf.setImage(with: imageURL, placeholder: placeholderImage, options: options)
-    
+    if isForceRefresh == true { options = [.forceRefresh] }
+    self.kf.setImage(with: imageURL, placeholder: placeholder, options: options)
   }
   
-  func setImage(url: Any?, placeholder: String? = nil, ignore: Bool = false, completionHandler: @escaping (UIImage?) -> Void) {
+  /// 设置图片
+  ///
+  /// - Parameters:
+  ///   - url: 要设置的图片地址，类型包括URL，可以转化为URL的String
+  ///   - placeholder: 占位图，可以是UIImage，也可以是通过能通过UIImage(named:)生成图片的本地图片名
+  ///   - isForceRefresh: 是否强制刷新
+  ///   - completionHandler: 设置图片后的回调
+  func setImage(with url: Any?, placeholder: Any? = nil, isForceRefresh: Bool = false, completionHandler: @escaping (UIImage?) -> Void) {
     
-    var placeholderImage: UIImage?
-    if let placeholder = placeholder { placeholderImage = UIImage(named: placeholder) }
-    
-    var imageURL: URL?
-    // String to URL
-    if let urlString = url as? String { imageURL = URL(string: urlString) }
-      // Set URL
-    else if let url = url as? URL { imageURL = url }
-    else { }
+    let placeholder: UIImage? = self.prepare(with: placeholder)
+    let imageURL: URL? = self.prepare(with: url)
     
     var options: KingfisherOptionsInfo?
-    if ignore == true { options = [.forceRefresh] }
-    self.kf.setImage(with: imageURL, placeholder: placeholderImage, options: options) { (image, error, _, url) in
+    if isForceRefresh == true { options = [.forceRefresh] }
+    self.kf.setImage(with: imageURL, placeholder: placeholder, options: options) { (image, error, _, url) in
       
       completionHandler(image)
     }
@@ -52,20 +50,38 @@ public extension UIImageView {
 
 public extension UIButton {
   
-  func setImage(url: Any?, placeholder: String? = nil, for state: UIControl.State = .normal) {
+  /// 设置图片
+  ///
+  /// - Parameters:
+  ///   - url: 要设置的图片地址，类型包括URL，可以转化为URL的String
+  ///   - placeholder: 占位图，可以是UIImage，也可以是通过能通过UIImage(named:)生成图片的本地图片名
+  ///   - state: 图片显示时所对应的UIControl.State
+  func setImage(with url: Any?, placeholder: String? = nil, for state: UIControl.State = .normal) {
     
-    var image: UIImage?
-    if let placeholder = placeholder { image = UIImage(named: placeholder) }
+    let placeholder: UIImage? = self.prepare(with: placeholder)
+    let imageURL: URL? = self.prepare(with: url)
     
-    var imageURL: URL?
-    // String to URL
-    if let urlString = url as? String { imageURL = URL(string: urlString) }
-      // Set URL
-    else if let url = url as? URL { imageURL = url }
-    else { }
-    
-    self.kf.setImage(with: imageURL, for: state, placeholder: image)
+    self.kf.setImage(with: imageURL, for: state, placeholder: placeholder)
   }
   
 }
 
+// MARK: - Utility
+private extension UIView {
+  
+  func prepare(with url: Any?) -> URL? {
+    
+    if let urlString = url as? String { return URL(string: urlString) }
+    if let url = url as? URL { return url }
+    
+    return nil
+  }
+  
+  func prepare(with placeholder: Any?) -> UIImage? {
+    
+    if let placeholder = placeholder as? UIImage { return placeholder }
+    if let placeholder = placeholder as? String { return UIImage(named: placeholder) }
+    return nil
+  }
+  
+}

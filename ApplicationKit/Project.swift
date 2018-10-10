@@ -80,16 +80,16 @@ public extension Project {
   ///   - viewController: 要添加的控制器
   ///   - title: 标签名称
   ///   - normalImage: 标签图片（未选中）
-  ///   - normalColor: 标签名称颜色（选中）
   ///   - selectedImage: 标签图片（未选中）
+  ///   - normalColor: 标签名称颜色（选中）
   ///   - selectedColor: 标签名称颜色（选中）
   ///   - isEmbeddedNavigation: 是否嵌套一个导航栏后再加入UITabBarController
   ///   - tabBarController: 指定的UITabBarController
   func addController(_ viewController: UIViewController,
                      title: String,
                      normalImage: String,
-                     normalColor: UIColor,
                      selectedImage: String,
+                     normalColor: UIColor,
                      selectedColor: UIColor,
                      isEmbeddedNavigation: Bool = true,
                      to tabBarController: UITabBarController) -> Void {

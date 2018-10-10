@@ -65,7 +65,7 @@ public extension Project {
                 develop developBasePath: String,
                 product productBasePath: String) {
     
-    API.isDevelop = true
+    API.isDevelop = isDevelop
     API.developBasePath = developBasePath
     API.productBasePath = productBasePath
     

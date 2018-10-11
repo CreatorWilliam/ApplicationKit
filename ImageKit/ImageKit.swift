@@ -8,6 +8,26 @@
 
 import UIKit
 
+public struct ImageKit {
+  
+}
+
+public extension ImageKit {
+  
+  /// 裁剪模式不会造成图片比例失真，配合wm_draw函数使用
+  ///
+  /// - default: 按原图宽高比进行缩放，图片宽度等于给定（默认）宽度，图片高度可能不等于（大于或小于）给定（默认）高度
+  /// - fill: 按原图宽高比进行缩放，填充给定（默认）大小，保证图片宽度等于给定（默认）的宽度，图片高度不小于给定（默认）的高度，或者图片高度等于给定（默认）的高度，图片宽度不小于给定（默认）的宽度
+  /// - fit: 按原图宽高比进行缩放，适应给定（默认）大小，保证图片宽度等于给定（默认）的宽度，图片高度不大于给定（默认）的高度，或者图片高度等于给定（默认）的高度，图片宽度不大于给定（默认）的宽度
+  enum DrawMode {
+    
+    case `default`
+    case fill
+    case fit
+  }
+  
+}
+
 public extension UIImageView {
   
   /// 设置图片
@@ -82,6 +102,56 @@ private extension UIView {
     if let placeholder = placeholder as? UIImage { return placeholder }
     if let placeholder = placeholder as? String { return UIImage(named: placeholder) }
     return nil
+  }
+  
+}
+
+public extension UIImage {
+  
+  func draw(_ size: CGSize,
+               mode: ImageKit.DrawMode = .default) -> UIImage? {
+    
+    var drawedSize = size
+    let imageSize = self.size
+    
+    if drawedSize == .zero { drawedSize = UIScreen.main.bounds.size }
+    var scale: CGFloat = 1
+    
+    switch mode {
+      
+    case .fill:
+      
+      let imageScale = imageSize.width / imageSize.height
+      let drawedScale = drawedSize.width / drawedSize.height
+      
+      scale = imageScale > drawedScale
+        ? drawedSize.height / imageSize.height
+        : drawedSize.width / imageSize.width
+      
+    case .fit:
+      
+      let imageScale = imageSize.width / imageSize.height
+      let tailoredScale = drawedSize.width / drawedSize.height
+      
+      scale = imageScale > tailoredScale
+        ? drawedSize.width / imageSize.width
+        : drawedSize.height / imageSize.height
+      
+    default: break
+      
+    }
+    drawedSize = CGSize(width: Int(imageSize.width * scale),
+                        height: Int(imageSize.height * scale))
+    
+    let tailoredRect = CGRect(origin: CGPoint.zero,
+                              size: drawedSize)
+    
+    UIGraphicsBeginImageContextWithOptions(drawedSize, true, 0)
+    self.draw(in: tailoredRect)
+    let tailoredImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return tailoredImage
   }
   
 }

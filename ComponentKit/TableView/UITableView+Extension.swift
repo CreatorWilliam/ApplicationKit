@@ -16,11 +16,7 @@ public struct ReuseItem {
   public init(_ cellClass: AnyClass, _ id: String? = nil) {
     
     self.class = cellClass
-    if let id = id {
-      
-      self.id = id
-    }
-    self.id = NSStringFromClass(cellClass)
+    self.id = id ?? NSStringFromClass(cellClass)
   }
   
 }

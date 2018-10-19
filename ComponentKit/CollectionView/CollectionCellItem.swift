@@ -36,7 +36,7 @@ public struct CollectionCellItem {
   /// Cell反选操作
   public var deselectedHandle: (() -> Void)?
   
-  public init(_ reuse: ReuseItem = ReuseItem(UICollectionViewCell.self, "DefaultCell"),
+  public init(_ reuse: ReuseItem,
               data: Any? = nil,
               accessoryData: Any? = nil,
               delegate: AnyObject? = nil,

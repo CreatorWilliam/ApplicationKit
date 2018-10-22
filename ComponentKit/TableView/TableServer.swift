@@ -126,6 +126,7 @@ extension TableServer: UITableViewDelegate {
   public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     
     if self.groups[indexPath.section].items[indexPath.row].selectedHandle == nil { return nil }
+    if tableView.cellForRow(at: indexPath)?.isSelected == true { return nil }
     return indexPath
   }
   

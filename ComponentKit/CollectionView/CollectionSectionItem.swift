@@ -8,6 +8,12 @@
 
 import Foundation
 
+// 遵循该协议后的SectionView，Server才可以更新SectionView
+public protocol CollectionSectionItemUpdatable {
+  
+  func update(with item: CollectionSectionItem)
+}
+
 public struct CollectionSectionItem {
   
   /// 更新SectionView的数据
@@ -20,13 +26,20 @@ public struct CollectionSectionItem {
   public weak var delegate: AnyObject?
   
   /// SectionView重用符号
-  internal var reuseItem: ReuseItem?
+  internal var reuseItem: ReuseItem
   
   /// Section视图的大小
   public var size: CGSize
   
-  public init(size: CGSize = .zero) {
+  public init(_ reuseItem: ReuseItem = ReuseItem(UICollectionReusableView.self),
+              data: Any? = nil,
+              delegate: AnyObject? = nil,
+              size: CGSize = .zero) {
     
+    self.reuseItem = reuseItem
+    self.data = data
+    self.delegate = delegate
     self.size = size
   }
+  
 }

@@ -18,6 +18,9 @@ public class CollectionServer: NSObject {
   
   /// 重用的Cell
   private var reusedCells: Set<String> = []
+  /// 重用的SectionView组
+  private var reusedSectionViews: Set<String> = []
+  
   /// 集合视图
   private weak var collectionView: UICollectionView?
   /// 滚动代理，分发集合视图的滚动视图事件
@@ -52,44 +55,32 @@ public extension CollectionServer {
     
     self.groups = groups
     
-    //var newSectionViews: [ReuseItem] = []
-    var newCells: [ReuseItem] = []
     self.groups.forEach({ (group) in
-      /*
-      if let reuseItem = group.header.reuseItem, !self.reusedSectionViews.contains(reuseItem.id) {
+      
+      var reuseItem = group.header.reuseItem
+      
+      if self.reusedSectionViews.contains(reuseItem.id) == false {
         
-        newSectionViews.append(reuseItem)
         self.reusedSectionViews.insert(reuseItem.id)
+        self.collectionView?.register(reuseItem.class, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseItem.id)
       }
       
-      if let reuseItem = group.footer.reuseItem, !self.reusedSectionViews.contains(reuseItem.id) {
+      reuseItem = group.footer.reuseItem
+      if self.reusedSectionViews.contains(reuseItem.id) == false {
         
-        newSectionViews.append(reuseItem)
         self.reusedSectionViews.insert(reuseItem.id)
+        self.collectionView?.register(reuseItem.class, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: reuseItem.id)
       }
-      */
+      
       group.items.forEach({ (cell) in
         
-        if !self.reusedCells.contains(cell.reuse.id) {
-          
-          newCells.append(cell.reuse)
-          self.reusedCells.insert(cell.reuse.id)
-        }
+        if self.reusedCells.contains(cell.reuse.id) == true { return }
+        self.collectionView?.register(cell.reuse.class, forCellWithReuseIdentifier: cell.reuse.id)
+        self.reusedCells.insert(cell.reuse.id)
         
       })
       
     })
-    
-    /*
-    if newSectionViews.count > 0 {
-
-      self.collectionView?.register(sectionViews: newSectionViews)
-    }
-    */
-    if newCells.count > 0 {
-      
-      self.collectionView?.register(cells: newCells)
-    }
     
     self.collectionView?.reloadData()
     self.emptyContentView?.isHidden = (self.groups.reduce(0, { $0 + $1.items.count }) > 0)
@@ -161,6 +152,26 @@ extension CollectionServer: UICollectionViewDataSource {
     return cell
   }
   
+  public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    
+    let group = self.groups[indexPath.section]
+    
+    if kind == UICollectionView.elementKindSectionHeader {
+      
+      let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: group.header.reuseItem.id, for: indexPath)
+      if let headerView = headerView as? CollectionSectionItemUpdatable { headerView.update(with: group.header) }
+      return headerView
+    }
+    
+    if kind == UICollectionView.elementKindSectionHeader {
+      
+      let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: group.footer.reuseItem.id, for: indexPath)
+      if let footer = footerView as? CollectionSectionItemUpdatable { footer.update(with: group.footer) }
+      return footerView
+    }
+    
+    return UICollectionReusableView()
+  }
   
 }
 

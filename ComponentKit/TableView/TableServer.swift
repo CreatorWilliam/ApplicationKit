@@ -142,7 +142,7 @@ extension TableServer: UITableViewDelegate {
   // Will Deselect
   public func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
     
-    if self.groups[indexPath.section].items[indexPath.row].deselectedHandle == nil { return nil }
+    //if self.groups[indexPath.section].items[indexPath.row].deselectedHandle == nil { return nil }
     return indexPath
   }
   

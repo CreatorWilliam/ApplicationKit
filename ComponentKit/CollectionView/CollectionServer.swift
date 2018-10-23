@@ -49,6 +49,10 @@ public extension CollectionServer {
     self.emptyContentView = emptyContentView
     self.emptyContentView?.isHidden = true
     self.collectionView?.backgroundView = emptyContentView
+    
+    let item = ReuseItem(UICollectionReusableView.self)
+    self.collectionView?.register(item.class, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: item.id)
+    self.collectionView?.register(item.class, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: item.id)
   }
  
   func update(_ groups: [CollectionSectionGroup]) {

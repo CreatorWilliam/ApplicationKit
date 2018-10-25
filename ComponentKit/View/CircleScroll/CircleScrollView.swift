@@ -27,6 +27,8 @@ public class CircleScrollView: UIView {
   public weak var delegate: CircleScrollViewDelegate?
   /// 页码
   public let pageControl = UIPageControl()
+  /// 占位图(本地图片名)
+  public var placeholder: String?
   
   /// 滑动方向
   private var direction: Direction = .horizontal
@@ -400,7 +402,7 @@ private extension CircleScrollView {
     guard let imageView = view as? UIImageView else { return }
     if let url = content as? String {
       
-      imageView.setImage(with: url)
+      imageView.setImage(with: url, placeholder: self.placeholder)
       
     } else if let image = content as? UIImage {
       

@@ -42,6 +42,7 @@
 		3D36F9932169CFD000A791C0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D36F9922169CFD000A791C0 /* MobileCoreServices.framework */; };
 		3D36F99C2169D2DA00A791C0 /* ImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D36F9432169CE9100A791C0 /* ImageKit.framework */; };
 		3D6E062C215A361B00BAA41A /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD8319F215A3130003B2C19 /* ComponentKit.framework */; };
+		3D74BF232181D123005B9C0F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74BF222181D123005B9C0F /* Device.swift */; };
 		3DD831A3215A3130003B2C19 /* ComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD831A1215A3130003B2C19 /* ComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DD8323D215A315C003B2C19 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B3215A315A003B2C19 /* PopViewController.swift */; };
 		3DD8323E215A315C003B2C19 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B5215A315A003B2C19 /* UIColor+Extension.swift */; };
@@ -274,6 +275,7 @@
 		3D36F98E2169CF8F00A791C0 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		3D36F9902169CF9700A791C0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3D36F9922169CFD000A791C0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		3D74BF222181D123005B9C0F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		3DD8319F215A3130003B2C19 /* ComponentKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComponentKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD831A1215A3130003B2C19 /* ComponentKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentKit.h; sourceTree = "<group>"; };
 		3DD831A2215A3130003B2C19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1244,6 +1246,7 @@
 			isa = PBXGroup;
 			children = (
 				BBF221D520E4B218007A5FA2 /* App.swift */,
+				3D74BF222181D123005B9C0F /* Device.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1818,6 +1821,7 @@
 				BB393CD2212A999F00F57F50 /* ItemListable.swift in Sources */,
 				BBC73BF220A5BC3000781F00 /* API.swift in Sources */,
 				BBF221D620E4B218007A5FA2 /* App.swift in Sources */,
+				3D74BF232181D123005B9C0F /* Device.swift in Sources */,
 				BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */,
 				73494FD8211B419900EB41C4 /* ListDataModel.swift in Sources */,
 				BBC73AE920A5B08900781F00 /* ViewControllerListable.swift in Sources */,

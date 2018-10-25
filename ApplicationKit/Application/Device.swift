@@ -65,7 +65,10 @@ public struct Device {
     case "iPhone10,1","iPhone10,4":                           return "iPhone 8"
     case "iPhone10,2","iPhone10,5":                           return "iPhone 8 Plus"
     case "iPhone10,3","iPhone10,6":                           return "iPhone X"
-      
+    case "iPhone11,2":                                        return "iPhone Xs"
+    case "iPhone11,4", "iPhone11,6":                          return "iPhone Xs Max"
+    case "iPhone11,8":                                        return "iPhone Xʀ"
+    
     // iPad
     case "iPad1,1":                                           return "iPad"
     case "iPad1,2":                                           return "iPad 3G"

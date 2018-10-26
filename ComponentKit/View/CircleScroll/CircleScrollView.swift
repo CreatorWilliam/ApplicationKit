@@ -11,7 +11,8 @@ import ImageKit
 
 public protocol CircleScrollViewDelegate: class {
   
-  func didSelect(at index: Int)
+  func circleScrollView(_ view: CircleScrollView, didScrollTo index: Int)
+  func circleScrollView(_ view: CircleScrollView, didSelectAt index: Int)
 }
 
 public class CircleScrollView: UIView {
@@ -153,25 +154,6 @@ extension CircleScrollView: UIScrollViewDelegate {
     self.updateContent()
   }
   
-  //  public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-  //
-  //    switch self.direction {
-  //    case .horizontal:
-  //
-  //      if velocity.x > 0 { self.scrollToNext() }
-  //      else if velocity.x < 0 { self.scrollToPrevious() }
-  //      else { return }
-  //
-  //    case .vertical:
-  //
-  //      if velocity.y > 0 { self.scrollToNext() }
-  //      else if velocity.y < 0 { self.scrollToPrevious() }
-  //      else { return }
-  //
-  //    }
-  //
-  //  }
-  
 }
 
 // MARK: - Zoomable
@@ -253,7 +235,7 @@ private extension CircleScrollView {
   
   @objc func clickContent(_ sender: Any) {
     
-    self.delegate?.didSelect(at: self.currentIndex)
+    self.delegate?.circleScrollView(self, didSelectAt: self.currentIndex)
   }
   
   /// 开始循环
@@ -342,7 +324,11 @@ private extension CircleScrollView {
   
   func updateContent() {
     
-    self.pageControl.currentPage = self.currentIndex
+    defer {
+      
+      self.pageControl.currentPage = self.currentIndex
+      self.delegate?.circleScrollView(self, didScrollTo: self.currentIndex)
+    }
     
     var offset: CGPoint = .zero
     
@@ -397,7 +383,7 @@ private extension CircleScrollView {
     
   }
   
-  func update(view:  UIView, with content: Any) {
+  func update(view: UIView, with content: Any) {
     
     guard let imageView = view as? UIImageView else { return }
     if let url = content as? String {

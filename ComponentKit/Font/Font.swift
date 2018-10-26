@@ -42,10 +42,10 @@ public extension Font {
   ///   - size: 字体大小
   ///   - isAdapted: 是否为适配模式，默认为是，适配模式会根据屏幕缩放字体大小
   /// - Returns: 字体对象
-  static func custom(_ name: String, size: CGFloat, isAdapted: Bool = true) -> UIFont? {
+  static func custom(_ name: String, size: CGFloat, isAdapted: Bool = true) -> UIFont {
     
     let finalSize = size
-    return UIFont(name: name, size: finalSize)
+    return UIFont(name: name, size: finalSize) ?? UIFont.systemFont(ofSize: finalSize)
   }
   
   /*

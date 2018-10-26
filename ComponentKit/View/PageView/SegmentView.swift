@@ -23,6 +23,11 @@ public class SegmentView: UIView {
     
     didSet { self.indicatorView.frame.size.width = self.indicatorWidth }
   }
+  /// 滑块宽度
+  public var indicatorYOffset: CGFloat = 0 {
+    
+    didSet { self.indicatorView.frame.origin.y += self.indicatorYOffset }
+  }
   /// 滑动动画时长
   public var animationDuration: TimeInterval = 0.25
   /// 滑块颜色
@@ -30,8 +35,8 @@ public class SegmentView: UIView {
     
     didSet { self.indicatorView.backgroundColor = self.indicatorColor }
   }
-  /// 根据当前选中的部分获得
-  public var currentIndex: Int { return self.collectionView.indexPathsForSelectedItems?.first?.item ?? -1 }
+  /// 当前选中的索引,在初始化的时候设置，可以设置默认选中的索引
+  public var selectedIndex: Int = 0
   
   private let flowLayout = UICollectionViewFlowLayout()
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
@@ -53,10 +58,12 @@ public class SegmentView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.indicatorView.frame.origin.y = self.bounds.height - 7
-    
     self.flowLayout.itemSize.width = self.bounds.width / CGFloat(self.segments.count > 4 ? 4 : self.segments.count)
     self.flowLayout.itemSize.height = self.bounds.height
+    
+    self.indicatorView.frame.origin.y = self.bounds.height - 7 + self.indicatorYOffset
+    
+    self.select(at: self.selectedIndex, isAnimated: false)
   }
   
 }
@@ -66,6 +73,7 @@ public extension SegmentView {
   
   func updateSegment(_ segment: SegmentItem, at index: Int) {
     
+    guard index < self.segments.count else { return }
     self.segments.remove(at: index)
     self.segments.insert(segment, at: index)
     (self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentCell)?.update(with: segment)
@@ -77,7 +85,7 @@ public extension SegmentView {
     self.segments = segments
     self.flowLayout.itemSize.width = self.bounds.width / CGFloat(self.segments.count > 4 ? 4 : self.segments.count)
     self.collectionView.reloadData()
-    self.page(to: 0, withSource: self)
+    self.select(at: self.selectedIndex, isAnimated: false)
   }
   
   /// 更新指定位置的角标
@@ -99,11 +107,7 @@ extension SegmentView: Pagable {
   
   public func page(to index: Int, withSource source: Pagable) {
     
-    guard self.segments.count > 0 else { return }
-    
-    let indexPath = IndexPath(item: index, section: 0)
-    self.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-    self.updateIndicator(at: indexPath)
+    self.select(at: index, isAnimated: true)
   }
   
 }
@@ -112,6 +116,8 @@ extension SegmentView: Pagable {
 private extension SegmentView {
   
   func setupUI() {
+    
+    self.backgroundColor = .white
     
     self.flowLayout.scrollDirection = .horizontal
     self.flowLayout.minimumLineSpacing = 0
@@ -143,21 +149,14 @@ extension SegmentView: UICollectionViewDelegate {
   
   public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
     
-    self.pageObserver?.pageWillPage(at: self.currentIndex, withSource: self)
+    self.pageObserver?.pageWillPage(at: self.selectedIndex, withSource: self)
     return true
   }
   
   public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    self.collectionView.scrollToItem(at: IndexPath(item: indexPath.item, section: 0), at: .centeredHorizontally, animated: true)
+    self.select(at: indexPath.item, isAnimated: true)
     self.pageObserver?.page(to: indexPath.item, withSource: self)
-    self.updateIndicator(at: indexPath)
-  }
-  
-  public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
-    guard cell.isSelected == true else { return }
-    self.updateIndicator(at: cell)
   }
   
 }
@@ -189,35 +188,38 @@ extension SegmentView: UICollectionViewDataSource {
 // MARK: - Utility
 private extension SegmentView {
   
-  func updateIndicator(at indexPath: IndexPath) {
+  /// 手动选择
+  func select(at index: Int, isAnimated: Bool) {
     
-    guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+    guard self.segments.count > 0 else { return }
     
-    self.updateIndicator(at: cell)
+    self.collectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+    self.selectedIndex = index
+    
+    self.updateIndicator(at: index, isAnimated: isAnimated)
   }
   
-  func updateIndicator(at cell: UICollectionViewCell) {
+  func updateIndicator(at index: Int, isAnimated: Bool) {
     
+    // 获取偏移后的中心点X
+    let centerX = self.flowLayout.itemSize.width * CGFloat(index) + self.flowLayout.itemSize.width * 0.5
+    
+    // 无动画
+    if isAnimated == false {
+      
+      self.indicatorView.center.x = centerX
+      return
+    }
+    
+    // 有动画
     UIView.animate(withDuration: self.animationDuration, animations: {
       
-      self.indicatorView.center.x = cell.center.x
+      self.indicatorView.center.x = centerX
       
     }, completion: { (_) in
       
-      self.pageObserver?.pageDidPage(to: self.currentIndex, withSource: self)
+      self.pageObserver?.pageDidPage(to: self.selectedIndex, withSource: self)
     })
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-

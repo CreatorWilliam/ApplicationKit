@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 段选数据，对文字，角标，图标进行封装
 public struct SegmentItem {
   
   public var badge: Int? = nil

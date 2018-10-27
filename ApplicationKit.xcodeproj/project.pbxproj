@@ -98,8 +98,8 @@
 		3DD83271215A315C003B2C19 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831F5215A315B003B2C19 /* TextView.swift */; };
 		3DD83272215A315C003B2C19 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831F6215A315B003B2C19 /* TextModel.swift */; };
 		3DD83273215A315C003B2C19 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831F8215A315B003B2C19 /* SegmentView.swift */; };
-		3DD83274215A315C003B2C19 /* SegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831F9215A315B003B2C19 /* SegmentCell.swift */; };
-		3DD83275215A315C003B2C19 /* SegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831FA215A315B003B2C19 /* SegmentItem.swift */; };
+		3DD83274215A315C003B2C19 /* SegmentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831F9215A315B003B2C19 /* SegmentViewCell.swift */; };
+		3DD83275215A315C003B2C19 /* SegmentViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831FA215A315B003B2C19 /* SegmentViewItem.swift */; };
 		3DD83276215A315C003B2C19 /* Pagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831FB215A315B003B2C19 /* Pagable.swift */; };
 		3DD83277215A315C003B2C19 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831FC215A315B003B2C19 /* PageView.swift */; };
 		3DD83278215A315C003B2C19 /* Zoomable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831FD215A315B003B2C19 /* Zoomable.swift */; };
@@ -335,8 +335,8 @@
 		3DD831F5215A315B003B2C19 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		3DD831F6215A315B003B2C19 /* TextModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
 		3DD831F8215A315B003B2C19 /* SegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
-		3DD831F9215A315B003B2C19 /* SegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentCell.swift; sourceTree = "<group>"; };
-		3DD831FA215A315B003B2C19 /* SegmentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentItem.swift; sourceTree = "<group>"; };
+		3DD831F9215A315B003B2C19 /* SegmentViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewCell.swift; sourceTree = "<group>"; };
+		3DD831FA215A315B003B2C19 /* SegmentViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewItem.swift; sourceTree = "<group>"; };
 		3DD831FB215A315B003B2C19 /* Pagable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pagable.swift; sourceTree = "<group>"; };
 		3DD831FC215A315B003B2C19 /* PageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		3DD831FD215A315B003B2C19 /* Zoomable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zoomable.swift; sourceTree = "<group>"; };
@@ -651,6 +651,16 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		3D4C66CE218460D700B3D169 /* SegmentView */ = {
+			isa = PBXGroup;
+			children = (
+				3DD831F8215A315B003B2C19 /* SegmentView.swift */,
+				3DD831F9215A315B003B2C19 /* SegmentViewCell.swift */,
+				3DD831FA215A315B003B2C19 /* SegmentViewItem.swift */,
+			);
+			path = SegmentView;
+			sourceTree = "<group>";
+		};
 		3DD831A0215A3130003B2C19 /* ComponentKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,7 +796,7 @@
 			isa = PBXGroup;
 			children = (
 				3DD831F4215A315B003B2C19 /* TextView */,
-				3DD831F7215A315B003B2C19 /* PageView */,
+				3DD831F7215A315B003B2C19 /* Page */,
 				3DD831FD215A315B003B2C19 /* Zoomable.swift */,
 				3DD831FE215A315B003B2C19 /* PopMenu */,
 				3DD83202215A315B003B2C19 /* Navigation */,
@@ -810,16 +820,14 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
-		3DD831F7215A315B003B2C19 /* PageView */ = {
+		3DD831F7215A315B003B2C19 /* Page */ = {
 			isa = PBXGroup;
 			children = (
-				3DD831F8215A315B003B2C19 /* SegmentView.swift */,
-				3DD831F9215A315B003B2C19 /* SegmentCell.swift */,
-				3DD831FA215A315B003B2C19 /* SegmentItem.swift */,
 				3DD831FB215A315B003B2C19 /* Pagable.swift */,
 				3DD831FC215A315B003B2C19 /* PageView.swift */,
+				3D4C66CE218460D700B3D169 /* SegmentView */,
 			);
-			path = PageView;
+			path = Page;
 			sourceTree = "<group>";
 		};
 		3DD831FE215A315B003B2C19 /* PopMenu */ = {
@@ -1707,7 +1715,7 @@
 				3DD83297215A315C003B2C19 /* UIView+Keyboard.swift in Sources */,
 				3DD83296215A315C003B2C19 /* UIButton+Extension.swift in Sources */,
 				3DD83260215A315C003B2C19 /* CollectionSectionGroup.swift in Sources */,
-				3DD83274215A315C003B2C19 /* SegmentCell.swift in Sources */,
+				3DD83274215A315C003B2C19 /* SegmentViewCell.swift in Sources */,
 				3DD83269215A315C003B2C19 /* ESRefreshFooterAnimator.swift in Sources */,
 				3DD8329D215A315C003B2C19 /* ImagePickerPreviewView.swift in Sources */,
 				3DD83282215A315C003B2C19 /* BarrageInterface.swift in Sources */,
@@ -1751,7 +1759,7 @@
 				3DD8327D215A315C003B2C19 /* OptionActionView.swift in Sources */,
 				3DD8323E215A315C003B2C19 /* UIColor+Extension.swift in Sources */,
 				3DD83284215A315C003B2C19 /* CircleScrollView.swift in Sources */,
-				3DD83275215A315C003B2C19 /* SegmentItem.swift in Sources */,
+				3DD83275215A315C003B2C19 /* SegmentViewItem.swift in Sources */,
 				3DD8326C215A315C003B2C19 /* ESPullToRefresh.swift in Sources */,
 				3DD8324A215A315C003B2C19 /* EZPlayerFloatContainerRootViewController.swift in Sources */,
 				3DD832A2215A315C003B2C19 /* ImageAlbumTableViewCell.swift in Sources */,

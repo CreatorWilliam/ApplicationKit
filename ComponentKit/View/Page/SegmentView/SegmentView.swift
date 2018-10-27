@@ -8,9 +8,43 @@
 
 import UIKit
 
+/// 遵循了该协议的UICollectionViewCell，SegmentView中自定义的Cell才会接收更新数据源的事件
+public protocol SegmentViewCellable {
+  
+  /// 更新Cell内容
+  ///
+  /// - Parameter item: 填充Cell内容的数据
+  func update(with item: SegmentViewItemSourcable)
+}
+
+/// 遵循了该协议，SegmentView中自定义的Cell才会接收更新角标的事件
+public protocol SegmentViewCellBadgable {
+  
+  /// 更新角标
+  ///
+  /// - Parameter count: 角标显示数，nil表示隐藏，0表示小圆点，大于0显示对应的数字
+  func updateBadge(_ count: Int?)
+}
+
+/// 遵循了该协议才能作为SegmentView的数据源元素,可以使用已有的SegmentViewItem
+public protocol SegmentViewItemSourcable {
+  
+}
+
 /// 水平滚动的Segment控件
 public class SegmentView: UIView {
   
+  // MARK: ********** Public **********
+  /// 用于自定义SegmentView中Cell的样式
+  ///
+  /// 其中Cell必须为UICollectionViewCell或其子类，且遵循了SegmentViewCellable协议
+  ///
+  /// 若遵循SegmentViewCellBadgable，则可以进行角标设置
+  public var segmentCell: ReuseItem = ReuseItem(SegmentViewCell.self) {
+    didSet { self.collectionView.register(cells: [self.segmentCell])}
+  }
+  /// 设置最大可见Segment个数，默认为4
+  public var maxVisibleCount: CGFloat = 4
   /// 是否可以翻页
   public var isPageEnable: Bool = true {
     
@@ -28,22 +62,23 @@ public class SegmentView: UIView {
     
     didSet { self.indicatorView.frame.origin.y += self.indicatorYOffset }
   }
-  /// 滑动动画时长
-  public var animationDuration: TimeInterval = 0.25
   /// 滑块颜色
   public var indicatorColor: UIColor = .blue {
     
     didSet { self.indicatorView.backgroundColor = self.indicatorColor }
   }
+  /// 滑动动画时长
+  public var animationDuration: TimeInterval = 0.25
   /// 当前选中的索引,在初始化的时候设置，可以设置默认选中的索引
   public var selectedIndex: Int = 0
   
+  // MARK: ********** Private **********
   private let flowLayout = UICollectionViewFlowLayout()
   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
   private let indicatorView = UIView()
   
   /// 段选数据源，对文字，角标，图标进行封装
-  private var segments: [SegmentItem] = []
+  private var segments: [SegmentViewItemSourcable] = []
   
   public override init(frame: CGRect) {
     super.init(frame: frame)
@@ -58,7 +93,7 @@ public class SegmentView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.flowLayout.itemSize.width = self.bounds.width / CGFloat(self.segments.count > 4 ? 4 : self.segments.count)
+    self.flowLayout.itemSize.width = self.bounds.width / (CGFloat(self.segments.count) > self.maxVisibleCount ? self.maxVisibleCount : CGFloat(self.segments.count))
     self.flowLayout.itemSize.height = self.bounds.height
     
     self.indicatorView.frame.origin.y = self.bounds.height - 7 + self.indicatorYOffset
@@ -71,24 +106,31 @@ public class SegmentView: UIView {
 // MARK: - Public
 public extension SegmentView {
   
-  func updateSegment(_ segment: SegmentItem, at index: Int) {
+  /// 更新指定位置的Segment
+  ///
+  /// - Parameters:
+  ///   - item: 数据源，内置SegmentViewItem已遵循该协议
+  ///   - index: 位置索引
+  func updateSegment(with item: SegmentViewItemSourcable, at index: Int) {
     
     guard index < self.segments.count else { return }
     self.segments.remove(at: index)
-    self.segments.insert(segment, at: index)
-    (self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentCell)?.update(with: segment)
+    self.segments.insert(item, at: index)
+    (self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentViewCellable)?.update(with: item)
   }
   
-  /// 自定义SegmentItem来自定义Segment图片及文字样式
-  func update(_ segments: [SegmentItem]) {
+  /// 使用数据源更新SegmentView
+  ///
+  /// - Parameter segments: 数据源，内置SegmentViewItem已遵循该协议
+  func update(with segments: [SegmentViewItemSourcable]) {
     
     self.segments = segments
-    self.flowLayout.itemSize.width = self.bounds.width / CGFloat(self.segments.count > 4 ? 4 : self.segments.count)
+    self.flowLayout.itemSize.width = self.bounds.width / (CGFloat(self.segments.count) > self.maxVisibleCount ? self.maxVisibleCount : CGFloat(self.segments.count))
     self.collectionView.reloadData()
     self.select(at: self.selectedIndex, isAnimated: false)
   }
   
-  /// 更新指定位置的角标
+  /// 更新指定位置的角标，如果使用自定义的SegmentViewCell，则需要遵循SegmentViewCellBadgable，才可以设置角标
   ///
   /// - Parameters:
   ///   - count: 角标显示数，nil表示隐藏，0表示小圆点，大于0显示对应的数字
@@ -96,8 +138,7 @@ public extension SegmentView {
   func updateBadge(_ count: Int?, at index: Int) {
     
     guard index < self.segments.count else { return }
-    self.segments[index].badge = count
-    (self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentCell)?.updateBadge(count)
+    (self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentViewCellBadgable)?.updateBadge(count)
   }
   
 }
@@ -128,10 +169,9 @@ private extension SegmentView {
     self.collectionView.showsHorizontalScrollIndicator = false
     self.collectionView.showsVerticalScrollIndicator = false
     self.collectionView.backgroundColor = .clear
-    self.collectionView.register(cells: [ReuseItem(SegmentCell.self)])
+    self.collectionView.register(cells: [ReuseItem(SegmentViewCell.self)])
     self.addSubview(self.collectionView)
     self.collectionView.layout.add { (make) in
-      
       make.top().bottom().leading().trailing().equal(self)
     }
     
@@ -176,9 +216,9 @@ extension SegmentView: UICollectionViewDataSource {
   
   public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseItem(SegmentCell.self).id, for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.segmentCell.id, for: indexPath)
     
-    (cell as? SegmentCell)?.update(with: self.segments[indexPath.item])
+    (cell as? SegmentViewCellable)?.update(with: self.segments[indexPath.item])
     
     return cell
   }

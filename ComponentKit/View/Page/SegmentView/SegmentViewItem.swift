@@ -1,5 +1,5 @@
 //
-//  SegmentItem.swift
+//  SegmentViewItem.swift
 //  ComponentKit
 //
 //  Created by William Lee on 2018/7/3.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// 段选数据，对文字，角标，图标进行封装
-public struct SegmentItem {
+public struct SegmentViewItem: SegmentViewItemSourcable {
   
   public var badge: Int? = nil
   
@@ -24,8 +24,8 @@ public struct SegmentItem {
   public var selectedTitle: NSAttributedString
   
   public init(title: String,
-              normalColor: UIColor,
-              selectedColor: UIColor,
+              normalColor: UIColor = UIColor.gray,
+              selectedColor: UIColor = UIColor.black,
               normalFont: UIFont = UIFont.systemFont(ofSize: 14),
               selectedFont: UIFont = UIFont.systemFont(ofSize: 16),
               normalImage: String? = nil,

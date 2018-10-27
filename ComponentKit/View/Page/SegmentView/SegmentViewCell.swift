@@ -1,5 +1,5 @@
 //
-//  SegmentCell.swift
+//  SegmentViewCell.swift
 //  ComponentKit
 //
 //  Created by William Lee on 2018/7/3.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SegmentCell: UICollectionViewCell {
+class SegmentViewCell: UICollectionViewCell {
   
   private let redPointView = UIView()
   private let badgeView = UIButton(type: .custom)
@@ -46,8 +46,8 @@ class SegmentCell: UICollectionViewCell {
   
 }
 
-// MARK: - Public
-extension SegmentCell {
+// MARK: - SegmentBadgable
+extension SegmentViewCell: SegmentViewCellBadgable {
   
   /// 更新角标
   ///
@@ -77,11 +77,14 @@ extension SegmentCell {
     }
   }
   
-  /// 更新Segment内容
-  ///
-  /// - Parameter item: 包含Segment要显示的内容
-  func update(with item: SegmentItem) {
+}
+
+// MARK: - SegmentCellable
+extension SegmentViewCell: SegmentViewCellable {
+  
+  func update(with item: SegmentViewItemSourcable) {
     
+    guard let item = item as? SegmentViewItem else { return }
     // 未选中图标
     if let name = item.normalImage {
       
@@ -112,7 +115,7 @@ extension SegmentCell {
 }
 
 // MARK: - Setup
-private extension SegmentCell {
+private extension SegmentViewCell {
   
   func setupUI() {
     

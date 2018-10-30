@@ -19,7 +19,7 @@ public class DatePicker: NSObject {
 
 public extension DatePicker {
   
-  static func open(withHandle handle: @escaping (Date) -> Void) {
+  static func open(default date: Date, withMode mode: UIDatePicker.Mode = .date, completion handle: @escaping (Date) -> Void) {
     
     DatePicker.shared.handle = handle
     
@@ -41,7 +41,8 @@ public extension DatePicker {
     contentView.addSubview(titleLabel)
     
     let datePicker = DatePicker.shared.datePicker
-    datePicker.datePickerMode = .date
+    datePicker.date = date
+    datePicker.datePickerMode = mode
     contentView.addSubview(datePicker)
     
     let cancelButton = UIButton(type: .custom)

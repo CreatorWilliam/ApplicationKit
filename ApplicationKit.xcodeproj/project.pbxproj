@@ -671,6 +671,16 @@
 			path = Placeholder;
 			sourceTree = "<group>";
 		};
+		3D64951F2188833A0046165A /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				3DD83238215A315C003B2C19 /* LocationPicker.swift */,
+				3DD83239215A315C003B2C19 /* LocationItem.swift */,
+				3DD8323A215A315C003B2C19 /* Resources */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		3DD831A0215A3130003B2C19 /* ComponentKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,9 +964,7 @@
 				3DD8322A215A315C003B2C19 /* DatePicker.swift */,
 				3DD8322B215A315C003B2C19 /* GenderPicker.swift */,
 				3DD8322C215A315C003B2C19 /* ImagePicker */,
-				3DD83238215A315C003B2C19 /* LocationPicker.swift */,
-				3DD83239215A315C003B2C19 /* LocationItem.swift */,
-				3DD8323A215A315C003B2C19 /* AreaPickerView */,
+				3D64951F2188833A0046165A /* Location */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -1000,13 +1008,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		3DD8323A215A315C003B2C19 /* AreaPickerView */ = {
+		3DD8323A215A315C003B2C19 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				3DD8323B215A315C003B2C19 /* area.plist */,
 				3DD8323C215A315C003B2C19 /* addressCode */,
 			);
-			path = AreaPickerView;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		BB5CB9F22121290A001701CC /* Squence */ = {

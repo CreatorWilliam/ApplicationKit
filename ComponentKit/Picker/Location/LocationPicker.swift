@@ -12,11 +12,11 @@ public class LocationPicker: UIViewController {
   
   private let titleLabel: UILabel = UILabel()
   private let closeButton: UIButton = UIButton(type: .custom)
-  private let provinceActionButton: UIButton = UIButton(type: .custom)
+  private let provinceAreaButton: UIButton = UIButton(type: .custom)
   private let cityActionButton: UIButton = UIButton(type: .custom)
   private let districtActionButton: UIButton = UIButton(type: .custom)
   private let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
-  private let whiteBackgroundView: UIView = UIView()
+  private let areaContainer: UIView = UIView()
   private let contentView: UIView = UIView()
 
   private let cell: ReuseItem = ReuseItem(UITableViewCell.self, "Cell")
@@ -34,7 +34,7 @@ public class LocationPicker: UIViewController {
     
     didSet {
       
-      self.updateActionButtons()
+      self.updateAreaButtons()
     }
   }
   
@@ -58,9 +58,7 @@ public class LocationPicker: UIViewController {
   public override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.setupView()
-    self.setupLayout()
-    
+    self.setupUI()
     self.loadData()
   }
   
@@ -75,21 +73,32 @@ public class LocationPicker: UIViewController {
     UIView.animate(withDuration: 0.3, animations: {
       
       self.view.layoutIfNeeded()
-      
     })
   }
   
-//  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//    for touch in touches {
-//
-//      guard touch.view == self.view else { continue }
-//
-//      self.dismiss(animated: false) { }
-//      return
-//    }
-//
-//  }
+  public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    for touch in touches {
+
+      guard touch.view == self.view else { continue }
+      
+      self.contentView.layout.update({ (make) in
+        
+        make.bottom(280).equal(self.view)
+      })
+      
+      UIView.animate(withDuration: 0.3, animations: {
+  
+        self.view.layoutIfNeeded()
+        
+      }, completion: { (isFinished) in
+        
+        self.dismiss(animated: false)
+      })
+      return
+    }
+
+  }
   
 }
 
@@ -137,7 +146,7 @@ extension LocationPicker: UITableViewDelegate {
 
     }
     
-    self.updateActionButtons()
+    self.updateAreaButtons()
   }
   
   public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -188,16 +197,17 @@ private extension LocationPicker {
     case district
   }
   
-  func setupView() -> Void {
-
+  func setupUI() -> Void {
     
     self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
     
     // ContentView
     self.contentView.backgroundColor = .white
-    
-    // Province,City,District backgroundView
-    self.whiteBackgroundView.backgroundColor = .white
+    self.view.addSubview(self.contentView)
+    self.contentView.layout.add { (make) in
+      make.leading().trailing().bottom(280).equal(self.view)
+      make.height(280)
+    }
     
     // Title
     self.titleLabel.text = "当前城市"
@@ -205,21 +215,55 @@ private extension LocationPicker {
     self.titleLabel.font = Font.system(15)
     self.titleLabel.textAlignment = .center
     self.titleLabel.backgroundColor = .white
+    self.contentView.addSubview(self.titleLabel)
+    self.titleLabel.layout.add { (make) in
+      make.top().leading().trailing().equal(self.contentView)
+      make.height(40)
+    }
+
+    // Province,City,District backgroundView
+    self.areaContainer.backgroundColor = .white
+    self.contentView.addSubview(self.areaContainer)
+    self.areaContainer.layout.add { (make) in
+      make.top(1).equal(self.titleLabel).bottom()
+      make.leading().trailing().equal(self.contentView)
+      make.height(40)
+    }
     
     // Close
     self.closeButton.setImage(UIImage(named: "close_gray"), for: .normal)
     self.closeButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
     self.closeButton.addTarget(self, action: #selector(clickClose(_:)), for: .touchUpInside)
+    self.contentView.addSubview(self.closeButton)
+    self.closeButton.layout.add { (make) in
+      make.centerY().trailing().equal(self.titleLabel)
+    }
     
     // Province
-    self.setupCustom(self.provinceActionButton)
-    self.provinceActionButton.addTarget(self, action: #selector(clickProvince(_:)), for: .touchUpInside)
+    self.setupCustom(area: self.provinceAreaButton)
+    self.provinceAreaButton.addTarget(self, action: #selector(clickProvince(_:)), for: .touchUpInside)
+    self.contentView.addSubview(self.provinceAreaButton)
+    self.provinceAreaButton.layout.add { (make) in
+      make.leading(15).centerY().equal(self.areaContainer)
+    }
+    
     // City
-    self.setupCustom(self.cityActionButton)
+    self.setupCustom(area: self.cityActionButton)
     self.cityActionButton.addTarget(self, action: #selector(clickCity(_:)), for: .touchUpInside)
+    self.contentView.addSubview(self.cityActionButton)
+    self.cityActionButton.layout.add { (make) in
+      make.leading(25).equal(self.provinceAreaButton).trailing()
+      make.centerY().equal(self.areaContainer)
+    }
+    
     // District
-    self.setupCustom(self.districtActionButton)
+    self.setupCustom(area: self.districtActionButton)
     self.districtActionButton.addTarget(self, action: #selector(clickDistrict(_:)), for: .touchUpInside)
+    self.contentView.addSubview(self.districtActionButton)
+    self.districtActionButton.layout.add { (make) in
+      make.leading(25).equal(self.cityActionButton).trailing()
+      make.centerY().equal(self.areaContainer)
+    }
     
     // TableView
     self.tableView.delegate = self
@@ -230,71 +274,17 @@ private extension LocationPicker {
     self.tableView.backgroundColor = .white
     self.tableView.separatorColor = .white
     self.tableView.register(cells: [self.cell])
-    
-    
-    self.contentView.addSubview(self.whiteBackgroundView)
-    self.contentView.addSubview(self.titleLabel)
-    self.contentView.addSubview(self.closeButton)
-    self.contentView.addSubview(self.provinceActionButton)
-    self.contentView.addSubview(self.cityActionButton)
-    self.contentView.addSubview(self.districtActionButton)
     self.contentView.addSubview(self.tableView)
-    self.view.addSubview(self.contentView)
-  }
-  
-  func setupLayout() -> Void {
-    
-    self.contentView.layout.add { (make) in
-      
-      make.leading().trailing().bottom(280).equal(self.view)
-      make.height(280)
-    }
-    
-    self.whiteBackgroundView.layout.add { (make) in
-      
-      make.top(1).equal(self.titleLabel).bottom()
-      make.leading().trailing().equal(self.contentView)
-      make.height(40)
-    }
-
-    self.titleLabel.layout.add { (make) in
-      
-      make.top().leading().trailing().equal(self.contentView)
-      make.height(40)
-    }
-    
-    self.closeButton.layout.add { (make) in
-      
-      make.centerY().trailing().equal(self.titleLabel)
-    }
-    
-    self.provinceActionButton.layout.add { (make) in
-      
-      make.leading(15).centerY().equal(self.whiteBackgroundView)
-    }
-    
-    self.cityActionButton.layout.add { (make) in
-      
-      make.leading(25).equal(self.provinceActionButton).trailing()
-      make.centerY().equal(self.whiteBackgroundView)
-    }
-    
-    self.districtActionButton.layout.add { (make) in
-      
-      make.leading(25).equal(self.cityActionButton).trailing()
-      make.centerY().equal(self.whiteBackgroundView)
-    }
-    
     self.tableView.layout.add { (make) in
-      
-      make.top(1).equal(self.whiteBackgroundView).bottom()
-      make.leading().trailing().bottom().equal(self.contentView)
+      make.top(1).equal(self.areaContainer).bottom()
+      make.leading().trailing().equal(self.contentView)
+      make.bottom().equal(self.contentView).safeBottom()
     }
     
     self.view.layoutIfNeeded()
   }
   
-  func setupCustom(_ button: UIButton) {
+  func setupCustom(area button: UIButton) {
     
     button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
@@ -312,14 +302,24 @@ private extension LocationPicker {
     
     self.completionHandle?(self.location)
     
-    self.dismiss(animated: false) {
+    self.contentView.layout.update({ (make) in
       
-    }
+      make.bottom(280).equal(self.view)
+    })
+    
+    UIView.animate(withDuration: 0.3, animations: {
+      
+      self.view.layoutIfNeeded()
+      
+    }, completion: { (isFinished) in
+      
+      self.dismiss(animated: false)
+    })
   }
   
   @objc func clickProvince(_ sender: UIButton) {
     
-    self.provinceActionButton.isSelected = true
+    self.provinceAreaButton.isSelected = true
     self.cityActionButton.isSelected = false
     self.districtActionButton.isSelected = false
     self.state = .province
@@ -328,7 +328,7 @@ private extension LocationPicker {
   
   @objc func clickCity(_ sender: UIButton) {
     
-    self.provinceActionButton.isSelected = false
+    self.provinceAreaButton.isSelected = false
     self.cityActionButton.isSelected = true
     self.districtActionButton.isSelected = false
     self.state = .city
@@ -337,7 +337,7 @@ private extension LocationPicker {
   
   @objc func clickDistrict(_ sender: UIButton) {
     
-    self.provinceActionButton.isSelected = false
+    self.provinceAreaButton.isSelected = false
     self.cityActionButton.isSelected = false
     self.districtActionButton.isSelected = true
     self.state = .district
@@ -361,32 +361,32 @@ private extension LocationPicker {
     self.updateDataSource()
   }
   
-  func updateActionButtons() {
+  func updateAreaButtons() {
     
-    self.provinceActionButton.setTitle(self.location.province, for: .normal)
+    self.provinceAreaButton.setTitle(self.location.province, for: .normal)
     self.cityActionButton.setTitle(self.location.city, for: .normal)
     self.districtActionButton.setTitle(self.location.district, for: .normal)
     
-    self.provinceActionButton.isEnabled = (self.location.province != "")
+    self.provinceAreaButton.isEnabled = (self.location.province != "")
     self.cityActionButton.isEnabled = (self.location.city != "")
     self.districtActionButton.isEnabled = (self.location.district != "")
     
     switch self.state {
     case .province:
       
-      self.provinceActionButton.isSelected = true
+      self.provinceAreaButton.isSelected = true
       self.cityActionButton.isSelected = false
       self.districtActionButton.isSelected = false
       
     case .city:
       
-      self.provinceActionButton.isSelected = false
+      self.provinceAreaButton.isSelected = false
       self.cityActionButton.isSelected = true
       self.districtActionButton.isSelected = false
       
     case .district:
       
-      self.provinceActionButton.isSelected = false
+      self.provinceAreaButton.isSelected = false
       self.cityActionButton.isSelected = false
       self.districtActionButton.isSelected = true
     }

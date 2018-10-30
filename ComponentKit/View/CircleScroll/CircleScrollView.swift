@@ -235,6 +235,7 @@ private extension CircleScrollView {
   
   @objc func clickContent(_ sender: Any) {
     
+    guard self.items.count > 0 else { return }
     self.delegate?.circleScrollView(self, didSelectAt: self.currentIndex)
   }
   

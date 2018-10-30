@@ -41,6 +41,7 @@
 		3D36F9912169CF9700A791C0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D36F9902169CF9700A791C0 /* Accelerate.framework */; };
 		3D36F9932169CFD000A791C0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D36F9922169CFD000A791C0 /* MobileCoreServices.framework */; };
 		3D36F99C2169D2DA00A791C0 /* ImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D36F9432169CE9100A791C0 /* ImageKit.framework */; };
+		3D64950A2188296F0046165A /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6495092188296F0046165A /* Placeholder.swift */; };
 		3D6E062C215A361B00BAA41A /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD8319F215A3130003B2C19 /* ComponentKit.framework */; };
 		3D74BF232181D123005B9C0F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74BF222181D123005B9C0F /* Device.swift */; };
 		3DD831A3215A3130003B2C19 /* ComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD831A1215A3130003B2C19 /* ComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -275,6 +276,7 @@
 		3D36F98E2169CF8F00A791C0 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		3D36F9902169CF9700A791C0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3D36F9922169CFD000A791C0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		3D6495092188296F0046165A /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		3D74BF222181D123005B9C0F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		3DD8319F215A3130003B2C19 /* ComponentKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComponentKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD831A1215A3130003B2C19 /* ComponentKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentKit.h; sourceTree = "<group>"; };
@@ -661,10 +663,19 @@
 			path = SegmentView;
 			sourceTree = "<group>";
 		};
+		3D649505218829590046165A /* Placeholder */ = {
+			isa = PBXGroup;
+			children = (
+				3D6495092188296F0046165A /* Placeholder.swift */,
+			);
+			path = Placeholder;
+			sourceTree = "<group>";
+		};
 		3DD831A0215A3130003B2C19 /* ComponentKit */ = {
 			isa = PBXGroup;
 			children = (
 				3DD831A1215A3130003B2C19 /* ComponentKit.h */,
+				3D649505218829590046165A /* Placeholder */,
 				3DD831DE215A315B003B2C19 /* TableView */,
 				3DD831D5215A315B003B2C19 /* CollectionView */,
 				3DD83216215A315B003B2C19 /* Font */,
@@ -1699,6 +1710,7 @@
 				3DD83276215A315C003B2C19 /* Pagable.swift in Sources */,
 				3DD83285215A315C003B2C19 /* EmitterButton.swift in Sources */,
 				3DD832A0215A315C003B2C19 /* AssetItem.swift in Sources */,
+				3D64950A2188296F0046165A /* Placeholder.swift in Sources */,
 				3DD83286215A315C003B2C19 /* CircleProgressView.swift in Sources */,
 				3DD832A4215A315C003B2C19 /* LocationItem.swift in Sources */,
 				3DD832A1215A315C003B2C19 /* ImageAssetCollectionViewCell.swift in Sources */,

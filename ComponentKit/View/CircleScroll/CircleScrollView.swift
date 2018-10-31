@@ -15,6 +15,12 @@ public protocol CircleScrollViewDelegate: class {
   func circleScrollView(_ view: CircleScrollView, didSelectAt index: Int)
 }
 
+// MARK: - Default
+public extension CircleScrollViewDelegate {
+  
+  func circleScrollView(_ view: CircleScrollView, didScrollTo index: Int) { }
+}
+
 public class CircleScrollView: UIView {
   
   /// 滑动方向

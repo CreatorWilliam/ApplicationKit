@@ -49,6 +49,7 @@ public extension Project {
     NavigationView.defaultBackgroundImage = backgroundImage
     
     // NavigationBar
+    UINavigationBar.appearance().tintColor = titleColor
     UINavigationBar.appearance().barTintColor = backgroundColor
     UINavigationBar.appearance().setBackgroundImage(backgroundImage, for: .default)
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: titleColor, .font: titleFont]

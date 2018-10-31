@@ -179,6 +179,48 @@ extension CollectionServer: UICollectionViewDataSource {
   
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+extension CollectionServer: UICollectionViewDelegateFlowLayout {
+
+  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    let item = self.groups[indexPath.section].items[indexPath.item]
+    
+    if item.size != .zero { return item.size }
+    return (collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize ?? .zero
+    //return item.size
+  }
+
+  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    
+    return self.groups[section].lineSpacing
+  }
+
+  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+
+    return self.groups[section].interitemSpacing
+  }
+  
+  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    
+    if self.groups[section].sectionInset != .zero { return self.groups[section].sectionInset }
+    return (collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset ?? .zero
+  }
+  
+  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    
+    if self.groups[section].header.size != .zero { return self.groups[section].header.size }
+    return (collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize ?? .zero
+  }
+  
+  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    
+    if self.groups[section].footer.size != .zero { return self.groups[section].footer.size }
+    return (collectionViewLayout as? UICollectionViewFlowLayout)?.footerReferenceSize ?? .zero
+  }
+  
+}
+
 // MARK: - UIScrollViewDelegate
 extension CollectionServer: UIScrollViewDelegate {
   

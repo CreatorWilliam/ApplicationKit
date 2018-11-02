@@ -33,15 +33,23 @@ public class KeyboardManager {
 // MARK: - Convince
 public extension KeyboardManager {
   
-  func adjust(spacing: CGFloat = 5, for view: UIView, in container: UIView) {
+  /// 配置一个默认的偏移量
+  ///
+  /// - Parameters:
+  ///   - spacing: 指定视图距离键盘顶部的距离
+  ///   - view: 将使用该视图作为基准判断
+  ///   - container: 将进行调整的视图，如果是UIScrollView，将调整contentOffset.y，其他非滚动视图，默认调整该视图的bounds.origin.y
+  func setupAdjust(spacing: CGFloat = 5,
+                   for view: UIView,
+                   in container: UIView) {
     
     if let scrollView = container as? UIScrollView {
       
-      self.adjust(spacing: spacing, for: view, in: scrollView)
+      self.setupAdjust(spacing: spacing, for: view, in: scrollView)
       return
     }
     
-    self.add(show: { (frame, duration) in
+    self.updateHandles(show: { (frame, duration) in
       
       guard let window = view.window ?? UIApplication.shared.keyWindow else { return }
       guard let rect = view.superview?.convert(view.frame, to: window) else { return }
@@ -50,17 +58,11 @@ public extension KeyboardManager {
       guard frame.minY < rect.maxY else { return }
       let offset = rect.maxY - frame.minY
       
-      UIView.animate(withDuration: duration, animations: {
-        
-        container.bounds.origin.y = offset + spacing
-      })
+      UIView.animate(withDuration: duration, animations: { container.bounds.origin.y = offset + spacing })
       
     }, hide: { (frame, duration) in
       
-      UIView.animate(withDuration: duration, animations: {
-        
-        container.bounds.origin.y = 0
-      })
+      UIView.animate(withDuration: duration, animations: { container.bounds.origin.y = 0 })
       
     })
   }
@@ -71,7 +73,16 @@ public extension KeyboardManager {
 public extension KeyboardManager {
   
   typealias KeyboardHandle = (_ frame: CGRect, _ duration: TimeInterval) -> Void
-  func add(show showHandle: @escaping KeyboardHandle, hide hideHandle: @escaping KeyboardHandle, change changeHandle: KeyboardHandle? = nil) {
+  
+  /// 添加自定义的键盘通知时回调
+  ///
+  /// - Parameters:
+  ///   - showHandle: 键盘显示时回调
+  ///   - hideHandle: 键盘隐藏时回调
+  ///   - changeHandle: 键盘改变时回调
+  func updateHandles(show showHandle: @escaping KeyboardHandle,
+                     hide hideHandle: @escaping KeyboardHandle,
+                     change changeHandle: KeyboardHandle? = nil) {
     
     self.showHandle = showHandle
     self.hideHandle = hideHandle
@@ -116,9 +127,17 @@ private extension KeyboardManager {
 // MARK: - Utility
 private extension KeyboardManager {
   
-  func adjust(spacing: CGFloat = 5, for view: UIView, in scrollView: UIScrollView) {
+  /// 根据设定的滚动视图来调整偏移量
+  ///
+  /// - Parameters:
+  ///   - spacing: 设置的偏移量
+  ///   - view: 需要根据键盘事件调整的视图
+  ///   - scrollView: “”
+  func setupAdjust(spacing: CGFloat,
+                   for view: UIView,
+                   in scrollView: UIScrollView) {
     
-    self.add(show: { (frame, duration) in
+    self.updateHandles(show: { (frame, duration) in
       
       let point = view.convert(CGPoint(x: view.frame.minX, y: view.frame.maxY), to: scrollView)
       self.origin = scrollView.contentOffset.y
@@ -141,11 +160,3 @@ private extension KeyboardManager {
   }
   
 }
-
-
-
-
-
-
-
-

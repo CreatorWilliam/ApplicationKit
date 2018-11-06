@@ -10,9 +10,11 @@ import SystemConfiguration
 
 public class Reachability: NSObject {
   
+  public private(set) static var shared: Reachability?
+  
   private var reachability: SCNetworkReachability
   
-  private var status: Status = .not
+  public private(set) var status: Status = .not
   
   public var queue: DispatchQueue = DispatchQueue.main
   public var monitorHandle: (_ status: Status) -> Void = { status in
@@ -44,21 +46,19 @@ public class Reachability: NSObject {
     }
   }
   
-  
   public init?(host: String) {
     
-    guard let reachability = SCNetworkReachabilityCreateWithName(nil, host) else {
-      
-      return nil
-    }
+    guard let host = URL(string: host)?.host else { return nil }
+    guard let reachability = SCNetworkReachabilityCreateWithName(nil, host) else { return nil }
     self.reachability = reachability
     
     super.init()
+    Reachability.shared = self
   }
   
   deinit {
     
-    stopMonitor()
+    self.stopMonitor()
   }
   
 }
@@ -80,7 +80,7 @@ public extension Reachability {
   /// 网络状态变更后，通知中UserInfo中用此Key获取网络状态, value为Reachability.Status类型
   static let StatusKey: String = "NetworkReachabilityStatusKey"
   // MARK: - 网络状态变更后的发出通知
-  static let changedNotification = Notification.Name("NetworkReachabilityChangedNotification")
+  static let statusChangedNotification = Notification.Name("NetworkReachabilityStatusChangedNotification")
   
   /// 启动网络监控
   ///
@@ -123,7 +123,7 @@ private extension Reachability {
     reachability.status = status
     reachability.monitorHandle(status)
     
-    NotificationCenter.default.post(name: Reachability.changedNotification,
+    NotificationCenter.default.post(name: Reachability.statusChangedNotification,
                                     object: nil,
                                     userInfo: [Reachability.StatusKey: reachability.status])
   }
@@ -136,37 +136,29 @@ private extension Reachability {
     
     guard flags.contains(.reachable) else { return .not }
     
-    var NetworkStatus: Status = .not
+    var status: Status = .not
     
     if !flags.contains(.connectionRequired) {
       
-      NetworkStatus = .wifi
+      status = .wifi
     }
     
     if flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic) {
       
       if !flags.contains(.interventionRequired) {
         
-        NetworkStatus = .wifi
+        status = .wifi
       }
     }
     
     #if os(iOS)
     if flags.contains(.isWWAN) {
       
-      NetworkStatus = .wwan
+      status = .wwan
     }
     #endif
     
-    return NetworkStatus
+    return status
   }
   
 }
-
-
-
-
-
-
-
-

@@ -218,13 +218,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BBAB8A732100D56600B89C44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BB87EB6520F784A700E0C966;
-			remoteInfo = TecentCloud;
-		};
 		BBC6DD2D20F35AD000CF885F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */;
@@ -440,7 +433,6 @@
 		BB822829211C50D900D5B2C0 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		BB82282B211C50D900D5B2C0 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		BB82282D211C50D900D5B2C0 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
-		BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TecentCloud.xcodeproj; path = ../TecentCloud/TecentCloud.xcodeproj; sourceTree = "<group>"; };
 		BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenKit.xcodeproj; path = ../OpenKit/OpenKit.xcodeproj; sourceTree = "<group>"; };
 		BBC73AD820A56DE400781F00 /* ApplicationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ApplicationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC73ADB20A56DE400781F00 /* ApplicationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationKit.h; sourceTree = "<group>"; };
@@ -1153,14 +1145,6 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
-		BBAB8A662100D56600B89C44 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BBAB8A742100D56600B89C44 /* TecentCloud.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		BBC6DD2920F35AD000CF885F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1173,7 +1157,6 @@
 		BBC73ACE20A56DE400781F00 = {
 			isa = PBXGroup;
 			children = (
-				BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */,
 				BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */,
 				BBC73ADA20A56DE400781F00 /* ApplicationKit */,
 				3DD831A0215A3130003B2C19 /* ComponentKit */,
@@ -1578,10 +1561,6 @@
 					ProductGroup = BBC6DD2920F35AD000CF885F /* Products */;
 					ProjectRef = BBC6DD2820F35AD000CF885F /* OpenKit.xcodeproj */;
 				},
-				{
-					ProductGroup = BBAB8A662100D56600B89C44 /* Products */;
-					ProjectRef = BBAB8A652100D56600B89C44 /* TecentCloud.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1598,13 +1577,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		BBAB8A742100D56600B89C44 /* TecentCloud.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TecentCloud.framework;
-			remoteRef = BBAB8A732100D56600B89C44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		BBC6DD2E20F35AD000CF885F /* OpenWithPayKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

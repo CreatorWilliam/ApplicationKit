@@ -61,8 +61,9 @@ public extension HUD {
   /// - Parameters:
   ///   - title: 消息标题
   ///   - message: 消息内容
+  ///   - duration: 持续时间
   ///   - completion: 消息视图隐藏后执行
-  func showMessage(title: String? = nil, message: String?, completion: (() -> Void)? = nil ) {
+  func showMessage(title: String? = nil, message: String?, duration: TimeInterval = 1, completion: (() -> Void)? = nil ) {
     
     DispatchQueue.main.async {
       
@@ -73,8 +74,7 @@ public extension HUD {
       
       self.controller?.view.bringSubviewToFront(self.messageView)
       self.messageView.show()
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
         
         self.controller?.view.sendSubviewToBack(self.messageView)
         self.messageView.hide()

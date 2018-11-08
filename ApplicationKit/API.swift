@@ -29,6 +29,13 @@ public class API {
   /// 请求体参数
   private var bodyParameters: Any?
   
+  /// 创建API对象，path、version、customPath按照一定的规则拼接成完整的请求路径
+  ///
+  /// - Parameters:
+  ///   - method: 请求方式
+  ///   - path: 请求路径
+  ///   - version: API版本
+  ///   - customPath: 自定义路径，将忽略path与version参数
   public init(method: Network.HTTPMethod, path: String? = nil, version: String? = nil, customPath: String? = nil) {
     
     let base = API.isDevelop ? API.developBasePath : API.productBasePath
@@ -115,8 +122,8 @@ private extension API {
   
   func debugLog(_ json: JSON) {
     
-    let api = self
     #if DEBUG
+    let api = self
     DebugLog(api.path)
     if let query = api.queryParameters { DebugLog(query) }
     if let body = api.bodyParameters { DebugLog(body) }
@@ -125,21 +132,3 @@ private extension API {
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

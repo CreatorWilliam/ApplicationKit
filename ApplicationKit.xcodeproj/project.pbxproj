@@ -44,6 +44,7 @@
 		3D64950A2188296F0046165A /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6495092188296F0046165A /* Placeholder.swift */; };
 		3D6E062C215A361B00BAA41A /* ComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD8319F215A3130003B2C19 /* ComponentKit.framework */; };
 		3D74BF232181D123005B9C0F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74BF222181D123005B9C0F /* Device.swift */; };
+		3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3983A2194028700507F2C /* CodeInputView.swift */; };
 		3DD831A3215A3130003B2C19 /* ComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD831A1215A3130003B2C19 /* ComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DD8323D215A315C003B2C19 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B3215A315A003B2C19 /* PopViewController.swift */; };
 		3DD8323E215A315C003B2C19 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B5215A315A003B2C19 /* UIColor+Extension.swift */; };
@@ -274,6 +275,7 @@
 		3D36F9922169CFD000A791C0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3D6495092188296F0046165A /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		3D74BF222181D123005B9C0F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		3DB3983A2194028700507F2C /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
 		3DD8319F215A3130003B2C19 /* ComponentKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComponentKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD831A1215A3130003B2C19 /* ComponentKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentKit.h; sourceTree = "<group>"; };
 		3DD831A2215A3130003B2C19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 			isa = PBXGroup;
 			children = (
 				3DD831A1215A3130003B2C19 /* ComponentKit.h */,
+				3DD831F3215A315B003B2C19 /* CustomView */,
 				3D649505218829590046165A /* Placeholder */,
 				3DDC0C8A21893DBF0035A84F /* ScrollView */,
 				3DD83216215A315B003B2C19 /* Font */,
@@ -693,7 +696,6 @@
 				3DD83229215A315C003B2C19 /* Picker */,
 				3DD831B7215A315A003B2C19 /* Player */,
 				3DD8321C215A315B003B2C19 /* Utility */,
-				3DD831F3215A315B003B2C19 /* View */,
 				3DD831A2215A3130003B2C19 /* Info.plist */,
 			);
 			path = ComponentKit;
@@ -809,9 +811,10 @@
 			path = Animator;
 			sourceTree = "<group>";
 		};
-		3DD831F3215A315B003B2C19 /* View */ = {
+		3DD831F3215A315B003B2C19 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				3DB3983A2194028700507F2C /* CodeInputView.swift */,
 				3DD831F7215A315B003B2C19 /* Page */,
 				3DD831F4215A315B003B2C19 /* TextView */,
 				3DD831FD215A315B003B2C19 /* Zoomable.swift */,
@@ -825,7 +828,7 @@
 				3DD83210215A315B003B2C19 /* ProgressView */,
 				3DD83212215A315B003B2C19 /* HUD */,
 			);
-			path = View;
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		3DD831F4215A315B003B2C19 /* TextView */ = {
@@ -1731,6 +1734,7 @@
 				3DD8327B215A315C003B2C19 /* PopupMenuPath.swift in Sources */,
 				3DD83297215A315C003B2C19 /* UIView+Keyboard.swift in Sources */,
 				3DD83296215A315C003B2C19 /* UIButton+Extension.swift in Sources */,
+				3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */,
 				3DD83260215A315C003B2C19 /* CollectionSectionGroup.swift in Sources */,
 				3DD83274215A315C003B2C19 /* SegmentViewCell.swift in Sources */,
 				3DD83269215A315C003B2C19 /* ESRefreshFooterAnimator.swift in Sources */,

@@ -35,7 +35,17 @@ public class CircleScrollView: UIView {
   /// 页码
   public let pageControl = UIPageControl()
   /// 占位图(本地图片名)
-  public var placeholder: String?
+  public var placeholder: String? {
+    didSet {
+      
+      if let name = self.placeholder {
+        
+        self.previousView.image = UIImage(named: name)
+        self.currentView.image = UIImage(named: name)
+        self.nextView.image = UIImage(named: name)
+      }
+    }
+  }
   
   /// 滑动方向
   private var direction: Direction = .horizontal
@@ -409,11 +419,3 @@ private extension CircleScrollView {
   }
   
 }
-
-
-
-
-
-
-
-

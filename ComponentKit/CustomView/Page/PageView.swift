@@ -22,7 +22,7 @@ public class PageView: UIView {
   public weak var pageObserver: Pagable?
   
   /// 根据当前滚动视图x偏移与视图宽度计算
-  public var currentIndex: Int { return Int((self.pageScrollView.contentOffset.x + self.pageScrollView.bounds.width / 2.0) / self.pageScrollView.bounds.width) }
+  public var currentIndex: Int = 0
   /// 滚动视图
   private let pageScrollView = UIScrollView()
   /// 自定义的页面视图
@@ -37,7 +37,12 @@ public class PageView: UIView {
   public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
+  public override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    self.pageScrollView.contentOffset.x = CGFloat(self.currentIndex) * self.pageScrollView.bounds.width
+  }
 }
 
 // MARK: - Public
@@ -86,7 +91,7 @@ extension PageView: Pagable {
     //self.pageScrollView.setContentOffset(CGPoint(x: CGFloat(index) * self.pageScrollView.bounds.width, y: 0), animated: true)
     
     // 手动生成滚动动画
-    self.pageObserver?.pageWillPage(at: self.currentIndex, withSource: self)
+    self.pageObserver?.pageWillPage(at: index, withSource: self)
     
     UIView.animate(withDuration: self.animationDuration, animations: {
 
@@ -94,8 +99,8 @@ extension PageView: Pagable {
 
     }, completion: { (_) in
 
-      self.pageObserver?.pageDidPage(to: self.currentIndex, withSource: self)
-      
+      self.pageObserver?.pageDidPage(to: index, withSource: self)
+      self.currentIndex = index
     })
   }
   
@@ -113,7 +118,6 @@ private extension PageView {
     self.pageScrollView.showsHorizontalScrollIndicator = false
     self.addSubview(self.pageScrollView)
     self.pageScrollView.layout.add { (make) in
-      
       make.top().bottom().leading().trailing().equal(self)
     }
   
@@ -126,32 +130,23 @@ extension PageView: UIScrollViewDelegate {
   
   public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     
-    self.pageObserver?.pageWillPage(at: self.currentIndex, withSource: self)
+    guard scrollView.bounds.width > 0 else { return }
+    let index = Int((self.pageScrollView.contentOffset.x + self.pageScrollView.bounds.width / 2.0) / self.pageScrollView.bounds.width)
+    self.pageObserver?.pageWillPage(at: index, withSource: self)
   }
   
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
     
     guard scrollView.bounds.width > 0 else { return }
-    self.pageObserver?.page(to: self.currentIndex, withSource: self)
+    let index = Int((self.pageScrollView.contentOffset.x + self.pageScrollView.bounds.width / 2.0) / self.pageScrollView.bounds.width)
+    self.pageObserver?.page(to: index, withSource: self)
   }
   
   public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
     
-    self.pageObserver?.pageDidPage(to: self.currentIndex, withSource: self)
+    guard scrollView.bounds.width > 0 else { return }
+    let index = Int((self.pageScrollView.contentOffset.x + self.pageScrollView.bounds.width / 2.0) / self.pageScrollView.bounds.width)
+    self.pageObserver?.pageDidPage(to: index, withSource: self)
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,21 @@ public class CodeInputView: UIView {
     
     // 是否明文
     public var isSecureTextEntry = false { didSet { self.updateContent() } }
-    
+  
+    public var text: String? {
+
+      set {
+        guard newValue?.count ?? 0 <= self.count else { return }
+        self.textField.text =  newValue
+        self.textField.sendActions(for: .editingChanged)
+
+      }
+      get {
+        
+        return self.textField.text
+      }
+    }
+  
     @discardableResult
     public override func becomeFirstResponder() -> Bool { return self.textField.becomeFirstResponder() }
     

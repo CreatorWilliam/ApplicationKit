@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D247AFC219AB86E00E30BCA /* QRCodeTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D247AFB219AB86E00E30BCA /* QRCodeTool.swift */; };
 		3D2EBB022169DC1A000BFCB0 /* DebugKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D2EBB002169DC1A000BFCB0 /* DebugKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D2EBB0B2169E7FA000BFCB0 /* SandBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB0A2169E7FA000BFCB0 /* SandBox.swift */; };
 		3D2EBB0D2169EAF5000BFCB0 /* SandBoxFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB0C2169EAF5000BFCB0 /* SandBoxFileItem.swift */; };
@@ -236,6 +237,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D247AFB219AB86E00E30BCA /* QRCodeTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeTool.swift; sourceTree = "<group>"; };
 		3D2EBAFE2169DC1A000BFCB0 /* DebugKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DebugKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D2EBB002169DC1A000BFCB0 /* DebugKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugKit.h; sourceTree = "<group>"; };
 		3D2EBB012169DC1A000BFCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -942,6 +944,7 @@
 				3DD83221215A315B003B2C19 /* ImageTool.swift */,
 				3DD83222215A315B003B2C19 /* Presenter.swift */,
 				3DD83223215A315B003B2C19 /* TextTool.swift */,
+				3D247AFB219AB86E00E30BCA /* QRCodeTool.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1750,6 +1753,7 @@
 				3DD8327C215A315C003B2C19 /* NavigationView.swift in Sources */,
 				3DD83294215A315C003B2C19 /* TextTool.swift in Sources */,
 				3DD8323D215A315C003B2C19 /* PopViewController.swift in Sources */,
+				3D247AFC219AB86E00E30BCA /* QRCodeTool.swift in Sources */,
 				3DD83263215A315C003B2C19 /* ESPullToRefresh+Manager.swift in Sources */,
 				3DD832A3215A315C003B2C19 /* LocationPicker.swift in Sources */,
 				3DD83291215A315C003B2C19 /* OpenTool.swift in Sources */,

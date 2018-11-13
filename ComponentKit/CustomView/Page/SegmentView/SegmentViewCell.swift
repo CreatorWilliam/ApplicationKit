@@ -122,6 +122,7 @@ private extension SegmentViewCell {
     self.contentView.backgroundColor = .clear
     
     self.titleButton.isUserInteractionEnabled = false
+    self.titleButton.titleLabel?.adjustsFontSizeToFitWidth = true
     self.contentView.addSubview(self.titleButton)
     self.titleButton.layout.add { (make) in
       

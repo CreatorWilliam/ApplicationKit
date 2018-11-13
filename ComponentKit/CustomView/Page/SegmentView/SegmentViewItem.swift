@@ -33,7 +33,7 @@ public struct SegmentViewItem: SegmentViewItemSourcable {
     
     var normalAttributes: [NSAttributedString.Key: Any] = [:]
     normalAttributes[.foregroundColor] = normalColor
-    normalAttributes[.font] = UIFont.systemFont(ofSize: 14)
+    normalAttributes[.font] = normalFont
     self.normalTitle = NSAttributedString(string: title, attributes: normalAttributes)
     
     var selectedAttributes: [NSAttributedString.Key: Any] = [:]

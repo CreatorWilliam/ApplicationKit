@@ -56,22 +56,21 @@ public extension Project {
     UINavigationBar.appearance().shadowImage = UIImage()
   }
   
-  /// 配置网络接口，同时根据网络可达性，发出相应的通知：NetworkKit.Reachability.changedNotification
+  /// 配置网络请求的主机地址，同时根据网络可达性，发出相应的通知：NetworkKit.Reachability.changedNotification
   ///
   /// - Parameters:
   ///   - isDevelop: 是否是开发环境
-  ///   - developBasePath: 开发环境基地址
-  ///   - productBasePath: 生产环境基地址
-  func setupApi(isDevelop: Bool,
-                develop developBasePath: String,
-                product productBasePath: String) {
+  ///   - developHost: 开发环境基地址
+  ///   - productHost: 生产环境基地址
+  func setupHost(isDevelop: Bool,
+                 develop developHost: String,
+                 product productHost: String) {
     
-    API.isDevelop = isDevelop
-    API.developBasePath = developBasePath
-    API.productBasePath = productBasePath
+    let host = isDevelop ? developHost : productHost
     
+    API.host = host
     // 网络可达性监控
-    self.reachability = Reachability(host: isDevelop ? developBasePath : productBasePath)
+    self.reachability = Reachability(host: host)
     self.reachability?.startMonitor()
   }
   

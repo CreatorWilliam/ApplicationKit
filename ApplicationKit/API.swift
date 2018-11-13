@@ -11,12 +11,8 @@ import JSONKit
 
 public class API {
   
-  /// 是否为开发版
-  public static var isDevelop: Bool = false
-  /// 开发版本基地址
-  public static var developBasePath: String = ""
-  /// 生产版本基地址
-  public static var productBasePath: String = ""
+  /// 接口主机地址
+  public static var host: String = ""
   
   /// 接口请求方式
   private var method: Network.HTTPMethod
@@ -38,8 +34,6 @@ public class API {
   ///   - customPath: 自定义路径，将忽略path与version参数
   public init(method: Network.HTTPMethod, path: String? = nil, version: String? = nil, customPath: String? = nil) {
     
-    let base = API.isDevelop ? API.developBasePath : API.productBasePath
-    
     self.method = method
     if let customPath = customPath {
       
@@ -47,7 +41,7 @@ public class API {
       
     } else {
       
-      self.path = base
+      self.path = API.host + "/api/"
     }
     
     if let version = version {

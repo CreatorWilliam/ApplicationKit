@@ -111,8 +111,8 @@ private extension ImageBrowerCollectionViewCell {
     self.scrollView.addGestureRecognizer(singleTap)
 
     // 长按显示图片操作菜单
-    let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
-    self.scrollView.addGestureRecognizer(longPressGR)
+    //let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+    //self.scrollView.addGestureRecognizer(longPressGR)
     
     self.scrollView.delegate = self
     self.scrollView.maximumZoomScale = 2
@@ -139,10 +139,12 @@ private extension ImageBrowerCollectionViewCell {
   
   @objc func tapSingle(_ sender: UITapGestureRecognizer) {
    
-    self.wm_viewController()?.dismiss(animated: false)
+    Presenter.currentPresentedController?.dismiss(animated: false)
   }
   
   @objc func longPress(_ sender: UILongPressGestureRecognizer) {
+    
+    if sender.state != .began { return }
     
     let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
@@ -150,7 +152,7 @@ private extension ImageBrowerCollectionViewCell {
       
       self.saveImage()
     }))
-    self.wm_viewController()?.present(alertController, animated: true)
+    Presenter.present(alertController)
   }
   
 }
@@ -200,7 +202,7 @@ private extension ImageBrowerCollectionViewCell {
     }, completionHandler: { (isSuccess, error) in
       
       guard isSuccess else { return }
-      self.wm_viewController()?.hud.showMessage(message: "保存成功!")
+      Presenter.currentPresentedController?.hud.showMessage(message: "保存成功!")
       /*
        guard let id = request?.placeholderForCreatedAsset?.localIdentifier else { return }
        let result = PHAsset.fetchAssets(withLocalIdentifiers: [id], options: nil)
@@ -236,12 +238,3 @@ private extension ImageBrowerCollectionViewCell {
   }
   
 }
-
-
-
-
-
-
-
-
-

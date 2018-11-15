@@ -29,7 +29,6 @@ public class ImageBrowerController: UIViewController {
     self.browerView.update(index: self.initIndex)
   }
   
-  
 }
 
 // MARK: - Public
@@ -55,22 +54,9 @@ private extension ImageBrowerController {
     self.browerView.update(images: self.images)
     self.view.addSubview(self.browerView)
     self.browerView.layout.add { (make) in
-      
       make.top().bottom().leading().trailing().equal(self.view)
     }
     
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-

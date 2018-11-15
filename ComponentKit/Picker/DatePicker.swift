@@ -96,7 +96,7 @@ public extension DatePicker {
   
   @objc private func clickCancel(_ sender: UIButton) {
     
-    DatePicker.shared.datePicker.wm_viewController()?.dismiss(animated: false, completion: {
+    Presenter.currentPresentedController?.dismiss(animated: false, completion: {
       
       DatePicker.shared.handle = nil
     })
@@ -106,15 +106,10 @@ public extension DatePicker {
     
     DatePicker.shared.handle?(DatePicker.shared.datePicker.date)
     
-    DatePicker.shared.datePicker.wm_viewController()?.dismiss(animated: false, completion: {
+    Presenter.currentPresentedController?.dismiss(animated: false, completion: {
       
       DatePicker.shared.handle = nil
     })
   }
   
 }
-
-
-
-
-

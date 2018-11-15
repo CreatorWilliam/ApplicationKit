@@ -64,7 +64,7 @@ extension ImageBrowerView: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    self.wm_viewController()?.dismiss(animated: false)
+    Presenter.currentPresentedController?.dismiss(animated: false)
   }
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -118,7 +118,6 @@ private extension ImageBrowerView {
     self.collectionView.register(ImageBrowerCollectionViewCell.self, forCellWithReuseIdentifier: self.cellID)
     self.addSubview(self.collectionView)
     self.collectionView.layout.add{(make) in
-      
       make.top().leading().trailing().bottom().equal(self)
     }
     
@@ -128,7 +127,6 @@ private extension ImageBrowerView {
     self.pageControl.pageIndicatorTintColor = UIColor.white
     self.addSubview(self.pageControl)
     self.pageControl.layout.add { (make) in
-      
       make.leading().trailing().equal(self)
       make.bottom().equal(self).safeBottom()
       make.height(30)
@@ -136,29 +134,3 @@ private extension ImageBrowerView {
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

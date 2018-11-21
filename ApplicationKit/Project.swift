@@ -94,8 +94,6 @@ public extension Project {
                      isEmbeddedNavigation: Bool = true,
                      to tabBarController: UITabBarController) -> Void {
     
-    tabBarController.tabBar.isTranslucent = false
-    
     viewController.navigationItem.title = title
     viewController.tabBarItem.title = title
     viewController.tabBarItem.setTitleTextAttributes([.foregroundColor: normalColor], for: .normal)

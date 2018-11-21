@@ -18,7 +18,8 @@ public struct TableSectionItem {
   
   /// 更新SectionView的数据
   public var data: Any?
-  
+  /// 辅助用数据
+  public var accessoryData: Any?
   /// 不重用的View
   internal var view: UIView?
   
@@ -27,36 +28,47 @@ public struct TableSectionItem {
   
   /// SectionView重用符号
   internal var reuseItem: ReuseItem?
+  /// 高度
+  internal let height: CGFloat
   
-  /// 固定高度
-  internal var fixedHeight: CGFloat = 0.01
-  /// 可变高度，该数值将会设置为Secion的EstimatedHeight
-  internal var flexibleHeight: CGFloat = 0
-  
+  /// 创建动态重用的Section视图
+  ///
+  /// - Parameters:
+  ///   - reuseItem: 重用的Section视图
+  ///   - data: Section视图更新的数据，非必须
+  ///   - delegate: Section视图的代理，非必须
+  ///   - height: Section视图的高度，默认为自适应高度
   public init(_ reuseItem: ReuseItem,
               data: Any? = nil,
+              accessoryData: Any? = nil,
               delegate: AnyObject? = nil,
-              fixed fixedHeight: CGFloat = 0.01,
-              flexible flexibleHeight: CGFloat = 0) {
+              height: CGFloat = UITableView.automaticDimension) {
     
-    self.fixedHeight = fixedHeight
-    self.flexibleHeight = flexibleHeight
+    self.height = height
     self.reuseItem = reuseItem
     self.delegate = delegate
     self.data = data
+    self.accessoryData = accessoryData
   }
   
+  /// 创建静态的Section视图
+  ///
+  /// - Parameters:
+  ///   - view: 静态Section视图，若设置为空，Section视图将会为空
+  ///   - data: Section视图更新的数据，非必须
+  ///   - delegate: Section视图的代理，非必须
+  ///   - height: Section视图的高度，默认为无高度，可变高度使用：UITableView.automaticDimension
   public init(_ view: UIView? = nil,
               data: Any? = nil,
+              accessoryData: Any? = nil,
               delegate: AnyObject? = nil,
-              fixed fixedHeight: CGFloat = 0.01,
-              flexible flexibleHeight: CGFloat = 0) {
+              height: CGFloat = 0.01) {
     
-    self.fixedHeight = fixedHeight
-    self.flexibleHeight = flexibleHeight
+    self.height = height
     self.view = view
     self.delegate = delegate
     self.data = data
+    self.accessoryData = accessoryData
   }
   
 }

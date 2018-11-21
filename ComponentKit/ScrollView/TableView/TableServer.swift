@@ -40,9 +40,9 @@ public class TableServer: NSObject {
   // 缓存的Row高度
   private var cachedRowHeights: [IndexPath: CGFloat] = [:]
   // 缓存的Header高度
-  private var cachedHeaderHeights: [IndexPath: CGFloat] = [:]
+  private var cachedHeaderHeights: [Int: CGFloat] = [:]
   // 缓存的Footer高度
-  private var cachedFooterHeights: [IndexPath: CGFloat] = [:]
+  private var cachedFooterHeights: [Int: CGFloat] = [:]
 }
 
 // MARK: - Public
@@ -66,8 +66,8 @@ public extension TableServer {
     
     tableView.delegate = self
     tableView.dataSource = self
-    tableView.estimatedSectionHeaderHeight = 0
-    tableView.estimatedSectionFooterHeight = 0
+    //tableView.estimatedSectionHeaderHeight = 0
+    //tableView.estimatedSectionFooterHeight = 0
     
     self.emptyContentView = emptyContentView
     self.emptyContentView?.isHidden = true
@@ -172,6 +172,7 @@ extension TableServer: UITableViewDelegate {
     return self.cachedRowHeights[indexPath] ?? tableView.estimatedRowHeight
   }
   
+  // Height Cell
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
     if tableView.rowHeight > 0 {
@@ -182,6 +183,23 @@ extension TableServer: UITableViewDelegate {
   }
   
   // MARK: ---------- Header
+  
+  // Estimated Height Of Header
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+      
+      // 必须保证返回值大于0
+      return self.cachedHeaderHeights[section] ?? 44//UITableView.automaticDimension
+    }
+  
+  // Height Of Header
+  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    
+    if tableView.sectionHeaderHeight > 0 {
+      
+      return tableView.sectionHeaderHeight
+    }
+    return self.groups[section].header.height
+  }
   
   // View Of Section Header
   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -203,19 +221,30 @@ extension TableServer: UITableViewDelegate {
     return sectionView
   }
   
-  // Estimated Height Of Header
-  //  public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-  //
-  //    return self.groups[section].flexibleHeightOfHeader
-  //  }
-  
-  // Height Of Header
-  public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+  // Did Display Header
+  public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
     
-    return self.groups[section].header.fixedHeight
+    self.cachedHeaderHeights[section] = view.bounds.height
   }
   
   // MARK: ---------- Footer
+  
+  // Estimated Height Of Footer
+    public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+      
+      // 必须保证返回值大于0
+      return self.cachedFooterHeights[section] ?? 44//UITableView.automaticDimension
+    }
+  
+  // Height Of Footer
+  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    
+    if tableView.sectionFooterHeight > 0 {
+      
+      return tableView.sectionFooterHeight
+    }
+    return self.groups[section].footer.height
+  }
   
   // View Of Section Footer
   public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -237,16 +266,10 @@ extension TableServer: UITableViewDelegate {
     return sectionView
   }
   
-  // Estimated Height Of Footer
-  //  public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-  //
-  //    return self.groups[section].flexibleHeightOfFooter
-  //  }
-  
-  // Height Of Footer
-  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+  // Did Display Footer
+  public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
     
-    return self.groups[section].footer.fixedHeight
+    self.cachedFooterHeights[section] = view.bounds.height
   }
   
 }

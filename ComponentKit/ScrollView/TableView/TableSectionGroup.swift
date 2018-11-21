@@ -11,32 +11,13 @@ import UIKit
 public struct TableSectionGroup {
   
   // Header
-  public var header: TableSectionItem = TableSectionItem() {
-    
-    didSet {
-      
-      guard self.header.flexibleHeight == 0 else { return }
-      self.isHeaderFlexible = true
-      self.header.fixedHeight = UITableView.automaticDimension
-    }
-  }
-  internal var isHeaderFlexible: Bool = false
+  public var header: TableSectionItem = TableSectionItem()
   
   // Footer
-  public var footer: TableSectionItem = TableSectionItem() {
-    
-    didSet {
-      
-      guard self.footer.flexibleHeight == 0 else  { return }
-      self.isFooterFlexible = true
-      self.footer.fixedHeight = UITableView.automaticDimension
-    }
-  }
-  internal var isFooterFlexible: Bool = false
+  public var footer: TableSectionItem = TableSectionItem()
   
   // Cells
   public var items: [TableCellItem] = []
-  internal var isCellFlexible: Bool = true
   
   public init(header: TableSectionItem = TableSectionItem(),
               footer: TableSectionItem = TableSectionItem()) {

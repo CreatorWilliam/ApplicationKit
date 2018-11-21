@@ -91,14 +91,14 @@ private extension ImagePickerAlbumViewController {
     let reuseCell = ReuseItem(ImageAlbumTableViewCell.self, "ImageAlbumTableViewCell")
     var groups: [TableSectionGroup] = []
     
-    var allPhotosGroup = TableSectionGroup(header: TableSectionItem(fixed: 5), footer: TableSectionItem(fixed: 5))
+    var allPhotosGroup = TableSectionGroup(header: TableSectionItem(height: 5), footer: TableSectionItem(height: 5))
     allPhotosGroup.items.append(TableCellItem(reuseCell, data: self.allPhotos, accessoryType: .disclosureIndicator, selected: { [weak self] in
       
       self?.showDetail(with: self?.allPhotos, animated: true)
     }))
     groups.append(allPhotosGroup)
     
-    var smartGroup = TableSectionGroup(header: TableSectionItem(fixed: 5), footer: TableSectionItem(fixed: 5))
+    var smartGroup = TableSectionGroup(header: TableSectionItem(height: 5), footer: TableSectionItem(height: 5))
     self.smartAlbums.forEach({ [weak self] (album) in
       
       smartGroup.items.append(TableCellItem(reuseCell, data: album, accessoryType: .disclosureIndicator, selected: {
@@ -108,7 +108,7 @@ private extension ImagePickerAlbumViewController {
     })
     groups.append(smartGroup)
     
-    var userGroup = TableSectionGroup(header: TableSectionItem(fixed: 5), footer: TableSectionItem(fixed: 5))
+    var userGroup = TableSectionGroup(header: TableSectionItem(height: 5), footer: TableSectionItem(height: 5))
     self.userAlbums.forEach({ [weak self] (album) in
       
       userGroup.items.append(TableCellItem(reuseCell, data: album, accessoryType: .disclosureIndicator, selected: {

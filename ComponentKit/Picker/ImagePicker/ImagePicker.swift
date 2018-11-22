@@ -71,17 +71,14 @@ public extension ImagePicker {
     
     let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
-    alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
-      
-    }))
+    alertController.addAction(UIAlertAction(title: "取消", style: .cancel))
     
     // 是否可以打开相机
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       
       alertController.addAction(UIAlertAction(title: "拍照", style: .default, handler: { (action) in
+        
         ImagePicker.openCamera(withHandle: handle)
-//        ImagePicker.shared.imagePicker.sourceType = .camera
-//        Presenter.present(ImagePicker.shared.imagePicker, animated: true)
       }))
     }
     
@@ -89,19 +86,8 @@ public extension ImagePicker {
     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
       
       alertController.addAction(UIAlertAction(title: "选择图片", style: .default, handler: { (action) in
-        ImagePicker.openPhotoLibrary(withHandle: handle)
-//        if count < 2 {
-//
-//          ImagePicker.shared.imagePicker.sourceType = .photoLibrary
-//          Presenter.present(ImagePicker.shared.imagePicker, animated: true)
-//          return
-//        }
-//        ImagePickerAlbumViewController.openPicker(withLimited: count, completion: { (asset, images) in
-//
-//          ImagePicker.shared.completeHandle?([], images)
-//          ImagePicker.shared.completeHandle = nil
-//        })
         
+        ImagePicker.openPhotoLibrary(withHandle: handle)
       }))
     }
     
@@ -119,9 +105,6 @@ public extension ImagePicker {
 extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    // Local variable inserted by Swift 4.2 migrator.
-    let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-    
     
     defer {
       
@@ -131,7 +114,7 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
     }
     
     // 获取选择的图片
-    guard let originImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else { return }
+    guard let originImage = info[.originalImage] as? UIImage else { return }
     
     /// 如果需要原图，则直接返回原图
     if self.isOrigin {
@@ -155,42 +138,15 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
       return
     }
     
-    
   }
   
   public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     
-    defer {
-      
-      // 因为是全局的，用完一次就可以清除回调
-      picker.dismiss(animated: true)
-      
-    }
+    defer { picker.dismiss(animated: true) }
     
+    // 因为是全局的，用完一次就可以清除回调
     self.completeHandle = nil
     
   }
   
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-  return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-  return input.rawValue
 }

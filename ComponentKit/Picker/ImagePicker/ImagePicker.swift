@@ -28,11 +28,46 @@ public class ImagePicker: NSObject {
 public extension ImagePicker {
   
   typealias CompleteHandle = ([PHAsset], [UIImage]) -> Void
-  class func open(isOrigin: Bool = false, limited count: Int = 1,
-                  withHandle handle: @escaping CompleteHandle) {
+  
+  class func openCamera(isOrigin: Bool = false, limited count: Int = 1,
+                        withHandle handle: @escaping CompleteHandle) {
     
     ImagePicker.shared.completeHandle = handle
     ImagePicker.shared.isOrigin = isOrigin
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      
+      ImagePicker.shared.imagePicker.sourceType = .camera
+      Presenter.present(ImagePicker.shared.imagePicker, animated: true)
+    }
+  }
+  
+  class func openPhotoLibrary(isOrigin: Bool = false, limited count: Int = 1,
+                              withHandle handle: @escaping CompleteHandle) {
+    
+    ImagePicker.shared.completeHandle = handle
+    ImagePicker.shared.isOrigin = isOrigin
+    // 是否可以打开相册
+    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+      
+      if count < 2 {
+        
+        ImagePicker.shared.imagePicker.sourceType = .photoLibrary
+        Presenter.present(ImagePicker.shared.imagePicker, animated: true)
+        return
+      }
+      ImagePickerAlbumViewController.openPicker(withLimited: count, completion: { (asset, images) in
+        
+        ImagePicker.shared.completeHandle?([], images)
+        ImagePicker.shared.completeHandle = nil
+      })
+    }
+  }
+  
+  class func open(isOrigin: Bool = false, limited count: Int = 1,
+                  withHandle handle: @escaping CompleteHandle) {
+    
+//    ImagePicker.shared.completeHandle = handle
+//    ImagePicker.shared.isOrigin = isOrigin
     
     let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
@@ -44,9 +79,9 @@ public extension ImagePicker {
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       
       alertController.addAction(UIAlertAction(title: "拍照", style: .default, handler: { (action) in
-        
-        ImagePicker.shared.imagePicker.sourceType = .camera
-        Presenter.present(ImagePicker.shared.imagePicker, animated: true)
+        ImagePicker.openCamera(withHandle: handle)
+//        ImagePicker.shared.imagePicker.sourceType = .camera
+//        Presenter.present(ImagePicker.shared.imagePicker, animated: true)
       }))
     }
     
@@ -54,25 +89,25 @@ public extension ImagePicker {
     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
       
       alertController.addAction(UIAlertAction(title: "选择图片", style: .default, handler: { (action) in
-        
-        if count < 2 {
-
-          ImagePicker.shared.imagePicker.sourceType = .photoLibrary
-          Presenter.present(ImagePicker.shared.imagePicker, animated: true)
-          return
-        }
-        ImagePickerAlbumViewController.openPicker(withLimited: count, completion: { (asset, images) in
-          
-          ImagePicker.shared.completeHandle?([], images)
-          ImagePicker.shared.completeHandle = nil
-        })
+        ImagePicker.openPhotoLibrary(withHandle: handle)
+//        if count < 2 {
+//
+//          ImagePicker.shared.imagePicker.sourceType = .photoLibrary
+//          Presenter.present(ImagePicker.shared.imagePicker, animated: true)
+//          return
+//        }
+//        ImagePickerAlbumViewController.openPicker(withLimited: count, completion: { (asset, images) in
+//
+//          ImagePicker.shared.completeHandle?([], images)
+//          ImagePicker.shared.completeHandle = nil
+//        })
         
       }))
     }
     
     DispatchQueue.main.async {
-        
-        Presenter.present(alertController, animated: true)
+      
+      Presenter.present(alertController, animated: true)
       
     }
     
@@ -84,9 +119,9 @@ public extension ImagePicker {
 extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
+    // Local variable inserted by Swift 4.2 migrator.
+    let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+    
     
     defer {
       
@@ -152,10 +187,10 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+  return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
+  return input.rawValue
 }

@@ -10,39 +10,61 @@ import UIKit
 
 public class TableServer: NSObject {
   
+  // MARK: ******************** Public ********************
+  /// TableView
+  public var tableView: UITableView = UITableView(frame: .zero, style: .grouped) {
+    
+    didSet {
+      // 设置后设置默认的代理属性
+      self.tableView.delegate = self
+      self.tableView.dataSource = self
+      // 清除
+      self.reusedCells.removeAll()
+      self.reusedSectionViews.removeAll()
+      self.tableView.backgroundView = self.emptyContentView
+      self.emptyContentView?.isHidden = true
+    }
+  }
+  
+  /// 空视图
+  public var emptyContentView: UIView? {
+    
+    didSet {
+      
+      self.tableView.backgroundView = self.emptyContentView
+      self.emptyContentView?.isHidden = true
+    }
+  }
+  
+  /// UIScrollViewDelegate
+  public weak var scrollViewDelegate: UIScrollViewDelegate?
+  
+  /// 是否选中后执行反选动画
+  public var isDeselectAutomatically: Bool = true
+
   /// 数据源
   public var groups: [TableSectionGroup] = []
   
-  /// 空视图
-  private var emptyContentView: UIView?
-  
+  // MARK: ******************** Public ********************
   /// 重用的Cell组
   private var reusedCells: Set<String> = []
   /// 重用的SectionView组
   private var reusedSectionViews: Set<String> = []
   
-  /// 默认的重用Cell
-  private lazy var defaultCell = ReuseItem(UITableViewCell.self, "Cell")
-  
-  /// TableView
-  private weak var tableView: UITableView?
-  
-  /// UIScrollViewDelegate
-  private weak var scrollViewDelegate: UIScrollViewDelegate?
-  
-  /// 是否选中后执行反选动画
-  private var isDeselectAutomatically: Bool = true
-  
-  /// 是否有内容状态视图
-  private var hasContentStateView: Bool = false
-  
-  // MARK: 优化性能相关属性（TODO）
   // 缓存的Row高度
   private var cachedRowHeights: [IndexPath: CGFloat] = [:]
   // 缓存的Header高度
   private var cachedHeaderHeights: [Int: CGFloat] = [:]
   // 缓存的Footer高度
   private var cachedFooterHeights: [Int: CGFloat] = [:]
+  
+  public override init() {
+    super.init()
+    
+    self.tableView.delegate = self
+    self.tableView.dataSource = self
+  }
+  
 }
 
 // MARK: - Public
@@ -55,27 +77,17 @@ public extension TableServer {
   ///   - emptyContentView: 无内容时显示的空内容视图
   ///   - scrollViewDelegate: 用于获取列表视图的滚动事件
   ///   - isDeselectAutomatically: 是否自动反选，默认true
+  @available(iOS, deprecated: 8.0, message: "Use TableServer's tableView, emptyContentView, scrollViewDelegate and isDeselectAutomatically instead")
   func setup(_ tableView: UITableView,
              emptyContentView: UIView? = nil,
              scrollViewDelegate: UIScrollViewDelegate? = nil,
              isDeselectAutomatically: Bool = true) {
     
     self.tableView = tableView
+    self.emptyContentView = emptyContentView
+
     self.scrollViewDelegate = scrollViewDelegate
     self.isDeselectAutomatically = isDeselectAutomatically
-    
-    tableView.delegate = self
-    tableView.dataSource = self
-    //tableView.estimatedSectionHeaderHeight = 0
-    //tableView.estimatedSectionFooterHeight = 0
-    
-    self.emptyContentView = emptyContentView
-    self.emptyContentView?.isHidden = true
-    tableView.backgroundView = emptyContentView
-    
-    // 外部没有传入重用的Cell时候，注册一个默认的Cell
-    if reusedCells.count < 1 { tableView.register(cells: [self.defaultCell]) }
-    
   }
   
   /// 使用数据源全部更新
@@ -87,7 +99,7 @@ public extension TableServer {
     
     self.registerNewViews(with: groups)
     
-    self.tableView?.reloadData()
+    self.tableView.reloadData()
     
     self.emptyContentView?.isHidden = (self.groups.reduce(0, { $0 + $1.items.count }) > 0)
   }
@@ -104,7 +116,7 @@ public extension TableServer {
 
     self.registerNewViews(with: groups)
     
-    self.tableView?.reloadSections(sections, with: animation)
+    self.tableView.reloadSections(sections, with: animation)
     
     self.emptyContentView?.isHidden = (self.groups.reduce(0, { $0 + $1.items.count }) > 0)
   }
@@ -291,12 +303,16 @@ extension TableServer: UITableViewDataSource {
     
     let item = self.groups[indexPath.section].items[indexPath.row]
     
-    let cell = item.staticCell ?? tableView.dequeueReusableCell(withIdentifier: (item.reuseItem ?? self.defaultCell).id, for: indexPath)
+    // 若设置了静态Cell，则使用静态Cell
+    var cell: UITableViewCell
+    if let staticCell = item.staticCell { cell = staticCell }
+    // 若设置了动态Cell，则使用动态Cell
+    else if let reuseItem = item.reuseItem { cell = tableView.dequeueReusableCell(withIdentifier: reuseItem.id, for: indexPath) }
+    // 默认的Cell
+    else { cell = UITableViewCell(style: .default, reuseIdentifier: nil) }
+    
     cell.accessoryType = item.accessoryType
-    if let cell = cell as? TableCellItemUpdatable {
-      
-      cell.update(with: item)
-    }
+    if let cell = cell as? TableCellItemUpdatable { cell.update(with: item) }
     
     return cell
   }
@@ -418,12 +434,12 @@ private extension TableServer {
     
     if newSectionViews.count > 0 {
       
-      self.tableView?.register(sectionViews: newSectionViews)
+      self.tableView.register(sectionViews: newSectionViews)
     }
     
     if newCells.count > 0 {
       
-      self.tableView?.register(cells: newCells)
+      self.tableView.register(cells: newCells)
     }
     
   }

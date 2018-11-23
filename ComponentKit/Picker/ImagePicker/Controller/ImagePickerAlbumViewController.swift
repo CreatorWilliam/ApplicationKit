@@ -24,13 +24,11 @@ class ImagePickerAlbumViewController: UIViewController {
   private var handle: AssetSelectionHandle?
   
   private let server = TableServer()
-  private let tableView = UITableView(frame: .zero, style: .grouped)
   
   override public func viewDidLoad() {
     super.viewDidLoad()
     
-    self.setupView()
-    self.setupLayout()
+    self.setupUI()
     
     self.showDetail(with: nil, animated: false)
     self.fetchAlbumsFromSystemAlbum()
@@ -67,20 +65,14 @@ extension ImagePickerAlbumViewController {
 // MARK: - Setup
 private extension ImagePickerAlbumViewController {
   
-  func setupView() {
+  func setupUI() {
     
     self.navigationView.setup(title: self.title)
     self.navigationView.addRight(title: "取消", target: self, action: #selector(dismissAction))
     
-    self.server.setup(self.tableView)
-    self.tableView.rowHeight = 80
-    self.view.addSubview(self.tableView)
-  }
-  
-  func setupLayout() {
-    
-    self.tableView.layout.add { (make) in
-      
+    self.server.tableView.rowHeight = 80
+    self.view.addSubview(self.server.tableView)
+    self.server.tableView.layout.add { (make) in
       make.top().equal(self.navigationView).bottom()
       make.leading().trailing().bottom().equal(self.view)
     }

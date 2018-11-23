@@ -19,6 +19,10 @@ public class NavigationView: UIView {
   public static var defaultBackgroundColor: UIColor = .white
   /// 默认导航栏背景图，接受图片名String，图片UIImage
   public static var defaultBackgroundImage: Any? = nil
+  /// 默认导航栏返回按钮图片
+  public static var defaultBackImage: String?
+  /// 默认导航栏返回按钮标题
+  public static var defaultBackTitle: String = "返回"
   
   /// 导航栏标题
   public private(set) var titleLabel: UILabel = UILabel()
@@ -27,7 +31,7 @@ public class NavigationView: UIView {
   
   /// 导航栏内容基础高度
   private var navigationBaseHeight: CGFloat = 44
-
+  
   /// 内容视图，承载左右两侧的操作按钮
   fileprivate var contentView = UIToolbar()
   /// 左侧操作集
@@ -37,7 +41,7 @@ public class NavigationView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-
+    
     self.backgroundColor = .clear
     
     let screenWidth = UIScreen.main.bounds.width
@@ -49,7 +53,6 @@ public class NavigationView: UIView {
     self.backgroundView.clipsToBounds = true
     self.addSubview(self.backgroundView)
     self.backgroundView.layout.add { (make) in
-      
       make.top().bottom().leading().trailing().equal(self)
     }
     
@@ -66,7 +69,6 @@ public class NavigationView: UIView {
     self.titleLabel.textColor = .white
     self.contentView.addSubview(self.titleLabel)
     self.titleLabel.layout.add { (make) in
-      
       make.top().bottom().equal(self.contentView)
       make.leading(40).trailing(-40).equal(self.contentView)
     }
@@ -171,6 +173,36 @@ public extension NavigationView {
 // MARK: - Item Handle
 public extension NavigationView {
   
+  /// 显示自定义导航栏返回按钮
+  ///
+  /// - Parameter image: 返回按钮图标
+  @discardableResult
+  func showBack(image name: String? = NavigationView.defaultBackImage) -> UIBarButtonItem {
+  
+
+    
+    var item: UIBarButtonItem
+    if let name = name {
+      
+      item = UIBarButtonItem(image: UIImage(named: name)?.withRenderingMode(.alwaysOriginal),
+                             style: UIBarButtonItem.Style.plain, target: self,
+                             action: #selector(clickNavigationBack))
+      
+    } else {
+      
+      item = UIBarButtonItem(title: NavigationView.defaultBackTitle,
+                             style: UIBarButtonItem.Style.plain, target: self,
+                             action: #selector(clickNavigationBack))
+    }
+    
+    item.tintColor = self.titleLabel.textColor
+    self.leftItems.insert(item, at: 0)
+    let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    self.contentView.items = (self.leftItems + [flexibleItem] + self.rightItems)
+
+    return item
+  }
+  
   /// 添加左侧导航栏Item
   ///
   /// - Parameters:
@@ -263,6 +295,16 @@ public extension NavigationView {
   
 }
 
+// MARK: - Action
+private extension NavigationView {
+  
+  @objc func clickNavigationBack(_ sender: UIBarButtonItem) {
+    
+    if let _ = Presenter.pop() { return }
+    Presenter.dismiss()
+  }
+  
+}
 
 // MARK: - Navigation
 public extension UIViewController {
@@ -283,44 +325,4 @@ public extension UIViewController {
     
     return temp
   }
-  
-  /// 显示自定义导航栏返回按钮
-  ///
-  /// - Parameter image: 返回按钮图标
-  /// - Parameter title: 返回按钮标题
-  func showNaviationBack(image: String = "nav_back", title: String? = nil) {
-
-    let item = title == nil ?
-      UIBarButtonItem(image: UIImage(named: image)?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(componentKit_clickNavigationBack(_:))) :
-      UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(componentKit_clickNavigationBack(_:)))
-    item.tintColor = self.navigationView.titleLabel.textColor
-    self.navigationView.leftItems.insert(item, at: 0)
-    let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    self.navigationView.contentView.items = (self.navigationView.leftItems + [flexibleItem] + self.navigationView.rightItems)
-  }
-  
 }
-
-// MARK: - Action
-private extension UIViewController {
-  
-  @objc func componentKit_clickNavigationBack(_ sender: UIBarButtonItem) {
-    
-    if let _ = self.navigationController?.popViewController(animated: true) { return }
-    self.dismiss(animated: true, completion: nil)
-  }
-  
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

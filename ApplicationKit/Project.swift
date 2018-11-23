@@ -38,16 +38,24 @@ public extension Project {
   /// - Parameters:
   ///   - titleColor: 导航栏文字颜色
   ///   - titleFont: 导航栏字体
+  ///   - backImageName: 返回按钮的图标
+  ///   - backTitle: 返回按钮的标题
   ///   - backgroundColor: 导航栏背景色
   ///   - backgroundImage: 导航栏背景图片
-  func setupNavigation(titleColor: UIColor, titleFont: UIFont, backgroundColor: UIColor, backgroundImage: UIImage?) {
+  func setupNavigation(titleColor: UIColor,
+                       titleFont: UIFont,
+                       backImageName: String,
+                       backTitle: String? = nil,
+                       backgroundColor: UIColor,
+                       backgroundImage: UIImage?) {
     
     // Custom Navigation
     NavigationView.defaultTitleColor = titleColor
     NavigationView.defaultTitleFont = titleFont
     NavigationView.defaultBackgroundColor = backgroundColor
     NavigationView.defaultBackgroundImage = backgroundImage
-    
+    NavigationView.defaultBackImage = backImageName
+    if let title = backTitle { NavigationView.defaultBackTitle = title }
     // NavigationBar
     UINavigationBar.appearance().tintColor = titleColor
     UINavigationBar.appearance().barTintColor = backgroundColor
@@ -93,6 +101,8 @@ public extension Project {
                      selectedColor: UIColor,
                      isEmbeddedNavigation: Bool = true,
                      to tabBarController: UITabBarController) -> Void {
+    
+    tabBarController.tabBar.isTranslucent = false
     
     viewController.navigationItem.title = title
     viewController.tabBarItem.title = title

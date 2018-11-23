@@ -219,7 +219,7 @@ private extension ImagePickerAssetViewController {
     
     self.navigationView.setup(title: self.album?.title)
     self.navigationView.addRight(title: "取消", target: self, action: #selector(clickCancel))
-    self.showNaviationBack()
+    self.navigationView.showBack()
     
     let spaceing: CGFloat = 3
     let count: CGFloat = 3

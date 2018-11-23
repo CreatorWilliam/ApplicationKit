@@ -44,6 +44,16 @@ public struct Presenter {
     Presenter.currentPresentedController?.present(presentedViewController, animated: animated, completion: completion)
   }
   
+  /// Modal隐藏一个控制器
+  ///
+  /// - Parameters:
+  ///   - animated: 是否有动画，默认有动画
+  ///   - completion: 完成展示后执行的闭包
+  public static func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+    
+    Presenter.currentPresentedController?.dismiss(animated: animated, completion: completion)
+  }
+  
   /// Push展示一个控制器
   ///
   /// - Parameters:
@@ -58,6 +68,15 @@ public struct Presenter {
     viewController.hidesBottomBarWhenPushed = isHideBottomBar
     navigationController.pushViewController(viewController, animated: animated)
     return true
+  }
+  
+  /// 导航栏控制器Pop当前视图
+  ///
+  /// - Parameter animated: 是否有动画，默认有动画
+  /// - Returns: Pop的控制器
+  public static func pop(animated: Bool = true) -> UIViewController? {
+    
+    return Presenter.currentNavigationController?.popViewController(animated: animated)
   }
   
 }

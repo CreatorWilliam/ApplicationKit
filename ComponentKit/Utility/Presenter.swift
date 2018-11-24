@@ -74,9 +74,29 @@ public struct Presenter {
   ///
   /// - Parameter animated: 是否有动画，默认有动画
   /// - Returns: Pop的控制器
+  @discardableResult
   public static func pop(animated: Bool = true) -> UIViewController? {
     
     return Presenter.currentNavigationController?.popViewController(animated: animated)
+  }
+  
+  /// 导航栏控制器Pop当前视图
+  ///
+  /// - Parameters:
+  ///   - viewController: pop到指定的控制器，若不指定，则直接到根视图
+  ///   - animated: 是否有动画，默认有动画
+  /// - Returns: Pop的控制器集合
+  @discardableResult
+  public static func pop(to viewController: UIViewController?, animated: Bool = true) -> [UIViewController]? {
+    
+    if let viewController = viewController {
+      
+      return Presenter.currentNavigationController?.popToViewController(viewController, animated: animated)
+      
+    } else {
+      
+      return Presenter.currentNavigationController?.popToRootViewController(animated: animated)
+    }
   }
   
 }

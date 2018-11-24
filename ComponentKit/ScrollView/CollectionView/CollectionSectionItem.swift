@@ -19,25 +19,26 @@ public struct CollectionSectionItem {
   /// 更新SectionView的数据
   public var data: Any?
   
-  /// 不重用的View
-  internal var view: UIView?
-  
+  /// 辅助用数据
+  public var accessoryData: Any?
   /// SectionView代理
   public weak var delegate: AnyObject?
   
-  /// SectionView重用符号
+  /// 动态SectionView
   internal var reuseItem: ReuseItem
-  
+    
   /// Section视图的大小
   public var size: CGSize
   
   public init(_ reuseItem: ReuseItem = ReuseItem(UICollectionReusableView.self),
               data: Any? = nil,
+              accessoryData: Any? = nil,
               delegate: AnyObject? = nil,
               size: CGSize = .zero) {
     
     self.reuseItem = reuseItem
     self.data = data
+    self.accessoryData = accessoryData
     self.delegate = delegate
     self.size = size
   }

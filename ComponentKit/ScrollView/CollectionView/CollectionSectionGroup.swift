@@ -32,6 +32,7 @@ public struct CollectionSectionGroup {
   public init(sectionInset: UIEdgeInsets = .zero,
               header: CollectionSectionItem = CollectionSectionItem(),
               footer: CollectionSectionItem = CollectionSectionItem()) {
+    
     self.sectionInset = sectionInset
     self.header = header
     self.footer = footer

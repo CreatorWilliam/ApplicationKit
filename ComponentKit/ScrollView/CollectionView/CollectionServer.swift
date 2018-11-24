@@ -10,6 +10,9 @@ import UIKit
 
 public class CollectionServer: NSObject {
   
+  /// 滚动代理，分发集合视图的滚动视图事件
+  public weak var scrollViewDelegate: UIScrollViewDelegate?
+  
   /// 数据源
   private var groups: [CollectionSectionGroup] = []
   
@@ -23,8 +26,7 @@ public class CollectionServer: NSObject {
   
   /// 集合视图
   private weak var collectionView: UICollectionView?
-  /// 滚动代理，分发集合视图的滚动视图事件
-  private weak var scrollViewDelegate: UIScrollViewDelegate?
+  
 }
 
 // MARK: - Public
@@ -37,10 +39,7 @@ public extension CollectionServer {
   ///   - emptyContentView: 无内容时显示的空内容视图
   ///   - scrollViewDelegate: 用于获取集合视图的滚动事件
   func setup(_ collectionView: UICollectionView,
-             emptyContentView: UIView? = nil,
-             scrollViewDelegate: UIScrollViewDelegate? = nil) {
-    
-    self.scrollViewDelegate = scrollViewDelegate
+             emptyContentView: UIView? = nil) {
     
     self.collectionView = collectionView
     self.collectionView?.delegate = self

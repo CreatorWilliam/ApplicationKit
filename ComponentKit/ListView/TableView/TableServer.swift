@@ -12,20 +12,7 @@ public class TableServer: NSObject {
   
   // MARK: ******************** Public ********************
   /// TableView
-  public var tableView: UITableView = UITableView(frame: .zero, style: .grouped) {
-    
-    didSet {
-      // 设置后设置默认的代理属性
-      self.tableView.delegate = self
-      self.tableView.dataSource = self
-      // 清除
-      self.reusedCells.removeAll()
-      self.reusedSectionViews.removeAll()
-      self.tableView.backgroundView = self.emptyContentView
-      self.emptyContentView?.isHidden = true
-    }
-  }
-  
+  public let tableView: UITableView
   /// 空视图
   public var emptyContentView: UIView? {
     
@@ -57,8 +44,10 @@ public class TableServer: NSObject {
   private var cachedHeaderHeights: [Int: CGFloat] = [:]
   // 缓存的Footer高度
   private var cachedFooterHeights: [Int: CGFloat] = [:]
-  
-  public override init() {
+
+  public init(tableStyle style: UITableView.Style = .grouped) {
+
+    self.tableView = UITableView(frame: .zero, style: style)
     super.init()
     
     self.tableView.delegate = self
@@ -69,26 +58,6 @@ public class TableServer: NSObject {
 
 // MARK: - Public
 public extension TableServer {
-  
-  /// 配置列表服务
-  ///
-  /// - Parameters:
-  ///   - tableView: 接受服务的列表视图
-  ///   - emptyContentView: 无内容时显示的空内容视图
-  ///   - scrollViewDelegate: 用于获取列表视图的滚动事件
-  ///   - isDeselectAutomatically: 是否自动反选，默认true
-  @available(iOS, deprecated: 8.0, message: "Use TableServer's tableView, emptyContentView, scrollViewDelegate and isDeselectAutomatically instead")
-  func setup(_ tableView: UITableView,
-             emptyContentView: UIView? = nil,
-             scrollViewDelegate: UIScrollViewDelegate? = nil,
-             isDeselectAutomatically: Bool = true) {
-    
-    self.tableView = tableView
-    self.emptyContentView = emptyContentView
-
-    self.scrollViewDelegate = scrollViewDelegate
-    self.isDeselectAutomatically = isDeselectAutomatically
-  }
   
   /// 使用数据源全部更新
   ///

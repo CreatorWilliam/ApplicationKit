@@ -687,7 +687,7 @@
 				3DD831A1215A3130003B2C19 /* ComponentKit.h */,
 				3DD831F3215A315B003B2C19 /* CustomView */,
 				3D649505218829590046165A /* Placeholder */,
-				3DDC0C8A21893DBF0035A84F /* ScrollView */,
+				3DDC0C8A21893DBF0035A84F /* ListView */,
 				3DD83216215A315B003B2C19 /* Font */,
 				3DD831B4215A315A003B2C19 /* Color */,
 				3DD831B2215A315A003B2C19 /* Controller */,
@@ -1016,7 +1016,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		3DDC0C8A21893DBF0035A84F /* ScrollView */ = {
+		3DDC0C8A21893DBF0035A84F /* ListView */ = {
 			isa = PBXGroup;
 			children = (
 				3DDC0C902189548C0035A84F /* PlaceholderView */,
@@ -1024,7 +1024,7 @@
 				3DD831DE215A315B003B2C19 /* TableView */,
 				3DD831D5215A315B003B2C19 /* CollectionView */,
 			);
-			path = ScrollView;
+			path = ListView;
 			sourceTree = "<group>";
 		};
 		3DDC0C902189548C0035A84F /* PlaceholderView */ = {

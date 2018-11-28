@@ -23,7 +23,7 @@ public struct ListDataModel<Element: ItemListable>: DataModelListable {
     self.pageNo = page["pageNo"] ?? 1
     self.hasNextPage = page["isHasNext"] ?? false
     if self.pageNo == 1 { self.list.removeAll() }
-    page["result"].forEach({ self.list.append(Element($0.json)) })
+    page["result"].forEach({ self.list.append(Element(list: $0.json)) })
   }
   
 }

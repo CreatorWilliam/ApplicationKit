@@ -11,7 +11,7 @@ import JSONKit
 /// 列表数据协议
 public protocol ItemListable {
   
-  init(_ json: JSON)
+  init(list json: JSON)
   
 }
 

@@ -28,7 +28,11 @@ public extension App {
   /// 应用版本号
   public var version: String { return self.info?["CFBundleShortVersionString"] as? String ?? "1.0" }
   /// 应用Build版本
-  public var build: String { return self.info?["CFBundleVersion"] as? String ?? "1" }
+  public var build: Int {
+    
+    let build = self.info?["CFBundleVersion"] as? String ?? "1"
+    return Int(build) ?? 1
+  }
   
 }
 

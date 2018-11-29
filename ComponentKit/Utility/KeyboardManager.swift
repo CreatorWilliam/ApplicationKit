@@ -54,7 +54,7 @@ public extension KeyboardManager {
       guard let window = view.window ?? UIApplication.shared.keyWindow else { return }
       guard let rect = view.superview?.convert(view.frame, to: window) else { return }
       
-      print("DebugLog", "KeyboardFrame:", frame, "ViewFrame:", view.frame, "Convert:", rect)
+      //print("DebugLog", "KeyboardFrame:", frame, "ViewFrame:", view.frame, "Convert:", rect)
       guard frame.minY < rect.maxY else { return }
       let offset = rect.maxY - frame.minY
       

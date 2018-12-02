@@ -163,6 +163,32 @@ extension TableServer: UITableViewDelegate {
     return self.groups[indexPath.section].items[indexPath.row].height
   }
   
+  // Editable Cell
+  public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    
+    return self.groups[indexPath.section].items[indexPath.row].deleteHandle != nil
+  }
+  
+  // EditStyle Cell
+  public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    
+    if self.groups[indexPath.section].items[indexPath.row].deleteHandle != nil { return .delete }
+    
+    return .none
+  }
+  
+  // EditAction Cell
+  public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    
+    if editingStyle == .delete {
+      
+      self.groups[indexPath.section].items[indexPath.row].deleteHandle?()
+      self.groups[indexPath.section].items.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      self.cachedRowHeights[indexPath] = nil
+    }
+  }
+  
   // MARK: ---------- Header
   
   // Estimated Height Of Header

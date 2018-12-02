@@ -45,6 +45,8 @@ public struct TableCellItem/*<DataSource>*/ {
   internal var selectedHandle: (() -> Void)?
   /// Cell反选操作
   internal var deselectedHandle: (() -> Void)?
+  /// 删除操作
+  internal var deleteHandle: (() -> Void)?
   
   /// 创建Cell
   ///
@@ -67,7 +69,8 @@ public struct TableCellItem/*<DataSource>*/ {
               seperatorInsets insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01),
               height: CGFloat = UITableView.automaticDimension,
               selected selectedHandle: (() -> Void)? = nil,
-              deselected deselectedHandle: (() -> Void)? = nil) {
+              deselected deselectedHandle: (() -> Void)? = nil,
+              deleteHandle: (() -> Void)? = nil) {
     
     self.reuseItem = reuse
     self.data = data
@@ -78,6 +81,7 @@ public struct TableCellItem/*<DataSource>*/ {
     self.height = height
     self.selectedHandle = selectedHandle
     self.deselectedHandle = deselectedHandle
+    self.deleteHandle = deleteHandle
   }
   
   /// 创建Cell
@@ -100,7 +104,8 @@ public struct TableCellItem/*<DataSource>*/ {
               seperatorInsets insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01),
               height: CGFloat = UITableView.automaticDimension,
               selected selectedHandle: (() -> Void)? = nil,
-              deselected deselectedHandle: (() -> Void)? = nil) {
+              deselected deselectedHandle: (() -> Void)? = nil,
+              deleteHandle: (() -> Void)? = nil) {
     
     self.staticCell = staticCell
     self.data = data
@@ -111,6 +116,7 @@ public struct TableCellItem/*<DataSource>*/ {
     self.height = height
     self.selectedHandle = selectedHandle
     self.deselectedHandle = deselectedHandle
+    self.deleteHandle = deleteHandle
   }
   
 }

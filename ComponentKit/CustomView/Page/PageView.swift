@@ -28,6 +28,9 @@ public class PageView: UIView {
   /// 自定义的页面视图
   private var pageViews: [UIView] = []
   
+  /// 是否同通知代理，目前是为了解决外部触发的翻页事件，会再次触发内部的翻页事件
+  private var shouldNotifyDelegate: Bool = true
+  
   public override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -90,7 +93,10 @@ extension PageView: Pagable {
     // 警告：该方式会触发scrollViewDidEndScrollingAnimation，从而会通知self.pageObserver，容易造成循环通知
     //self.pageScrollView.setContentOffset(CGPoint(x: CGFloat(index) * self.pageScrollView.bounds.width, y: 0), animated: true)
     
+    // 事实上，这种滚动也会触发scrollViewDidEndScrollingAnimation，从而会通知self.pageObserver，容易造成循环通知
+    // ORZ，So 使用一个属性进行区分
     // 手动生成滚动动画
+    self.shouldNotifyDelegate = false
     self.pageObserver?.pageWillPage(at: index, withSource: self)
     
     UIView.animate(withDuration: self.animationDuration, animations: {
@@ -101,6 +107,7 @@ extension PageView: Pagable {
 
       self.pageObserver?.pageDidPage(to: index, withSource: self)
       self.currentIndex = index
+      self.shouldNotifyDelegate = true
     })
   }
   
@@ -137,7 +144,7 @@ extension PageView: UIScrollViewDelegate {
   
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
     
-    guard scrollView.bounds.width > 0 else { return }
+    guard scrollView.bounds.width > 0 && self.shouldNotifyDelegate == true else { return }
     let index = Int((self.pageScrollView.contentOffset.x + self.pageScrollView.bounds.width / 2.0) / self.pageScrollView.bounds.width)
     self.pageObserver?.page(to: index, withSource: self)
   }

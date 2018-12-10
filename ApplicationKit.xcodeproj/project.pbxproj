@@ -47,6 +47,7 @@
 		3D74BF232181D123005B9C0F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74BF222181D123005B9C0F /* Device.swift */; };
 		3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3983A2194028700507F2C /* CodeInputView.swift */; };
 		3DC38F0D21BE654B00871DE7 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */; };
+		3DC38F1221BE844700871DE7 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F1021BE83D600871DE7 /* Tips.swift */; };
 		3DD831A3215A3130003B2C19 /* ComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD831A1215A3130003B2C19 /* ComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DD8323D215A315C003B2C19 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B3215A315A003B2C19 /* PopViewController.swift */; };
 		3DD8323E215A315C003B2C19 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B5215A315A003B2C19 /* UIColor+Extension.swift */; };
@@ -279,6 +280,7 @@
 		3D74BF222181D123005B9C0F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		3DB3983A2194028700507F2C /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
 		3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		3DC38F1021BE83D600871DE7 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
 		3DD8319F215A3130003B2C19 /* ComponentKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComponentKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD831A1215A3130003B2C19 /* ComponentKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentKit.h; sourceTree = "<group>"; };
 		3DD831A2215A3130003B2C19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1198,6 +1200,7 @@
 				BBC73ADB20A56DE400781F00 /* ApplicationKit.h */,
 				3DE7FAB1216CB26E0089F110 /* Project.swift */,
 				BBC73BF120A5BC3000781F00 /* API.swift */,
+				3DC38F1021BE83D600871DE7 /* Tips.swift */,
 				BBD26ABD20B7B0CF00BB0657 /* List */,
 				BBF221C720E4B1ED007A5FA2 /* Application */,
 				BBD26ABC20B7B0C200BB0657 /* Debug */,
@@ -1855,6 +1858,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB393CD2212A999F00F57F50 /* ItemListable.swift in Sources */,
+				3DC38F1221BE844700871DE7 /* Tips.swift in Sources */,
 				BBC73BF220A5BC3000781F00 /* API.swift in Sources */,
 				BBF221D620E4B218007A5FA2 /* App.swift in Sources */,
 				3D74BF232181D123005B9C0F /* Device.swift in Sources */,

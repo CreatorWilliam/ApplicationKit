@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 import Photos
 
 protocol ImageAssetCollectionViewCellDelegate: class {
@@ -121,18 +121,3 @@ private extension ImageAssetCollectionViewCell {
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 //
 //  ItemListable.swift
-//  ApplicationKit
+//  ComponentKit
 //
 //  Created by William Lee on 2018/8/20.
 //  Copyright © 2018 William Lee. All rights reserved.
@@ -14,12 +14,3 @@ public protocol ItemListable {
   init(list json: JSON)
   
 }
-
-
-
-
-
-
-
-
-

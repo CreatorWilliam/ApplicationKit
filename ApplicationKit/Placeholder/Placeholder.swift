@@ -8,10 +8,12 @@
 
 import UIKit
 
+/// 占位符
 public struct Placeholder {
   
   public let name: String
   public var image: UIImage? { return UIImage(named: self.name) }
   
   public init(_ name: String) { self.name = name }
+  
 }

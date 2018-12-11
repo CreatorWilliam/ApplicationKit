@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import Foundation
+import ApplicationKit
 
 public struct GenderPicker {
   
@@ -60,4 +60,3 @@ public extension GenderPicker {
   }
   
 }
-

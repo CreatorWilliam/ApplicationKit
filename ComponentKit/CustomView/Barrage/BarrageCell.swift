@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 
 class BarrageCell: UIView {
   
@@ -56,17 +56,3 @@ private extension BarrageCell {
 private extension BarrageCell {
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

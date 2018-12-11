@@ -8,7 +8,6 @@
 
 import UIKit
 import NetworkKit
-import ComponentKit
 
 public class Project {
   
@@ -124,5 +123,3 @@ public extension Project {
   }
   
 }
-
-

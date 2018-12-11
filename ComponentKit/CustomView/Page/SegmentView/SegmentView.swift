@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 
 /// 遵循了该协议的UICollectionViewCell，SegmentView中自定义的Cell才会接收更新数据源的事件
 public protocol SegmentViewCellable {

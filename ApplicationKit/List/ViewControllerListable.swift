@@ -1,12 +1,12 @@
 //
 //  ViewControllerListable.swift
-//  ApplicationKit
+//  ComponentKit
 //
 //  Created by William Lee on 2018/5/11.
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import ComponentKit
+import UIKit
 
 /// 列表视图控制器协议
 public protocol ViewControllerListable: class {
@@ -122,13 +122,3 @@ public extension ViewControllerListable {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-

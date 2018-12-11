@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 
 public class LocationPicker: UIViewController {
   
@@ -428,10 +428,3 @@ private extension LocationPicker {
   }
   
 }
-
-
-
-
-
-
-

@@ -6,6 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
+import ApplicationKit
 import Photos
 
 class ImageAlbumTableViewCell: UITableViewCell {

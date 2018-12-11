@@ -87,10 +87,3 @@ public extension String  {
     return String(hash)
   }
 }
-
-
-
-
-
-
-

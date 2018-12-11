@@ -97,4 +97,3 @@ public struct Device {
  
   }
 }
-

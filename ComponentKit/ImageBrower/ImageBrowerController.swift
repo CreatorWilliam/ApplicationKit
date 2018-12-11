@@ -6,7 +6,7 @@
 //  Copyright © 2017年 William Lee. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 
 public class ImageBrowerController: UIViewController {
   

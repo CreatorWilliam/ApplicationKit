@@ -1,6 +1,6 @@
 //
 //  ListDataModel.swift
-//  ApplicationKit
+//  ComponentKit
 //
 //  Created by William Lee on 08/08/2018.
 //  Copyright © 2018 William Lee. All rights reserved.

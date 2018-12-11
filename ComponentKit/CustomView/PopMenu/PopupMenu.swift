@@ -6,7 +6,7 @@
 //  Copyright © 2018年 飞进科技. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 
 public enum PopupMenuType {
   

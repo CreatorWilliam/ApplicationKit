@@ -83,12 +83,3 @@ public extension App {
   /// 屏幕Size
   public var screen: CGSize { return UIScreen.main.bounds.size }
 }
-
-
-
-
-
-
-
-
-

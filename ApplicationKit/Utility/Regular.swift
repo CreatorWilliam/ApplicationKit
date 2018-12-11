@@ -77,13 +77,3 @@ public extension String {
     return Regular.isValidateText(self)
   }
 }
-
-
-
-
-
-
-
-
-
-

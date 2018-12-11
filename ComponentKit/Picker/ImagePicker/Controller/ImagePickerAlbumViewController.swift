@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 import Photos
 
 typealias AssetSelectionHandle = ([PHAsset], [UIImage]) -> Void

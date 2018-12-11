@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import UIKit
+import ApplicationKit
 
 class SegmentViewCell: UICollectionViewCell {
   
@@ -158,17 +158,3 @@ private extension SegmentViewCell {
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

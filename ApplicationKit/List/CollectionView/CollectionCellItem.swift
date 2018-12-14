@@ -49,6 +49,7 @@ public struct CollectionCellItem {
     self.data = data
     self.accessoryData = accessoryData
     self.size = size
+    self.delegate = delegate
     self.shouldSelectedHandle = shouldSelectedHandle
     self.selectedHandle = selectedHandle
     self.deselectedHandle = deselectedHandle

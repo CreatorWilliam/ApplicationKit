@@ -54,7 +54,6 @@ public extension KeyboardManager {
       guard let window = view.window ?? UIApplication.shared.keyWindow else { return }
       guard let rect = view.superview?.convert(view.frame, to: window) else { return }
       
-      //print("DebugLog", "KeyboardFrame:", frame, "ViewFrame:", view.frame, "Convert:", rect)
       guard frame.minY < rect.maxY else { return }
       let offset = rect.maxY - frame.minY
       
@@ -139,22 +138,17 @@ private extension KeyboardManager {
     
     self.updateHandles(show: { (frame, duration) in
       
-      let point = view.convert(CGPoint(x: view.frame.minX, y: view.frame.maxY), to: scrollView)
-      self.origin = scrollView.contentOffset.y
-      guard frame.minY < point.y else { return }
-      let offset = point.y - frame.minY
+      guard let window = view.window ?? UIApplication.shared.keyWindow else { return }
+      guard let rect = view.superview?.convert(view.frame, to: window) else { return }
       
-      UIView.animate(withDuration: duration, animations: {
-        
-        scrollView.contentOffset.y += (offset + spacing)
-      })
+      guard frame.minY < rect.maxY else { return }
+      let offset = rect.maxY - frame.minY
+      
+      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y += (offset + spacing) })
       
     }, hide: { [unowned self] (frame, duration) in
       
-      UIView.animate(withDuration: duration, animations: {
-        
-        scrollView.contentOffset.y = self.origin
-      })
+      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y = self.origin })
       
     })
   }

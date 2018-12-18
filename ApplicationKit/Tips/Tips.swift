@@ -11,7 +11,7 @@ import Foundation
 /// 根据判决显示对应的提示信息，便于集中管理提示信息
 public struct Tips {
   
-  static func developing() {
+  public static func developing() {
     
     Presenter.currentPresentedController?.hud.showMessage(message: "开发中...")
   }

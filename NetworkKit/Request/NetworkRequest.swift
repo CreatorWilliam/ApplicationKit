@@ -82,19 +82,23 @@ extension NetworkRequest {
     })
     
     // 9、配置请求体
-    if self.httpMethod != "GET", let body = bodyParameters {
+    if self.httpMethod != "GET" {
       
       if let formData = self.formData {
         
         request.httpBody = formData
         
-      } else {
+      } else if let body = bodyParameters {
         
         guard let temp = try? JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted) else {
           
           return NetworkStatus.prepareRequestFailure("Reason：请求体参数转化成Json Data失败：\nBody:\(body)")
         }
         request.httpBody = temp
+        
+      } else {
+        
+        // Nothing
       }
       
     }
@@ -105,12 +109,3 @@ extension NetworkRequest {
   }
   
 }
-
-
-
-
-
-
-
-
-

@@ -24,6 +24,8 @@ public class API {
   private var queryParameters: Any?
   /// 请求体参数
   private var bodyParameters: Any?
+  /// 表单提交用的请求体
+  private var formParameters: Data?
   
   /// 创建API对象，path、version、customPath按照一定的规则拼接成完整的请求路径
   ///
@@ -78,9 +80,19 @@ public extension API {
     self.bodyParameters = parameters
     return self
   }
- 
+  
+  /// 设置表单
+  ///
+  /// - Parameter data: 表单数据
+  func form(_ data: Data) -> Self {
+    
+    self.formParameters = data
+    return self
+  }
+  
   typealias ProgressHandle = (_ progress: Float) -> Void
   typealias CompleteHandle = (_ result: JSON) -> Void
+  
   /// 进行请求
   func request(handle: @escaping CompleteHandle) {
     
@@ -91,6 +103,7 @@ public extension API {
     if let query = api.queryParameters { network.query(query) }
     if let body = api.bodyParameters { network.body(body) }
     if let headerField = api.headerFieldParameters { network.httpHeaderField(headerField) }
+    if let data = api.formParameters { network.form(data) }
     
     network.data({ (data, status) in
       
@@ -103,6 +116,42 @@ public extension API {
       DispatchQueue.main.async(execute: {
         
         handle(json)
+      })
+      
+    })
+    
+  }
+  
+  /// 进行请求
+  func request(progressHandle: @escaping ProgressHandle, completionHandle: @escaping CompleteHandle) {
+    
+    let api = self
+    
+    let network = Network.request(api.method, api.path, isDebug: true)
+    
+    if let query = api.queryParameters { network.query(query) }
+    if let body = api.bodyParameters { network.body(body) }
+    if let headerField = api.headerFieldParameters { network.httpHeaderField(headerField) }
+    if let data = api.formParameters { network.form(data) }
+    
+    network.progress({ (totalCompletedBytes, totalExpectedBytes, partialData) in
+      
+      DispatchQueue.main.async {
+        
+        progressHandle(Float(totalCompletedBytes) / Float(totalExpectedBytes))
+      }
+      
+    }).data({ (data, status) in
+      
+      guard let data = data else { return }
+      var json = JSON()
+      json.update(from: data)
+      
+      // 调试
+      self.debugLog(json)
+      DispatchQueue.main.async(execute: {
+        
+        completionHandle(json)
       })
       
     })

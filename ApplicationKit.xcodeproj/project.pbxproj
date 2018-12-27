@@ -96,7 +96,7 @@
 		3DD831A3215A3130003B2C19 /* ComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DD831A1215A3130003B2C19 /* ComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DD8323D215A315C003B2C19 /* PopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B3215A315A003B2C19 /* PopViewController.swift */; };
 		3DD83240215A315C003B2C19 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B8215A315A003B2C19 /* MediaItem.swift */; };
-		3DD83241215A315C003B2C19 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B9215A315A003B2C19 /* PlayerManager.swift */; };
+		3DD83241215A315C003B2C19 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831B9215A315A003B2C19 /* MediaManager.swift */; };
 		3DD83242215A315C003B2C19 /* EZPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831BB215A315A003B2C19 /* EZPlayer.swift */; };
 		3DD83243215A315C003B2C19 /* EZPlayerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831BC215A315A003B2C19 /* EZPlayerControlView.swift */; };
 		3DD83244215A315C003B2C19 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831BD215A315A003B2C19 /* Delay.swift */; };
@@ -288,7 +288,7 @@
 		3DD831B5215A315A003B2C19 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		3DD831B6215A315A003B2C19 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3DD831B8215A315A003B2C19 /* MediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
-		3DD831B9215A315A003B2C19 /* PlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
+		3DD831B9215A315A003B2C19 /* MediaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		3DD831BB215A315A003B2C19 /* EZPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayer.swift; sourceTree = "<group>"; };
 		3DD831BC215A315A003B2C19 /* EZPlayerControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayerControlView.swift; sourceTree = "<group>"; };
 		3DD831BD215A315A003B2C19 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
@@ -765,7 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				3DD831B8215A315A003B2C19 /* MediaItem.swift */,
-				3DD831B9215A315A003B2C19 /* PlayerManager.swift */,
+				3DD831B9215A315A003B2C19 /* MediaManager.swift */,
 				3DD831BA215A315A003B2C19 /* EZPlayer */,
 			);
 			path = Player;
@@ -1726,7 +1726,7 @@
 			files = (
 				3DD83255215A315C003B2C19 /* AVPlayerItem+EZPlayer.swift in Sources */,
 				3DD83283215A315C003B2C19 /* ArcTextView.swift in Sources */,
-				3DD83241215A315C003B2C19 /* PlayerManager.swift in Sources */,
+				3DD83241215A315C003B2C19 /* MediaManager.swift in Sources */,
 				3DD83276215A315C003B2C19 /* Pagable.swift in Sources */,
 				3DD83285215A315C003B2C19 /* EmitterButton.swift in Sources */,
 				3DD832A0215A315C003B2C19 /* AssetItem.swift in Sources */,

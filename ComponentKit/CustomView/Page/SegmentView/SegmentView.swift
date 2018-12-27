@@ -43,8 +43,10 @@ public class SegmentView: UIView {
   public var segmentCell: ReuseItem = ReuseItem(SegmentViewCell.self) {
     didSet { self.collectionView.register(cells: [self.segmentCell])}
   }
-  /// 设置最大可见Segment个数，默认为4
+  /// 设置最大可见Segment个数，默认为4，该值会计算单个Segment的宽度，若计算所得的宽度小于minVisibleWidth，则使用minVisibleWidth的值
   public var maxVisibleCount: CGFloat = 4
+  /// 设置最小Segment宽度，默认为0，无限制
+  public var minSegmentWidth: CGFloat = 0
   /// 是否可以翻页
   public var isPageEnable: Bool = true {
     
@@ -94,6 +96,9 @@ public class SegmentView: UIView {
     super.layoutSubviews()
     
     self.flowLayout.itemSize.width = self.bounds.width / (CGFloat(self.segments.count) > self.maxVisibleCount ? self.maxVisibleCount : CGFloat(self.segments.count))
+    if self.flowLayout.itemSize.width < self.minSegmentWidth {
+      self.flowLayout.itemSize.width = self.minSegmentWidth
+    }
     self.flowLayout.itemSize.height = self.bounds.height
     
     self.indicatorView.frame.origin.y = self.bounds.height - 7 + self.indicatorYOffset

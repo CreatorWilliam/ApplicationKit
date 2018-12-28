@@ -12,7 +12,14 @@ public class TableServer: NSObject {
   
   // MARK: ******************** Public ********************
   /// TableView
-  public let tableView: UITableView
+  public var tableView: UITableView {
+    
+    didSet {
+      
+      tableView.delegate = self
+      tableView.dataSource = self
+    }
+  }
   /// 空视图
   public var emptyContentView: UIView? {
     

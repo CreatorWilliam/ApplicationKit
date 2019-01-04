@@ -42,6 +42,10 @@
 		3D36F9932169CFD000A791C0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D36F9922169CFD000A791C0 /* MobileCoreServices.framework */; };
 		3D36F99C2169D2DA00A791C0 /* ImageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D36F9432169CE9100A791C0 /* ImageKit.framework */; };
 		3D74BF232181D123005B9C0F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74BF222181D123005B9C0F /* Device.swift */; };
+		3DA5A07521DF7EE80014D7F1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5A07021DF7EE70014D7F1 /* PlayerView.swift */; };
+		3DA5A07621DF7EE80014D7F1 /* Player.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DA5A07121DF7EE70014D7F1 /* Player.bundle */; };
+		3DA5A07821DF7EE80014D7F1 /* PlayerViewControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5A07321DF7EE80014D7F1 /* PlayerViewControllable.swift */; };
+		3DA5A07921DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5A07421DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift */; };
 		3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3983A2194028700507F2C /* CodeInputView.swift */; };
 		3DC38F0D21BE654B00871DE7 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */; };
 		3DC38F1221BE844700871DE7 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F1021BE83D600871DE7 /* Tips.swift */; };
@@ -278,6 +282,10 @@
 		3D36F9922169CFD000A791C0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3D6495092188296F0046165A /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		3D74BF222181D123005B9C0F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		3DA5A07021DF7EE70014D7F1 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		3DA5A07121DF7EE70014D7F1 /* Player.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Player.bundle; sourceTree = "<group>"; };
+		3DA5A07321DF7EE80014D7F1 /* PlayerViewControllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewControllable.swift; sourceTree = "<group>"; };
+		3DA5A07421DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewDefaultControlView.swift; sourceTree = "<group>"; };
 		3DB3983A2194028700507F2C /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
 		3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		3DC38F1021BE83D600871DE7 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
@@ -685,6 +693,17 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
+		3DA5A06F21DF7EBB0014D7F1 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				3DA5A07021DF7EE70014D7F1 /* PlayerView.swift */,
+				3DA5A07321DF7EE80014D7F1 /* PlayerViewControllable.swift */,
+				3DA5A07421DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift */,
+				3DA5A07121DF7EE70014D7F1 /* Player.bundle */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		3DC38F5421BE8A5200871DE7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,7 +766,8 @@
 				3DD831B2215A315A003B2C19 /* Controller */,
 				3DD83218215A315B003B2C19 /* ImageBrower */,
 				3DD83229215A315C003B2C19 /* Picker */,
-				3DD831B7215A315A003B2C19 /* Player */,
+				3DA5A06F21DF7EBB0014D7F1 /* Player */,
+				3DD831B7215A315A003B2C19 /* DeprecatedPlayer */,
 				3DD831A2215A3130003B2C19 /* Info.plist */,
 			);
 			path = ComponentKit;
@@ -761,14 +781,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		3DD831B7215A315A003B2C19 /* Player */ = {
+		3DD831B7215A315A003B2C19 /* DeprecatedPlayer */ = {
 			isa = PBXGroup;
 			children = (
 				3DD831B8215A315A003B2C19 /* MediaItem.swift */,
 				3DD831B9215A315A003B2C19 /* MediaManager.swift */,
 				3DD831BA215A315A003B2C19 /* EZPlayer */,
 			);
-			path = Player;
+			path = DeprecatedPlayer;
 			sourceTree = "<group>";
 		};
 		3DD831BA215A315A003B2C19 /* EZPlayer */ = {
@@ -1633,6 +1653,7 @@
 				3DD8324C215A315C003B2C19 /* EZPlayerAudibleLegibleViewController.xib in Resources */,
 				3DD832A6215A315C003B2C19 /* addressCode in Resources */,
 				3DD832A5215A315C003B2C19 /* area.plist in Resources */,
+				3DA5A07621DF7EE80014D7F1 /* Player.bundle in Resources */,
 				3DD83252215A315C003B2C19 /* EZPlayerFloatContainerRootViewController.xib in Resources */,
 				3DD8324D215A315C003B2C19 /* EZPlayerFloatView.xib in Resources */,
 			);
@@ -1747,6 +1768,7 @@
 				3DD83259215A315C003B2C19 /* EZPlayerFloatContainer.swift in Sources */,
 				3DD83277215A315C003B2C19 /* PageView.swift in Sources */,
 				3DD8329B215A315C003B2C19 /* ImagePicker.swift in Sources */,
+				3DA5A07921DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift in Sources */,
 				3DD8323D215A315C003B2C19 /* PopViewController.swift in Sources */,
 				3DD832A3215A315C003B2C19 /* LocationPicker.swift in Sources */,
 				3DD83248215A315C003B2C19 /* EZPlayerFloatView.swift in Sources */,
@@ -1770,11 +1792,13 @@
 				3DD83284215A315C003B2C19 /* CircleScrollView.swift in Sources */,
 				3DD83275215A315C003B2C19 /* SegmentViewItem.swift in Sources */,
 				3DD8324A215A315C003B2C19 /* EZPlayerFloatContainerRootViewController.swift in Sources */,
+				3DA5A07821DF7EE80014D7F1 /* PlayerViewControllable.swift in Sources */,
 				3DD832A2215A315C003B2C19 /* ImageAlbumTableViewCell.swift in Sources */,
 				3DD83257215A315C003B2C19 /* EZPlayerAVAssetResourceLoaderDelegate.swift in Sources */,
 				3DD8324F215A315C003B2C19 /* EZPlayerContentItem.swift in Sources */,
 				3DD83280215A315C003B2C19 /* BarrageCell.swift in Sources */,
 				3DD8324B215A315C003B2C19 /* EZPlayerView.swift in Sources */,
+				3DA5A07521DF7EE80014D7F1 /* PlayerView.swift in Sources */,
 				3DD83249215A315C003B2C19 /* EZPlayerTransportExtension.swift in Sources */,
 				3DD83246215A315C003B2C19 /* EZPlayerFullScreenViewController.swift in Sources */,
 				3DD8327E215A315C003B2C19 /* OptionsPopView.swift in Sources */,

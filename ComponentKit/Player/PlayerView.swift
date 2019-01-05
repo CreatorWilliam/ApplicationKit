@@ -17,20 +17,19 @@ public class PlayerView: UIView {
   public var isAutoPlay: Bool = false
   /// 是否循环播放
   public var isRepeat: Bool = false
-  
+  /// 是否可以根据设备方向旋转
+  public var isRotationEnable: Bool = false
   /// 内容页，承载视频播放，视频控制视图，切换全屏模式，也是操纵该视图
   private let contentView = UIView()
   /// 缩略图
   private var thumb: String?
-  /// 视频播放地址
-  private var url: String?
   /// 视频播放器
   private var playerItem: AVPlayerItem? {
     
     willSet {
       
       guard self.playerItem != newValue else { return }
-      NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+      NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
       self.playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
       self.playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.loadedTimeRanges))
       self.playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackBufferEmpty))
@@ -40,7 +39,7 @@ public class PlayerView: UIView {
     didSet {
       
       guard self.playerItem != oldValue else { return }
-      NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidPlayToEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidPlayToEnd), name: .AVPlayerItemDidPlayToEndTime, object: nil)
       self.playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: .new, context: nil)
       self.playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.loadedTimeRanges), options: .new, context: nil)
       // 缓冲区空了，需要等待数据
@@ -53,15 +52,25 @@ public class PlayerView: UIView {
   private let playerLayer = AVPlayerLayer()
   
   /// 表示当前视频画面模式，默认自适应
-  private let mode: RenderMode = .fit
+  public var mode: RenderMode = .fit {
+    
+    didSet {
+      switch self.mode {
+      case .fit: self.playerLayer.videoGravity = .resizeAspect
+      case .fill: self.playerLayer.videoGravity = .resizeAspectFill
+      }
+    }
+  }
   /// 播放状态，表示当前播放情况
-  public var playState: PlayState = .prepared
+  public private(set) var playState: PlayState = .prepared
   /// 加载状态，表示当前视频加载情况，对于本地视频，直接为完成
-  public var loadState: LoadState = .prepared
+  public private(set) var loadState: LoadState = .prepared
   /// 用于延迟旋转，避免因设备多次变换导致界面经常变换
   private var isRotationComplete: Bool = true
   // TODO: 是否锁定全屏
   private var isLockScreen: Bool = false
+  
+  private var timeObserver: Any?
   
   /// 播放器视图，用于播放各类视频
   ///
@@ -72,13 +81,20 @@ public class PlayerView: UIView {
               controlView: (PlayerViewControllable & UIView) = PlayerViewDefaultControlView()) {
     
     self.controlView = controlView
-    super.init(frame: frame)    
+    
+    super.init(frame: frame)
+    
+    self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: DispatchQueue.main, using: { [unowned self] (time) in
+      guard self.playerItem?.duration.seconds.isNaN == false else { return }
+      self.controlView.playerView(self, updateProgressWithCurrentTime: self.playerItem?.currentTime().seconds ?? 0, totalTime: self.playerItem?.duration.seconds ?? 1)
+    })
     self.controlView.update(playerView: self)
     self.controlView.playerView(self, didChangedScreenMode: .shrink)
     
     self.setupUI()
     
     self.addNotification()
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -88,12 +104,22 @@ public class PlayerView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    if self.contentView.superview != self { return }
+    defer {
+      
+      self.playerLayer.frame = self.contentView.bounds
+    }
+    
     // 仅当作为子视图的时候，才设置大小
+    if self.contentView.superview != self { return }
     self.contentView.frame = self.bounds
   }
   
   deinit {
+    
+    if let timeObserver = self.timeObserver {
+      
+      self.player.removeTimeObserver(timeObserver)
+    }
     
     self.removeNotification()
     
@@ -162,12 +188,13 @@ public extension PlayerView {
     self.thumb = thumb
     self.controlView.update(thumb: thumb)
     
-    if self.isAutoPlay == true { self.play() }
+    //if self.isAutoPlay == true { self.play() }
   }
   
   func play() {
     
     guard self.playerItem != nil else { return }
+    
     self.player.play()
     self.playState = .playing
     self.controlView.playerViewDidPlay(self)
@@ -217,6 +244,8 @@ private extension PlayerView {
   
   func setupUI() {
     
+    self.playerLayer.player = self.player
+    self.contentView.layer.addSublayer(self.playerLayer)
     self.contentView.backgroundColor = .black
     self.addSubview(self.contentView)
     
@@ -234,27 +263,40 @@ extension PlayerView {
   
   @objc func playerDidPlayToEnd(_ notification: Notification) {
     
+    self.player.pause()
+    self.player.seek(to: CMTime(value: 0, timescale: 1))
+    self.playState = .prepared
+    self.controlView.playerViewDidComplete(self)
     
+    guard self.isRepeat == true else { return }
+    
+    self.play()
   }
   
   public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     
     guard let keyPath = keyPath else { return }
     guard let item = object as? AVPlayerItem else { return }
-    
+    guard item == self.playerItem else { return }
     switch keyPath {
       
-    case #keyPath(AVPlayerItem.status): self.playerStatusDidChanged(item)
+    case #keyPath(AVPlayerItem.status):
       
-    case #keyPath(AVPlayerItem.loadedTimeRanges): self.playerBufferDidChanged(item)
+      self.playerStatusDidChanged(item)
+      
+    case #keyPath(AVPlayerItem.loadedTimeRanges):
+      
+      self.playerBufferDidChanged(item)
       
     case #keyPath(AVPlayerItem.playbackBufferEmpty):
       
-      DebugLog("AVPlayerItem's playbackBufferEmpty is changed")
+      // TODO: 缓冲不足，显示Loading
+      DebugLog("AVPlayerItem's playbackBufferEmpty is changed: \(item.isPlaybackBufferEmpty)")
       
     case #keyPath(AVPlayerItem.playbackLikelyToKeepUp):
       
-      DebugLog("AVPlayerItem's playbackLikelyToKeepUp is changed")
+      // TODO: 缓冲足够，隐藏Loading
+      DebugLog("AVPlayerItem's playbackLikelyToKeepUp is changed: \(item.isPlaybackLikelyToKeepUp)")
       
     default:
       
@@ -269,36 +311,31 @@ private extension PlayerView {
   func playerStatusDidChanged(_ item: AVPlayerItem) {
     
     DebugLog("AVPlayerItem's status is changed: \(item.status)")
-    if item.status == .readyToPlay {
+    
+    if item.status == .failed {
       
-      if self.playState != .playing{
-        self.playState = .prepared
-      }
-      //自动播放
-      if self.isAutoPlay == true && self.playState == .prepared {
-        self.play()
-      }
-      
-    } else if item.status == .failed {
-      
-      self.loadState = .failed("")
+      self.loadState = .failed(item.error?.localizedDescription ?? "- -")
+      return
     }
+    
+    guard item.status == .readyToPlay else { return }
+    
+    //自动播放：设置了自动播放，且播放状态处于已准备
+    guard self.isAutoPlay == true && self.playState == .prepared else { return }
+    
+    self.play()
   }
   
   func playerBufferDidChanged(_ item: AVPlayerItem) {
-    
-    DebugLog("AVPlayerItem's loadedTimeRanges is changed")
     
     //获取缓冲进度,第一个即最新的一个缓冲区域
     guard let timeRange = item.loadedTimeRanges.first?.timeRangeValue else { return }
     let startSeconds = timeRange.start.seconds //开始的时间
     let durationSecound = timeRange.duration.seconds//表示已经缓冲的时间
     let bufferDuration = startSeconds + durationSecound // 计算缓冲总时间
-    
-    self.controlView.playerView(self,
-                                updateProgressWithCurrentTime: item.currentTime().seconds,
-                                bufferingTime: bufferDuration,
-                                totalTime: item.duration.seconds)
+    DebugLog("AVPlayerItem's loadedTimeRanges is changed, current: \(bufferDuration)s - total: \(item.duration.seconds)s")
+    guard item.duration.seconds.isNaN == false else { return }
+    self.controlView.playerView(self, updateProgressWithBufferingTime: bufferDuration, totalTime: item.duration.seconds)
   }
   
 }
@@ -372,6 +409,7 @@ private extension PlayerView {
   
   @objc func recieveOrientationDidChange(_ notification: Notification) {
     
+    guard self.isRotationEnable == true else { return }
     let orientation = UIDevice.current.orientation
     switch orientation {
     case .portrait: self.commitRotationUpdateTask(with: .portrait)

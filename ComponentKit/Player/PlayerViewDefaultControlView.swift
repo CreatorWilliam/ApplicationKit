@@ -140,12 +140,17 @@ extension PlayerViewDefaultControlView: PlayerViewControllable {
     self.topContainer.isHidden = !isFullScreen
   }
   
-  public func playerView(_ playerView: PlayerView, updateProgressWithCurrentTime currentTime: Double, bufferingTime: Double, totalTime: Double) {
+  public func playerView(_ playerView: PlayerView, updateProgressWithCurrentTime currentTime: Double, totalTime: Double) {
     
     self.currentTimeLabel.text = self.time(with: currentTime)
     self.totalTimeLabel.text = self.time(with: totalTime)
     self.progressSlider.value = Float(currentTime / totalTime)
+  }
+  
+  public func playerView(_ playerView: PlayerView, updateProgressWithBufferingTime bufferingTime: Double, totalTime: Double) {
+    
     self.bufferingProgressView.progress = Float(bufferingTime / totalTime)
+    self.totalTimeLabel.text = self.time(with: totalTime)
   }
   
 }

@@ -209,6 +209,9 @@ public extension PlayerView {
   
   func stop() {
     
+    /// 设置nil触发该属性的didSet方法，释放观察者
+    self.playerItem = nil
+    
     self.player.pause()
     self.player.seek(to: CMTime(value: 0, timescale: 1))
     self.playState = .stopped

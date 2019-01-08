@@ -14,6 +14,8 @@ public struct ListDataModel<Element: ItemListable>: DataModelListable {
   
   public var hasNextPage: Bool = false
   
+  public var totalCount: Int = 0
+  
   public var list: [Element] = []
   
   public init() { }
@@ -22,6 +24,7 @@ public struct ListDataModel<Element: ItemListable>: DataModelListable {
     
     self.pageNo = page["pageNo"] ?? 1
     self.hasNextPage = page["isHasNext"] ?? false
+    self.totalCount = page["totalCount"] ?? 0
     if self.pageNo == 1 { self.list.removeAll() }
     page["result"].forEach({ self.list.append(Element(list: $0.json)) })
   }

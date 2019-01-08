@@ -12,6 +12,7 @@
 		3D2EBB0D2169EAF5000BFCB0 /* SandBoxFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB0C2169EAF5000BFCB0 /* SandBoxFileItem.swift */; };
 		3D2EBB11216A4270000BFCB0 /* SandBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB10216A4270000BFCB0 /* SandBoxViewController.swift */; };
 		3D2EBB13216A45AE000BFCB0 /* SandBoxFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2EBB12216A45AE000BFCB0 /* SandBoxFileCell.swift */; };
+		3D2FDC1821E49DE400C1C639 /* CountingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2FDC1721E49DE400C1C639 /* CountingLabel.swift */; };
 		3D36F9472169CE9100A791C0 /* ImageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D36F9452169CE9100A791C0 /* ImageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D36F9712169CF0A00A791C0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D36F9562169CF0800A791C0 /* Image.swift */; };
 		3D36F9722169CF0A00A791C0 /* UIButton+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D36F9572169CF0800A791C0 /* UIButton+Kingfisher.swift */; };
@@ -250,6 +251,7 @@
 		3D2EBB0C2169EAF5000BFCB0 /* SandBoxFileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxFileItem.swift; sourceTree = "<group>"; };
 		3D2EBB10216A4270000BFCB0 /* SandBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxViewController.swift; sourceTree = "<group>"; };
 		3D2EBB12216A45AE000BFCB0 /* SandBoxFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandBoxFileCell.swift; sourceTree = "<group>"; };
+		3D2FDC1721E49DE400C1C639 /* CountingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingLabel.swift; sourceTree = "<group>"; };
 		3D36F9432169CE9100A791C0 /* ImageKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ImageKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D36F9452169CE9100A791C0 /* ImageKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageKit.h; sourceTree = "<group>"; };
 		3D36F9462169CE9100A791C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -879,6 +881,7 @@
 			children = (
 				3DB3983A2194028700507F2C /* CodeInputView.swift */,
 				3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */,
+				3D2FDC1721E49DE400C1C639 /* CountingLabel.swift */,
 				3DD831F7215A315B003B2C19 /* Page */,
 				3DD831F4215A315B003B2C19 /* TextView */,
 				3DD831FD215A315B003B2C19 /* Zoomable.swift */,
@@ -1758,6 +1761,7 @@
 				3DD83247215A315C003B2C19 /* EZPlayerAudibleLegibleViewController.swift in Sources */,
 				3DD83273215A315C003B2C19 /* SegmentView.swift in Sources */,
 				3DD8327B215A315C003B2C19 /* PopupMenuPath.swift in Sources */,
+				3D2FDC1821E49DE400C1C639 /* CountingLabel.swift in Sources */,
 				3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */,
 				3DD83274215A315C003B2C19 /* SegmentViewCell.swift in Sources */,
 				3DD8329D215A315C003B2C19 /* ImagePickerPreviewView.swift in Sources */,

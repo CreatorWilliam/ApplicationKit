@@ -59,15 +59,20 @@ public extension CountDownTimer {
     
   }
   
-  /// 停止倒计时,同时会清空回调
-  func stop() {
+  func cancel() {
     
     self.timer?.invalidate()
-    self.endHandle?()
     
     self.timer = nil
     self.updateHandle = nil
     self.endHandle = nil
+  }
+  
+  /// 停止倒计时,同时会清空回调
+  func stop() {
+    
+    self.endHandle?()
+    self.cancel()
   }
   
 }
@@ -81,7 +86,7 @@ private extension CountDownTimer {
   /// - Parameter timer: 定时器
   @objc func update(_ timer: Timer) {
     
-    var isEnd: Bool = false
+    //var isEnd: Bool = false
     
     defer {
       

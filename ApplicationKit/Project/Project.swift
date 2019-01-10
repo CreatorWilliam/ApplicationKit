@@ -48,6 +48,7 @@ public extension Project {
                        backgroundColor: UIColor,
                        backgroundImage: UIImage?) {
     
+    let backgroundImage = backgroundImage?.resizableImage(withCapInsets: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1), resizingMode: .stretch)
     // Custom Navigation
     NavigationView.defaultTitleColor = titleColor
     NavigationView.defaultTitleFont = titleFont

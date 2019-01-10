@@ -146,11 +146,11 @@ public extension CountingLabel {
     
     self.timer = CADisplayLink(target: self, selector: #selector(updateValue))
     if #available(iOS 10, *) {
-      
-      self.timer?.preferredFramesPerSecond = 2
-      
+
+      self.timer?.preferredFramesPerSecond = 30
+
     } else {
-      
+    
       self.timer?.frameInterval = 2
     }
     self.timer?.add(to: .main, forMode: .default)

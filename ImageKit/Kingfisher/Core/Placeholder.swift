@@ -33,7 +33,7 @@
 
 /// Represent a placeholder type which could be set while loading as well as
 /// loading finished without getting an image.
-public protocol Placeholder {
+public protocol KingfisherPlaceholder {
     
     /// How the placeholder should be added to a given image view.
     func add(to imageView: ImageView)
@@ -44,7 +44,7 @@ public protocol Placeholder {
 
 /// Default implementation of an image placeholder. The image will be set or 
 /// reset directly for `image` property of the image view.
-extension Placeholder where Self: Image {
+extension KingfisherPlaceholder where Self: Image {
     
     /// How the placeholder should be added to a given image view.
     public func add(to imageView: ImageView) { imageView.image = self }
@@ -53,14 +53,14 @@ extension Placeholder where Self: Image {
     public func remove(from imageView: ImageView) { imageView.image = nil }
 }
 
-extension Image: Placeholder {}
+extension Image: KingfisherPlaceholder {}
 
 /// Default implementation of an arbitrary view as placeholder. The view will be 
 /// added as a subview when adding and be removed from its super view when removing.
 ///
 /// To use your customize View type as placeholder, simply let it conforming to 
 /// `Placeholder` by `extension MyView: Placeholder {}`.
-extension Placeholder where Self: View {
+extension KingfisherPlaceholder where Self: View {
     
     /// How the placeholder should be added to a given image view.
     public func add(to imageView: ImageView) {

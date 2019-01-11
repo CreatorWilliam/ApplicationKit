@@ -55,7 +55,7 @@ extension Kingfisher where Base: ImageView {
      */
     @discardableResult
     public func setImage(with resource: Resource?,
-                         placeholder: Placeholder? = nil,
+                         placeholder: KingfisherPlaceholder? = nil,
                          options: KingfisherOptionsInfo? = nil,
                          progressBlock: DownloadProgressBlock? = nil,
                          completionHandler: CompletionHandler? = nil) -> RetrieveImageTask
@@ -236,9 +236,9 @@ extension Kingfisher where Base: ImageView {
         objc_setAssociatedObject(base, &imageTaskKey, task, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
-    public fileprivate(set) var placeholder: Placeholder? {
+    public fileprivate(set) var placeholder: KingfisherPlaceholder? {
         get {
-            return objc_getAssociatedObject(base, &placeholderKey) as? Placeholder
+            return objc_getAssociatedObject(base, &placeholderKey) as? KingfisherPlaceholder
         }
         
         set {

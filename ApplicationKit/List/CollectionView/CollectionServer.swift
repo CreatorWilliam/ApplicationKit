@@ -166,7 +166,7 @@ extension CollectionServer: UICollectionViewDataSource {
       return headerView
     }
     
-    if kind == UICollectionView.elementKindSectionHeader {
+    if kind == UICollectionView.elementKindSectionFooter {
       
       let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: group.footer.reuseItem.id, for: indexPath)
       if let footer = footerView as? CollectionSectionItemUpdatable { footer.update(with: group.footer) }

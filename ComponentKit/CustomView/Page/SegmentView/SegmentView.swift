@@ -59,7 +59,7 @@ public class SegmentView: UIView {
     
     didSet { self.indicatorView.frame.size.width = self.indicatorWidth }
   }
-  /// 滑块宽度
+  /// 滑块Y方向向下偏移的修正量，默认为0，通过计算后会向上偏移5个pt单位
   public var indicatorYOffset: CGFloat = 0 {
     
     didSet { self.indicatorView.frame.origin.y += self.indicatorYOffset }

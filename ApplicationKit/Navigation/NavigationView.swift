@@ -83,7 +83,7 @@ public class NavigationView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    let screenWidth = UIScreen.main.bounds.width
+    let screenWidth = self.superview?.frame.width ?? 0 //UIScreen.main.bounds.width
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
     self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.navigationBaseHeight + statusBarHeight)
     self.contentView.frame = CGRect(x: 0, y: statusBarHeight, width: screenWidth, height: 44)

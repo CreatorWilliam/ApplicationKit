@@ -110,8 +110,8 @@ public class PlayerView: UIView {
     }
     
     // 仅当作为子视图的时候，才设置大小
-    if self.contentView.superview != self { return }
-    self.contentView.frame = self.bounds
+    //if self.contentView.superview != self { return }
+    //self.contentView.frame = self.bounds
   }
   
   deinit {
@@ -249,9 +249,11 @@ private extension PlayerView {
     
     self.playerLayer.player = self.player
     self.contentView.layer.addSublayer(self.playerLayer)
-    self.contentView.backgroundColor = .black
+    //self.contentView.backgroundColor = .black
     self.addSubview(self.contentView)
-    
+    self.contentView.layout.add { (make) in
+      make.top().bottom().leading().trailing().equal(self)
+    }
     let controlView: UIView = self.controlView
     self.contentView.addSubview(controlView)
     controlView.layout.add { (make) in

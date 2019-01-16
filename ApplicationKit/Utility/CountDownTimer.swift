@@ -10,10 +10,12 @@ import Foundation
 
 public class CountDownTimer {
   
-  private var timer: Timer?
+  /// 描述是否正在倒计时
+  public private(set) var isCounting: Bool = false
   
-  private var deadLineDate: Date = Date()
-  private var dateComponents:DateComponents = DateComponents()
+  private var timer: Timer?
+  /// 记录结束时间
+  private var deadLineDate = Date()
   
   // 时间每过1S就进行一次回调
   private var updateHandle: UpdateHandle?
@@ -50,7 +52,7 @@ public extension CountDownTimer {
     self.updateHandle = update
     self.endHandle = timeEnd
     
-    
+    self.isCounting = true
     //正常启动
     self.timer = Timer(timeInterval: 1, target: self, selector: #selector(update(_:)), userInfo: nil, repeats: true)
     guard let temp = self.timer else { return }
@@ -61,6 +63,7 @@ public extension CountDownTimer {
   
   func cancel() {
     
+    self.isCounting = false
     self.timer?.invalidate()
     
     self.timer = nil
@@ -71,6 +74,7 @@ public extension CountDownTimer {
   /// 停止倒计时,同时会清空回调
   func stop() {
     
+    self.isCounting = false
     self.endHandle?()
     self.cancel()
   }
@@ -78,8 +82,7 @@ public extension CountDownTimer {
 }
 
 // MARK: - Utility
-private extension CountDownTimer {
-  
+private extension CountDownTimer {  
   
   /// 更新倒计时
   ///
@@ -88,31 +91,33 @@ private extension CountDownTimer {
     
     //var isEnd: Bool = false
     
+    var dateComponents = DateComponents()
+    
     defer {
       
       //更新显示
-      self.updateHandle?(self.dateComponents)
+      self.updateHandle?(dateComponents)
     }
     
     //计算倒计时
     let fromDate: Date = Date()
     let toDate: Date = self.deadLineDate
-    self.dateComponents = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: fromDate, to: toDate)
+    dateComponents = Calendar.current.dateComponents([.day, .hour, .minute, .second], from: fromDate, to: toDate)
     
     //判断是否到期，如果到了截至日期，则停止倒计时
-    if let day = self.dateComponents.day,
-      let hour = self.dateComponents.hour,
-      let minute = self.dateComponents.minute,
-      let second = self.dateComponents.second,
+    if let day = dateComponents.day,
+      let hour = dateComponents.hour,
+      let minute = dateComponents.minute,
+      let second = dateComponents.second,
       day <= 0,
       hour <= 0,
       minute <= 0,
       second <= 0 {
       
-      self.dateComponents.day = 0
-      self.dateComponents.hour = 0
-      self.dateComponents.minute = 0
-      self.dateComponents.second = 0
+      dateComponents.day = 0
+      dateComponents.hour = 0
+      dateComponents.minute = 0
+      dateComponents.second = 0
       
       self.stop()
     }

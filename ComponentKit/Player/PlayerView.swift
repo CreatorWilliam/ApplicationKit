@@ -190,7 +190,8 @@ public extension PlayerView {
     self.thumb = thumb
     self.controlView.update(thumb: thumb)
     
-    //if self.isAutoPlay == true { self.play() }
+    self.playState = .prepared
+    self.controlView.playerView(self, updateProgressWithCurrentTime: 0, totalTime: 0)
   }
   
   func play() {
@@ -270,8 +271,9 @@ extension PlayerView {
   
   @objc func playerDidPlayToEnd(_ notification: Notification) {
     
+    // 避免黑屏
     self.player.pause()
-    self.player.seek(to: CMTime(value: 0, timescale: 1))
+    //self.player.seek(to: CMTime(value: 0, timescale: 1))
     self.playState = .stopped
     self.controlView.playerViewDidComplete(self)
     

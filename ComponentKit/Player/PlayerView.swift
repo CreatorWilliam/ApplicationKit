@@ -23,7 +23,7 @@ public class PlayerView: UIView {
   private let contentView = UIView()
   /// 缩略图
   private var thumb: String?
-  /// 视频播放器
+  /// 视频播放数据源
   private var playerItem: AVPlayerItem? {
     
     willSet {
@@ -181,6 +181,8 @@ public extension PlayerView {
     
     guard let urlString = url?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
     guard let url = URL(string: urlString) else { return }
+    
+    //self.playerItem = AVPlayerItem(url: PlayerCacher.shared.url(withRemote: url))
     self.playerItem = AVPlayerItem(url: url)
     self.player.pause()
     self.player.replaceCurrentItem(with: self.playerItem)
@@ -270,7 +272,7 @@ extension PlayerView {
     
     self.player.pause()
     self.player.seek(to: CMTime(value: 0, timescale: 1))
-    self.playState = .prepared
+    self.playState = .stopped
     self.controlView.playerViewDidComplete(self)
     
     guard self.isRepeat == true else { return }
@@ -395,11 +397,13 @@ private extension PlayerView {
   @objc func recieveApplicationDidBecomeActive(_ notification: Notification) {
     
     if self.isAutoPlay == false { return }
+    if self.playState == .stopped { return }
     self.play()
   }
   
   @objc func recieveApplicationWillResignActive(_ notification: Notification) {
     
+    if self.playState != .playing { return }
     self.pause()
   }
   
@@ -409,6 +413,7 @@ private extension PlayerView {
   
   @objc func recieveRouteChange(_ notification: Notification) {
     
+    if self.playState != .playing { return }
     self.pause()
   }
   

@@ -273,7 +273,7 @@ extension PlayerView {
     
     // 避免黑屏
     self.player.pause()
-    //self.player.seek(to: CMTime(value: 0, timescale: 1))
+    self.player.seek(to: CMTime(value: 0, timescale: 1))
     self.playState = .stopped
     self.controlView.playerViewDidComplete(self)
     

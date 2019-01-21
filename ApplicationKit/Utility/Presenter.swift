@@ -10,6 +10,11 @@ import UIKit
 
 public struct Presenter {
   
+}
+
+// MARK: - Show ViewController
+public extension Presenter {
+  
   /// 获取当前Present出来的控制器
   public static var currentPresentedController: UIViewController? {
     
@@ -97,6 +102,39 @@ public struct Presenter {
       
       return Presenter.currentNavigationController?.popToRootViewController(animated: animated)
     }
+  }
+  
+}
+
+// MARK: - HUD
+public extension Presenter {
+  
+  /// 显示加载视图
+  ///
+  /// - Parameter handle: 加载视图显示后执行
+  static func showLoading(_ handle: (() -> Void)? = nil) {
+    
+    self.currentPresentedController?.hud.showLoading(handle)
+  }
+  
+  /// 隐藏加载视图
+  ///
+  /// - Parameter handle: 加载视图隐藏后执行
+  static func hideLoading(_ handle: (() -> Void)? = nil) {
+    
+    self.currentPresentedController?.hud.hideLoading(handle)
+  }
+  
+  /// 显示消息视图
+  ///
+  /// - Parameters:
+  ///   - title: 消息标题
+  ///   - message: 消息内容
+  ///   - duration: 持续时间
+  ///   - completion: 消息视图隐藏后执行
+  static func showMessage(title: String? = nil, message: String?, duration: TimeInterval = 1, completion: (() -> Void)? = nil ) {
+    
+    self.currentPresentedController?.hud.showMessage(title: title, message: message, duration: duration, completion: completion)
   }
   
 }

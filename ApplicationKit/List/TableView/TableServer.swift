@@ -16,8 +16,9 @@ public class TableServer: NSObject {
     
     didSet {
       
-      tableView.delegate = self
-      tableView.dataSource = self
+      self.tableView.delegate = self
+      self.tableView.dataSource = self
+      self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
     }
   }
   /// 空视图
@@ -59,6 +60,7 @@ public class TableServer: NSObject {
     
     self.tableView.delegate = self
     self.tableView.dataSource = self
+    self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
   }
   
 }
@@ -145,7 +147,7 @@ extension TableServer: UITableViewDelegate {
   public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
     cell.preservesSuperviewLayoutMargins = false
-    cell.separatorInset = self.groups[indexPath.section].items[indexPath.row].seperatorInsets
+    cell.separatorInset = self.groups[indexPath.section].items[indexPath.row].seperatorInsets ?? self.tableView.separatorInset
   }
   
   // Did Display Cell

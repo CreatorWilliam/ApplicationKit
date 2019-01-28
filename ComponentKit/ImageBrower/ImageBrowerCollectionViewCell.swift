@@ -113,7 +113,7 @@ private extension ImageBrowerCollectionViewCell {
     // 长按显示图片操作菜单
     //let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
     //self.scrollView.addGestureRecognizer(longPressGR)
-    
+    self.scrollView.bounds = self.contentView.bounds
     self.scrollView.delegate = self
     self.scrollView.maximumZoomScale = 2
     self.scrollView.minimumZoomScale = 0.5

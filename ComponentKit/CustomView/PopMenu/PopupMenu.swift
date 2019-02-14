@@ -8,22 +8,6 @@
 
 import ApplicationKit
 
-public enum PopupMenuType {
-  
-  case white //Default
-  case dark
-}
-
-/// 箭头方向优先级,当控件超出屏幕时会自动调整成反方向
-public enum PopupMenuPriorityDirection {
-  
-  case top
-  case bottom
-  case left
-  case right
-  case none //不自动调整
-}
-
 public protocol PopupMenuDelegate: class {
   
   func popupMenu(_ popupMenu: PopupMenu, didSelectAt index: Int)
@@ -49,6 +33,22 @@ extension PopupMenuDelegate {
 }
 
 open class PopupMenu: UIView {
+  
+  /// 箭头方向优先级,当控件超出屏幕时会自动调整成反方向
+  public enum DirectionPriority {
+    
+    case top
+    case bottom
+    case left
+    case right
+    case none //不自动调整
+  }
+  
+  public enum Style {
+    
+    case white //Default
+    case dark
+  }
   
   /// 圆角半径 Default is 5.0
   public var cornerRadius: CGFloat = 5.0
@@ -88,7 +88,7 @@ open class PopupMenu: UIView {
   public var dismissOnTouchOutside: Bool = true
   
   /// 设置字体大小 Default is 15
-  public var fontSize: CGFloat = 15
+  public var font: UIFont = UIFont.systemFont(ofSize: 15)
   
   /// 设置字体颜色 Default is UIColor.black
   public var textColor: UIColor = .black {
@@ -113,18 +113,18 @@ open class PopupMenu: UIView {
   /// 箭头高度 Default is 10
   public var arrowHeight: CGFloat = 10
   
-  /// 箭头位置 Default is center, 只有箭头优先级是YBPopupMenuPriorityDirectionLeft/YBPopupMenuPriorityDirectionRight/YBPopupMenuPriorityDirectionNone时需要设置
-  public var arrowPosition: CGFloat = 0
+  /// 箭头位置 Default is center, 只有箭头优先级是left/right/none时需要设置
+  public var arrowOffset: CGFloat = 0
   
   public var isCornerChanged: Bool = false
   public var isChangeDirection: Bool = false
   public var separatorColor: UIColor?
   
-  /// 箭头方向 Default is PopupMenuArrowDirection.top
+  /// 箭头方向 Default is top
   public var arrowDirection: PopupMenuArrowDirection = .top
   
   /// 箭头优先方向 Default is PopupMenuArrowDirection.top,当控件超出屏幕时会自动调整箭头位置
-  public var priorityDirection: PopupMenuPriorityDirection = .top
+  public var directionPriority: DirectionPriority = .top
   
   /// 可见的最大行数 Default is 5;
   public var maxVisibleCount: Int = 5
@@ -137,25 +137,25 @@ open class PopupMenu: UIView {
     
     didSet {
       
-      self.tableView.rowHeight = itemHeight
+      self.tableView.rowHeight = self.itemHeight
       self.updateUI()
     }
   }
   
   /// 设置显示模式 Default is PopupMenuType.defaultWhite
-  public var type: PopupMenuType = .white {
-    
+  public var style: Style = .white {
+
     didSet {
-      
-      switch type {
+
+      switch self.style {
       case .dark:
-        
+
         self.textColor = .lightGray
         self.backColor = UIColor(red: 0.25, green: 0.27, blue: 0.29, alpha: 1)
         self.separatorColor = .lightGray
-        
+
       default:
-        
+
         self.textColor = .black
         self.backColor = .white
         self.separatorColor = .lightGray
@@ -230,7 +230,7 @@ open class PopupMenu: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.type = .white
+    self.style = .white
     self.menuBackgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
     self.menuBackgroundView.alpha = 0
     let tap = UITapGestureRecognizer(target: self, action: #selector(touchOutside))
@@ -254,7 +254,7 @@ open class PopupMenu: UIView {
   override open func draw(_ rect: CGRect) {
     super.draw(rect)
     
-    let bezierPath = PopupMenuPath.bezierPathWithRect(myRect: rect, rectCorner: self.rectCorner, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor, backgroundColor: backColor, arrowWidth: arrowWidth, arrowHeight: arrowHeight, myArrowPosition: arrowPosition, arrowDirection: arrowDirection)
+    let bezierPath = PopupMenuPath.bezierPathWithRect(myRect: rect, rectCorner: self.rectCorner, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor, backgroundColor: backColor, arrowWidth: arrowWidth, arrowHeight: arrowHeight, myArrowPosition: arrowOffset, arrowDirection: arrowDirection)
     bezierPath.fill()
     bezierPath.stroke()
   }
@@ -308,6 +308,12 @@ private extension PopupMenu {
 // MARK: - Setup
 private extension PopupMenu {
   
+  var lastVisibleCell: PopupMenuCell? {
+    
+    guard let indexPath = tableView.indexPathsForVisibleRows?.sorted(by: { $0.row < $1.row}).last else { return nil }
+    return tableView.cellForRow(at: indexPath) as? PopupMenuCell
+  }
+  
   func updateUI() {
     
     var height: CGFloat = 0
@@ -324,7 +330,7 @@ private extension PopupMenu {
     }
     isChangeDirection = false
     
-    if priorityDirection == .top {
+    if directionPriority == .top {
       
       if point.y + height + arrowHeight > UIScreen.main.bounds.height - minSpace {
         
@@ -337,7 +343,7 @@ private extension PopupMenu {
         isChangeDirection = false
       }
       
-    } else if priorityDirection == .bottom {
+    } else if directionPriority == .bottom {
       
       if point.y - height - arrowHeight < minSpace {
         
@@ -350,7 +356,8 @@ private extension PopupMenu {
         isChangeDirection = false
         
       }
-    } else if priorityDirection == .left {
+      
+    } else if directionPriority == .left {
       
       if point.x + itemWidth + arrowHeight > UIScreen.main.bounds.width - minSpace {
         
@@ -363,7 +370,7 @@ private extension PopupMenu {
         isChangeDirection = false
       }
       
-    } else if priorityDirection == .right {
+    } else if directionPriority == .right {
       
       if point.x - itemWidth - arrowHeight < minSpace {
         
@@ -375,6 +382,7 @@ private extension PopupMenu {
         arrowDirection = PopupMenuArrowDirection.right
         isChangeDirection = false
       }
+      
     } else { // .none
       
       if point.y + height + arrowHeight > UIScreen.main.bounds.height - minSpace {
@@ -394,11 +402,11 @@ private extension PopupMenu {
     if arrowDirection == .top {
       
       let y =  point.y
-      if arrowPosition > itemWidth / 2 {
+      if arrowOffset > itemWidth / 2 {
         
         frame = CGRect.init(x: UIScreen.main.bounds.width - minSpace - itemWidth, y:y , width: itemWidth, height: height + arrowHeight)
         
-      } else if arrowPosition < itemWidth / 2 {
+      } else if arrowOffset < itemWidth / 2 {
         
         frame = CGRect.init(x: minSpace, y:y , width: itemWidth, height: height + arrowHeight)
         
@@ -409,11 +417,11 @@ private extension PopupMenu {
     } else if arrowDirection == .bottom {
       
       let y = point.y - arrowHeight - height
-      if arrowPosition > itemWidth / 2 {
+      if arrowOffset > itemWidth / 2 {
         
         frame = CGRect.init(x: UIScreen.main.bounds.width - minSpace - itemWidth, y:y , width: itemWidth, height: height + arrowHeight)
         
-      } else if arrowPosition < itemWidth / 2 {
+      } else if arrowOffset < itemWidth / 2 {
         
         frame = CGRect.init(x: minSpace, y:y , width: itemWidth, height: height + arrowHeight)
         
@@ -425,44 +433,44 @@ private extension PopupMenu {
     } else if arrowDirection == .left {
       
       let x = point.x
-      if arrowPosition < itemHeight / 2 {
+      if arrowOffset < itemHeight / 2 {
         
-        frame = CGRect.init(x: x , y:point.y - arrowPosition, width: itemWidth + arrowHeight, height: height )
+        frame = CGRect.init(x: x , y:point.y - arrowOffset, width: itemWidth + arrowHeight, height: height )
         
-      } else if arrowPosition > itemHeight / 2 {
+      } else if arrowOffset > itemHeight / 2 {
         
-        frame = CGRect.init(x: x, y:point.y - arrowPosition, width: itemWidth + arrowHeight, height: height)
+        frame = CGRect.init(x: x, y:point.y - arrowOffset, width: itemWidth + arrowHeight, height: height)
         
       } else {
         
-        frame = CGRect.init(x: x, y:point.y - arrowPosition, width: itemWidth + arrowHeight, height: height)
+        frame = CGRect.init(x: x, y:point.y - arrowOffset, width: itemWidth + arrowHeight, height: height)
       }
       
     } else if arrowDirection == .right {
       
       let x = isChangeDirection ? point.x - itemWidth - arrowHeight - 2*borderWidth : point.x - itemWidth - arrowHeight - 2*borderWidth
-      if arrowPosition < itemHeight / 2 {
+      if arrowOffset < itemHeight / 2 {
         
-        frame = CGRect.init(x: x , y:point.y - arrowPosition, width: itemWidth + arrowHeight, height: height )
+        frame = CGRect.init(x: x , y:point.y - arrowOffset, width: itemWidth + arrowHeight, height: height )
         
-      } else if arrowPosition > itemHeight / 2 {
+      } else if arrowOffset > itemHeight / 2 {
         
-        frame = CGRect.init(x: x-itemWidth/2, y:point.y - arrowPosition, width: itemWidth + arrowHeight, height: height)
+        frame = CGRect.init(x: x-itemWidth/2, y:point.y - arrowOffset, width: itemWidth + arrowHeight, height: height)
         
       } else {
         
-        frame = CGRect.init(x: x, y:point.y - arrowPosition, width: itemWidth + arrowHeight, height: height)
+        frame = CGRect.init(x: x, y:point.y - arrowOffset, width: itemWidth + arrowHeight, height: height)
       }
       
     } else if arrowDirection == .none {
       
       let y = isChangeDirection ? point.y - arrowHeight - height : point.y + arrowHeight
       
-      if arrowPosition > itemWidth / 2 {
+      if arrowOffset > itemWidth / 2 {
         
         frame = CGRect.init(x: UIScreen.main.bounds.width - minSpace - itemWidth, y:y , width: itemWidth, height: height )
         
-      } else if arrowPosition < itemWidth / 2 {
+      } else if arrowOffset < itemWidth / 2 {
         
         frame = CGRect.init(x: minSpace, y:y , width: itemWidth, height: height)
         
@@ -480,21 +488,21 @@ private extension PopupMenu {
   
   func setArrowPosition() {
     
-    if priorityDirection == .none { return }
+    if directionPriority == .none { return }
     
     guard arrowDirection == .top || arrowDirection == .bottom else { return }
     
     if point.x + itemWidth / 2 > UIScreen.main.bounds.width - minSpace {
       
-      arrowPosition = itemWidth - (UIScreen.main.bounds.width - minSpace - point.x)
+      arrowOffset = itemWidth - (UIScreen.main.bounds.width - minSpace - point.x)
       
     } else if point.x < itemWidth / 2 + minSpace {
       
-      arrowPosition = point.x - minSpace
+      arrowOffset = point.x - minSpace
       
     } else {
       
-      arrowPosition = itemWidth / 2
+      arrowOffset = itemWidth / 2
     }
   }
   
@@ -535,29 +543,29 @@ private extension PopupMenu {
     var point = CGPoint(x: 0.5, y: 0.5)
     if arrowDirection == .top {
       
-      point = CGPoint(x: arrowPosition / itemWidth, y: 0)
+      point = CGPoint(x: arrowOffset / itemWidth, y: 0)
       
     } else if arrowDirection == .bottom {
       
-      point = CGPoint(x: arrowPosition / itemWidth, y: 1)
+      point = CGPoint(x: arrowOffset / itemWidth, y: 1)
       
     } else if arrowDirection == .left {
       
-      point = CGPoint(x: 0 , y: (itemHeight - arrowPosition) / itemHeight)
+      point = CGPoint(x: 0 , y: (itemHeight - arrowOffset) / itemHeight)
       
     } else if arrowDirection == .right {
       
-      point = CGPoint(x: 0, y: (itemHeight - arrowPosition) / itemHeight)
+      point = CGPoint(x: 0, y: (itemHeight - arrowOffset) / itemHeight)
       
     } else if arrowDirection == .none {
       
       if isChangeDirection == true {
         
-        point = CGPoint(x: arrowPosition / itemWidth, y: 1)
+        point = CGPoint(x: arrowOffset / itemWidth, y: 1)
         
       } else {
         
-        point = CGPoint(x: arrowPosition / itemWidth, y: 0)
+        point = CGPoint(x: arrowOffset / itemWidth, y: 0)
       }
     }
     
@@ -592,8 +600,8 @@ private extension PopupMenu {
     UIApplication.shared.keyWindow?.addSubview(self.menuBackgroundView)
     UIApplication.shared.keyWindow?.addSubview(self)
     
-    let cell: PopupMenuCell = lastVisibleCell()
-    cell.isShowSeparator = false
+    let cell = lastVisibleCell
+    cell?.isShowSeparator = false
     self.delegate?.popupMenuWillAppear()
     
     self.layer.setAffineTransform(CGAffineTransform(scaleX: 0.1, y: 0.1))
@@ -637,22 +645,12 @@ extension PopupMenu {
   
   public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     
-    lastVisibleCell().isShowSeparator = true
+    self.lastVisibleCell?.isShowSeparator = true
   }
   
   public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     
-    lastVisibleCell().isShowSeparator = false
-  }
-  
-  func lastVisibleCell() -> PopupMenuCell {
-    
-    var indexPaths = tableView.indexPathsForVisibleRows
-    indexPaths = indexPaths?.sorted{ (obj1, obj2) -> Bool in
-      return obj1.row < obj2.row
-    }
-    let indexPath = indexPaths?.last
-    return tableView.cellForRow(at: indexPath!) as! PopupMenuCell
+    self.lastVisibleCell?.isShowSeparator = false
   }
   
 }
@@ -692,7 +690,7 @@ extension PopupMenu: UITableViewDataSource {
     if let cell = cell as? PopupMenuCell {
     
       cell.updateText(self.textColor)
-      cell.updateText(UIFont.systemFont(ofSize: self.fontSize))
+      cell.updateText(self.font)
       cell.updateText(self.titles[indexPath.row])
       cell.updateImage(self.images.count > indexPath.row ? self.images[indexPath.row] : nil)
       cell.separatorColor = self.separatorColor ?? .lightGray
@@ -702,10 +700,3 @@ extension PopupMenu: UITableViewDataSource {
   }
   
 }
-
-
-
-
-
-
-

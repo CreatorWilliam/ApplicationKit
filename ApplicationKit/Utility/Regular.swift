@@ -56,6 +56,7 @@ public extension Regular {
     case month = "(^(0)([0-9])$)|(^(1)([0-2])$)"
     case year = "^([1-3])([0-9])$"
     
+    case number = "^[0-9]*$"
     //case nickName = "([\u4e00-\u9fa5]{2,5})(&middot;[\u4e00-\u9fa5]{2,5})*
     //case carNo = "^[\u4e00-\u9fa5]{1}[a-zA-Z]{1}[a-zA-Z_0-9]{4}[a-zA-Z_0-9_\u4e00-\u9fa5]$"
     //case carType = "^[\u4E00-\u9FFF]+$"

@@ -708,12 +708,12 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
-		3DA72533221BDB5F004A1F17 /* General Model */ = {
+		3DA72533221BDB5F004A1F17 /* GeneralModel */ = {
 			isa = PBXGroup;
 			children = (
 				3DA7252F221BDB32004A1F17 /* FormInputItem.swift */,
 			);
-			path = "General Model";
+			path = GeneralModel;
 			sourceTree = "<group>";
 		};
 		3DC38F5421BE8A5200871DE7 /* Extension */ = {
@@ -750,7 +750,7 @@
 				3DC38F5C21BE8AE000871DE7 /* Font */,
 				3DC38F5B21BE8ACD00871DE7 /* Color */,
 				3DC38F8921BFA57C00871DE7 /* API */,
-				3DA72533221BDB5F004A1F17 /* General Model */,
+				3DA72533221BDB5F004A1F17 /* GeneralModel */,
 			);
 			path = Project;
 			sourceTree = "<group>";

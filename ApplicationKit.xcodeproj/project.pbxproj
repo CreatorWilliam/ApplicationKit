@@ -47,6 +47,7 @@
 		3DA5A07621DF7EE80014D7F1 /* Player.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3DA5A07121DF7EE70014D7F1 /* Player.bundle */; };
 		3DA5A07821DF7EE80014D7F1 /* PlayerViewControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5A07321DF7EE80014D7F1 /* PlayerViewControllable.swift */; };
 		3DA5A07921DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5A07421DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift */; };
+		3DA72532221BDB32004A1F17 /* FormInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7252F221BDB32004A1F17 /* FormInputItem.swift */; };
 		3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3983A2194028700507F2C /* CodeInputView.swift */; };
 		3DC38F0D21BE654B00871DE7 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */; };
 		3DC38F1221BE844700871DE7 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F1021BE83D600871DE7 /* Tips.swift */; };
@@ -288,6 +289,7 @@
 		3DA5A07121DF7EE70014D7F1 /* Player.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Player.bundle; sourceTree = "<group>"; };
 		3DA5A07321DF7EE80014D7F1 /* PlayerViewControllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewControllable.swift; sourceTree = "<group>"; };
 		3DA5A07421DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewDefaultControlView.swift; sourceTree = "<group>"; };
+		3DA7252F221BDB32004A1F17 /* FormInputItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputItem.swift; sourceTree = "<group>"; };
 		3DB3983A2194028700507F2C /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
 		3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		3DC38F1021BE83D600871DE7 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
@@ -706,6 +708,14 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		3DA72533221BDB5F004A1F17 /* General Model */ = {
+			isa = PBXGroup;
+			children = (
+				3DA7252F221BDB32004A1F17 /* FormInputItem.swift */,
+			);
+			path = "General Model";
+			sourceTree = "<group>";
+		};
 		3DC38F5421BE8A5200871DE7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,6 +750,7 @@
 				3DC38F5C21BE8AE000871DE7 /* Font */,
 				3DC38F5B21BE8ACD00871DE7 /* Color */,
 				3DC38F8921BFA57C00871DE7 /* API */,
+				3DA72533221BDB5F004A1F17 /* General Model */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -1889,6 +1900,7 @@
 				3DC38F7621BFA08700871DE7 /* ESRefreshProtocol.swift in Sources */,
 				3DC38F5921BE8AAF00871DE7 /* QRCodeTool.swift in Sources */,
 				BBD0B26820AC3550007FB9BA /* Debug.swift in Sources */,
+				3DA72532221BDB32004A1F17 /* FormInputItem.swift in Sources */,
 				3DC38F6821BF8D2C00871DE7 /* HUD.swift in Sources */,
 				3DC38F5821BE8AAF00871DE7 /* ImageTool.swift in Sources */,
 				3DC38F6221BF8C3700871DE7 /* Font.swift in Sources */,

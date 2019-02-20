@@ -48,6 +48,7 @@
 		3DA5A07821DF7EE80014D7F1 /* PlayerViewControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5A07321DF7EE80014D7F1 /* PlayerViewControllable.swift */; };
 		3DA5A07921DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5A07421DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift */; };
 		3DA72532221BDB32004A1F17 /* FormInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7252F221BDB32004A1F17 /* FormInputItem.swift */; };
+		3DA7254A221D51FC004A1F17 /* PopupMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA72549221D51FC004A1F17 /* PopupMenuItem.swift */; };
 		3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3983A2194028700507F2C /* CodeInputView.swift */; };
 		3DC38F0D21BE654B00871DE7 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */; };
 		3DC38F1221BE844700871DE7 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC38F1021BE83D600871DE7 /* Tips.swift */; };
@@ -139,7 +140,6 @@
 		3DD83278215A315C003B2C19 /* Zoomable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831FD215A315B003B2C19 /* Zoomable.swift */; };
 		3DD83279215A315C003B2C19 /* PopupMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831FF215A315B003B2C19 /* PopupMenuCell.swift */; };
 		3DD8327A215A315C003B2C19 /* PopupMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD83200215A315B003B2C19 /* PopupMenu.swift */; };
-		3DD8327B215A315C003B2C19 /* PopupMenuPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD83201215A315B003B2C19 /* PopupMenuPath.swift */; };
 		3DD8327D215A315C003B2C19 /* OptionActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD83205215A315B003B2C19 /* OptionActionView.swift */; };
 		3DD8327E215A315C003B2C19 /* OptionsPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD83206215A315B003B2C19 /* OptionsPopView.swift */; };
 		3DD8327F215A315C003B2C19 /* BarrageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD83208215A315B003B2C19 /* BarrageItem.swift */; };
@@ -290,6 +290,7 @@
 		3DA5A07321DF7EE80014D7F1 /* PlayerViewControllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewControllable.swift; sourceTree = "<group>"; };
 		3DA5A07421DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewDefaultControlView.swift; sourceTree = "<group>"; };
 		3DA7252F221BDB32004A1F17 /* FormInputItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInputItem.swift; sourceTree = "<group>"; };
+		3DA72549221D51FC004A1F17 /* PopupMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMenuItem.swift; sourceTree = "<group>"; };
 		3DB3983A2194028700507F2C /* CodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeInputView.swift; sourceTree = "<group>"; };
 		3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		3DC38F1021BE83D600871DE7 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
@@ -359,7 +360,6 @@
 		3DD831FD215A315B003B2C19 /* Zoomable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zoomable.swift; sourceTree = "<group>"; };
 		3DD831FF215A315B003B2C19 /* PopupMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupMenuCell.swift; sourceTree = "<group>"; };
 		3DD83200215A315B003B2C19 /* PopupMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupMenu.swift; sourceTree = "<group>"; };
-		3DD83201215A315B003B2C19 /* PopupMenuPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupMenuPath.swift; sourceTree = "<group>"; };
 		3DD83203215A315B003B2C19 /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		3DD83205215A315B003B2C19 /* OptionActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionActionView.swift; sourceTree = "<group>"; };
 		3DD83206215A315B003B2C19 /* OptionsPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsPopView.swift; sourceTree = "<group>"; };
@@ -896,7 +896,7 @@
 				3DD831F7215A315B003B2C19 /* Page */,
 				3DD831F4215A315B003B2C19 /* TextView */,
 				3DD831FD215A315B003B2C19 /* Zoomable.swift */,
-				3DD831FE215A315B003B2C19 /* PopMenu */,
+				3DD831FE215A315B003B2C19 /* PopupMenu */,
 				3DD83204215A315B003B2C19 /* PopUpView */,
 				3DD83207215A315B003B2C19 /* Barrage */,
 				3DD8320C215A315B003B2C19 /* ArcTextView.swift */,
@@ -926,14 +926,14 @@
 			path = Page;
 			sourceTree = "<group>";
 		};
-		3DD831FE215A315B003B2C19 /* PopMenu */ = {
+		3DD831FE215A315B003B2C19 /* PopupMenu */ = {
 			isa = PBXGroup;
 			children = (
-				3DD831FF215A315B003B2C19 /* PopupMenuCell.swift */,
 				3DD83200215A315B003B2C19 /* PopupMenu.swift */,
-				3DD83201215A315B003B2C19 /* PopupMenuPath.swift */,
+				3DD831FF215A315B003B2C19 /* PopupMenuCell.swift */,
+				3DA72549221D51FC004A1F17 /* PopupMenuItem.swift */,
 			);
-			path = PopMenu;
+			path = PopupMenu;
 			sourceTree = "<group>";
 		};
 		3DD83202215A315B003B2C19 /* Navigation */ = {
@@ -1771,7 +1771,6 @@
 				3DD83272215A315C003B2C19 /* TextModel.swift in Sources */,
 				3DD83247215A315C003B2C19 /* EZPlayerAudibleLegibleViewController.swift in Sources */,
 				3DD83273215A315C003B2C19 /* SegmentView.swift in Sources */,
-				3DD8327B215A315C003B2C19 /* PopupMenuPath.swift in Sources */,
 				3D2FDC1821E49DE400C1C639 /* CountingLabel.swift in Sources */,
 				3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */,
 				3DD83274215A315C003B2C19 /* SegmentViewCell.swift in Sources */,
@@ -1798,6 +1797,7 @@
 				3DD83240215A315C003B2C19 /* MediaItem.swift in Sources */,
 				3DD8327F215A315C003B2C19 /* BarrageItem.swift in Sources */,
 				3DD8328B215A315C003B2C19 /* ImageBrowerController.swift in Sources */,
+				3DA7254A221D51FC004A1F17 /* PopupMenuItem.swift in Sources */,
 				3DD83279215A315C003B2C19 /* PopupMenuCell.swift in Sources */,
 				3DD83242215A315C003B2C19 /* EZPlayer.swift in Sources */,
 				3DD8328D215A315C003B2C19 /* ImageBrowerView.swift in Sources */,

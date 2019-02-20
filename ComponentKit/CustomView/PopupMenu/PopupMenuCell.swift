@@ -3,7 +3,7 @@
 //  VideoModule
 //
 //  Created by Hiu on 2018/6/6.
-//  Copyright © 2018年 飞进科技. All rights reserved.
+//  Copyright © 2018年 Hiu. All rights reserved.
 //
 
 import UIKit
@@ -31,6 +31,8 @@ class PopupMenuCell: UITableViewCell {
     bezierPath.close()
   }
   
+  var normalColor: UIColor?
+  var selectedColor: UIColor?
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,11 +41,16 @@ class PopupMenuCell: UITableViewCell {
     self.selectionStyle = .none
     self.textLabel?.numberOfLines = 0
     self.backgroundColor = .clear
-    self.textLabel?.textAlignment = .center
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+    
+    self.textLabel?.textColor = selected ? self.selectedColor : self.normalColor
   }
   
 }
@@ -51,9 +58,27 @@ class PopupMenuCell: UITableViewCell {
 // MARK: - Public
 extension PopupMenuCell {
   
-  func updateText(_ color: UIColor) {
+  func update(with item: PopupMenuItem) {
     
-    self.textLabel?.textColor = color
+    self.textLabel?.text = item.title
+    if let imageName = item.imageName {
+      
+      self.imageView?.image = UIImage(named: imageName)
+      
+    } else if let imageURL = item.imageURL {
+      
+      self.imageView?.setImage(with: imageURL)
+      
+    } else {
+      
+      self.imageView?.image = nil
+    }
+    
+  }
+  
+  func updateText(_ alignment: NSTextAlignment) {
+    
+    self.textLabel?.textAlignment = alignment
   }
   
   func updateText(_ font: UIFont) {
@@ -61,35 +86,4 @@ extension PopupMenuCell {
     self.textLabel?.font = font
   }
   
-  func updateText(_ text: String) {
-    
-    self.textLabel?.text = text
-  }
-  
-  func updateImage(_ name: String? = nil) {
-    
-    if let name = name {
-      
-      self.imageView?.image = UIImage(named: name)
-      
-    } else {
-      
-      self.imageView?.image = nil
-    }
-  }
-  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -22,7 +22,13 @@ public struct ListDataModel<Element: ItemListable>: DataModelListable {
   
   public mutating func update(with page: JSON) {
     
-    self.pageNo = page["pageNo"] ?? 1
+    guard let pageNo: Int = page["pageNo"] else {
+      
+      self.hasNextPage = false
+      return
+    }
+    
+    self.pageNo = pageNo
     self.hasNextPage = page["isHasNext"] ?? false
     self.totalCount = page["totalCount"] ?? 0
     if self.pageNo == 1 { self.list.removeAll() }

@@ -1062,10 +1062,10 @@
 		3DDC0C8A21893DBF0035A84F /* List */ = {
 			isa = PBXGroup;
 			children = (
-				BBC73AE820A5B08900781F00 /* ViewControllerListable.swift */,
-				BB393CD1212A999F00F57F50 /* ItemListable.swift */,
 				73494FD7211B419900EB41C4 /* ListDataModel.swift */,
+				BBC73AE820A5B08900781F00 /* ViewControllerListable.swift */,
 				BB393CDF212A99C200F57F50 /* DataModelListable.swift */,
+				BB393CD1212A999F00F57F50 /* ItemListable.swift */,
 				3DDC0C902189548C0035A84F /* PlaceholderView */,
 				3DD831E0215A315B003B2C19 /* ESPullToRefresh */,
 				3DD831DE215A315B003B2C19 /* TableView */,

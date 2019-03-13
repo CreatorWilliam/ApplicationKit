@@ -45,4 +45,11 @@ public struct SegmentViewItem: SegmentViewItemSourcable {
     self.selectedImage = selectedImage
   }
   
+  public init(_ normalAttributedText: NSAttributedString,
+              _ selectedAttributedText: NSAttributedString) {
+    
+    self.normalTitle = normalAttributedText
+    self.selectedTitle = selectedAttributedText
+  }
+  
 }

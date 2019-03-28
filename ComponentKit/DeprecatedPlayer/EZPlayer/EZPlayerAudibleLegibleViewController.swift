@@ -9,24 +9,25 @@
 import UIKit
 import AVFoundation
 
-public struct  MediaTypes: OptionSet {
+struct  MediaTypes: OptionSet {
   
-  public typealias RawValue = Int
+  typealias RawValue = Int
   
-  public  let rawValue: Int
+   let rawValue: Int
   
-  public static let audios = MediaTypes(rawValue: 1)
-  public static let closedCaption = MediaTypes(rawValue: 2)
-  public static let subtitles = MediaTypes(rawValue: 4)
+  static let audios = MediaTypes(rawValue: 1)
+  static let closedCaption = MediaTypes(rawValue: 2)
+  static let subtitles = MediaTypes(rawValue: 4)
   
-  public init(rawValue: MediaTypes.RawValue) {
+  init(rawValue: MediaTypes.RawValue) {
     
     self.rawValue = rawValue
   }
   
 }
 
-open class EZPlayerAudibleLegibleViewController: UIViewController {
+class EZPlayerAudibleLegibleViewController: UIViewController {
+  
   fileprivate let mediaTypeTableViewIdentifier = "mediaTypeTableViewIdentifier"
   fileprivate let audioTitle = "Audios"
   fileprivate let subtitleTitle = "Subtitles"
@@ -80,33 +81,33 @@ open class EZPlayerAudibleLegibleViewController: UIViewController {
     
   }
   
-  required public init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override open func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
   }
   
-  override open func didReceiveMemoryWarning() {
+  override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
   
   
-  override open func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.player.pause()
   }
   
-  open override func viewDidDisappear(_ animated: Bool) {
+  override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     self.player.play()
   }
   
-  open override var preferredContentSize: CGSize{
+  override var preferredContentSize: CGSize{
     get{
       var lines = (self.audios?.count ?? 0)
       lines += lines > 0 ? 1 : 0
@@ -120,18 +121,18 @@ open class EZPlayerAudibleLegibleViewController: UIViewController {
   }
   
   // MARK: - Orientations
-  override open var shouldAutorotate : Bool {
+  override var shouldAutorotate : Bool {
     return true
   }
   
-  override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+  override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
     return [.all]
   }
   
 }
 
 extension EZPlayerAudibleLegibleViewController: UIPopoverPresentationControllerDelegate {
-  public func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+  func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
     if UIDevice.current.userInterfaceIdiom == .pad {
       return .none
     }else{
@@ -139,7 +140,7 @@ extension EZPlayerAudibleLegibleViewController: UIPopoverPresentationControllerD
     }
   }
   
-  public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+  func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
     if UIDevice.current.userInterfaceIdiom == .pad {
       return .none
     }else{
@@ -147,7 +148,7 @@ extension EZPlayerAudibleLegibleViewController: UIPopoverPresentationControllerD
     }
   }
   
-  public func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+  func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
     let navigationController = UINavigationController(rootViewController: controller.presentedViewController)
     let btnDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.dismissPop))
     navigationController.topViewController!.navigationItem.rightBarButtonItem = btnDone
@@ -161,7 +162,7 @@ extension EZPlayerAudibleLegibleViewController: UIPopoverPresentationControllerD
   
 }
 extension EZPlayerAudibleLegibleViewController: UITableViewDataSource,UITableViewDelegate {
-  public func numberOfSections(in tableView: UITableView) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     var num = 0
     if self.mediaTypes.contains(.audios) {
       num += 1
@@ -172,7 +173,7 @@ extension EZPlayerAudibleLegibleViewController: UITableViewDataSource,UITableVie
     return num
   }
   
-  public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     var title = ""
     if section == 0{
       if self.mediaTypes.contains(.audios) {
@@ -190,20 +191,20 @@ extension EZPlayerAudibleLegibleViewController: UITableViewDataSource,UITableVie
     return title
   }
   
-  public func  tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
+  func  tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
     return self.sectionHeight
   }
   
-  public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
     return 0
   }
   
   
-  public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return self.cellHeight
   }
   
-  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     var num = 0
     if section == 0{
       if self.mediaTypes.contains(.audios) {
@@ -220,7 +221,7 @@ extension EZPlayerAudibleLegibleViewController: UITableViewDataSource,UITableVie
     return num + 1
   }
   
-  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     var cell : UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: self.mediaTypeTableViewIdentifier)
     if cell == nil{
@@ -271,7 +272,7 @@ extension EZPlayerAudibleLegibleViewController: UITableViewDataSource,UITableVie
     return cell
   }
   
-  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == 0{
       if self.mediaTypes.contains(.audios) {
         if let audio = self.audios?[indexPath.row]{
@@ -314,5 +315,3 @@ extension EZPlayerAudibleLegibleViewController: UITableViewDataSource,UITableVie
   }
   
 }
-
-

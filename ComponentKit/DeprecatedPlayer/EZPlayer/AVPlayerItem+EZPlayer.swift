@@ -8,95 +8,95 @@
 
 import AVFoundation
 
-public extension AVPlayerItem {
-
-    public var bufferDuration: TimeInterval? {
-        if  let first = self.loadedTimeRanges.first { //获取缓冲进度
-            let timeRange = first.timeRangeValue // 获取缓冲区域
-            let startSeconds = CMTimeGetSeconds(timeRange.start)//开始的时间
-            let durationSecound = CMTimeGetSeconds(timeRange.duration)//表示已经缓冲的时间
-            let result = startSeconds + durationSecound // 计算缓冲总时间
-            return result
-        }
-        return nil
+extension AVPlayerItem {
+  
+  var bufferDuration: TimeInterval? {
+    if  let first = self.loadedTimeRanges.first { //获取缓冲进度
+      let timeRange = first.timeRangeValue // 获取缓冲区域
+      let startSeconds = CMTimeGetSeconds(timeRange.start)//开始的时间
+      let durationSecound = CMTimeGetSeconds(timeRange.duration)//表示已经缓冲的时间
+      let result = startSeconds + durationSecound // 计算缓冲总时间
+      return result
     }
-
-    
-    /// 获取／设置当前subtitle／cc
-    public var selectedMediaCharacteristicLegibleOption:AVMediaSelectionOption?{
-        get{
-            if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
-                return self.selectedMediaOption(in: legibleGroup)
-            }
-            return nil
-        }
-        set{
-            if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
-                self.select(newValue, in: legibleGroup)
-            }
-        }
+    return nil
+  }
+  
+  
+  /// 获取／设置当前subtitle／cc
+  var selectedMediaCharacteristicLegibleOption:AVMediaSelectionOption?{
+    get{
+      if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
+        return self.selectedMediaOption(in: legibleGroup)
+      }
+      return nil
     }
-
-    /// 获取／设置当前cc
-    public var selectedClosedCaptionOption:AVMediaSelectionOption?{
-        get{
-            if let option = self.selectedMediaCharacteristicLegibleOption{
-                if convertFromAVMediaType(option.mediaType) == "clcp" {
-                    return option
-                }
-            }
-            return nil
-        }
-        set{
-            if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
-                if newValue == nil{
-                    self.select(newValue, in: legibleGroup)
-                }else if convertFromAVMediaType(newValue!.mediaType) == "clcp"{
-                    self.select(newValue, in: legibleGroup)
-                }
-            }
-        }
+    set{
+      if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
+        self.select(newValue, in: legibleGroup)
+      }
     }
-
-    /// 获取／设置当前subtitle
-    public var selectedSubtitleOption:AVMediaSelectionOption?{
-        get{
-            if let option = self.selectedMediaCharacteristicLegibleOption{
-                if !option.hasMediaCharacteristic(AVMediaCharacteristic.containsOnlyForcedSubtitles) {
-                    return option
-                }
-            }
-            return nil
+  }
+  
+  /// 获取／设置当前cc
+  var selectedClosedCaptionOption:AVMediaSelectionOption?{
+    get{
+      if let option = self.selectedMediaCharacteristicLegibleOption{
+        if convertFromAVMediaType(option.mediaType) == "clcp" {
+          return option
         }
-        set{
-            if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
-                if newValue == nil{
-                    self.select(newValue, in: legibleGroup)
-                }else if !newValue!.hasMediaCharacteristic(AVMediaCharacteristic.containsOnlyForcedSubtitles) {
-                    self.select(newValue, in: legibleGroup)
-                }
-            }
-        }
+      }
+      return nil
     }
-
-    /// 获取／设置当前audio
-    public var selectedMediaCharacteristicAudibleOption:AVMediaSelectionOption?{
-        get{
-            if let group = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.audible){
-                return self.selectedMediaOption(in: group)
-            }
-            return nil
+    set{
+      if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
+        if newValue == nil{
+          self.select(newValue, in: legibleGroup)
+        }else if convertFromAVMediaType(newValue!.mediaType) == "clcp"{
+          self.select(newValue, in: legibleGroup)
         }
-        set{
-            if let group = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.audible){
-                self.select(newValue, in: group)
-            }
-        }
+      }
     }
-
+  }
+  
+  /// 获取／设置当前subtitle
+  var selectedSubtitleOption:AVMediaSelectionOption?{
+    get{
+      if let option = self.selectedMediaCharacteristicLegibleOption{
+        if !option.hasMediaCharacteristic(AVMediaCharacteristic.containsOnlyForcedSubtitles) {
+          return option
+        }
+      }
+      return nil
+    }
+    set{
+      if let legibleGroup = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible){
+        if newValue == nil{
+          self.select(newValue, in: legibleGroup)
+        }else if !newValue!.hasMediaCharacteristic(AVMediaCharacteristic.containsOnlyForcedSubtitles) {
+          self.select(newValue, in: legibleGroup)
+        }
+      }
+    }
+  }
+  
+  /// 获取／设置当前audio
+  var selectedMediaCharacteristicAudibleOption:AVMediaSelectionOption?{
+    get{
+      if let group = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.audible){
+        return self.selectedMediaOption(in: group)
+      }
+      return nil
+    }
+    set{
+      if let group = self.asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.audible){
+        self.select(newValue, in: group)
+      }
+    }
+  }
+  
 }
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromAVMediaType(_ input: AVMediaType) -> String {
-	return input.rawValue
+  return input.rawValue
 }

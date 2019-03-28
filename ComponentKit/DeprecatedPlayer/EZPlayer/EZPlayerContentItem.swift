@@ -7,9 +7,9 @@
 //
 
 import Foundation
+
 public struct EZPlayerContentItem {
-    var url: URL?
-    var title: String?
-
-
+  
+  var url: URL?
+  var title: String?
 }

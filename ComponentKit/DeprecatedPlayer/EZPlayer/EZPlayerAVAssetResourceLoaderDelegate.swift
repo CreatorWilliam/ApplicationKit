@@ -6,31 +6,30 @@
 //  Copyright © 2017年 yangjun zhu. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
 
-
-public class EZPlayerAVAssetResourceLoaderDelegate: NSObject {
-    public var customScheme: String{
-      return ""
-    }
-
-    public unowned let asset: AVURLAsset
+class EZPlayerAVAssetResourceLoaderDelegate: NSObject {
+  
+  var customScheme: String {
+    return ""
+  }
+  
+  unowned let asset: AVURLAsset
+  
+  let delegateQueue: DispatchQueue?
+  
+  init(asset: AVURLAsset,delegateQueue: DispatchQueue? = nil) {
     
-    public let delegateQueue: DispatchQueue?
-
-    public init(asset: AVURLAsset,delegateQueue: DispatchQueue? = nil) {
-
-        self.asset = asset
-        self.delegateQueue = delegateQueue
-        super.init()
-        self.asset.resourceLoader.setDelegate(self, queue: self.delegateQueue)
-
-    }
-
+    self.asset = asset
+    self.delegateQueue = delegateQueue
+    super.init()
+    self.asset.resourceLoader.setDelegate(self, queue: self.delegateQueue)
+    
+  }
+  
 }
 
 
 extension EZPlayerAVAssetResourceLoaderDelegate: AVAssetResourceLoaderDelegate{
-
+  
 }

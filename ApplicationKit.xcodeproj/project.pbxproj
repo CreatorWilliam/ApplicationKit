@@ -111,7 +111,6 @@
 		3DD83246215A315C003B2C19 /* EZPlayerFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831BF215A315A003B2C19 /* EZPlayerFullScreenViewController.swift */; };
 		3DD83247215A315C003B2C19 /* EZPlayerAudibleLegibleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831C0215A315A003B2C19 /* EZPlayerAudibleLegibleViewController.swift */; };
 		3DD83248215A315C003B2C19 /* EZPlayerFloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831C1215A315A003B2C19 /* EZPlayerFloatView.swift */; };
-		3DD83249215A315C003B2C19 /* EZPlayerTransportExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831C2215A315A003B2C19 /* EZPlayerTransportExtension.swift */; };
 		3DD8324A215A315C003B2C19 /* EZPlayerFloatContainerRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831C3215A315A003B2C19 /* EZPlayerFloatContainerRootViewController.swift */; };
 		3DD8324B215A315C003B2C19 /* EZPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD831C4215A315A003B2C19 /* EZPlayerView.swift */; };
 		3DD8324C215A315C003B2C19 /* EZPlayerAudibleLegibleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DD831C5215A315A003B2C19 /* EZPlayerAudibleLegibleViewController.xib */; };
@@ -309,7 +308,6 @@
 		3DD831BF215A315A003B2C19 /* EZPlayerFullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayerFullScreenViewController.swift; sourceTree = "<group>"; };
 		3DD831C0215A315A003B2C19 /* EZPlayerAudibleLegibleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayerAudibleLegibleViewController.swift; sourceTree = "<group>"; };
 		3DD831C1215A315A003B2C19 /* EZPlayerFloatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayerFloatView.swift; sourceTree = "<group>"; };
-		3DD831C2215A315A003B2C19 /* EZPlayerTransportExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayerTransportExtension.swift; sourceTree = "<group>"; };
 		3DD831C3215A315A003B2C19 /* EZPlayerFloatContainerRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayerFloatContainerRootViewController.swift; sourceTree = "<group>"; };
 		3DD831C4215A315A003B2C19 /* EZPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZPlayerView.swift; sourceTree = "<group>"; };
 		3DD831C5215A315A003B2C19 /* EZPlayerAudibleLegibleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EZPlayerAudibleLegibleViewController.xib; sourceTree = "<group>"; };
@@ -814,7 +812,6 @@
 				3DD831BF215A315A003B2C19 /* EZPlayerFullScreenViewController.swift */,
 				3DD831C0215A315A003B2C19 /* EZPlayerAudibleLegibleViewController.swift */,
 				3DD831C1215A315A003B2C19 /* EZPlayerFloatView.swift */,
-				3DD831C2215A315A003B2C19 /* EZPlayerTransportExtension.swift */,
 				3DD831C3215A315A003B2C19 /* EZPlayerFloatContainerRootViewController.swift */,
 				3DD831C4215A315A003B2C19 /* EZPlayerView.swift */,
 				3DD831C5215A315A003B2C19 /* EZPlayerAudibleLegibleViewController.xib */,
@@ -1571,6 +1568,7 @@
 					};
 					3DD8319E215A3130003B2C19 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 					BB7A1B2F21259D7B008508CA = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -1814,7 +1812,6 @@
 				3DD83280215A315C003B2C19 /* BarrageCell.swift in Sources */,
 				3DD8324B215A315C003B2C19 /* EZPlayerView.swift in Sources */,
 				3DA5A07521DF7EE80014D7F1 /* PlayerView.swift in Sources */,
-				3DD83249215A315C003B2C19 /* EZPlayerTransportExtension.swift in Sources */,
 				3DD83246215A315C003B2C19 /* EZPlayerFullScreenViewController.swift in Sources */,
 				3DD8327E215A315C003B2C19 /* OptionsPopView.swift in Sources */,
 				3DD8324E215A315C003B2C19 /* AVPlayer+EZPlayer.swift in Sources */,
@@ -2094,7 +2091,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.william.ComponentKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2120,7 +2117,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.william.ComponentKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

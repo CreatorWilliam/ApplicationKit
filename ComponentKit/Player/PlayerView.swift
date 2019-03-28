@@ -104,10 +104,10 @@ public class PlayerView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    defer {
+    //defer {
       
       self.playerLayer.frame = self.contentView.bounds
-    }
+    //}
     
     // 仅当作为子视图的时候，才设置大小
     //if self.contentView.superview != self { return }
@@ -458,6 +458,7 @@ private extension PlayerView {
       case .landscapeRight: orientation = .landscapeRight
       case .portrait: orientation = .portrait
       case .portraitUpsideDown: orientation = .portraitUpsideDown
+      default: return
       }
       self.updateRotation(with: orientation)
     })

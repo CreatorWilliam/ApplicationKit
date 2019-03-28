@@ -27,7 +27,7 @@ public extension ConstraintMaker {
   
   /// 构造约束，布局属性为高
   @discardableResult
-  public func height(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func height(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: self.target, attribute: .height, constant: offset)
     self.collectors.append(collector)
@@ -36,7 +36,7 @@ public extension ConstraintMaker {
   
   /// 构造约束，布局属性为宽
   @discardableResult
-  public func width(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func width(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: self.target, attribute: .width, constant: offset)
     self.collectors.append(collector)
@@ -44,7 +44,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为顶
-  public func top(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func top(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: self.target, attribute: .top, constant: offset)
     self.collectors.append(collector)
@@ -52,7 +52,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为底
-  public func bottom(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func bottom(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: target, attribute: .bottom, constant: offset)
     self.collectors.append(collector)
@@ -60,7 +60,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为左
-  public func left(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func left(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: target, attribute: .left, constant: offset)
     self.collectors.append(collector)
@@ -68,7 +68,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为右
-  public func right(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func right(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: target, attribute: .right, constant: offset)
     self.collectors.append(collector)
@@ -76,7 +76,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为头
-  public func leading(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func leading(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: target, attribute: .leading, constant: offset)
     self.collectors.append(collector)
@@ -84,7 +84,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为尾
-  public func trailing(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func trailing(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: target, attribute: .trailing, constant: offset)
     self.collectors.append(collector)
@@ -92,7 +92,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为中心X
-  public func centerX(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func centerX(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: target, attribute: .centerX, constant: offset)
     self.collectors.append(collector)
@@ -100,7 +100,7 @@ public extension ConstraintMaker {
   }
   
   /// 构造约束，布局属性为中心Y
-  public func centerY(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
+  func centerY(_ offset: CGFloat = 0) -> ConstraintLeftCollector {
     
     let collector = ConstraintLeftCollector(target: target, attribute: .centerY, constant: offset)
     self.collectors.append(collector)
@@ -112,7 +112,7 @@ public extension ConstraintMaker {
   /// - Parameters:
   ///   - axis: 抗压缩的方向
   ///   - priority: 约束等级
-  public func compression(axis: NSLayoutConstraint.Axis,
+  func compression(axis: NSLayoutConstraint.Axis,
                           priority: UILayoutPriority = UILayoutPriority.required) -> Void{
     
     self.target.setContentCompressionResistancePriority(priority, for: axis)
@@ -123,7 +123,7 @@ public extension ConstraintMaker {
   /// - Parameters:
   ///   - axis: 抗拉伸的方向
   ///   - priority: 约束等级
-  public func hugging(axis: NSLayoutConstraint.Axis,
+  func hugging(axis: NSLayoutConstraint.Axis,
                       priority: UILayoutPriority = UILayoutPriority.required) -> Void {
     
     self.target.setContentHuggingPriority(priority, for: axis)
@@ -157,14 +157,3 @@ internal extension ConstraintMaker {
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-

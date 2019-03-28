@@ -219,7 +219,7 @@ public extension ConstraintRightCollector {
   
   /// 计算系数
   @discardableResult
-  public func multiplier(_ multiplier: CGFloat) -> Self {
+  func multiplier(_ multiplier: CGFloat) -> Self {
     
     self.multiplier = multiplier
     return self
@@ -227,7 +227,7 @@ public extension ConstraintRightCollector {
   
   /// 优先级
   @discardableResult
-  public func priority(_ priority: UILayoutPriority) -> Self {
+  func priority(_ priority: UILayoutPriority) -> Self {
     
     self.priority = priority
     return self
@@ -254,7 +254,3 @@ fileprivate extension UIView {
   }
   
 }
-
-
-
-

@@ -67,18 +67,9 @@ public protocol AutoLayoutCompatible {
 // MARK: - AutoLayoutCompatible 为符合该协议的对象提供默认的创建者
 public extension AutoLayoutCompatible {
   
-  public var layout: Layout<Self> { return Layout(self) }
+  var layout: Layout<Self> { return Layout(self) }
   
 }
 
 // MARK: - UIView 遵循 AutoLayoutCompatible
 extension UIView: AutoLayoutCompatible { }
-
-
-
-
-
-
-
-
-

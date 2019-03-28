@@ -78,7 +78,7 @@ public extension ImageProcessor {
     ///
     /// - returns: The new `ImageProcessor` will process the image in the order
     ///            of the two processors concatenated.
-    public func append(another: ImageProcessor) -> ImageProcessor {
+    func append(another: ImageProcessor) -> ImageProcessor {
         let newIdentifier = identifier.appending("|>\(another.identifier)")
         return GeneralProcessor(identifier: newIdentifier) {
             item, options in

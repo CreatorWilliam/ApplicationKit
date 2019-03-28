@@ -34,8 +34,8 @@ public class CountDownTimer {
 // MARK: - Public
 public extension CountDownTimer {
   
-  public typealias UpdateHandle = (DateComponents) -> Void
-  public typealias TimeEndHandle = () -> Void
+  typealias UpdateHandle = (DateComponents) -> Void
+  typealias TimeEndHandle = () -> Void
   
   /// 开始倒计时
   ///

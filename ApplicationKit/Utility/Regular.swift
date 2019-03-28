@@ -43,7 +43,7 @@ public struct Regular {
 // MARK: - Kind
 public extension Regular {
   
-  public enum Kind : String {
+  enum Kind : String {
     
     case email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
     case mobil = "^(1)\\d{10}$" //^((13[0-9])|(15[0-9])|(17[678])|(18[0-9])|(14[57]))[0-9]{8}$

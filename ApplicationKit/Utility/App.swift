@@ -22,13 +22,13 @@ public struct App {
 public extension App {
   
   /// 应用信息
-  public var info: [String: Any]? { return Bundle.main.infoDictionary }
+  var info: [String: Any]? { return Bundle.main.infoDictionary }
   /// 应用名称
-  public var name: String { return self.info?["CFBundleName"] as? String ?? "- -" }
+  var name: String { return self.info?["CFBundleName"] as? String ?? "- -" }
   /// 应用版本号
-  public var version: String { return self.info?["CFBundleShortVersionString"] as? String ?? "1.0" }
+  var version: String { return self.info?["CFBundleShortVersionString"] as? String ?? "1.0" }
   /// 应用Build版本
-  public var build: Int {
+  var build: Int {
     
     let build = self.info?["CFBundleVersion"] as? String ?? "1"
     return Int(build) ?? 1
@@ -66,7 +66,7 @@ public extension App {
 public extension App {
   
   /// 状态栏Frame
-  public var statusBar: CGRect { return UIApplication.shared.statusBarFrame }
+  var statusBar: CGRect { return UIApplication.shared.statusBarFrame }
   
 }
 
@@ -74,12 +74,12 @@ public extension App {
 public extension App {
   
   /// 导航栏Frame
-  public var navigationBar: CGRect { return CGRect(x: 0, y: self.statusBar.height, width: self.screen.width, height: 44) }
+  var navigationBar: CGRect { return CGRect(x: 0, y: self.statusBar.height, width: self.screen.width, height: 44) }
 }
 
 // MARK: - Screen
 public extension App {
   
   /// 屏幕Size
-  public var screen: CGSize { return UIScreen.main.bounds.size }
+  var screen: CGSize { return UIScreen.main.bounds.size }
 }

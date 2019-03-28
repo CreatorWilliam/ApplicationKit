@@ -10,8 +10,8 @@ import UIKit
 
 public struct ReuseItem {
   
-  public var `class`: AnyClass?
-  public var id: String
+  public let `class`: AnyClass
+  public let id: String
   
   public init(_ cellClass: AnyClass, _ id: String? = nil) {
     
@@ -23,9 +23,10 @@ public struct ReuseItem {
 
 extension ReuseItem: Hashable {
   
-  public var hashValue: Int {
+  public func hash(into hasher: inout Hasher) {
     
-    return (self.id.hashValue + (self.class?.hash() ?? 0)).hashValue
+    hasher.combine(self.class.hash())
+    hasher.combine(self.id)
   }
   
   public static func ==(lhs: ReuseItem, rhs: ReuseItem) -> Bool {
@@ -47,10 +48,5 @@ public extension UITableView {
     
     sectionViews.forEach { self.register($0.class, forHeaderFooterViewReuseIdentifier: $0.id) }
   }
+  
 }
-
-
-
-
-
-

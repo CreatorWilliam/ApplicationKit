@@ -17,7 +17,7 @@ public extension Network {
   /// - Parameters:
   ///   - resumeData: 包含继续下载所需信息，若不提供，则重新下载
   ///   - action: 下载完成或出现异常后进行回调，处理下载文件的临时地址及错误信息
-  public func download(with resumeData: Data? = nil, _ action: @escaping DownloadTaskCompleteAction) {
+  func download(with resumeData: Data? = nil, _ action: @escaping DownloadTaskCompleteAction) {
     
     //设置内部完成回调
     self.setupResultComplete({ (delegate) in
@@ -64,7 +64,7 @@ public extension Network {
   /// 取消下载
   ///
   /// - Parameter action: 处理暂停下载的内容
-  public func cancelDownload(_ handle: @escaping DownloadTaskCancelHandle) {
+  func cancelDownload(_ handle: @escaping DownloadTaskCancelHandle) {
     
     self.handleTask({ (task) in
       
@@ -97,12 +97,3 @@ public extension Network {
   }
   
 }
-
-
-
-
-
-
-
-
-

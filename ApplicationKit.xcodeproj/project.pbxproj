@@ -1578,7 +1578,7 @@
 					};
 					BB8227F3211C50B400D5B2C0 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					BBC73AD720A56DE400781F00 = {
 						CreatedOnToolsVersion = 9.3;
@@ -2206,7 +2206,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.william.NetworkKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2231,7 +2231,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.william.NetworkKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -14,7 +14,7 @@ public extension Network {
   typealias StatusHandle = (_ status: NetworkStatus) -> Void
   
   /// 暂停任务
-  public func suspend(_ handle: StatusHandle) {
+  func suspend(_ handle: StatusHandle) {
     
     self.handleTask({ (task) in
       
@@ -29,7 +29,7 @@ public extension Network {
     
   }
   
-  public func resume(_ handle: StatusHandle) {
+  func resume(_ handle: StatusHandle) {
     
     self.handleTask({ (task) in
       
@@ -43,7 +43,7 @@ public extension Network {
   }
   
   /// 取消任务，任务将不可恢复，若想取消下载任务后，能继续下载，使用cancelDownload，获取resumeData，用于继续下载
-  public func cancel(_ handle: StatusHandle) {
+  func cancel(_ handle: StatusHandle) {
     
     self.handleTask({ (task) in
       
@@ -66,6 +66,7 @@ public extension Network {
   
 }
 
+// MARK: - Utility
 internal extension Network {
   
   /// 创建并启动任务
@@ -157,12 +158,3 @@ internal extension Network {
   }
   
 }
-
-
-
-
-
-
-
-
-

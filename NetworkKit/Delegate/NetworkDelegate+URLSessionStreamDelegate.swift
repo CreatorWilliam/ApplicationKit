@@ -55,13 +55,5 @@ extension NetworkDelegate: URLSessionStreamDelegate {
     
     delegateLog()
   }
+  
 }
-
-
-
-
-
-
-
-
-

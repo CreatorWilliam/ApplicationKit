@@ -15,7 +15,7 @@ public extension Network {
   /// 处理Data数据
   ///
   /// - Parameter action: 获取Data数据或出现异常后进行回调，处理Data数据集错误信息
-  public func data(_ action: @escaping DataTaskCompleteAction) {
+  func data(_ action: @escaping DataTaskCompleteAction) {
     
     //外部完成回调打包成内部完成回调
     self.setupResultComplete({ (delegate) in
@@ -35,14 +35,4 @@ public extension Network {
     
   }
   
-  
 }
-
-
-
-
-
-
-
-
-

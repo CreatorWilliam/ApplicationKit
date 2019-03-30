@@ -10,7 +10,7 @@ import Foundation
 
 public extension SandBox {
   
-  public struct FileItem {
+  struct FileItem {
     
     /// 文件路径
     public let path: String

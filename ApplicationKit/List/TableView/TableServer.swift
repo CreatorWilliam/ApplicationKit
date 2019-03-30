@@ -31,6 +31,11 @@ public class TableServer: NSObject {
     }
   }
   
+  /// 是否可以移动
+  public var canMoveRow: Bool = false
+  public typealias MoveHandle = (_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void
+  public var moveHandle: MoveHandle?
+  
   /// UIScrollViewDelegate
   public weak var scrollViewDelegate: UIScrollViewDelegate?
   
@@ -141,6 +146,17 @@ extension TableServer: UITableViewDelegate {
   public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     
     self.groups[indexPath.section].items[indexPath.row].deselectedHandle?()
+  }
+  
+  /// Can Move
+  public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    
+    return self.canMoveRow
+  }
+  
+  public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    
+    self.moveHandle?(sourceIndexPath, destinationIndexPath)
   }
   
   // Will Display Cell

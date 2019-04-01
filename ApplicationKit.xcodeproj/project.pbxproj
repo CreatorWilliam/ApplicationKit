@@ -170,6 +170,7 @@
 		3DD832A7215A326B003B2C19 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F034211BD3AA00424FEA /* LayoutKit.framework */; };
 		3DE7FAB2216CB26E0089F110 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FAB1216CB26E0089F110 /* Project.swift */; };
 		3DE7FABD216CB60B0089F110 /* ImageKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FABC216CB60B0089F110 /* ImageKit.swift */; };
+		59F11C5A224B277200D604FD /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F11C57224B277200D604FD /* ActivityIndicatorView.swift */; };
 		BB0E65332126D01E00C862EF /* JSON+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E65322126D01E00C862EF /* JSON+Description.swift */; };
 		BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */; };
 		BB5CB9E121212713001701CC /* JSONIteratorElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9E021212713001701CC /* JSONIteratorElement.swift */; };
@@ -408,6 +409,7 @@
 		3DE6BBC021772EF000A3BE08 /* CollectionSectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionItem.swift; sourceTree = "<group>"; };
 		3DE7FAB1216CB26E0089F110 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		3DE7FABC216CB60B0089F110 /* ImageKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKit.swift; sourceTree = "<group>"; };
+		59F11C57224B277200D604FD /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
 		BB0E65322126D01E00C862EF /* JSON+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Description.swift"; sourceTree = "<group>"; };
 		BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -983,6 +985,7 @@
 		3DD83212215A315B003B2C19 /* HUD */ = {
 			isa = PBXGroup;
 			children = (
+				59F11C57224B277200D604FD /* ActivityIndicatorView.swift */,
 				3DD83213215A315B003B2C19 /* HUD.swift */,
 				3DD83214215A315B003B2C19 /* LoadingView.swift */,
 				3DD83215215A315B003B2C19 /* MessageView.swift */,
@@ -1875,6 +1878,7 @@
 				3DC38F1221BE844700871DE7 /* Tips.swift in Sources */,
 				3DC38F5D21BF8C0F00871DE7 /* UIButton+Extension.swift in Sources */,
 				3DC38F6D21BFA06E00871DE7 /* ItemListable.swift in Sources */,
+				59F11C5A224B277200D604FD /* ActivityIndicatorView.swift in Sources */,
 				BBC73BF220A5BC3000781F00 /* API.swift in Sources */,
 				3DC38F6721BF8D0B00871DE7 /* NavigationView.swift in Sources */,
 				3DC38F6C21BFA06E00871DE7 /* ViewControllerListable.swift in Sources */,

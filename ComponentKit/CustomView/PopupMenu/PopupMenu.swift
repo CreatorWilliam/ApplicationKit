@@ -279,6 +279,24 @@ public extension PopupMenu {
     self.show()
   }
   
+  func hide() {
+    
+    self.delegate?.popupMenuWillDisappear()
+    
+    UIView.animate(withDuration: 0.25, animations: {
+      
+      self.layer.setAffineTransform(CGAffineTransform(scaleX: 0.1, y: 0.1))
+      self.alpha = 0
+      self.menuBackgroundView.alpha = 0
+      
+    }, completion: { (isFinished) in
+      
+      self.delegate?.popupMenuDidDisappear()
+      self.delegate = nil
+      self.removeFromSuperview()
+      self.menuBackgroundView.removeFromSuperview()
+    })
+  }
 }
 
 // MARK: - Action
@@ -609,24 +627,24 @@ private extension PopupMenu {
     
   }
   
-  func hide() {
-    
-    self.delegate?.popupMenuWillDisappear()
-    
-    UIView.animate(withDuration: 0.25, animations: {
-      
-      self.layer.setAffineTransform(CGAffineTransform(scaleX: 0.1, y: 0.1))
-      self.alpha = 0
-      self.menuBackgroundView.alpha = 0
-      
-    }, completion: { (isFinished) in
-      
-      self.delegate?.popupMenuDidDisappear()
-      self.delegate = nil
-      self.removeFromSuperview()
-      self.menuBackgroundView.removeFromSuperview()
-    })
-  }
+//  func hide() {
+//    
+//    self.delegate?.popupMenuWillDisappear()
+//    
+//    UIView.animate(withDuration: 0.25, animations: {
+//      
+//      self.layer.setAffineTransform(CGAffineTransform(scaleX: 0.1, y: 0.1))
+//      self.alpha = 0
+//      self.menuBackgroundView.alpha = 0
+//      
+//    }, completion: { (isFinished) in
+//      
+//      self.delegate?.popupMenuDidDisappear()
+//      self.delegate = nil
+//      self.removeFromSuperview()
+//      self.menuBackgroundView.removeFromSuperview()
+//    })
+//  }
   
   func drawBezierPath(with myRect: CGRect) {
     

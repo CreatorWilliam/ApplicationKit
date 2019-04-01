@@ -20,6 +20,8 @@ class PopupMenuCell: UITableViewCell {
     didSet{ self.setNeedsDisplay() }
   }
   
+  private let avatarView = UIImageView()
+  
   override func draw(_ rect: CGRect) {
     super.draw(rect)
     
@@ -41,6 +43,25 @@ class PopupMenuCell: UITableViewCell {
     self.selectionStyle = .none
     self.textLabel?.numberOfLines = 0
     self.backgroundColor = .clear
+    
+    //FIXME: 调整
+    self.avatarView.layer.cornerRadius = 13
+    self.avatarView.contentMode = .scaleAspectFill
+    self.avatarView.layer.masksToBounds = true
+    self.contentView.addSubview(self.avatarView)
+    self.avatarView.layout.add { (make) in
+      
+      make.leading(10).centerY().equal(self.contentView)
+      make.width(26).height(26)
+    }
+    
+    self.textLabel?.layout.add({ (make) in
+      
+      make.leading(10).equal(self.avatarView).trailing()
+      make.trailing().equal(self.contentView)
+      make.centerY().equal(self.avatarView)
+    })
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -63,15 +84,24 @@ extension PopupMenuCell {
     self.textLabel?.text = item.title
     if let imageName = item.imageName {
       
-      self.imageView?.image = UIImage(named: imageName)
+      self.avatarView.image = UIImage(named: imageName)
       
     } else if let imageURL = item.imageURL {
       
-      self.imageView?.setImage(with: imageURL)
+      self.avatarView.setImage(with: imageURL)
       
     } else {
       
-      self.imageView?.image = nil
+      self.avatarView.image = nil
+      self.avatarView.layout.update { (make) in
+        
+        make.leading().equal(self.contentView)
+        make.width(0)
+      }
+      self.textLabel?.layout.update({ (make) in
+        
+        make.leading().equal(self.avatarView).trailing()
+      })
     }
     
   }

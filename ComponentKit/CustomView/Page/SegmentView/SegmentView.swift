@@ -133,6 +133,7 @@ public extension SegmentView {
     self.flowLayout.itemSize.width = self.bounds.width / (CGFloat(self.segments.count) > self.maxVisibleCount ? self.maxVisibleCount : CGFloat(self.segments.count))
     self.collectionView.reloadData()
     self.select(at: self.selectedIndex, isAnimated: false)
+    self.indicatorView.isHidden = !(self.segments.count > 0)
   }
   
   /// 更新指定位置的角标，如果使用自定义的SegmentViewCell，则需要遵循SegmentViewCellBadgable，才可以设置角标
@@ -185,6 +186,7 @@ private extension SegmentView {
     self.indicatorView.frame.size.width = self.indicatorWidth
     self.indicatorView.backgroundColor = self.indicatorColor
     self.collectionView.addSubview(self.indicatorView)
+    self.indicatorView.isHidden = true
   }
   
 }

@@ -57,7 +57,7 @@ public extension ImagePicker {
       }
       ImagePickerAlbumViewController.openPicker(withLimited: count, completion: { (asset, images) in
         
-        ImagePicker.shared.completeHandle?([], images)
+        ImagePicker.shared.completeHandle?(asset, images)
         ImagePicker.shared.completeHandle = nil
       })
     }

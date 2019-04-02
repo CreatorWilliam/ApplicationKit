@@ -19,4 +19,5 @@ struct AttributeItem {
     self.attribute = attribute
     self.offset = offset
   }
+  
 }

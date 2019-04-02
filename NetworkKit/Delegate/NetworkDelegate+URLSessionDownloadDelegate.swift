@@ -78,12 +78,3 @@ extension NetworkDelegate : URLSessionDownloadDelegate {
   }
   
 }
-
-
-
-
-
-
-
-
-

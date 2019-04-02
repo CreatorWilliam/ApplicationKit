@@ -33,7 +33,7 @@ public enum NetworkStatus : Error {
 
 public extension NetworkStatus {
   
-  public var isNormality: Bool {
+  var isNormality: Bool {
     
     switch self {
     case .progress,
@@ -48,7 +48,7 @@ public extension NetworkStatus {
     
   }
   
-  public var reason: String? {
+  var reason: String? {
     
     switch self {
       
@@ -67,12 +67,3 @@ public extension NetworkStatus {
   }
   
 }
-
-
-
-
-
-
-
-
-

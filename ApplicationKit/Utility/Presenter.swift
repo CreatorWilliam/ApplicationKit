@@ -16,7 +16,7 @@ public struct Presenter {
 public extension Presenter {
   
   /// 获取当前Present出来的控制器
-  public static var currentPresentedController: UIViewController? {
+  static var currentPresentedController: UIViewController? {
     
     var keyWindow = UIApplication.shared.keyWindow
     if keyWindow?.windowLevel != UIWindow.Level.normal {
@@ -33,7 +33,7 @@ public extension Presenter {
   }
   
   /// 获取当前Present出来的导航控制器
-  public static var currentNavigationController: UINavigationController? {
+  static var currentNavigationController: UINavigationController? {
     
     return Presenter.currentPresentedController?.navigationController
   }
@@ -44,7 +44,7 @@ public extension Presenter {
   ///   - presentedViewController: 要显示的控制器
   ///   - animated: 是否有动画，默认有动画
   ///   - completion: 完成展示后执行的闭包
-  public static func present(_ presentedViewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+  static func present(_ presentedViewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
     
     Presenter.currentPresentedController?.present(presentedViewController, animated: animated, completion: completion)
   }
@@ -54,7 +54,7 @@ public extension Presenter {
   /// - Parameters:
   ///   - animated: 是否有动画，默认有动画
   ///   - completion: 完成展示后执行的闭包
-  public static func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+  static func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
     
     Presenter.currentPresentedController?.dismiss(animated: animated, completion: completion)
   }
@@ -67,7 +67,7 @@ public extension Presenter {
   ///   - animated: 是否有动画，默认有动画
   /// - Returns: 若没有导航控制器，调用此方法后，将返回false
   @discardableResult
-  public static func push(_ viewController: UIViewController, isHideBottomBar: Bool = true, animated: Bool = true) -> Bool {
+  static func push(_ viewController: UIViewController, isHideBottomBar: Bool = true, animated: Bool = true) -> Bool {
     
     guard let navigationController = Presenter.currentNavigationController else { return false }
     viewController.hidesBottomBarWhenPushed = isHideBottomBar
@@ -80,7 +80,7 @@ public extension Presenter {
   /// - Parameter animated: 是否有动画，默认有动画
   /// - Returns: Pop的控制器
   @discardableResult
-  public static func pop(animated: Bool = true) -> UIViewController? {
+  static func pop(animated: Bool = true) -> UIViewController? {
     
     return Presenter.currentNavigationController?.popViewController(animated: animated)
   }
@@ -92,7 +92,7 @@ public extension Presenter {
   ///   - animated: 是否有动画，默认有动画
   /// - Returns: Pop的控制器集合
   @discardableResult
-  public static func pop(to viewController: UIViewController?, animated: Bool = true) -> [UIViewController]? {
+  static func pop(to viewController: UIViewController?, animated: Bool = true) -> [UIViewController]? {
     
     if let viewController = viewController {
       

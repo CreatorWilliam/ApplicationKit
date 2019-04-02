@@ -56,9 +56,3 @@ public struct CollectionCellItem {
   }
   
 }
-
-
-
-
-
-

@@ -8,30 +8,30 @@
 
 import Foundation
 
-public protocol EZPlayerHorizontalPan: class {
-    func player(_ player: EZPlayer ,progressWillChange value: TimeInterval)
-    func player(_ player: EZPlayer ,progressChanging value: TimeInterval)
-    func player(_ player: EZPlayer ,progressDidChange value: TimeInterval)
+protocol EZPlayerHorizontalPan: class {
+  func player(_ player: EZPlayer ,progressWillChange value: TimeInterval)
+  func player(_ player: EZPlayer ,progressChanging value: TimeInterval)
+  func player(_ player: EZPlayer ,progressDidChange value: TimeInterval)
 }
 
-public protocol EZPlayerGestureRecognizer: class {
-    func player(_ player: EZPlayer ,singleTapGestureTapped singleTap: UITapGestureRecognizer)
-    func player(_ player: EZPlayer ,doubleTapGestureTapped doubleTap: UITapGestureRecognizer)
-}
-
-
-public protocol EZPlayerCustomAction: class {
-    var player: EZPlayer? { get set }
-    var autohidedControlViews: [UIView] { get set }
-
-
-    func playPauseButtonPressed(_ sender: Any)
-    func fullEmbeddedScreenButtonPressed(_ sender: Any)
-    func audioSubtitleCCButtonPressed(_ sender: Any)
-    func backButtonPressed(_ sender: Any)
+protocol EZPlayerGestureRecognizer: class {
+  func player(_ player: EZPlayer ,singleTapGestureTapped singleTap: UITapGestureRecognizer)
+  func player(_ player: EZPlayer ,doubleTapGestureTapped doubleTap: UITapGestureRecognizer)
 }
 
 
-public protocol EZPlayerCustom: EZPlayerDelegate,EZPlayerCustomAction,EZPlayerHorizontalPan,EZPlayerGestureRecognizer {
+protocol EZPlayerCustomAction: class {
+  var player: EZPlayer? { get set }
+  var autohidedControlViews: [UIView] { get set }
+  
+  
+  func playPauseButtonPressed(_ sender: Any)
+  func fullEmbeddedScreenButtonPressed(_ sender: Any)
+  func audioSubtitleCCButtonPressed(_ sender: Any)
+  func backButtonPressed(_ sender: Any)
+}
+
+
+protocol EZPlayerCustom: EZPlayerDelegate,EZPlayerCustomAction,EZPlayerHorizontalPan,EZPlayerGestureRecognizer {
 }
 

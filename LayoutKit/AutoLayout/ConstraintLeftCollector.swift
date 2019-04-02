@@ -116,7 +116,7 @@ public extension ConstraintLeftCollector {
   /// - Parameter scale: 系数
   /// - Returns: 约束
   @discardableResult
-  public func multiplier(_ multiplier: CGFloat) -> ConstraintRightCollector {
+  func multiplier(_ multiplier: CGFloat) -> ConstraintRightCollector {
     
     self.rightCollector.multiplier(multiplier)
     return self.rightCollector
@@ -127,7 +127,7 @@ public extension ConstraintLeftCollector {
   /// - Parameter priority: 优先级
   /// - Returns: 约束
   @discardableResult
-  public func priority(_ priority: UILayoutPriority) -> ConstraintRightCollector {
+  func priority(_ priority: UILayoutPriority) -> ConstraintRightCollector {
     
     self.rightCollector.priority(priority)
     return self.rightCollector
@@ -234,10 +234,3 @@ private extension ConstraintLeftCollector {
   }
   
 }
-
-
-
-
-
-
-

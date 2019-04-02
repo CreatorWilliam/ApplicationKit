@@ -38,7 +38,7 @@ public extension Network {
   /// - get: GET请求
   /// - post: POST请求
   /// - delete: DELETE请求
-  public enum HTTPMethod : String {
+  enum HTTPMethod : String {
     
     case get     = "GET"
     case post    = "POST"
@@ -58,7 +58,7 @@ public extension Network {
   ///   - urlString: 请求地址
   ///   - isDebug: 是否为Debug模式, 默认开启，若Network为Debug模式，则打印输出
   /// - Returns: 用于链式调用，设置其他参数
-  public class func request(_ httpMethod: HTTPMethod,
+  class func request(_ httpMethod: HTTPMethod,
                             _ urlString: String,
                             isDebug: Bool = true) -> Network {
     
@@ -81,7 +81,7 @@ public extension Network {
   /// - Parameter parameters: 查询参数
   /// - Returns: 用于链式调用，设置其他参数
   @discardableResult
-  public func query(_ parameters: Any) -> Network {
+  func query(_ parameters: Any) -> Network {
     
     self.delegate.request.queryParameters = parameters
     return self
@@ -92,7 +92,7 @@ public extension Network {
   /// - Parameter parameters: httpBody中的数据
   /// - Returns: 用于链式调用，设置其他参数
   @discardableResult
-  public func body(_ parameters: Any) -> Network {
+  func body(_ parameters: Any) -> Network {
     
     self.delegate.request.bodyParameters = parameters
     return self
@@ -103,7 +103,7 @@ public extension Network {
   /// - Parameter data: Form表单数据
   /// - Returns: 用于链式调用，设置其他参数
   @discardableResult
-  public func form(_ data: Data) -> Network {
+  func form(_ data: Data) -> Network {
     
     self.delegate.request.formData = data
     return self
@@ -114,7 +114,7 @@ public extension Network {
   /// - Parameter contentType: URLRequest中HTTPHeaderField的Content-Type
   /// - Returns: 用于链式调用，设置其他参数
   @discardableResult
-  public func httpHeaderField(_ parameters: [String: String]) -> Network {
+  func httpHeaderField(_ parameters: [String: String]) -> Network {
     
     parameters.forEach({ self.delegate.request.httpHeaderFieldParameters[$0.key] = $0.value})
     return self
@@ -126,7 +126,7 @@ public extension Network {
   ///
   /// - Parameter action: 监听进度的行为,包含上传／下载进度
   /// - Returns: 用于链式调用，设置其他参数
-  public func progress(_ action: @escaping ProgressAction) -> Network {
+  func progress(_ action: @escaping ProgressAction) -> Network {
     
     self.delegate.result.progressingAction = { (delegate) in
       
@@ -161,12 +161,3 @@ internal extension Network {
   }
   
 }
-
-
-
-
-
-
-
-
-

@@ -49,7 +49,7 @@ public class FormInputItem {
 // MARK: - Public
 public extension FormInputItem {
   
-  public var keyboardType: UIKeyboardType {
+  var keyboardType: UIKeyboardType {
     
     guard let regular = self.regular else { return .default }
     switch regular {
@@ -72,7 +72,7 @@ public extension FormInputItem {
     }
   }
   
-  public func clear() {
+  func clear() {
     
     self.visibleValue = nil
   }
@@ -81,7 +81,7 @@ public extension FormInputItem {
   ///
   /// - Parameter hasMessage: 是否显示提示（待完善），默认不显示
   /// - Returns: 验证结果：true为通过，false为不通过
-  public func verify(hasMessage: Bool = false) -> Bool {
+  func verify(hasMessage: Bool = false) -> Bool {
     
     /// 非编辑选项，则只验证是否选中了选项
     guard self.isEditable == true else { return self.parameter != nil }

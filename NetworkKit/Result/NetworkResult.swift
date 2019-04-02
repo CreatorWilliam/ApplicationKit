@@ -50,15 +50,3 @@ extension NetworkResult {
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-

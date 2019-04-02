@@ -9,46 +9,46 @@
 import UIKit
 
 open class EZPlayerFloatView: UIView, EZPlayerCustomAction {
-    public var autohidedControlViews = [UIView]()
-
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
-    weak public var player: EZPlayer?
-    public func playPauseButtonPressed(_ sender: Any){
-    }
-    public func fullEmbeddedScreenButtonPressed(_ sender: Any){
-    }
-    public func audioSubtitleCCButtonPressed(_ sender: Any){
-    }
-
-   @IBAction public func backButtonPressed(_ sender: Any){
-        self.player?.backButtonBlock?(.float)
-    }
-
+  var autohidedControlViews = [UIView]()
+  
+  
+  /*
+   // Only override draw() if you perform custom drawing.
+   // An empty implementation adversely affects performance during animation.
+   override func draw(_ rect: CGRect) {
+   // Drawing code
+   }
+   */
+  
+  weak var player: EZPlayer?
+  func playPauseButtonPressed(_ sender: Any){
+  }
+  func fullEmbeddedScreenButtonPressed(_ sender: Any){
+  }
+  func audioSubtitleCCButtonPressed(_ sender: Any){
+  }
+  
+  @IBAction func backButtonPressed(_ sender: Any){
+    self.player?.backButtonBlock?(.float)
+  }
+  
 }
 
 
 extension EZPlayerFloatView: EZPlayerGestureRecognizer {
-
-    public func player(_ player: EZPlayer, singleTapGestureTapped singleTap: UITapGestureRecognizer)
-    {
-        if player.isPlaying {
-            player.pause()
-        }else{
-            player.play()
-        }
+  
+  func player(_ player: EZPlayer, singleTapGestureTapped singleTap: UITapGestureRecognizer)
+  {
+    if player.isPlaying {
+      player.pause()
+    }else{
+      player.play()
     }
-
-    public func player(_ player: EZPlayer, doubleTapGestureTapped doubleTap: UITapGestureRecognizer) {
-        player.toFull()
-    }
-
-
+  }
+  
+  func player(_ player: EZPlayer, doubleTapGestureTapped doubleTap: UITapGestureRecognizer) {
+    player.toFull()
+  }
+  
+  
 }

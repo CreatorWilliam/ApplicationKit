@@ -151,7 +151,7 @@ extension ImagePickerAssetViewController: UICollectionViewDataSource {
       cell.isShowChoice = (self.maxCount > 1)
       cell.delegate = self
       cell.imageManager = self.imageManager
-      if let index = self.selectedAssets.index(where: { $0.asset.localIdentifier == self.group[indexPath.item].asset.localIdentifier }) {
+      if let index = self.selectedAssets.firstIndex(where: { $0.asset.localIdentifier == self.group[indexPath.item].asset.localIdentifier }) {
         
         cell.update(with: "\(index + 1)")
         

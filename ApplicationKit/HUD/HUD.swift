@@ -159,9 +159,8 @@ public extension HUD {
         self.activityView.layerTintColors = [UIColor(0x23F6EB), UIColor.black, UIColor(0xFF2E56)]
         self.activityView = ActivityIndicatorView.show(in: controller.view)
       }
-      
-      self.controller?.view.bringSubviewToFront(self.activityView)
       self.activityView.startAnimation()
+      self.controller?.view.bringSubviewToFront(self.activityView)
       handle?()
     }
   }

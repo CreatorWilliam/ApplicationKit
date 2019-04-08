@@ -23,7 +23,7 @@ public class ActivityIndicatorView: UIView {
   }
  
   /// 配置三个球的颜色
-  public var layerTintColors = [UIColor.orange, UIColor.blue, UIColor.red] {
+  public var layerTintColors = [UIColor(0x23F6EB), UIColor.black, UIColor(0xFF2E56)] {
 
     didSet {
       if oldValue != layerTintColors {
@@ -96,6 +96,7 @@ public class ActivityIndicatorView: UIView {
     self.animationLayer.sublayers = nil
     self.setupAnimation(self.animationLayer, size: CGSize(width: self.size, height: self.size), tintColors: self.layerTintColors)
     self.animationLayer.speed = 0.0
+
   }
 }
 
@@ -134,9 +135,7 @@ public extension ActivityIndicatorView {
   
   func startAnimation() {
     
-    if self.animationLayer.sublayers == nil {
-      self.setupAnimation()
-    }
+    self.setupAnimation()
     self.isHidden = false
     self.animationLayer.speed = 1
     self.isAnimatiing = true
@@ -148,7 +147,6 @@ public extension ActivityIndicatorView {
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay, execute: {
       
       self.stopAnimation()
-      self.removeFromSuperview()
       compelete()
     })
   }
@@ -183,6 +181,8 @@ private extension ActivityIndicatorView {
     let circle1 = layer.sublayers?[0]
     let circle2 = layer.sublayers?[1]
     let circle3 = layer.sublayers?[2]
+    
+    
     
     let circle1Color = tintColors[0]
     let circle2Color = tintColors[1]

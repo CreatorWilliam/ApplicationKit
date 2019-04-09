@@ -34,6 +34,8 @@ public class HUD {
   private lazy var messageView = MessageView()
   /// 加载视图
   private lazy var loadingView = LoadingView()
+  /// 
+  private lazy var activityView = ActivityIndicatorView(frame: .zero)
   private weak var controller: UIViewController?
   
   fileprivate init(_ controller: UIViewController) {
@@ -141,4 +143,38 @@ public extension HUD {
     
   }
   
+}
+
+
+// MARK: - ActivityIndicatorView
+public extension HUD {
+
+  func showActivity(_ handle: (() -> Void)? = nil) {
+   
+    DispatchQueue.main.async {
+      
+      if self.activityView.superview == nil {
+        
+        guard let controller = self.controller else { return }
+        self.activityView.layerTintColors = [UIColor(0x23F6EB), UIColor.black, UIColor(0xFF2E56)]
+        self.activityView = ActivityIndicatorView.show(in: controller.view)
+      }
+      self.activityView.startAnimation()
+      self.controller?.view.bringSubviewToFront(self.activityView)
+      handle?()
+    }
+  }
+  
+ 
+  func hideActivity(_ handle: (() -> Void)? = nil) {
+    
+    DispatchQueue.main.async {
+      
+      self.activityView.hide(0.0, compelete: {
+        
+        handle?()
+      })
+    }
+    
+  }
 }

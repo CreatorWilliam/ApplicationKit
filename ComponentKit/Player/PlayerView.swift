@@ -21,6 +21,8 @@ public class PlayerView: UIView {
   public var isRotationEnable: Bool = false
   /// 内容页，承载视频播放，视频控制视图，切换全屏模式，也是操纵该视图
   private let contentView = UIView()
+  /// 放置视频播放Layer
+  private let playerLayerView = UIView()
   /// 缩略图
   private var thumb: String?
   /// 视频播放数据源
@@ -28,24 +30,24 @@ public class PlayerView: UIView {
     
     willSet {
       
-      guard self.playerItem != newValue else { return }
+      guard playerItem != newValue else { return }
       NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
-      self.playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
-      self.playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.loadedTimeRanges))
-      self.playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackBufferEmpty))
-      self.playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackLikelyToKeepUp))
+      playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
+      playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.loadedTimeRanges))
+      playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackBufferEmpty))
+      playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackLikelyToKeepUp))
     }
     
     didSet {
       
-      guard self.playerItem != oldValue else { return }
-      NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidPlayToEnd), name: .AVPlayerItemDidPlayToEndTime, object: nil)
-      self.playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: .new, context: nil)
-      self.playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.loadedTimeRanges), options: .new, context: nil)
+      guard playerItem != oldValue else { return }
+      NotificationCenter.default.addObserver(self, selector: #selector(playerDidPlayToEnd), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+      playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: .new, context: nil)
+      playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.loadedTimeRanges), options: .new, context: nil)
       // 缓冲区空了，需要等待数据
-      self.playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackBufferEmpty), options: .new, context: nil)
+      playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackBufferEmpty), options: .new, context: nil)
       // 缓冲区有足够数据可以播放了
-      self.playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackLikelyToKeepUp), options: .new, context: nil)
+      playerItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.playbackLikelyToKeepUp), options: .new, context: nil)
     }
   }
   private let player = AVPlayer()
@@ -55,9 +57,9 @@ public class PlayerView: UIView {
   public var mode: RenderMode = .fit {
     
     didSet {
-      switch self.mode {
-      case .fit: self.playerLayer.videoGravity = .resizeAspect
-      case .fill: self.playerLayer.videoGravity = .resizeAspectFill
+      switch mode {
+      case .fit: playerLayer.videoGravity = .resizeAspect
+      case .fill: playerLayer.videoGravity = .resizeAspectFill
       }
     }
   }
@@ -84,16 +86,17 @@ public class PlayerView: UIView {
     
     super.init(frame: frame)
     
-    self.timeObserver = self.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: DispatchQueue.main, using: { [unowned self] (time) in
+    timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: DispatchQueue.main, using: { [unowned self] (time) in
+      
       guard self.playerItem?.duration.seconds.isNaN == false else { return }
-      self.controlView.playerView(self, updateProgressWithCurrentTime: self.playerItem?.currentTime().seconds ?? 0, totalTime: self.playerItem?.duration.seconds ?? 1)
+      controlView.playerView(self, updateProgressWithCurrentTime: self.playerItem?.currentTime().seconds ?? 0, totalTime: self.playerItem?.duration.seconds ?? 1)
     })
-    self.controlView.update(playerView: self)
-    self.controlView.playerView(self, didChangedScreenMode: .shrink)
+    controlView.update(playerView: self)
+    controlView.playerView(self, didChangedScreenMode: .shrink)
     
-    self.setupUI()
+    setupUI()
     
-    self.addNotification()
+    addNotification()
     
   }
   
@@ -104,27 +107,28 @@ public class PlayerView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    //defer {
+    defer {
       
-      self.playerLayer.frame = self.contentView.bounds
-    //}
-    
+      playerLayer.frame = contentView.bounds
+    }
     // 仅当作为子视图的时候，才设置大小
-    //if self.contentView.superview != self { return }
-    //self.contentView.frame = self.bounds
+    if contentView.superview != self { return }
+    contentView.frame = bounds
   }
   
   deinit {
     
-    if let timeObserver = self.timeObserver {
+    stop()
+    
+    if let timeObserver = timeObserver {
       
-      self.player.removeTimeObserver(timeObserver)
+      player.removeTimeObserver(timeObserver)
     }
     
-    self.removeNotification()
+    removeNotification()
     
     // 可能添加到UIWindow上并持有，因此需要移除销毁
-    self.contentView.removeFromSuperview()
+    contentView.removeFromSuperview()
   }
   
 }
@@ -182,65 +186,66 @@ public extension PlayerView {
     guard let urlString = url?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
     guard let url = URL(string: urlString) else { return }
     
-    //self.playerItem = AVPlayerItem(url: PlayerCacher.shared.url(withRemote: url))
-    self.playerItem = AVPlayerItem(url: url)
-    self.player.pause()
-    self.player.replaceCurrentItem(with: self.playerItem)
+    //playerItem = AVPlayerItem(url: PlayerCacher.shared.url(withRemote: url))
+    playerItem = AVPlayerItem(url: url)
+    player.pause()
+    player.replaceCurrentItem(with: playerItem)
     
     self.thumb = thumb
-    self.controlView.update(thumb: thumb)
+    controlView.update(thumb: thumb)
     
-    self.playState = .prepared
-    self.controlView.playerView(self, updateProgressWithCurrentTime: 0, totalTime: 0)
+    playState = .prepared
+    controlView.playerView(self, updateProgressWithCurrentTime: 0, totalTime: 0)
   }
   
   func play() {
     
-    guard self.playerItem != nil else { return }
+    guard playerItem != nil else { return }
     
-    self.player.play()
-    self.playState = .playing
-    self.controlView.playerViewDidPlay(self)
+    player.play()
+    playState = .playing
+    controlView.playerViewDidPlay(self)
   }
   
   func pause() {
     
-    self.player.pause()
-    self.playState = .paused
-    self.controlView.playerViewDidPause(self)
+    player.pause()
+    playState = .paused
+    controlView.playerViewDidPause(self)
   }
   
   func stop() {
     
     /// 设置nil触发该属性的didSet方法，释放观察者
-    self.playerItem = nil
+    playerItem = nil
     
-    self.player.pause()
-    self.player.seek(to: CMTime(value: 0, timescale: 1))
-    self.playState = .stopped
-    self.controlView.playerViewDidStop(self)
+    player.pause()
+    player.seek(to: CMTime(value: 0, timescale: 1))
+    playState = .stopped
+    controlView.playerViewDidStop(self)
   }
   
   func seek(with progress: Float) {
     
-    guard let item = self.playerItem else { return }
+    guard let item = playerItem else { return }
     let progress: Double = progress > 1 ? 1 : Double(progress)
     let time = item.duration.seconds * progress
-    self.player.seek(to: CMTime(seconds: time, preferredTimescale: 1), completionHandler: { (_) in
+    player.seek(to: CMTime(seconds: time, preferredTimescale: 1), completionHandler: { (_) in
       
     })
   }
   
   func joinFullScreen() {
     
-    self.controlView.playerView(self, didChangedScreenMode: .full)
-    self.updateRotation(with: .landscapeLeft)
+    contentView.backgroundColor = .black
+    controlView.playerView(self, didChangedScreenMode: .full)
+    updateRotation(with: .landscapeLeft)
   }
   
   func quitFullScreen() {
     
-    self.controlView.playerView(self, didChangedScreenMode: .shrink)
-    self.updateRotation(with: .portrait)
+    controlView.playerView(self, didChangedScreenMode: .shrink)
+    updateRotation(with: .portrait)
   }
   
 }
@@ -250,17 +255,19 @@ private extension PlayerView {
   
   func setupUI() {
     
-    self.playerLayer.player = self.player
-    self.contentView.layer.addSublayer(self.playerLayer)
-    //self.contentView.backgroundColor = .black
-    self.addSubview(self.contentView)
-    self.contentView.layout.add { (make) in
-      make.top().bottom().leading().trailing().equal(self)
+    playerLayer.player = player
+    addSubview(contentView)
+    
+    playerLayerView.layer.addSublayer(playerLayer)
+    contentView.addSubview(playerLayerView)
+    playerLayerView.layout.add { (make) in
+      make.top().bottom().leading().trailing().equal(contentView)
     }
+    
     let controlView: UIView = self.controlView
-    self.contentView.addSubview(controlView)
+    contentView.addSubview(controlView)
     controlView.layout.add { (make) in
-      make.top().bottom().leading().trailing().equal(self.contentView)
+      make.top().bottom().leading().trailing().equal(contentView)
     }
   }
   
@@ -272,30 +279,30 @@ extension PlayerView {
   @objc func playerDidPlayToEnd(_ notification: Notification) {
     
     // 避免黑屏
-    self.player.pause()
-    self.player.seek(to: CMTime(value: 0, timescale: 1))
-    self.playState = .stopped
-    self.controlView.playerViewDidComplete(self)
+    player.pause()
+    player.seek(to: CMTime(value: 0, timescale: 1))
+    playState = .stopped
+    controlView.playerViewDidComplete(self)
     
-    guard self.isRepeat == true else { return }
+    guard isRepeat == true else { return }
     
-    self.play()
+    play()
   }
   
   public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     
     guard let keyPath = keyPath else { return }
     guard let item = object as? AVPlayerItem else { return }
-    guard item == self.playerItem else { return }
+    guard item == playerItem else { return }
     switch keyPath {
       
     case #keyPath(AVPlayerItem.status):
       
-      self.playerStatusDidChanged(item)
+      playerStatusDidChanged(item)
       
     case #keyPath(AVPlayerItem.loadedTimeRanges):
       
-      self.playerBufferDidChanged(item)
+      playerBufferDidChanged(item)
       
     case #keyPath(AVPlayerItem.playbackBufferEmpty):
       
@@ -323,16 +330,16 @@ private extension PlayerView {
     
     if item.status == .failed {
       
-      self.loadState = .failed(item.error?.localizedDescription ?? "- -")
+      loadState = .failed(item.error?.localizedDescription ?? "- -")
       return
     }
     
     guard item.status == .readyToPlay else { return }
     
     //自动播放：设置了自动播放，且播放状态处于已准备
-    guard self.isAutoPlay == true && self.playState == .prepared else { return }
+    guard isAutoPlay == true && playState == .prepared else { return }
     
-    self.play()
+    play()
   }
   
   func playerBufferDidChanged(_ item: AVPlayerItem) {
@@ -344,7 +351,7 @@ private extension PlayerView {
     let bufferDuration = startSeconds + durationSecound // 计算缓冲总时间
     DebugLog("AVPlayerItem's loadedTimeRanges is changed, current: \(bufferDuration)s - total: \(item.duration.seconds)s")
     guard item.duration.seconds.isNaN == false else { return }
-    self.controlView.playerView(self, updateProgressWithBufferingTime: bufferDuration, totalTime: item.duration.seconds)
+    controlView.playerView(self, updateProgressWithBufferingTime: bufferDuration, totalTime: item.duration.seconds)
   }
   
 }
@@ -398,15 +405,15 @@ private extension PlayerView {
   
   @objc func recieveApplicationDidBecomeActive(_ notification: Notification) {
     
-    if self.isAutoPlay == false { return }
-    if self.playState == .stopped { return }
-    self.play()
+    if isAutoPlay == false { return }
+    if playState == .stopped { return }
+    play()
   }
   
   @objc func recieveApplicationWillResignActive(_ notification: Notification) {
     
-    if self.playState != .playing { return }
-    self.pause()
+    if playState != .playing { return }
+    pause()
   }
   
   @objc func recieveApplicationDidEnterBackground(_ notification: Notification) {
@@ -415,19 +422,19 @@ private extension PlayerView {
   
   @objc func recieveRouteChange(_ notification: Notification) {
     
-    if self.playState != .playing { return }
-    self.pause()
+    if playState != .playing { return }
+    pause()
   }
   
   @objc func recieveOrientationDidChange(_ notification: Notification) {
     
-    guard self.isRotationEnable == true else { return }
+    guard isRotationEnable == true else { return }
     let orientation = UIDevice.current.orientation
     switch orientation {
-    case .portrait: self.commitRotationUpdateTask(with: .portrait)
-    case .portraitUpsideDown: self.commitRotationUpdateTask(with: .portraitUpsideDown)
-    case .landscapeLeft: self.commitRotationUpdateTask(with: .landscapeLeft)
-    case .landscapeRight: self.commitRotationUpdateTask(with: .landscapeRight)
+    case .portrait: commitRotationUpdateTask(with: .portrait)
+    case .portraitUpsideDown: commitRotationUpdateTask(with: .portraitUpsideDown)
+    case .landscapeLeft: commitRotationUpdateTask(with: .landscapeLeft)
+    case .landscapeRight: commitRotationUpdateTask(with: .landscapeRight)
     default: break
     }
   }
@@ -440,12 +447,12 @@ private extension PlayerView {
   func commitRotationUpdateTask(with orientation: UIInterfaceOrientation) {
     
     // 锁定屏幕将不会更新界面布局
-    if self.isLockScreen == true { return }
+    if isLockScreen == true { return }
     
     // 提交的界面更新未完成，将不再重复提交，将根据最终执行更新任务时的方向为依据，保证更新时界面方向正确性
-    guard self.isRotationComplete == true else { return }
+    guard isRotationComplete == true else { return }
     
-    self.isRotationComplete = false
+    isRotationComplete = false
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
       
       self.isRotationComplete = true
@@ -480,28 +487,29 @@ private extension PlayerView {
       
       transform = CGAffineTransform.identity.rotated(by: (CGFloat.pi / 2.0))
       size = CGSize(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width)
-      UIApplication.shared.keyWindow?.addSubview(self.contentView)
+      UIApplication.shared.keyWindow?.addSubview(contentView)
       
     case .landscapeRight:
       
       transform = CGAffineTransform.identity.rotated(by: -(CGFloat.pi / 2.0))
       size = CGSize(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width)
-      UIApplication.shared.keyWindow?.addSubview(self.contentView)
+      UIApplication.shared.keyWindow?.addSubview(contentView)
       
     default:
       
       transform = CGAffineTransform.identity
-      size = self.frame.size
-      self.addSubview(self.contentView)
+      size = frame.size
+      addSubview(contentView)
     }
     
     // 使用视图角度旋转的方式实现画面旋转
     UIView.beginAnimations(nil, context: nil)
     
-    self.contentView.frame = CGRect(origin: .zero, size: size)
-    self.contentView.transform = transform
-    self.contentView.frame.origin = .zero
-    self.contentView.layoutIfNeeded()
+    contentView.frame = CGRect(origin: .zero, size: size)
+    contentView.transform = transform
+    contentView.frame.origin = .zero
+    playerLayer.frame = contentView.bounds
+    contentView.layoutIfNeeded()
     
     UIView.commitAnimations()
   }

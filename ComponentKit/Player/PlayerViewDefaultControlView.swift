@@ -60,8 +60,8 @@ public class PlayerViewDefaultControlView: UIView {
   public override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.setupUI()
-    self.setupGestureRecognizer()
+    setupUI()
+    setupGestureRecognizer()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -82,51 +82,51 @@ extension PlayerViewDefaultControlView: PlayerViewControllable {
     
     self.playerView = playerView
     
-    self.updatePrepareStyle()
-    self.showControls(isAnimate: false, shouldHide: false)
+    updatePrepareStyle()
+    showControls(isAnimate: false, shouldHide: false)
   }
   
   public func update(thumb: Any?) {
     
-    if let image = thumb as? UIImage { self.thumbView.image = image }
-    else if let urlString = thumb as? String { self.thumbView.setImage(with: urlString) }
+    if let image = thumb as? UIImage { thumbView.image = image }
+    else if let urlString = thumb as? String { thumbView.setImage(with: urlString) }
     else { return }
     
-    self.updatePrepareStyle()
-    self.showControls(isAnimate: false, shouldHide: false)
+    updatePrepareStyle()
+    showControls(isAnimate: false, shouldHide: false)
   }
   
   public func playerViewDidPlay(_ playerView: PlayerView) {
     
-    self.updatePlayingStyle()
-    self.hideThumb()
-    self.hideControls()
+    updatePlayingStyle()
+    hideThumb()
+    hideControls()
   }
   
   public func playerViewDidPause(_ playerView: PlayerView) {
     
-    self.updatePrepareStyle()
-    self.showControls(isAnimate: true, shouldHide: false)
+    updatePrepareStyle()
+    showControls(isAnimate: true, shouldHide: false)
   }
   
   public func playerViewDidResume(_ playerView: PlayerView) {
     
-    self.updatePlayingStyle()
-    self.showControls(isAnimate: true, shouldHide: true)
+    updatePlayingStyle()
+    showControls(isAnimate: true, shouldHide: true)
   }
   
   public func playerViewDidStop(_ playerView: PlayerView) {
     
-    self.updatePrepareStyle()
-    self.showThumb()
-    self.hideControls()
+    updatePrepareStyle()
+    showThumb()
+    hideControls()
   }
   
   public func playerViewDidComplete(_ playerView: PlayerView) {
     
-    self.updateReplayStyle()
-    self.showThumb()
-    self.hideControls()
+    updateReplayStyle()
+    showThumb()
+    hideControls()
   }
   
   public func playerView(_ playerView: PlayerView, didChangedScreenMode mode: PlayerView.ScreenMode) {
@@ -136,21 +136,21 @@ extension PlayerViewDefaultControlView: PlayerViewControllable {
     case .full: isFullScreen = true
     default: isFullScreen = false
     }
-    self.screenButton.isSelected = isFullScreen
-    self.topContainer.isHidden = !isFullScreen
+    screenButton.isSelected = isFullScreen
+    topContainer.isHidden = !isFullScreen
   }
   
   public func playerView(_ playerView: PlayerView, updateProgressWithCurrentTime currentTime: Double, totalTime: Double) {
     
-    self.currentTimeLabel.text = self.time(with: currentTime)
-    self.totalTimeLabel.text = self.time(with: totalTime)
-    self.progressSlider.value = Float(currentTime / totalTime)
+    currentTimeLabel.text = time(with: currentTime)
+    totalTimeLabel.text = time(with: totalTime)
+    progressSlider.value = Float(currentTime / totalTime)
   }
   
   public func playerView(_ playerView: PlayerView, updateProgressWithBufferingTime bufferingTime: Double, totalTime: Double) {
     
-    self.bufferingProgressView.progress = Float(bufferingTime / totalTime)
-    self.totalTimeLabel.text = self.time(with: totalTime)
+    bufferingProgressView.progress = Float(bufferingTime / totalTime)
+    totalTimeLabel.text = time(with: totalTime)
   }
   
 }
@@ -160,134 +160,139 @@ private extension PlayerViewDefaultControlView {
   
   func setupUI() {
     
-    self.backgroundColor = .clear
+    backgroundColor = .clear
     
-    self.addSubview(self.backgroundContainer)
-    self.backgroundContainer.layout.add { (make) in
+    addSubview(backgroundContainer)
+    backgroundContainer.layout.add { (make) in
       make.top().bottom().leading().trailing().equal(self)
     }
     
-    self.topContainer.isHidden = true
-    self.addSubview(self.topContainer)
-    self.topContainer.layout.add { (make) in
-      make.top().leading(25).trailing(-5).equal(self)
+    topContainer.isHidden = true
+    addSubview(topContainer)
+    topContainer.layout.add { (make) in
+      make.top().equal(self).safeTop()
+      make.leading(25).equal(self).safeLeading()
+      make.trailing(-15).equal(self).safeTrailing()
     }
     
-    self.addSubview(self.bottomContainer)
-    self.bottomContainer.layout.add { (make) in
-      make.leading(25).trailing(-5).bottom(-5).equal(self)
+    addSubview(bottomContainer)
+    bottomContainer.layout.add { (make) in
+      make.leading(25).equal(self).safeLeading()
+      make.trailing(-15).equal(self).safeTrailing()
+      make.bottom(-5).equal(self).safeBottom()
     }
     
-    self.addSubview(self.centerContainer)
-    self.centerContainer.layout.add { (make) in
-      make.top().equal(self.topContainer).bottom()
-      make.bottom().equal(self.bottomContainer).top()
+    addSubview(centerContainer)
+    centerContainer.layout.add { (make) in
+      make.top().equal(topContainer).bottom()
+      make.bottom().equal(bottomContainer).top()
       make.leading(5).trailing(-5).equal(self)
     }
     
-    self.setupBackgroundUI()
-    self.setupTopUI()
-    self.setupCenterUI()
-    self.setupBottomUI()
+    setupBackgroundUI()
+    setupTopUI()
+    setupCenterUI()
+    setupBottomUI()
   }
   
   func setupBackgroundUI() {
     
-    self.thumbView.contentMode = .scaleAspectFit
-    self.backgroundContainer.addSubview(self.thumbView)
-    self.thumbView.layout.add { (make) in
-      make.top().bottom().leading().trailing().equal(self.backgroundContainer)
+    thumbView.backgroundColor = .black
+    thumbView.contentMode = .scaleAspectFit
+    backgroundContainer.addSubview(thumbView)
+    thumbView.layout.add { (make) in
+      make.top().bottom().leading().trailing().equal(backgroundContainer)
     }
   }
   
   func setupTopUI() {
     
-    self.backButton.setImage(self.image(with: "back"), for: .normal)
-    self.backButton.addTarget(self, action: #selector(clickBack), for: .touchUpInside)
-    self.topContainer.addSubview(self.backButton)
-    self.backButton.layout.add { (make) in
-      make.top().bottom().leading().equal(self.topContainer)
+    backButton.setImage(image(with: "back"), for: .normal)
+    backButton.addTarget(self, action: #selector(clickBack), for: .touchUpInside)
+    topContainer.addSubview(backButton)
+    backButton.layout.add { (make) in
+      make.top().bottom().leading().equal(topContainer)
       make.height(44)
     }
   }
   
   func setupCenterUI() {
     
-    self.centerPlayStateButton.setImage(self.image(with: "play_big"), for: .normal)
-    self.centerPlayStateButton.addTarget(self, action: #selector(clickPlayState), for: .touchUpInside)
-    self.centerContainer.addSubview(self.centerPlayStateButton)
-    self.centerPlayStateButton.layout.add { (make) in
-      make.centerX().centerY().equal(self.centerContainer)
+    centerPlayStateButton.setImage(image(with: "play_big"), for: .normal)
+    centerPlayStateButton.addTarget(self, action: #selector(clickPlayState), for: .touchUpInside)
+    centerContainer.addSubview(centerPlayStateButton)
+    centerPlayStateButton.layout.add { (make) in
+      make.centerX().centerY().equal(centerContainer)
     }
   }
   
   func setupBottomUI() {
     
-    self.setupAction(self.bottomPlayStateButton, normal: "play_small", selected: "pause_small")
-    self.bottomPlayStateButton.addTarget(self, action: #selector(clickPlayState), for: .touchUpInside)
-    self.bottomContainer.addSubview(self.bottomPlayStateButton)
-    self.bottomPlayStateButton.layout.add { (make) in
-      make.top().bottom().leading().equal(self.bottomContainer)
+    setupAction(bottomPlayStateButton, normal: "play_small", selected: "pause_small")
+    bottomPlayStateButton.addTarget(self, action: #selector(clickPlayState), for: .touchUpInside)
+    bottomContainer.addSubview(bottomPlayStateButton)
+    bottomPlayStateButton.layout.add { (make) in
+      make.top().bottom().leading().equal(bottomContainer)
       make.height(30).width(30)
     }
     
-    self.setupAction(self.screenButton, normal: "screen_full", selected: "screen_screen_shrink")
-    self.screenButton.addTarget(self, action: #selector(clickScreen), for: .touchUpInside)
-    self.bottomContainer.addSubview(self.screenButton)
-    self.screenButton.layout.add { (make) in
-      make.top().bottom().trailing().equal(self.bottomContainer)
+    setupAction(screenButton, normal: "screen_full", selected: "screen_screen_shrink")
+    screenButton.addTarget(self, action: #selector(clickScreen), for: .touchUpInside)
+    bottomContainer.addSubview(screenButton)
+    screenButton.layout.add { (make) in
+      make.top().bottom().trailing(-15).equal(bottomContainer)
       make.height(30).width(30)
     }
     
-    self.setupTime(self.currentTimeLabel)
-    self.bottomContainer.addSubview(self.currentTimeLabel)
-    self.currentTimeLabel.layout.add { (make) in
-      make.leading(5).equal(self.bottomPlayStateButton).trailing()
-      make.centerY().equal(self.bottomContainer)
+    setupTime(currentTimeLabel)
+    bottomContainer.addSubview(currentTimeLabel)
+    currentTimeLabel.layout.add { (make) in
+      make.leading(5).equal(bottomPlayStateButton).trailing()
+      make.centerY().equal(bottomContainer)
       make.hugging(axis: .horizontal)
     }
     
-    self.setupTime(self.totalTimeLabel)
-    self.bottomContainer.addSubview(self.totalTimeLabel)
-    self.totalTimeLabel.layout.add { (make) in
-      make.trailing(-5).equal(self.screenButton).leading()
-      make.centerY().equal(self.bottomContainer)
+    setupTime(totalTimeLabel)
+    bottomContainer.addSubview(totalTimeLabel)
+    totalTimeLabel.layout.add { (make) in
+      make.trailing(-5).equal(screenButton).leading()
+      make.centerY().equal(bottomContainer)
       make.hugging(axis: .horizontal)
     }
     
-    self.bottomContainer.addSubview(self.bufferingProgressView)
-    self.bufferingProgressView.layout.add { (make) in
-      make.leading(5).equal(self.currentTimeLabel).trailing()
-      make.trailing(-5).equal(self.totalTimeLabel).leading()
-      make.centerY().equal(self.bottomContainer)
+    bottomContainer.addSubview(bufferingProgressView)
+    bufferingProgressView.layout.add { (make) in
+      make.leading(5).equal(currentTimeLabel).trailing()
+      make.trailing(-5).equal(totalTimeLabel).leading()
+      make.centerY().equal(bottomContainer)
     }
     
-    self.progressSlider.minimumTrackTintColor = UIColor(0x00f5ac)
-    self.progressSlider.maximumTrackTintColor = .clear
-    self.progressSlider.addTarget(self, action: #selector(slidProgress), for: .valueChanged)
-    self.bottomContainer.addSubview(self.progressSlider)
-    self.progressSlider.layout.add { (make) in
-      make.leading().trailing().centerY().equal(self.bufferingProgressView)
+    progressSlider.minimumTrackTintColor = UIColor(0x00f5ac)
+    progressSlider.maximumTrackTintColor = .clear
+    progressSlider.addTarget(self, action: #selector(slidProgress), for: .valueChanged)
+    bottomContainer.addSubview(progressSlider)
+    progressSlider.layout.add { (make) in
+      make.leading().trailing().centerY().equal(bufferingProgressView)
     }
   }
   
   func setupGestureRecognizer() {
     
-    self.singleTapGestureRecognizer.addTarget(self, action: #selector(singleTap))
-    self.singleTapGestureRecognizer.numberOfTapsRequired = 1
-    self.singleTapGestureRecognizer.numberOfTouchesRequired = 1
-    self.centerContainer.addGestureRecognizer(self.singleTapGestureRecognizer)
+    singleTapGestureRecognizer.addTarget(self, action: #selector(singleTap))
+    singleTapGestureRecognizer.numberOfTapsRequired = 1
+    singleTapGestureRecognizer.numberOfTouchesRequired = 1
+    centerContainer.addGestureRecognizer(singleTapGestureRecognizer)
     
-    self.doubleTapGestureRecognizer.addTarget(self, action: #selector(doubleTap))
-    self.doubleTapGestureRecognizer.numberOfTapsRequired = 2
-    self.doubleTapGestureRecognizer.numberOfTouchesRequired = 1
-    self.centerContainer.addGestureRecognizer(self.doubleTapGestureRecognizer)
+    doubleTapGestureRecognizer.addTarget(self, action: #selector(doubleTap))
+    doubleTapGestureRecognizer.numberOfTapsRequired = 2
+    doubleTapGestureRecognizer.numberOfTouchesRequired = 1
+    centerContainer.addGestureRecognizer(doubleTapGestureRecognizer)
   }
   
   func setupAction(_ button: UIButton, normal normalImage: String, selected selectedImage: String) {
     
-    button.setImage(self.image(with: normalImage), for: .normal)
-    button.setImage(self.image(with: selectedImage), for: .selected)
+    button.setImage(image(with: normalImage), for: .normal)
+    button.setImage(image(with: selectedImage), for: .selected)
   }
   
   func setupTime(_ label: UILabel) {
@@ -332,43 +337,43 @@ private extension PlayerViewDefaultControlView {
     
     if sender.isSelected == true {
       
-      self.playerView?.pause()
+      playerView?.pause()
       return
     }
     
-    self.playerView?.play()
+    playerView?.play()
   }
   
   @objc func slidProgress(_ sender: UISlider) {
     
-    self.showControls(isAnimate: false, shouldHide: false)
-    self.playerView?.pause()
-    self.playerView?.seek(with: sender.value)
+    showControls(isAnimate: false, shouldHide: false)
+    playerView?.pause()
+    playerView?.seek(with: sender.value)
   }
   
   @objc func clickScreen(_ sender: UIButton) {
     
     if sender.isSelected == true {
       
-      self.playerView?.quitFullScreen()
+      playerView?.quitFullScreen()
       return
     }
-    self.playerView?.joinFullScreen()
+    playerView?.joinFullScreen()
   }
   
   @objc func clickBack(_ sender: UIButton) {
     
-    self.playerView?.quitFullScreen()
+    playerView?.quitFullScreen()
   }
   
   @objc func singleTap(_ sender: UITapGestureRecognizer) {
    
-    self.showControls(isAnimate: true, shouldHide: true)
+    showControls(isAnimate: true, shouldHide: true)
   }
   
   @objc func doubleTap(_ sender: UITapGestureRecognizer) {
     
-    self.clickPlayState(self.bottomPlayStateButton)
+    clickPlayState(bottomPlayStateButton)
   }
 }
 
@@ -398,7 +403,7 @@ private extension PlayerViewDefaultControlView {
     
     if isAnimate == false {
       
-      self.bottomContainer.alpha = 1
+      bottomContainer.alpha = 1
       return
     }
     
@@ -421,7 +426,7 @@ private extension PlayerViewDefaultControlView {
     
     if isAnimate == false {
       
-      self.bottomContainer.alpha = 0
+      bottomContainer.alpha = 0
       return
     }
     
@@ -435,29 +440,29 @@ private extension PlayerViewDefaultControlView {
   func updatePlayingStyle() {
     
     /// 隐藏中间的播放状态按钮
-    self.centerPlayStateButton.isHidden = true
+    centerPlayStateButton.isHidden = true
     
     /// 暂停样式
-    self.bottomPlayStateButton.isSelected = true
+    bottomPlayStateButton.isSelected = true
   }
   
   func updatePrepareStyle() {
     
     /// 播放样式
-    self.centerPlayStateButton.isHidden = false
-    self.centerPlayStateButton.setImage(self.image(with: "play_big"), for: .normal)
+    centerPlayStateButton.isHidden = false
+    centerPlayStateButton.setImage(image(with: "play_big"), for: .normal)
     
     /// 播放样式
-    self.bottomPlayStateButton.isSelected = false
+    bottomPlayStateButton.isSelected = false
   }
   
   func updateReplayStyle() {
     
-    self.centerPlayStateButton.isHidden = false
-    self.centerPlayStateButton.setImage(self.image(with: "repeat_big"), for: .normal)
+    centerPlayStateButton.isHidden = false
+    centerPlayStateButton.setImage(image(with: "repeat_big"), for: .normal)
     
     /// 播放样式
-    self.bottomPlayStateButton.isSelected = false
+    bottomPlayStateButton.isSelected = false
   }
   
 }

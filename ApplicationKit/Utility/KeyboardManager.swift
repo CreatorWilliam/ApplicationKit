@@ -10,10 +10,14 @@ import UIKit
 
 public class KeyboardManager {
   
-  private var showHandle: KeyboardHandle?
-  private var changeHandle: KeyboardHandle?
-  private var hideHandle: KeyboardHandle?
+  /// 参考视图，默认为当前第一响应者
+  public weak var referenceView: UIView?
+  /// 执行调整的视图
+  public weak var adjustedView: UIView?
+  /// 键盘上边缘与参考视图下边缘的间距
+  public var spacing: CGFloat = 5
   
+  /// 用于保存调整前的原点
   private var origin: CGFloat = 0
   
   public init() {
@@ -37,55 +41,14 @@ public extension KeyboardManager {
   ///
   /// - Parameters:
   ///   - spacing: 指定视图距离键盘顶部的距离
-  ///   - view: 将使用该视图作为基准判断
+  ///   - view: 将使用该视图作为基准判断,不设置则查找当前第一响应者调整
   ///   - container: 将进行调整的视图，如果是UIScrollView，将调整contentOffset.y，其他非滚动视图，默认调整该视图的bounds.origin.y
   func setupAdjust(spacing: CGFloat = 5,
-                   for view: UIView,
+                   for view: UIView? = nil,
                    in container: UIView) {
-    
-    if let scrollView = container as? UIScrollView {
-      
-      self.setupAdjust(spacing: spacing, for: view, in: scrollView)
-      return
-    }
-    
-    self.updateHandles(show: { (frame, duration) in
-      
-      guard let window = view.window ?? UIApplication.shared.keyWindow else { return }
-      guard let rect = view.superview?.convert(view.frame, to: window) else { return }
-      
-      guard frame.minY < rect.maxY else { return }
-      let offset = rect.maxY - frame.minY
-      
-      UIView.animate(withDuration: duration, animations: { container.bounds.origin.y = offset + spacing })
-      
-    }, hide: { (frame, duration) in
-      
-      UIView.animate(withDuration: duration, animations: { container.bounds.origin.y = 0 })
-      
-    })
-  }
-  
-}
-
-// MARK: - Custom Handle
-public extension KeyboardManager {
-  
-  typealias KeyboardHandle = (_ frame: CGRect, _ duration: TimeInterval) -> Void
-  
-  /// 添加自定义的键盘通知时回调
-  ///
-  /// - Parameters:
-  ///   - showHandle: 键盘显示时回调
-  ///   - hideHandle: 键盘隐藏时回调
-  ///   - changeHandle: 键盘改变时回调
-  func updateHandles(show showHandle: @escaping KeyboardHandle,
-                     hide hideHandle: @escaping KeyboardHandle,
-                     change changeHandle: KeyboardHandle? = nil) {
-    
-    self.showHandle = showHandle
-    self.hideHandle = hideHandle
-    self.changeHandle = changeHandle ?? showHandle
+    self.spacing = 5
+    self.referenceView = view
+    self.adjustedView = container
   }
   
 }
@@ -95,30 +58,90 @@ private extension KeyboardManager {
   
   @objc func keyboardWillShow(_ notification: Notification) {
     
+    /// 获取必要的视图
+    guard let referenceView: UIView = self.referenceView ?? queryTextInputView() else { return }
+    guard let adjustContainer = adjustedView else { return }
+    
+    /// 注册键盘变更的通知
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChange), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     
+    /// 获取键盘相关的参数
     guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
     guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
     
-    self.showHandle?(frame, duration)
+    /// 获取参考视图在当前视窗上的位置，以此计算偏移量
+    guard let window = referenceView.window ?? UIApplication.shared.keyWindow else { return }
+    guard let rect = referenceView.superview?.convert(referenceView.frame, to: window) else { return }
+    
+    /// 计算偏移量
+    guard frame.minY < rect.maxY else { return }
+    let offset = rect.maxY - frame.minY
+    
+    if let scrollView = adjustContainer as? UIScrollView {
+      
+      origin = scrollView.contentOffset.y
+      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y += (offset + self.spacing) })
+      
+    } else {
+      
+      origin = adjustContainer.bounds.origin.y
+      UIView.animate(withDuration: duration, animations: { adjustContainer.bounds.origin.y = offset + self.spacing })
+    }
   }
   
   @objc func keyboardDidChange(_ notification: Notification) {
     
+    /// 获取必要的视图
+    guard let referenceView: UIView = self.referenceView ?? queryTextInputView() else { return }
+    guard let adjustContainer = adjustedView else { return }
+    
+    /// 获取键盘相关的参数
     guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
     guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+    /// 获取参考视图在当前视窗上的位置，以此计算偏移量
+    guard let window = referenceView.window ?? UIApplication.shared.keyWindow else { return }
+    guard let rect = referenceView.superview?.convert(referenceView.frame, to: window) else { return }
+    /// 计算偏移量
+    guard frame.minY < rect.maxY else { return }
+    let offset = rect.maxY - frame.minY
     
-    self.changeHandle?(frame, duration)
+    if let scrollView = adjustContainer as? UIScrollView {
+      
+      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y += (offset + self.spacing) })
+      
+    } else {
+      
+      UIView.animate(withDuration: duration, animations: { adjustContainer.bounds.origin.y = offset + self.spacing })
+    }
   }
   
   @objc func keyboardWillHide(_ notification: Notification) {
     
+    /// 获取必要的视图
+    //guard let referenceView: UIView = self.referenceView ?? UIApplication.shared.keyWindow?.perform(Selector(("firstResponder"))).takeRetainedValue() as? UIView else { return }
+    guard let adjustContainer = adjustedView else { return }
+    /// 移除键盘变化通知
     NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    
-    guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+    /// 获取键盘相关的参数
+    //guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
     guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
     
-    self.hideHandle?(frame, duration)
+    /// 获取参考视图在当前视窗上的位置，以此计算偏移量
+    //guard let window = referenceView.window ?? UIApplication.shared.keyWindow else { return }
+    //guard let rect = referenceView.superview?.convert(referenceView.frame, to: window) else { return }
+    
+    /// 计算偏移量
+    //guard frame.minY < rect.maxY else { return }
+    //let offset = rect.maxY - frame.minY
+    
+    if let scrollView = adjustContainer as? UIScrollView {
+      
+      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y = self.origin })
+      
+    } else {
+      
+      UIView.animate(withDuration: duration, animations: { adjustContainer.bounds.origin.y = self.origin })
+    }
   }
   
 }
@@ -126,31 +149,23 @@ private extension KeyboardManager {
 // MARK: - Utility
 private extension KeyboardManager {
   
-  /// 根据设定的滚动视图来调整偏移量
-  ///
-  /// - Parameters:
-  ///   - spacing: 设置的偏移量
-  ///   - view: 需要根据键盘事件调整的视图
-  ///   - scrollView: “”
-  func setupAdjust(spacing: CGFloat,
-                   for view: UIView,
-                   in scrollView: UIScrollView) {
+  func queryTextInputView() -> UIView? {
     
-    self.updateHandles(show: { (frame, duration) in
-      
-      guard let window = view.window ?? UIApplication.shared.keyWindow else { return }
-      guard let rect = view.superview?.convert(view.frame, to: window) else { return }
-      
-      guard frame.minY < rect.maxY else { return }
-      let offset = rect.maxY - frame.minY
-      
-      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y += (offset + spacing) })
-      
-    }, hide: { [unowned self] (frame, duration) in
-      
-      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y = self.origin })
-      
-    })
+    return UIApplication.shared.keyWindow?.queryFirstResponder()
   }
   
+}
+
+fileprivate extension UIView {
+  
+  func queryFirstResponder() -> UIView? {
+    
+    if isFirstResponder == true { return self }
+    for subview in subviews {
+      
+      guard let firstResponder = subview.queryFirstResponder() else { continue }
+      return firstResponder
+    }
+    return nil
+  }
 }

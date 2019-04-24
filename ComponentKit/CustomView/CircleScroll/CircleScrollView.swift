@@ -38,11 +38,11 @@ public class CircleScrollView: UIView {
   public var placeholder: String? {
     didSet {
       
-      if let name = self.placeholder {
+      if let name = placeholder {
         
-        self.previousView.image = UIImage(named: name)
-        self.currentView.image = UIImage(named: name)
-        self.nextView.image = UIImage(named: name)
+        previousView.image = UIImage(named: name)
+        currentView.image = UIImage(named: name)
+        nextView.image = UIImage(named: name)
       }
     }
   }
@@ -66,22 +66,22 @@ public class CircleScrollView: UIView {
   /// 上一个
   private var previousIndex: Int {
     
-    var index = self.currentIndex - 1
-    if index < 0 { index = self.items.count - 1 }
+    var index = currentIndex - 1
+    if index < 0 { index = images.count - 1 }
     return index
   }
   /// 下一个
   private var nextIndex: Int {
     
-    var index = self.currentIndex + 1
-    if index > self.items.count - 1 { index = 0 }
+    var index = currentIndex + 1
+    if index > images.count - 1 { index = 0 }
     return index
   }
   
   /// 是否自动滚动
   private var isAutoScrollable: Bool = false
   /// 数据源
-  private var items: [Any] = []
+  private var images: [Any] = []
   
   public init(frame: CGRect = .zero,
               isAutoScrollable: Bool = false) {
@@ -89,7 +89,7 @@ public class CircleScrollView: UIView {
     
     self.isAutoScrollable = isAutoScrollable
     
-    self.setupUI()
+    setupUI()
   }
   
   required public init?(coder aDecoder: NSCoder) {
@@ -99,27 +99,27 @@ public class CircleScrollView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.scrollView.frame = self.bounds
+    scrollView.frame = bounds
     
-    let width: CGFloat = self.scrollView.bounds.width
-    let height: CGFloat = self.scrollView.bounds.height
+    let width: CGFloat = scrollView.bounds.width
+    let height: CGFloat = scrollView.bounds.height
     
-    switch self.direction {
+    switch direction {
     case .horizontal:
       
-      self.previousView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-      self.currentView.frame = CGRect(x: width, y: 0, width: width, height: height)
-      self.nextView.frame = CGRect(x: width * 2, y: 0, width: width, height: height)
-      self.scrollView.contentSize = CGSize(width: width * 3, height: height)
-      self.scrollView.contentOffset = CGPoint(x: width, y: 0)
+      previousView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+      currentView.frame = CGRect(x: width, y: 0, width: width, height: height)
+      nextView.frame = CGRect(x: width * 2, y: 0, width: width, height: height)
+      scrollView.contentSize = CGSize(width: width * 3, height: height)
+      scrollView.contentOffset = CGPoint(x: width, y: 0)
       
     case .vertical:
       
-      self.previousView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-      self.currentView.frame = CGRect(x: 0, y: height, width: width, height: height)
-      self.nextView.frame = CGRect(x: 0, y: height * 2, width: width, height: height)
-      self.scrollView.contentSize = CGSize(width: width, height: height * 3)
-      self.scrollView.contentOffset = CGPoint(x: 0, y: height)
+      previousView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+      currentView.frame = CGRect(x: 0, y: height, width: width, height: height)
+      nextView.frame = CGRect(x: 0, y: height * 2, width: width, height: height)
+      scrollView.contentSize = CGSize(width: width, height: height * 3)
+      scrollView.contentOffset = CGPoint(x: 0, y: height)
     }
     
   }
@@ -134,20 +134,20 @@ public extension CircleScrollView {
   func update(with items: [Any]) {
     
     //保存数据,只会初始化一次
-    if self.items.count > 0 { return }
-    self.items = items
-    self.currentIndex = 0
-    self.pageControl.numberOfPages = self.items.count
+    if images.count > 0 { return }
+    images = items
+    currentIndex = 0
+    pageControl.numberOfPages = images.count
     
     // 防止越界
-    guard self.items.count > 0 else { return }
-    self.scrollView.isScrollEnabled = (self.items.count > 1)
-    self.update(view: self.previousView, with: self.items[self.previousIndex])
-    self.update(view: self.currentView, with: self.items[self.currentIndex])
-    self.update(view: self.nextView, with: self.items[self.nextIndex])
+    guard images.count > 0 else { return }
+    scrollView.isScrollEnabled = (images.count > 1)
+    update(view: previousView, with: images[previousIndex])
+    update(view: currentView, with: images[currentIndex])
+    update(view: nextView, with: images[nextIndex])
     
     //判断启动轮播
-    if self.isAutoScrollable {
+    if isAutoScrollable {
       
       DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
         
@@ -167,7 +167,7 @@ extension CircleScrollView: UIScrollViewDelegate {
   
   public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     
-    self.updateContent()
+    updateContent()
   }
   
 }
@@ -175,20 +175,20 @@ extension CircleScrollView: UIScrollViewDelegate {
 // MARK: - Zoomable
 extension CircleScrollView: Zoomable {
   
-  public var zoomView: UIView { return self.currentView }
+  public var zoomView: UIView { return currentView }
   
-  public var zoomViewContainer: UIView { return self.scrollView }
+  public var zoomViewContainer: UIView { return scrollView }
   
   public func zoom(with offset: CGFloat) {
     
     // 仅支持水平滚动，竖直方向上放大
-    guard self.direction == .horizontal else { return }
+    guard direction == .horizontal else { return }
     
-    let size = self.scrollView.bounds.size
+    let size = scrollView.bounds.size
     
     guard size.height > 0 else { return }
-    self.zoomView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-    self.zoomView.center = CGPoint(x: self.scrollView.contentSize.width / 2, y: self.scrollView.contentSize.height)
+    zoomView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
+    zoomView.center = CGPoint(x: scrollView.contentSize.width / 2, y: scrollView.contentSize.height)
     
     
     //向下偏移放大
@@ -197,8 +197,8 @@ extension CircleScrollView: Zoomable {
     let heightOffset = abs(offset)
     let widhtOffset = abs(offset) * (size.width / size.height)
     
-    self.zoomView.bounds.size.height = heightOffset + size.height
-    self.zoomView.bounds.size.width = widhtOffset + size.width
+    zoomView.bounds.size.height = heightOffset + size.height
+    zoomView.bounds.size.width = widhtOffset + size.width
   }
   
 }
@@ -209,31 +209,32 @@ private extension CircleScrollView {
   func setupUI() {
     
     //ScrollView
-    self.scrollView.clipsToBounds = false
-    self.scrollView.showsVerticalScrollIndicator = false
-    self.scrollView.showsHorizontalScrollIndicator = false
-    self.scrollView.delegate = self
-    self.scrollView.bounces = true
-    self.scrollView.isPagingEnabled = true
-    self.scrollView.backgroundColor = .clear
-    self.addSubview(self.scrollView)
+    scrollView.clipsToBounds = false
+    scrollView.showsVerticalScrollIndicator = false
+    scrollView.showsHorizontalScrollIndicator = false
+    scrollView.delegate = self
+    scrollView.bounces = true
+    scrollView.isPagingEnabled = true
+    scrollView.backgroundColor = .clear
+    scrollView.isScrollEnabled = false
+    addSubview(scrollView)
     
-    self.previousView.contentMode = .scaleAspectFill
-    self.previousView.clipsToBounds = true
-    self.scrollView.addSubview(self.previousView)
+    previousView.contentMode = .scaleAspectFill
+    previousView.clipsToBounds = true
+    scrollView.addSubview(previousView)
     
-    self.currentView.contentMode = .scaleAspectFill
-    self.currentView.clipsToBounds = true
-    self.scrollView.addSubview(self.currentView)
+    currentView.contentMode = .scaleAspectFill
+    currentView.clipsToBounds = true
+    scrollView.addSubview(currentView)
     
-    self.nextView.contentMode = .scaleAspectFill
-    self.nextView.clipsToBounds = true
-    self.scrollView.addSubview(self.nextView)
+    nextView.contentMode = .scaleAspectFill
+    nextView.clipsToBounds = true
+    scrollView.addSubview(nextView)
     
-    self.pageControl.isUserInteractionEnabled = false
-    self.pageControl.hidesForSinglePage = true
-    self.addSubview(self.pageControl)
-    self.pageControl.layout.add { (make) in
+    pageControl.isUserInteractionEnabled = false
+    pageControl.hidesForSinglePage = true
+    addSubview(pageControl)
+    pageControl.layout.add { (make) in
       
       make.leading().trailing().bottom().equal(self)
     }
@@ -241,7 +242,7 @@ private extension CircleScrollView {
     tapGR.numberOfTapsRequired = 1
     tapGR.numberOfTouchesRequired = 1
     tapGR.addTarget(self, action: #selector(clickContent(_:)))
-    self.addGestureRecognizer(tapGR)
+    addGestureRecognizer(tapGR)
   }
   
 }
@@ -251,26 +252,26 @@ private extension CircleScrollView {
   
   @objc func clickContent(_ sender: Any) {
     
-    guard self.items.count > 0 else { return }
-    self.delegate?.circleScrollView(self, didSelectAt: self.currentIndex)
+    guard images.count > 0 else { return }
+    delegate?.circleScrollView(self, didSelectAt: currentIndex)
   }
   
   /// 开始循环
   func startLoop() {
     
     //大于1，轮播，否则不轮播
-    guard self.items.count > 1 else {
+    guard images.count > 1 else {
       
-      self.stopLoop()
+      stopLoop()
       return
     }
     
     //已经启动则不再重新启动
-    if let _ = self.timer { return }
+    if let _ = timer { return }
     
     //正常启动
-    self.timer = Timer(timeInterval: 5, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
-    guard let temp = self.timer else { return }
+    timer = Timer(timeInterval: 5, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
+    guard let temp = timer else { return }
     RunLoop.main.add(temp, forMode: RunLoop.Mode.default)
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -283,24 +284,24 @@ private extension CircleScrollView {
   /// 停止循环
   func stopLoop() {
     
-    self.timer?.invalidate()
-    self.timer = nil
+    timer?.invalidate()
+    timer = nil
   }
   
   @objc func loop(_ timer: Timer) {
     
-    self.scrollToNext()
+    scrollToNext()
   }
   
   func scrollToPrevious() {
     
     var offset: CGPoint = .zero
-    switch self.direction {
+    switch direction {
     case .horizontal: offset.x = 0
     case .vertical: offset.y = 0
     }
     
-    self.scrollView.isUserInteractionEnabled = false
+    scrollView.isUserInteractionEnabled = false
     UIView.animate(withDuration: 0.5, animations: {
       
       self.scrollView.contentOffset = offset
@@ -316,12 +317,12 @@ private extension CircleScrollView {
   func scrollToNext() {
     
     var offset: CGPoint = .zero
-    switch self.direction {
-    case .horizontal: offset.x = self.scrollView.bounds.width * 2
-    case .vertical: offset.y = self.scrollView.bounds.height * 2
+    switch direction {
+    case .horizontal: offset.x = scrollView.bounds.width * 2
+    case .vertical: offset.y = scrollView.bounds.height * 2
     }
     
-    self.scrollView.isUserInteractionEnabled = false
+    scrollView.isUserInteractionEnabled = false
     UIView.animate(withDuration: 0.5, animations: {
       
       self.scrollView.contentOffset = offset
@@ -343,8 +344,8 @@ private extension CircleScrollView {
     
     defer {
       
-      self.pageControl.currentPage = self.currentIndex
-      self.delegate?.circleScrollView(self, didScrollTo: self.currentIndex)
+      pageControl.currentPage = currentIndex
+      delegate?.circleScrollView(self, didScrollTo: currentIndex)
     }
     
     var offset: CGPoint = .zero
@@ -352,64 +353,69 @@ private extension CircleScrollView {
     var isPrevious: Bool = false
     var isNext: Bool = false
     
-    switch self.direction {
+    switch direction {
     case .horizontal:
       
-      let width: CGFloat = self.scrollView.bounds.width
+      let width: CGFloat = scrollView.bounds.width
       offset = CGPoint(x: width, y: 0)
-      if self.scrollView.contentOffset.x < width { isPrevious = true }
-      if self.scrollView.contentOffset.x > width { isNext = true }
+      if scrollView.contentOffset.x < width { isPrevious = true }
+      if scrollView.contentOffset.x > width { isNext = true }
       
     case .vertical:
       
-      let height: CGFloat = self.scrollView.bounds.height
+      let height: CGFloat = scrollView.bounds.height
       offset = CGPoint(x: 0, y: height)
-      if self.scrollView.contentOffset.y < height { isPrevious = true }
-      if self.scrollView.contentOffset.y > height { isNext = true }
+      if scrollView.contentOffset.y < height { isPrevious = true }
+      if scrollView.contentOffset.y > height { isNext = true }
     }
     
     if isPrevious == true {
       
       // 更新索引
-      self.currentIndex -= 1
-      if self.currentIndex < 0 { self.currentIndex = self.items.count - 1 }
+      currentIndex -= 1
+      if currentIndex < 0 { currentIndex = images.count - 1 }
       // 交换位置
-      (self.previousView, self.currentView) = (self.currentView, self.previousView)
-      (self.previousView.frame, self.currentView.frame) = (self.currentView.frame, self.previousView.frame)
+      (previousView, currentView) = (currentView, previousView)
+      (previousView.frame, currentView.frame) = (currentView.frame, previousView.frame)
       
     } else if isNext == true {
       
       // 更新索引
-      self.currentIndex += 1
-      if self.currentIndex > self.items.count - 1 { self.currentIndex = 0 }
+      currentIndex += 1
+      if currentIndex > images.count - 1 { currentIndex = 0 }
       // 交换位置
-      (self.currentView, self.nextView) = (self.nextView, self.currentView)
-      (self.currentView.frame, self.nextView.frame) = (self.nextView.frame, self.currentView.frame)
+      (currentView, nextView) = (nextView, currentView)
+      (currentView.frame, nextView.frame) = (nextView.frame, currentView.frame)
       
     } else {
       
       return
     }
     
-    self.scrollView.contentOffset = offset
+    scrollView.contentOffset = offset
     
-    guard self.previousIndex < self.items.count else { return }
-    guard self.nextIndex < self.items.count else { return }
-    self.update(view: self.previousView, with: self.items[self.previousIndex])
-    self.update(view: self.nextView, with: self.items[self.nextIndex])
+    guard previousIndex < images.count else { return }
+    guard nextIndex < images.count else { return }
+    update(view: previousView, with: images[previousIndex])
+    update(view: nextView, with: images[nextIndex])
     
   }
   
   func update(view: UIView, with content: Any) {
     
     guard let imageView = view as? UIImageView else { return }
+    
     if let url = content as? String {
       
-      imageView.setImage(with: url, placeholder: self.placeholder)
+      imageView.setImage(with: url, placeholder: placeholder)
       
     } else if let image = content as? UIImage {
       
       imageView.image = image
+      
+    } else if let url = content as? URL {
+      
+      imageView.setImage(with: url, placeholder: placeholder)
       
     } else {
       

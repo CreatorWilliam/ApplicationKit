@@ -14,18 +14,18 @@ public struct PopupMenuItem {
   let imageName: String?
   let imageURL: String?
   
-  public init(title: String?, imageName name: String?) {
+  public init(title: String?, imageName name: String? = nil, imageURL url: String? = nil) {
     
     self.title = title
     self.imageName = name
-    self.imageURL = nil
-  }
-  
-  public init(title: String?, imageURL url: String?) {
-    
-    self.title = title
-    self.imageName = nil
     self.imageURL = url
   }
+  
+//  public init(title: String?, imageURL url: String?) {
+//    
+//    self.title = title
+//    self.imageName = nil
+//    self.imageURL = url
+//  }
   
 }

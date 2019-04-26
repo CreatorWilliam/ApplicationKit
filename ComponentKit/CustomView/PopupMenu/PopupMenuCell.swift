@@ -82,13 +82,13 @@ extension PopupMenuCell {
   func update(with item: PopupMenuItem) {
     
     self.textLabel?.text = item.title
-    if let imageName = item.imageName {
+    if let imageURL = item.imageURL {
+      
+      self.avatarView.setImage(with: imageURL, placeholder: item.imageName)
+      
+    } else if let imageName = item.imageName {
       
       self.avatarView.image = UIImage(named: imageName)
-      
-    } else if let imageURL = item.imageURL {
-      
-      self.avatarView.setImage(with: imageURL)
       
     } else {
       

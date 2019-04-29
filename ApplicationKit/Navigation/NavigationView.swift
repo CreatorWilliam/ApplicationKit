@@ -73,11 +73,16 @@ public class NavigationView: UIView {
       make.leading(40).trailing(-40).equal(self.contentView)
     }
     
-    
+    NotificationCenter.default.addObserver(self, selector: #selector(recieveStatusDidChange), name: UIApplication.didChangeStatusBarFrameNotification, object: nil)
   }
   
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  deinit {
+    
+    NotificationCenter.default.removeObserver(self)
   }
   
   public override func layoutSubviews() {
@@ -302,6 +307,16 @@ private extension NavigationView {
     
     if let _ = Presenter.pop() { return }
     Presenter.dismiss()
+  }
+  
+}
+
+// MARK: - Notification
+private extension NavigationView {
+  
+  @objc func recieveStatusDidChange(_ notification: Notification) {
+    
+    setNeedsLayout()
   }
   
 }

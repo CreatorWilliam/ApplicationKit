@@ -73,18 +73,27 @@ private extension KeyboardManager {
     guard let window = referenceView.window ?? UIApplication.shared.keyWindow else { return }
     guard let rect = referenceView.superview?.convert(referenceView.frame, to: window) else { return }
     
-    /// 计算偏移量
-    guard frame.minY < rect.maxY else { return }
-    let offset = rect.maxY - frame.minY
-    
+    /// 保存偏移的状态
     if let scrollView = adjustContainer as? UIScrollView {
       
       origin = scrollView.contentOffset.y
-      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y += (offset + self.spacing) })
       
     } else {
       
       origin = adjustContainer.bounds.origin.y
+    }
+    
+    /// 计算偏移量
+    guard frame.minY < rect.maxY else { return }
+    let offset = rect.maxY - frame.minY
+    
+    /// 进入编辑后的界面偏移状态，并执行偏移动画
+    if let scrollView = adjustContainer as? UIScrollView {
+      
+      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y += (offset + self.spacing) })
+      
+    } else {
+      
       UIView.animate(withDuration: duration, animations: { adjustContainer.bounds.origin.y = offset + self.spacing })
     }
   }
@@ -98,13 +107,16 @@ private extension KeyboardManager {
     /// 获取键盘相关的参数
     guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
     guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+    
     /// 获取参考视图在当前视窗上的位置，以此计算偏移量
     guard let window = referenceView.window ?? UIApplication.shared.keyWindow else { return }
     guard let rect = referenceView.superview?.convert(referenceView.frame, to: window) else { return }
+    
     /// 计算偏移量
     guard frame.minY < rect.maxY else { return }
     let offset = rect.maxY - frame.minY
     
+    /// 执行偏移动画
     if let scrollView = adjustContainer as? UIScrollView {
       
       UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y += (offset + self.spacing) })
@@ -118,22 +130,15 @@ private extension KeyboardManager {
   @objc func keyboardWillHide(_ notification: Notification) {
     
     /// 获取必要的视图
-    //guard let referenceView: UIView = self.referenceView ?? UIApplication.shared.keyWindow?.perform(Selector(("firstResponder"))).takeRetainedValue() as? UIView else { return }
     guard let adjustContainer = adjustedView else { return }
+    
     /// 移除键盘变化通知
     NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    
     /// 获取键盘相关的参数
-    //guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
     guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
     
-    /// 获取参考视图在当前视窗上的位置，以此计算偏移量
-    //guard let window = referenceView.window ?? UIApplication.shared.keyWindow else { return }
-    //guard let rect = referenceView.superview?.convert(referenceView.frame, to: window) else { return }
-    
-    /// 计算偏移量
-    //guard frame.minY < rect.maxY else { return }
-    //let offset = rect.maxY - frame.minY
-    
+    /// 恢复到编辑前时的界面偏移状态，执行动画
     if let scrollView = adjustContainer as? UIScrollView {
       
       UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y = self.origin })

@@ -19,6 +19,8 @@ public class KeyboardManager {
   
   /// 用于保存调整前的原点
   private var origin: CGFloat = 0
+  /// 用于记录是否该更新origin的数值
+  private var shouldUpdateOrigin: Bool = true
   
   public init() {
     
@@ -74,13 +76,18 @@ private extension KeyboardManager {
     guard let rect = referenceView.superview?.convert(referenceView.frame, to: window) else { return }
     
     /// 保存偏移的状态
-    if let scrollView = adjustContainer as? UIScrollView {
+    if shouldUpdateOrigin == true {
       
-      origin = scrollView.contentOffset.y
+      shouldUpdateOrigin = false
+      if let scrollView = adjustContainer as? UIScrollView {
+        
+        origin = scrollView.contentOffset.y
+        
+      } else {
+        
+        origin = adjustContainer.bounds.origin.y
+      }
       
-    } else {
-      
-      origin = adjustContainer.bounds.origin.y
     }
     
     /// 计算偏移量
@@ -141,12 +148,28 @@ private extension KeyboardManager {
     /// 恢复到编辑前时的界面偏移状态，执行动画
     if let scrollView = adjustContainer as? UIScrollView {
       
-      UIView.animate(withDuration: duration, animations: { scrollView.contentOffset.y = self.origin })
+      UIView.animate(withDuration: duration, animations: {
+        
+        scrollView.contentOffset.y = self.origin
+        
+      }, completion: { (_) in
+        
+        self.shouldUpdateOrigin = true
+      })
+      UIView.animate(withDuration: duration, animations: {  })
       
     } else {
       
-      UIView.animate(withDuration: duration, animations: { adjustContainer.bounds.origin.y = self.origin })
+      UIView.animate(withDuration: duration, animations: {
+        
+        adjustContainer.bounds.origin.y = self.origin
+        
+      }, completion: { (_) in
+        
+        self.shouldUpdateOrigin = true
+      })
     }
+    
   }
   
 }

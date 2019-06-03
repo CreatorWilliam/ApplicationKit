@@ -11,7 +11,7 @@ import UIKit
 public class FormInputItem {
   
   /// 表单选项名称
-  public let title: String?
+  public var title: String?
   /// 占位文字
   public var placeholder: String?
   /// 用于保存界面显示的值
@@ -26,6 +26,7 @@ public class FormInputItem {
       
     }
   }
+  
   /// 用于保存表单提交时的参数值，对于非编辑录入的类型，自行维护值，但是visibleValue置空，本值依然也会置空
   public var parameter: Any?
   

@@ -131,10 +131,10 @@ public extension CircleScrollView {
   /// 设置轮播图集后，自动进行轮播
   ///
   /// - Parameter items: 轮播图集
-  func update(with items: [Any]) {
+  func update(with items: [Any], isForce: Bool = false) {
     
-    //保存数据,只会初始化一次
-    if images.count > 0 { return }
+    //保存数据,只会初始化一次, 除非是强制性更新
+    if images.count > 0 && isForce == false { return }
     images = items
     currentIndex = 0
     pageControl.numberOfPages = images.count

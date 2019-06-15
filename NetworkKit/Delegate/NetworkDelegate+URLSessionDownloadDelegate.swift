@@ -70,11 +70,15 @@ extension NetworkDelegate : URLSessionDownloadDelegate {
     delegateLog()
     
     //保存下载完成后，临时文件的地址
-    self.result.downloadedFile = location
+    result.downloadedFile = location
     
     //执行完成回调
-    self.result.status = .complete
-    self.result.completeAction?(self)
+    result.status = .complete
+    result.completeAction?(self)
+    
+    //从代理池中移除
+    guard let urlRequest = request.urlRequest else { return }
+    Network.delegatePool.removeValue(forKey: urlRequest)
   }
   
 }

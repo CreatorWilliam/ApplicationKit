@@ -18,10 +18,10 @@ public extension Network {
   func data(_ action: @escaping DataTaskCompleteAction) {
     
     //外部完成回调打包成内部完成回调
-    self.setupResultComplete({ (delegate) in
+    delegate.result.completeAction = { (delegate) in
       
       action(delegate.result.data, delegate.result.status)
-    })
+    }
     
     //设置代理类型
     self.delegate.taskType = .dataTask

@@ -26,7 +26,7 @@ public class Network {
   internal static var delegatePool: [URLRequest: NetworkDelegate] = [:]
   
   /// 私有化
-  private init() {}
+  private init() { }
   
 }
 
@@ -143,21 +143,5 @@ public extension Network {
 
 // MARK: - Utility
 internal extension Network {
-  
-  /// 将外部回调打包成内部回调
-  ///
-  /// - Parameter action: 任务完成后，执行的外部回调
-  func setupResultComplete(_ action: @escaping NetworkResult.Action) {
-    
-    self.delegate.result.completeAction = { (delegate) in
-      
-      //执行外部回调
-      action(delegate)
-      
-      //从代理池中移除
-      guard let urlRequest = delegate.request.urlRequest else { return }
-      Network.delegatePool.removeValue(forKey: urlRequest)
-    }
-  }
   
 }

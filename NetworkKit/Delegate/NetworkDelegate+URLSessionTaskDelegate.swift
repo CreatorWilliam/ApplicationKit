@@ -103,6 +103,10 @@ extension NetworkDelegate : URLSessionTaskDelegate {
     //任务完成后，关闭Session，释放Delegate
     session.finishTasksAndInvalidate()
     
+    //从代理池中移除
+    guard let urlRequest = request.urlRequest else { return }
+    Network.delegatePool.removeValue(forKey: urlRequest)
+
   }
   
   /// Tells the delegate that the session finished collecting metrics for the task.

@@ -20,11 +20,11 @@ public extension Network {
   func upload(with file: URL, _ action: @escaping UploadTaskCompleteAction) {
     
     //设置内部完成回调
-    self.setupResultComplete({ (delegate) in
-      
+    delegate.result.completeAction = { (delegate) in
+  
       //执行外部设置的完成回调
       action(delegate.result.data, delegate.result.status)
-    })
+    }
     
     self.setupTask({ (session, request) -> URLSessionTask? in
       
@@ -42,10 +42,10 @@ public extension Network {
   func upload(with data: Data, _ action: @escaping UploadTaskCompleteAction) {
     
     //设置内部完成回调
-    self.setupResultComplete({ (delegate) in
+    delegate.result.completeAction = { (delegate) in
       
       action(delegate.result.data, delegate.result.status)
-    })
+    }
 
     self.setupTask({ (session, request) -> URLSessionTask? in
       

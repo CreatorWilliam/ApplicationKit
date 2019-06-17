@@ -64,6 +64,9 @@ internal extension Network {
   /// - Parameter action: 用于指明创建什么任务
   func setupTask(_ action: (_ session: URLSession, _ urlRequest: URLRequest?) -> URLSessionTask?) {
     
+    //创建并准备请求参数
+    self.delegate.result.status = delegate.request.prepare()
+    
     //无需在失败的时候设置错误状态，已经在上一步的prepare()进行了处理
     guard let urlRequest = self.delegate.request.urlRequest else { return }
     
@@ -73,9 +76,6 @@ internal extension Network {
     let session = URLSession(configuration: Network.configuration,
                              delegate: self.delegate,
                              delegateQueue: self.delegateQueue)
-    
-    //获取请求
-    self.delegate.result.status = delegate.request.prepare()
     
     //创建任务
     guard let task = action(session, urlRequest) else {

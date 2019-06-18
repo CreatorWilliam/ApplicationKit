@@ -9,7 +9,7 @@
 import NetworkKit
 import JSONKit
 
-public class API {
+open class API {
   
   /// 接口主机地址
   public static var host: String = ""
@@ -27,34 +27,94 @@ public class API {
   /// 表单提交用的请求体
   private var formParameters: Data?
   
-  /// 创建API对象，path、version、customPath按照一定的规则拼接成完整的请求路径
+  /// 创建API对象，提供请求路径，API.host会参与路径的拼接
   ///
   /// - Parameters:
   ///   - method: 请求方式
-  ///   - path: 请求路径
-  ///   - version: API版本
-  ///   - customPath: 自定义路径，将忽略path与version参数
-  public init(method: Network.HTTPMethod, path: String? = nil, version: String? = nil, customPath: String? = nil) {
+  ///   - path: 请求的子路径
+  public init(method: Network.HTTPMethod, path: String) {
     
     self.method = method
-    if let customPath = customPath {
-      
-      self.path = customPath
-      
-    } else {
-      
-      self.path = API.host + "/api/"
-    }
+    self.path = API.host + path
+  }
+  
+  /// 创建API对象, 需提供完整的请求路径，API.host不会参与路径的拼接
+  ///
+  /// - Parameters:
+  ///   - method: 请求方式
+  ///   - customPath: 自定义的全路径
+  public init(method: Network.HTTPMethod, customPath: String) {
     
-    if let version = version {
-      
-      self.path += "\(version)/"
-    }
+    self.method = method
+    self.path = customPath
+  }
+  
+  public typealias ProgressHandle = (_ progress: Float) -> Void
+  public typealias CompleteHandle = (_ result: JSON) -> Void
+  
+  /// 发起请求
+  open func request(handle: @escaping CompleteHandle) {
     
-    if let subpath = path {
+    let api = self
+    
+    let network = Network.request(api.method, api.path, isDebug: true)
+    
+    if let query = api.queryParameters { network.query(query) }
+    if let body = api.bodyParameters { network.body(body) }
+    if let headerField = api.headerFieldParameters { network.httpHeaderField(headerField) }
+    if let data = api.formParameters { network.form(data) }
+    
+    network.data({ (data, status) in
       
-      self.path += subpath
-    }
+      guard let data = data else { return }
+      var json = JSON()
+      json.update(from: data)
+      
+      // 调试
+      self.debugLog(json)
+      DispatchQueue.main.async(execute: {
+        
+        handle(json)
+      })
+      
+    })
+    
+  }
+  
+  /// 进行请求
+  open func request(progressHandle: @escaping ProgressHandle, completionHandle: @escaping CompleteHandle) {
+    
+    let api = self
+    
+    let network = Network.request(api.method, api.path, isDebug: true)
+    
+    if let query = api.queryParameters { network.query(query) }
+    if let body = api.bodyParameters { network.body(body) }
+    if let headerField = api.headerFieldParameters { network.httpHeaderField(headerField) }
+    if let data = api.formParameters { network.form(data) }
+    
+    network.progress({ (totalCompletedBytes, totalExpectedBytes, partialData) in
+      
+      DispatchQueue.main.async {
+        
+        progressHandle(Float(totalCompletedBytes) / Float(totalExpectedBytes))
+      }
+      
+    }).data({ (data, status) in
+      
+      guard let data = data else { return }
+      var json = JSON()
+      json.update(from: data)
+      
+      // 调试
+      self.debugLog(json)
+      DispatchQueue.main.async(execute: {
+        
+        completionHandle(json)
+      })
+      
+    })
+    
   }
   
 }
@@ -88,74 +148,6 @@ public extension API {
     
     self.formParameters = data
     return self
-  }
-  
-  typealias ProgressHandle = (_ progress: Float) -> Void
-  typealias CompleteHandle = (_ result: JSON) -> Void
-  
-  /// 进行请求
-  func request(handle: @escaping CompleteHandle) {
-    
-    let api = self
-    
-    let network = Network.request(api.method, api.path, isDebug: true)
-    
-    if let query = api.queryParameters { network.query(query) }
-    if let body = api.bodyParameters { network.body(body) }
-    if let headerField = api.headerFieldParameters { network.httpHeaderField(headerField) }
-    if let data = api.formParameters { network.form(data) }
-    
-    network.data({ (data, status) in
-      
-      guard let data = data else { return }
-      var json = JSON()
-      json.update(from: data)
-      
-      // 调试
-      self.debugLog(json)
-      DispatchQueue.main.async(execute: {
-        
-        handle(json)
-      })
-      
-    })
-    
-  }
-  
-  /// 进行请求
-  func request(progressHandle: @escaping ProgressHandle, completionHandle: @escaping CompleteHandle) {
-    
-    let api = self
-    
-    let network = Network.request(api.method, api.path, isDebug: true)
-    
-    if let query = api.queryParameters { network.query(query) }
-    if let body = api.bodyParameters { network.body(body) }
-    if let headerField = api.headerFieldParameters { network.httpHeaderField(headerField) }
-    if let data = api.formParameters { network.form(data) }
-    
-    network.progress({ (totalCompletedBytes, totalExpectedBytes, partialData) in
-      
-      DispatchQueue.main.async {
-        
-        progressHandle(Float(totalCompletedBytes) / Float(totalExpectedBytes))
-      }
-      
-    }).data({ (data, status) in
-      
-      guard let data = data else { return }
-      var json = JSON()
-      json.update(from: data)
-      
-      // 调试
-      self.debugLog(json)
-      DispatchQueue.main.async(execute: {
-        
-        completionHandle(json)
-      })
-      
-    })
-    
   }
   
 }

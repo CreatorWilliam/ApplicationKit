@@ -30,6 +30,12 @@ public class FormInputItem {
   /// 用于保存表单提交时的参数值，对于非编辑录入的类型，自行维护值，但是visibleValue置空，本值依然也会置空
   public var parameter: Any?
   
+  /// 用于保存附加数据
+  public var accessoryData: Any?
+  
+  /// 存储代理属性
+  public weak var delegate: AnyObject?
+  
   /// 是否是必填,仅仅是一个标志，不参与内部验证
   public var isRequired: Bool
   

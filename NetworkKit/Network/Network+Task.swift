@@ -62,35 +62,40 @@ internal extension Network {
   /// 创建并启动任务
   ///
   /// - Parameter action: 用于指明创建什么任务
-  func setupTask(_ action: (_ session: URLSession, _ urlRequest: URLRequest?) -> URLSessionTask?) {
+  func setupTask(_ action: @escaping (_ session: URLSession, _ urlRequest: URLRequest?) -> URLSessionTask?) {
     
-    //创建并准备请求参数
-    self.delegate.result.status = delegate.request.prepare()
-    
-    //无需在失败的时候设置错误状态，已经在上一步的prepare()进行了处理
-    guard let urlRequest = self.delegate.request.urlRequest else { return }
-    
-    if Network.delegatePool.contains(where: { urlRequest == $0.key }) { return }
-    
-    //创建回话
-    let session = URLSession(configuration: Network.configuration,
-                             delegate: self.delegate,
-                             delegateQueue: self.delegateQueue)
-    
-    //创建任务
-    guard let task = action(session, urlRequest) else {
+    delegateQueue.addOperation({
       
-      self.delegate.result.status = .requestFailure("Reason:创建URLSessionTask失败")
-      return
-    }
+      //创建并准备请求参数
+      self.delegate.result.status = self.delegate.request.prepare()
+      
+      //无需在失败的时候设置错误状态，已经在上一步的prepare()进行了处理
+      guard let urlRequest = self.delegate.request.urlRequest else { return }
+      
+      if Network.delegatePool.contains(where: { urlRequest == $0.key }) { return }
+      
+      //创建回话
+      let session = URLSession(configuration: Network.configuration,
+                               delegate: self.delegate,
+                               delegateQueue: self.delegateQueue)
+      
+      //创建任务
+      guard let task = action(session, urlRequest) else {
+        
+        self.delegate.result.status = .requestFailure("Reason:创建URLSessionTask失败")
+        return
+      }
+      
+      //保存任务
+      self.delegate.task = task
+      
+      //将代理加入代理池，后续会对任务的精细化操作
+      Network.delegatePool[urlRequest] = self.delegate
+      //启动任务
+      self.delegate.task?.resume()
+      
+    })
     
-    //保存任务
-    self.delegate.task = task
-    
-    //将代理加入代理池，后续会对任务的精细化操作
-    Network.delegatePool[urlRequest] = self.delegate
-    //启动任务
-    self.delegate.task?.resume()
   }
   
   /// 依赖内容相同URLRequest，获取代理池中的代理，进行操作

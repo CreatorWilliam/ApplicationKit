@@ -43,6 +43,8 @@ public class FormInputItem {
   public var isEditable: Bool = true
   /// 正则校验，仅对可编辑的项目进行校验,对于非编辑选项，设置了也会置空
   public var regular: Regular.Kind? { didSet { if self.isEditable == false { self.regular = nil } } }
+  /// 用于保存输入时键盘样式
+  public var keyboardType: UIKeyboardType = .default
   
   public init(title: String? = nil,
               isRequired: Bool = false) {
@@ -55,29 +57,6 @@ public class FormInputItem {
 
 // MARK: - Public
 public extension FormInputItem {
-  
-  var keyboardType: UIKeyboardType {
-    
-    guard let regular = self.regular else { return .default }
-    switch regular {
-    case .account:
-      
-      if #available(iOS 10.0, *) {
-        
-        return .asciiCapableNumberPad
-        
-      } else {
-        
-        return .asciiCapable
-      }
-      
-    case .mobil: return .numberPad
-      
-    case .email: return .emailAddress
-      
-    default: return .default
-    }
-  }
   
   func clear() {
     

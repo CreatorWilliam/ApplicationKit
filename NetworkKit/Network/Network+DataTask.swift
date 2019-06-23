@@ -24,10 +24,10 @@ public extension Network {
     }
     
     //设置代理类型
-    self.delegate.taskType = .dataTask
+    delegate.taskType = .dataTask
     
     //启动任务
-    self.setupTask({ (session, request) -> URLSessionTask? in
+    setupTask({ (session, request) -> URLSessionTask? in
       
       guard let urlRequest = request else { return nil }
       return session.dataTask(with: urlRequest)

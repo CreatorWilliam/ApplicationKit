@@ -26,12 +26,12 @@ public extension Network {
     }
     
     //设置代理类型
-    self.delegate.taskType = .downloadTask
+    delegate.taskType = .downloadTask
     
     //若有ResumeData，创建DownloadTask继续下载
     guard let resumeData = resumeData else {
       
-      self.setupTask({ (session, urlRequest) -> URLSessionTask? in
+      setupTask({ (session, urlRequest) -> URLSessionTask? in
         
         guard let urlRequest = urlRequest else { return nil }
         return session.downloadTask(with: urlRequest)
@@ -39,7 +39,7 @@ public extension Network {
       return
     }
     
-    self.setupTask({ (session, urlRequest) -> URLSessionTask? in
+    setupTask({ (session, urlRequest) -> URLSessionTask? in
       
       let task = session.downloadTask(withResumeData: resumeData)
       
@@ -66,25 +66,11 @@ public extension Network {
   /// - Parameter action: 处理暂停下载的内容
   func cancelDownload(_ handle: @escaping DownloadTaskCancelHandle) {
     
-    var resumeData: Data? = nil
-    defer { handle(resumeData, self.delegate.result.status) }
-    
-    guard let task = handleTask() else { return }
-    
     //取消下载任务，同时处理ResumeData
-    (task as? URLSessionDownloadTask)?.cancel(byProducingResumeData: { (temp) in
-      
-      resumeData = temp
-      
-      //保证从代理池中移除
-      guard let urlRequest = self.delegate.request.urlRequest else {
-        
-        self.delegate.result.status = .requestFailure("Reason：无法获取任务对应的URLRequest,无法将代理从代理池中去除")
-        return
-      }
-      Network.delegatePool.removeValue(forKey: urlRequest)
+    (delegate.task as? URLSessionDownloadTask)?.cancel(byProducingResumeData: { (resumeData) in
       
       self.delegate.result.status =  .ok
+      handle(resumeData, self.delegate.result.status)
     })
     
   }

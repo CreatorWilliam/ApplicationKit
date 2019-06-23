@@ -13,17 +13,17 @@ public class Network {
   /// 是否为Debug模式，1、开启后，将会打印WMReachability网络状态变更日志：2、与请求设置的Debug参数共同决定是否打印请求日志
   public static var isDebug: Bool = false
   
-  // 配置默认的参数
+  /// 默认的超时时间
   public static var defualtTimeout: TimeInterval = 20
+  /// 默认的缓存策略
   public static var defualtCachePolicy: NSURLRequest.CachePolicy = .reloadIgnoringLocalCacheData
+  /// 默认的URLSessionConfiguration
   public static var configuration = URLSessionConfiguration.default
   
-  
-  internal let delegateQueue: OperationQueue = OperationQueue()
+  /// 代理，对请求及相应结果进行处理
   internal let delegate: NetworkDelegate = NetworkDelegate()
-  
-  /// 保存请求中的代理，相应代理完成任务后，将会被移除
-  internal static var delegatePool: [URLRequest: NetworkDelegate] = [:]
+  /// 代理回调队列
+  internal static let delegateQueue: OperationQueue = OperationQueue()
   
   /// 私有化
   private init() { }
@@ -83,7 +83,7 @@ public extension Network {
   @discardableResult
   func query(_ parameters: Any) -> Network {
     
-    self.delegate.request.queryParameters = parameters
+    delegate.request.queryParameters = parameters
     return self
   }
   
@@ -94,7 +94,7 @@ public extension Network {
   @discardableResult
   func body(_ parameters: Any) -> Network {
     
-    self.delegate.request.bodyParameters = parameters
+    delegate.request.bodyParameters = parameters
     return self
   }
   
@@ -105,7 +105,7 @@ public extension Network {
   @discardableResult
   func form(_ data: Data) -> Network {
     
-    self.delegate.request.formData = data
+    delegate.request.formData = data
     return self
   }
   
@@ -116,7 +116,7 @@ public extension Network {
   @discardableResult
   func httpHeaderField(_ parameters: [String: String]) -> Network {
     
-    parameters.forEach({ self.delegate.request.httpHeaderFieldParameters[$0.key] = $0.value})
+    parameters.forEach({ delegate.request.httpHeaderFieldParameters[$0.key] = $0.value})
     return self
   }
   

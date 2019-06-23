@@ -58,7 +58,7 @@ public class Reachability: NSObject {
   
   deinit {
     
-    self.stopMonitor()
+    stopMonitor()
   }
   
 }
@@ -102,8 +102,8 @@ public extension Reachability {
   /// 停止网络监控
   func stopMonitor() {
     
-    SCNetworkReachabilitySetCallback(self.reachability, nil, nil)
-    SCNetworkReachabilitySetDispatchQueue(self.reachability, nil)
+    SCNetworkReachabilitySetCallback(reachability, nil, nil)
+    SCNetworkReachabilitySetDispatchQueue(reachability, nil)
   }
   
 }

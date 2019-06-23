@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - URLSessionDownloadDelegate
-extension NetworkDelegate : URLSessionDownloadDelegate {
+extension NetworkDelegate: URLSessionDownloadDelegate {
   
   /// Tells the delegate that the download task has resumed downloading.
   ///
@@ -48,12 +48,12 @@ extension NetworkDelegate : URLSessionDownloadDelegate {
     
     delegateLog()
     
-    self.result.totalCompletedBytes = totalBytesWritten
-    self.result.totalExpectedBytes = totalBytesExpectedToWrite
+    result.totalCompletedBytes = totalBytesWritten
+    result.totalExpectedBytes = totalBytesExpectedToWrite
     
     //执行进度回调
-    self.result.status = .progress
-    self.result.progressingAction?(self)
+    result.status = .progress
+    result.progressingAction?(self)
   }
   
   /// Tells the delegate that a download task has finished downloading.
@@ -75,10 +75,6 @@ extension NetworkDelegate : URLSessionDownloadDelegate {
     //执行完成回调
     result.status = .complete
     result.completeAction?(self)
-    
-    //从代理池中移除
-    guard let urlRequest = request.urlRequest else { return }
-    Network.delegatePool.removeValue(forKey: urlRequest)
   }
   
 }

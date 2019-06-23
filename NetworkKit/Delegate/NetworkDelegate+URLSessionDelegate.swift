@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - URLSessionDelegate
-extension NetworkDelegate : URLSessionDelegate {
+extension NetworkDelegate: URLSessionDelegate {
   
   /// Tells the delegate that the session has been invalidated.
   ///
@@ -17,7 +17,7 @@ extension NetworkDelegate : URLSessionDelegate {
   /// - parameter error:   The error that caused invalidation, or nil if the invalidation was explicit.
   func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
     
-    self.delegateLog(message: error?.localizedDescription)
+    delegateLog(message: error?.localizedDescription)
   }
   
   /// Requests credentials from the delegate in response to a session-level authentication request from the
@@ -31,7 +31,7 @@ extension NetworkDelegate : URLSessionDelegate {
                   didReceive challenge: URLAuthenticationChallenge,
                   completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
     
-    self.delegateLog()
+    delegateLog()
     // TODO: 处理Session Level身份验证
     completionHandler(.performDefaultHandling, nil)
   }
@@ -41,7 +41,7 @@ extension NetworkDelegate : URLSessionDelegate {
   /// - parameter session: The session that no longer has any outstanding requests.
   func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
     
-    self.delegateLog()
+    delegateLog()
   }
   
 }

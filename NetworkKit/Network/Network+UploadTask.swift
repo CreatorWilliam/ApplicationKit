@@ -26,7 +26,10 @@ public extension Network {
       action(delegate.result.data, delegate.result.status)
     }
     
-    self.setupTask({ (session, request) -> URLSessionTask? in
+    //设置代理类型
+    delegate.taskType = .uploadTask
+    
+    setupTask({ (session, request) -> URLSessionTask? in
       
       guard let request = request else { return nil }
       return session.uploadTask(with: request, fromFile: file)
@@ -46,8 +49,11 @@ public extension Network {
       
       action(delegate.result.data, delegate.result.status)
     }
-
-    self.setupTask({ (session, request) -> URLSessionTask? in
+    
+    //设置代理类型
+    delegate.taskType = .uploadTask
+    
+    setupTask({ (session, request) -> URLSessionTask? in
       
       guard let request = request else { return nil }
       return session.uploadTask(with: request, from: data)

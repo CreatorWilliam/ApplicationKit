@@ -41,7 +41,7 @@ extension NetworkRequest {
   mutating func prepare() -> NetworkStatus {
     
     // 1、获取请求地址
-    guard let urlString = self.urlString else {
+    guard let urlString = urlString else {
       
       return NetworkStatus.prepareRequestFailure("Reason：请求地址为空")
     }
@@ -50,7 +50,7 @@ extension NetworkRequest {
     var urlStringWithQuery = urlString
     
     // 3、生成Query，并附加到请求地址后
-    if let query = self.queryParameters as? [String: Any] {
+    if let query = queryParameters as? [String: Any], query.count > 0 {
       
       urlStringWithQuery.append("?")
       urlStringWithQuery.append(query.map { "\($0)=\($1)" }.joined(separator: "&"))
@@ -73,18 +73,18 @@ extension NetworkRequest {
     var request = URLRequest(url: url)
     
     // 7、配置请求方式
-    request.httpMethod = self.httpMethod
+    request.httpMethod = httpMethod
     
     // 8、配置请求域
-    self.httpHeaderFieldParameters.forEach({ (key, value) in
+    httpHeaderFieldParameters.forEach({ (key, value) in
       
       request.setValue(value, forHTTPHeaderField: key)
     })
     
     // 9、配置请求体
-    if self.httpMethod != "GET" {
+    if httpMethod != "GET" {
       
-      if let formData = self.formData {
+      if let formData = formData {
         
         request.httpBody = formData
         
@@ -103,7 +103,7 @@ extension NetworkRequest {
       
     }
     
-    self.urlRequest = request
+    urlRequest = request
     
     return .ok
   }

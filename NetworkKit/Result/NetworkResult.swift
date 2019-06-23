@@ -41,10 +41,10 @@ struct NetworkResult {
 extension NetworkResult {
   
   /// 将结果转化为Json字典
-  var json: [String : Any]? {
+  var json: [String: Any]? {
     
-    guard let temp = try? JSONSerialization.jsonObject(with: self.data, options: .mutableContainers) else { return nil }
-    guard let json = temp as? [String : Any] else { return nil }
+    guard let temp = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else { return nil }
+    guard let json = temp as? [String: Any] else { return nil }
     
     return json
   }

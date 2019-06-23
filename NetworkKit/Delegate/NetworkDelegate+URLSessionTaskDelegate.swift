@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - URLSessionTaskDelegate
-extension NetworkDelegate : URLSessionTaskDelegate {
+extension NetworkDelegate: URLSessionTaskDelegate {
   
   /// Tells the delegate that the remote server requested an HTTP redirect.
   ///
@@ -26,7 +26,7 @@ extension NetworkDelegate : URLSessionTaskDelegate {
                   newRequest request: URLRequest,
                   completionHandler: @escaping (URLRequest?) -> Void) {
     
-    self.delegateLog()
+    delegateLog()
     
     // TODO: 处理重定向响应及请求
     completionHandler(request)
@@ -44,7 +44,7 @@ extension NetworkDelegate : URLSessionTaskDelegate {
                   didReceive challenge: URLAuthenticationChallenge,
                   completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
     
-    self.delegateLog()
+    delegateLog()
     
     // TODO: 处理Task Level身份验证
     completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
@@ -59,7 +59,7 @@ extension NetworkDelegate : URLSessionTaskDelegate {
                   task: URLSessionTask,
                   needNewBodyStream completionHandler: @escaping (InputStream?) -> Void) {
     
-    self.delegateLog()
+    delegateLog()
   }
   
   /// Periodically informs the delegate of the progress of sending body content to the server.
@@ -75,14 +75,14 @@ extension NetworkDelegate : URLSessionTaskDelegate {
                   totalBytesSent: Int64,
                   totalBytesExpectedToSend: Int64) {
     
-    self.delegateLog()
+    delegateLog()
     
-    self.result.totalCompletedBytes = totalBytesSent
-    self.result.totalExpectedBytes = totalBytesExpectedToSend
+    result.totalCompletedBytes = totalBytesSent
+    result.totalExpectedBytes = totalBytesExpectedToSend
     
     //执行进度回调
-    self.result.status = .progress
-    self.result.progressingAction?(self)
+    result.status = .progress
+    result.progressingAction?(self)
     
   }
   
@@ -95,18 +95,13 @@ extension NetworkDelegate : URLSessionTaskDelegate {
                   task: URLSessionTask,
                   didCompleteWithError error: Error?) {
     
-    self.delegateLog(message: error?.localizedDescription)
+    delegateLog(message: error?.localizedDescription)
     
     //执行完成回调
-    self.result.status = .complete
-    self.result.completeAction?(self)
+    result.status = .complete
+    result.completeAction?(self)
     //任务完成后，关闭Session，释放Delegate
     session.finishTasksAndInvalidate()
-    
-    //从代理池中移除
-    guard let urlRequest = request.urlRequest else { return }
-    Network.delegatePool.removeValue(forKey: urlRequest)
-
   }
   
   /// Tells the delegate that the session finished collecting metrics for the task.
@@ -120,7 +115,7 @@ extension NetworkDelegate : URLSessionTaskDelegate {
                   task: URLSessionTask,
                   didFinishCollecting metrics: URLSessionTaskMetrics) {
     
-    self.delegateLog()
+    delegateLog()
   }
   
 }

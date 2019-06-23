@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - URLSessionDataDelegate
-extension NetworkDelegate : URLSessionDataDelegate {
+extension NetworkDelegate: URLSessionDataDelegate {
   
   /// Tells the delegate that the data task received the initial reply (headers) from the server.
   ///
@@ -26,11 +26,8 @@ extension NetworkDelegate : URLSessionDataDelegate {
     
     delegateLog()
     //保存响应
-    if let temp = response as? HTTPURLResponse {
-      
-      self.result.response = temp
-      
-    }
+    result.response = response as? HTTPURLResponse
+    
     completionHandler(.allow)
   }
   
@@ -50,7 +47,7 @@ extension NetworkDelegate : URLSessionDataDelegate {
                   willCacheResponse proposedResponse: CachedURLResponse,
                   completionHandler: @escaping (CachedURLResponse?) -> Void) {
     
-    self.delegateLog()
+    delegateLog()
     completionHandler(proposedResponse)
   }
   
@@ -66,7 +63,7 @@ extension NetworkDelegate : URLSessionDataDelegate {
     delegateLog()
     
     //保存获取的数据
-    self.result.data.append(data)
+    result.data.append(data)
     
   }
   
@@ -79,7 +76,7 @@ extension NetworkDelegate : URLSessionDataDelegate {
                   dataTask: URLSessionDataTask,
                   didBecome downloadTask: URLSessionDownloadTask) {
     
-    self.delegateLog()
+    delegateLog()
   }
   
   /// Tells the delegate that the data task was changed to a streamtask.
@@ -95,7 +92,7 @@ extension NetworkDelegate : URLSessionDataDelegate {
                   dataTask: URLSessionDataTask,
                   didBecome streamTask: URLSessionStreamTask) {
     
-    self.delegateLog()
+    delegateLog()
   }
   
 }

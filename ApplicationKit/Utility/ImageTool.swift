@@ -10,7 +10,14 @@ import UIKit
 
 public struct ImageTool {
   
-  public static func gaussianBlur(for image: UIImage, with radius: CGFloat, handle: @escaping (UIImage) -> Void) {
+}
+
+// MARK: - 图片特效处理
+public extension ImageTool {
+  
+  static func gaussianBlur(for image: UIImage,
+                           with radius: CGFloat,
+                           handle: @escaping (UIImage) -> Void) {
     
     //使用高斯模糊滤镜
     DispatchQueue.global().async(execute: {
@@ -32,7 +39,40 @@ public struct ImageTool {
       })
       
     })
+  }
+  
+}
+
+// MARK: - 颜色转图片
+public extension ImageTool {
+  
+  /// 创建渐变色图片
+  ///
+  /// - Parameters:
+  ///   - imageSize: 图片的大小
+  ///   - gradientColors: 渐变色数组
+  ///   - locations: 渐变线性百分比数组
+  /// - Returns: 可选的UIImage对象
+  static func gradient(with imageSize: CGSize,
+                       gradientColors: [UIColor],
+                       locations: [CGFloat] = [0, 1]) -> UIImage? {
     
+    UIGraphicsBeginImageContextWithOptions(imageSize, true, 0)
+    
+    guard let context = UIGraphicsGetCurrentContext() else { return nil }
+    context.saveGState()
+    let colorSpace = gradientColors.last?.cgColor.colorSpace
+    guard let gradientRef = CGGradient(colorsSpace: colorSpace, colors: gradientColors.compactMap({ $0.cgColor }) as CFArray, locations: locations) else { return nil }
+    
+    ///水平方向渐变
+    let startPoint = CGPoint(x: 0, y: imageSize.height / 2)
+    let endPoint = CGPoint(x: imageSize.width, y: imageSize.height / 2)
+    
+    context.drawLinearGradient(gradientRef, start: startPoint, end: endPoint, options: [.drawsBeforeStartLocation, .drawsAfterEndLocation])
+    
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    
+    return image
   }
   
   /// 矩形纯色图片
@@ -41,8 +81,8 @@ public struct ImageTool {
   ///   - color: 图片颜色
   ///   - size: 图片大小
   /// - Returns: 图片
-  public static func rectangle(with color: UIColor,
-                       and size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+  static func rectangle(with color: UIColor,
+                        and size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
     
     let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
     
@@ -64,8 +104,8 @@ public struct ImageTool {
   ///   - color: 图片颜色
   ///   - radius: 半径
   /// - Returns: 图片
-  public static func roundness(with color: UIColor,
-                          and radius: Int) -> UIImage? {
+  static func roundness(with color: UIColor,
+                        and radius: Int) -> UIImage? {
     
     let rect = CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
     
@@ -86,9 +126,9 @@ public struct ImageTool {
   ///   - color: 下划线颜色
   ///   - backgroundColor: 背景颜色
   ///   - rect: 图片大小
-  public static func underline(with color: UIColor,
-                          background backgroundColor: UIColor = UIColor.white,
-                          and rect: CGRect) -> UIImage? {
+  static func underline(with color: UIColor,
+                        background backgroundColor: UIColor = UIColor.white,
+                        and rect: CGRect) -> UIImage? {
     
     UIGraphicsBeginImageContext(rect.size)
     let context = UIGraphicsGetCurrentContext()
@@ -112,7 +152,8 @@ public struct ImageTool {
   ///   - color: 省略号颜色
   ///   - backgroundColor: 背景色
   /// - Returns: 图片
-  public static func suspension(with color: UIColor, background backgroundColor: UIColor = UIColor.clear) -> UIImage? {
+  static func suspension(with color: UIColor,
+                         background backgroundColor: UIColor = UIColor.clear) -> UIImage? {
     
     UIGraphicsBeginImageContext(CGSize(width: 7, height: 1))
     let context = UIGraphicsGetCurrentContext()
@@ -134,8 +175,7 @@ public struct ImageTool {
   
 }
 
-
-// MARK: - Draw
+// MARK: - 图片重绘
 public extension ImageTool {
   
   enum DrawMode {
@@ -146,8 +186,9 @@ public extension ImageTool {
     
   }
   
-  static func draw(_ image: UIImage, _ size: CGSize = UIScreen.main.bounds.size,
-                          mode: DrawMode = .default) -> UIImage? {
+  static func draw(_ image: UIImage,
+                   _ size: CGSize = UIScreen.main.bounds.size,
+                   mode: DrawMode = .default) -> UIImage? {
     
     var drawedSize = size
     let imageSize = image.size

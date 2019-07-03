@@ -62,16 +62,25 @@ public extension Presenter {
   /// Push展示一个控制器
   ///
   /// - Parameters:
-  ///   - viewController: 要显示的控制器
+  ///   - showViewController: 显示的控制器
+  ///   - hideViewController: 显示后，导航栏中需要移除的控制器
   ///   - isHideBottomBar: 是否隐藏底部系统Bar，如tabbar等，默认隐藏
   ///   - animated: 是否有动画，默认有动画
   /// - Returns: 若没有导航控制器，调用此方法后，将返回false
   @discardableResult
-  static func push(_ viewController: UIViewController, isHideBottomBar: Bool = true, animated: Bool = true) -> Bool {
+  static func push(_ showViewController: UIViewController, andPop hideViewControllers: [UIViewController] = [], isHideBottomBar: Bool = true, animated: Bool = true) -> Bool {
     
     guard let navigationController = Presenter.currentNavigationController else { return false }
-    viewController.hidesBottomBarWhenPushed = isHideBottomBar
-    navigationController.pushViewController(viewController, animated: animated)
+    
+    showViewController.hidesBottomBarWhenPushed = isHideBottomBar
+    navigationController.pushViewController(showViewController, animated: animated)
+    
+    hideViewControllers.forEach({ (hideViewController) in
+      
+      guard let index = navigationController.viewControllers.firstIndex(where: { $0 == hideViewController }) else { return }
+      navigationController.viewControllers.remove(at: index)
+    })
+    
     return true
   }
   

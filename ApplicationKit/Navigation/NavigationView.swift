@@ -248,6 +248,14 @@ public extension NavigationView {
     return item
   }
   
+  /// 移除左侧所有Items
+  func removeAllLeftItems() {
+    
+    self.leftItems.removeAll()
+    let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    self.contentView.items = (self.leftItems + [flexibleItem] + self.rightItems)
+  }
+  
   /// 添加右侧导航栏Item
   ///
   /// - Parameters:

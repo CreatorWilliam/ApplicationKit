@@ -169,6 +169,9 @@
 		3DD832A7215A326B003B2C19 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F034211BD3AA00424FEA /* LayoutKit.framework */; };
 		3DE7FAB2216CB26E0089F110 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FAB1216CB26E0089F110 /* Project.swift */; };
 		3DE7FABD216CB60B0089F110 /* ImageKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FABC216CB60B0089F110 /* ImageKit.swift */; };
+		3DFD7D6122CFA0E700B5C99A /* jpush-ios-3.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD7D5D22CFA0E600B5C99A /* jpush-ios-3.2.1.a */; };
+		3DFD7D6222CFA0E700B5C99A /* jcore-ios-2.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD7D6022CFA0E600B5C99A /* jcore-ios-2.1.1.a */; };
+		3DFD7D6422CFA10D00B5C99A /* JPUSHService.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DFD7D6322CFA10D00B5C99A /* JPUSHService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59F11C5A224B277200D604FD /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F11C57224B277200D604FD /* ActivityIndicatorView.swift */; };
 		BB0E65332126D01E00C862EF /* JSON+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E65322126D01E00C862EF /* JSON+Description.swift */; };
 		BB23308D211D4FF2003D01B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB23308C211D4FF2003D01B2 /* SystemConfiguration.framework */; };
@@ -176,9 +179,6 @@
 		BB5CB9EF2121286C001701CC /* JSON+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9EE2121286C001701CC /* JSON+File.swift */; };
 		BB5CB9F1212128E2001701CC /* JSON+Squence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5CB9F0212128E2001701CC /* JSON+Squence.swift */; };
 		BB7A1B3421259D7B008508CA /* JPushKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BB7A1B3221259D7B008508CA /* JPushKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB7A1B4921259DC0008508CA /* jcore-ios-1.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7A1B4621259DBF008508CA /* jcore-ios-1.2.2.a */; };
-		BB7A1B4A21259DC0008508CA /* JPUSHService.h in Headers */ = {isa = PBXBuildFile; fileRef = BB7A1B4721259DBF008508CA /* JPUSHService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BB7A1B4B21259DC0008508CA /* jpush-ios-3.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7A1B4821259DC0008508CA /* jpush-ios-3.1.0.a */; };
 		BB7A1B4D21259DFF008508CA /* JPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7A1B4C21259DFF008508CA /* JPush.swift */; };
 		BB7A1B6A2125A804008508CA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7A1B5D2125A804008508CA /* CFNetwork.framework */; };
 		BB7A1B6C2125A812008508CA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7A1B6B2125A812008508CA /* CoreFoundation.framework */; };
@@ -407,6 +407,9 @@
 		3DE6BBC021772EF000A3BE08 /* CollectionSectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionItem.swift; sourceTree = "<group>"; };
 		3DE7FAB1216CB26E0089F110 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		3DE7FABC216CB60B0089F110 /* ImageKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKit.swift; sourceTree = "<group>"; };
+		3DFD7D5D22CFA0E600B5C99A /* jpush-ios-3.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.2.1.a"; sourceTree = "<group>"; };
+		3DFD7D6022CFA0E600B5C99A /* jcore-ios-2.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.1.1.a"; sourceTree = "<group>"; };
+		3DFD7D6322CFA10D00B5C99A /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		59F11C57224B277200D604FD /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		73494FD7211B419900EB41C4 /* ListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataModel.swift; sourceTree = "<group>"; };
 		BB0E65322126D01E00C862EF /* JSON+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Description.swift"; sourceTree = "<group>"; };
@@ -419,9 +422,6 @@
 		BB7A1B3021259D7B008508CA /* JPushKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JPushKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB7A1B3221259D7B008508CA /* JPushKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JPushKit.h; sourceTree = "<group>"; };
 		BB7A1B3321259D7B008508CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BB7A1B4621259DBF008508CA /* jcore-ios-1.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.2.2.a"; sourceTree = "<group>"; };
-		BB7A1B4721259DBF008508CA /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
-		BB7A1B4821259DC0008508CA /* jpush-ios-3.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.1.0.a"; sourceTree = "<group>"; };
 		BB7A1B4C21259DFF008508CA /* JPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPush.swift; sourceTree = "<group>"; };
 		BB7A1B5D2125A804008508CA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		BB7A1B6B2125A812008508CA /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -508,8 +508,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB7A1B4B21259DC0008508CA /* jpush-ios-3.1.0.a in Frameworks */,
-				BB7A1B4921259DC0008508CA /* jcore-ios-1.2.2.a in Frameworks */,
 				BB7A1B7D2125A880008508CA /* libresolv.tbd in Frameworks */,
 				BB7A1B7B2125A86C008508CA /* libz.tbd in Frameworks */,
 				BB7A1B792125A85B008508CA /* UserNotifications.framework in Frameworks */,
@@ -518,7 +516,9 @@
 				BB7A1B6F2125A826008508CA /* SystemConfiguration.framework in Frameworks */,
 				BB7A1B6E2125A81A008508CA /* CoreTelephony.framework in Frameworks */,
 				BB7A1B712125A833008508CA /* Foundation.framework in Frameworks */,
+				3DFD7D6222CFA0E700B5C99A /* jcore-ios-2.1.1.a in Frameworks */,
 				BB7A1B752125A846008508CA /* UIKit.framework in Frameworks */,
+				3DFD7D6122CFA0E700B5C99A /* jpush-ios-3.2.1.a in Frameworks */,
 				BB7A1B6C2125A812008508CA /* CoreFoundation.framework in Frameworks */,
 				BB7A1B6A2125A804008508CA /* CFNetwork.framework in Frameworks */,
 			);
@@ -1116,9 +1116,9 @@
 		BB7A1B4521259DAC008508CA /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				BB7A1B4721259DBF008508CA /* JPUSHService.h */,
-				BB7A1B4621259DBF008508CA /* jcore-ios-1.2.2.a */,
-				BB7A1B4821259DC0008508CA /* jpush-ios-3.1.0.a */,
+				3DFD7D6322CFA10D00B5C99A /* JPUSHService.h */,
+				3DFD7D6022CFA0E600B5C99A /* jcore-ios-2.1.1.a */,
+				3DFD7D5D22CFA0E600B5C99A /* jpush-ios-3.2.1.a */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -1369,7 +1369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB7A1B3421259D7B008508CA /* JPushKit.h in Headers */,
-				BB7A1B4A21259DC0008508CA /* JPUSHService.h in Headers */,
+				3DFD7D6422CFA10D00B5C99A /* JPUSHService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2129,6 +2129,7 @@
 		BB7A1B3521259D7B008508CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -2160,6 +2161,7 @@
 		BB7A1B3621259D7B008508CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;

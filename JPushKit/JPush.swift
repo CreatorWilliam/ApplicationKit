@@ -97,6 +97,13 @@ public extension JPush {
 extension JPush: JPUSHRegisterDelegate {
   
   @available(iOS 10.0, *)
+  public func jpushNotificationCenter(_ center: UNUserNotificationCenter!, openSettingsFor notification: UNNotification?) {
+    
+    
+  }
+  
+  
+  @available(iOS 10.0, *)
   public func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
     
     let userInfo = response.notification.request.content.userInfo
@@ -120,12 +127,3 @@ extension JPush: JPUSHRegisterDelegate {
   }
   
 }
-
-
-
-
-
-
-
-
-

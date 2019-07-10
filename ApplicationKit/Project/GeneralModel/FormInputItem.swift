@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS, deprecated: 9.0, message: "请使用MenuItem代替")
 public class FormInputItem {
   
   /// 表单选项名称

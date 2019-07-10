@@ -27,6 +27,8 @@ open class API {
   /// 表单提交用的请求体
   private var formParameters: Data?
   
+  // MARK: - Init
+  
   /// 创建API对象，提供请求路径，API.host会参与路径的拼接
   ///
   /// - Parameters:
@@ -48,6 +50,8 @@ open class API {
     self.method = method
     self.path = customPath
   }
+  
+  // MARK: - Request
   
   public typealias ProgressHandle = (_ progress: Float) -> Void
   public typealias CompleteHandle = (_ result: JSON) -> Void
@@ -119,6 +123,7 @@ open class API {
   
 }
 
+// MARK: - Parameters
 public extension API {
   
   func headerField(_ parameters: [String: String]) -> Self {

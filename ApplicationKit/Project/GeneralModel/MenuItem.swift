@@ -149,13 +149,13 @@ public class MenuItem {
 // MARK: - DataSourceMode
 public extension MenuItem {
   
-  /// 数据源样式
+  /// 数据源模式
   enum DataSourceMode {
     /// 无
     case none
-    /// 输入
+    /// 输入模式
     case input
-    /// 选择
+    /// 选择模式
     case selection
   }
   

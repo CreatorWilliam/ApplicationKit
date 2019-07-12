@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 描述一个菜单项
 public class MenuItem {
   
   /// 数据源模式
@@ -121,7 +122,7 @@ public class MenuItem {
     }
   }
   /// 选择模式下，用于保存选项数据源，其他模式下无效
-  public var selectionDatas: [MenuSelectionDataItem] = [] {
+  public var selectionDatas: [MenuDataItem] = [] {
     didSet {
       if mode != .selection { selectionDatas = [] }
     }

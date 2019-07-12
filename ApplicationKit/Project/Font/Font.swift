@@ -10,11 +10,6 @@ import Foundation
 
 public struct Font {
   
-  // 字体大小
-  var size: CGFloat = 14
-
-  // 字体名称
-  var name: String?
 }
 
 public extension Font {
@@ -24,15 +19,14 @@ public extension Font {
   /// - Parameters:
   ///   - size: 设计稿中字体大小
   ///   - isBold: 是否为粗体，默认为否
-  ///   - isAdapted: 是否为适配模式，默认为是，适配模式会根据屏幕缩放字体大小
-  /// - Returns: 适配的字体
-  static func system(_ size: CGFloat, isBold: Bool = false, isAdapted: Bool = true) -> UIFont {
-  
-  let finalSize = size
+  /// - Returns: 字体对象
+  static func system(_ size: CGFloat, isBold: Bool = false) -> UIFont {
     
-  if isBold { return UIFont.boldSystemFont(ofSize: finalSize) }
-  
-  return UIFont.systemFont(ofSize: finalSize)
+    let finalSize = size
+    
+    if isBold { return UIFont.boldSystemFont(ofSize: finalSize) }
+    
+    return UIFont.systemFont(ofSize: finalSize)
   }
   
   /// 自定义字体
@@ -47,15 +41,6 @@ public extension Font {
     let finalSize = size
     return UIFont(name: name, size: finalSize) ?? UIFont.systemFont(ofSize: finalSize)
   }
-  
-  /*
-   PingFang SC - PingFangSC-Medium
-   PingFang SC - PingFangSC-Semibold
-   PingFang SC - PingFangSC-Light
-   PingFang SC - PingFangSC-Ultralight
-   PingFang SC - PingFangSC-Regular
-   PingFang SC - PingFangSC-Thin
-   */
   
 }
 
@@ -75,5 +60,24 @@ public extension Font {
     })
     
   }
+  
+}
+
+// MARK: - PingFangSC
+public extension Font {
+  
+  static func pingFangSCHeavy(_ size: CGFloat) -> UIFont { return Font.custom("PingFangSC-Heavy", size: size) }
+  
+  static func pingFangSCSemibold(_ size: CGFloat) -> UIFont { return Font.custom("PingFangSC-Semibold", size: size) }
+  
+  static func pingFangSCMedium(_ size: CGFloat) -> UIFont { return Font.custom("PingFangSC-Medium", size: size) }
+  
+  static func pingFangSCRegular(_ size: CGFloat) -> UIFont { return Font.custom("PingFangSC-Regular", size: size) }
+  
+  static func pingFangSCThin(_ size: CGFloat) -> UIFont { return Font.custom("PingFangSC-Thin", size: size) }
+  
+  static func pingFangSCLight(_ size: CGFloat) -> UIFont { return Font.custom("PingFangSC-Light", size: size) }
+  
+  static func pingFangSCUltralight(_ size: CGFloat) -> UIFont { return Font.custom("PingFangSC-Ultralight", size: size) }
   
 }

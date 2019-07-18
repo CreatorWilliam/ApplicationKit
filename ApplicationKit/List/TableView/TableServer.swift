@@ -104,6 +104,28 @@ public extension TableServer {
     self.emptyContentView?.isHidden = (self.groups.reduce(0, { $0 + $1.items.count }) > 0)
   }
   
+  /// 下拉操作
+  ///
+  /// - Parameter action: 触发下拉动作时执行
+  func addPullDown(action: @escaping () -> Void) {
+    
+    tableView.es.addPullToRefresh(handler: {
+      
+      action()
+    })
+  }
+  
+  /// 上拉操作
+  ///
+  /// - Parameter action: 触发下拉动作时执行
+  func addPullUp(action: @escaping () -> Void) {
+    
+    tableView.es.addInfiniteScrolling {
+      
+      action()
+    }
+  }
+  
 }
 
 // MARK: - UITableViewDelegate

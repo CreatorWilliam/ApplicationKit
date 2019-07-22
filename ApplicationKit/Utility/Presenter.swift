@@ -113,6 +113,13 @@ public extension Presenter {
     }
   }
   
+  /// 返回上一个页面
+  static func back() {
+    
+    if let _ = Presenter.pop() { return }
+    Presenter.dismiss()
+  }
+  
 }
 
 // MARK: - HUD

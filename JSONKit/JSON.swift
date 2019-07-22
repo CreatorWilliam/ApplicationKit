@@ -19,6 +19,12 @@ public struct JSON {
   /// JSON为数组的时候，有值
   public private(set) var array: [Any]?
   
+  /// 判断JSON是否为空的便捷方法
+  public var isEmpty: Bool {
+    
+    return data == nil
+  }
+  
   /// 根据JSON(字典、数组)数据创建JSON对象
   ///
   /// - Parameter jsonData: JSON数据

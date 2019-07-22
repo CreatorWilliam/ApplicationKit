@@ -20,14 +20,14 @@ public class MenuItem {
   public var placeholder: String?
   /// 是否为必要的,仅仅是一个标志，不参与内部验证
   public var isRequired: Bool = false
-  /// 界面显示的值
+  /// 界面显示的值，在input和selection模式下，由内部维护
   /// 输入模式下，显示的为inputValue
-  /// 选择模式下，保存selectionDatas中selectedIndex对应数据的title
+  /// 选择模式下，保存selectedIndex对应selectionDatas中的title
   public var visibleValue: String?
-  /// 保存提交的参数
+  /// 参数，在input和selection模式下，由内部维护
   /// 输入模式下，保存inputValue
-  /// 选择模式下，保存selectionDatas中selectedIndex对应数据的parameter
-  public private(set) var parameter: Any?
+  /// 选择模式下，保存selectedIndex对应selectionDatas中的parameter
+  public var parameter: Any?
   /// 用于传递代理
   public weak var delegate: AnyObject?
   /// 用于传递附加的数据
@@ -53,9 +53,7 @@ public class MenuItem {
       /// 保证只有设置不同的新值，才会继续执行
       if inputValue == oldValue { return }
       
-      defer {
-        changedAction?()
-      }
+      defer { changedAction?() }
       
       /// 验证是否有输入的值，否则同步置空
       guard let value = inputValue else {
@@ -71,8 +69,8 @@ public class MenuItem {
       }
       visibleValue = value
       parameter = value
-      
     }
+    
   }
   /// 输入模式下，用于正则校验，可直接调用verify来验证输入的内容是否符合规则
   public var regular: String?

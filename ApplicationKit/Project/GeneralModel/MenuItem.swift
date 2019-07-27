@@ -109,7 +109,7 @@ public class MenuItem {
         return
       }
       /// 确保设置正确的索引
-      guard index < 0 && index > (selectionDatas.count) else {
+      guard index > -1 && index < (selectionDatas.count) else {
         visibleValue = nil
         parameter = nil
         return

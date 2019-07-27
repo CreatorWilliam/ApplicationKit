@@ -76,7 +76,7 @@ public extension UIButton {
   ///   - url: 要设置的图片地址，类型包括URL，可以转化为URL的String
   ///   - placeholder: 占位图，可以是UIImage，也可以是通过能通过UIImage(named:)生成图片的本地图片名
   ///   - state: 图片显示时所对应的UIControl.State
-  func setImage(with url: Any?, placeholder: String? = nil, for state: UIControl.State = .normal) {
+  func setImage(with url: Any?, placeholder: Any? = nil, for state: UIControl.State = .normal) {
     
     let placeholder: UIImage? = self.prepare(with: placeholder)
     let imageURL: URL? = self.prepare(with: url)

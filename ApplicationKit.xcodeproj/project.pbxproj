@@ -170,6 +170,7 @@
 		3DD832A5215A315C003B2C19 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DD8323B215A315C003B2C19 /* area.plist */; };
 		3DD832A6215A315C003B2C19 /* addressCode in Resources */ = {isa = PBXBuildFile; fileRef = 3DD8323C215A315C003B2C19 /* addressCode */; };
 		3DD832A7215A326B003B2C19 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF1F034211BD3AA00424FEA /* LayoutKit.framework */; };
+		3DDAEF2522EFDBE700039573 /* RichTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDAEF2422EFDBE700039573 /* RichTextView.swift */; };
 		3DE7FAB2216CB26E0089F110 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FAB1216CB26E0089F110 /* Project.swift */; };
 		3DE7FABD216CB60B0089F110 /* ImageKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FABC216CB60B0089F110 /* ImageKit.swift */; };
 		3DFD7D6122CFA0E700B5C99A /* jpush-ios-3.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD7D5D22CFA0E600B5C99A /* jpush-ios-3.2.1.a */; };
@@ -407,6 +408,7 @@
 		3DD83239215A315C003B2C19 /* LocationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationItem.swift; sourceTree = "<group>"; };
 		3DD8323B215A315C003B2C19 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		3DD8323C215A315C003B2C19 /* addressCode */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addressCode; sourceTree = "<group>"; };
+		3DDAEF2422EFDBE700039573 /* RichTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextView.swift; sourceTree = "<group>"; };
 		3DDC0C8E218954810035A84F /* PlaceholderViewCustomizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderViewCustomizable.swift; sourceTree = "<group>"; };
 		3DDC0C91218956980035A84F /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		3DDC0C93218957C80035A84F /* PlaceholderViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDelegate.swift; sourceTree = "<group>"; };
@@ -906,6 +908,7 @@
 		3DD831F3215A315B003B2C19 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				3DDAEF2422EFDBE700039573 /* RichTextView.swift */,
 				3DB3983A2194028700507F2C /* CodeInputView.swift */,
 				3DC38F0C21BE654B00871DE7 /* StarRatingView.swift */,
 				3D2FDC1721E49DE400C1C639 /* CountingLabel.swift */,
@@ -1804,6 +1807,7 @@
 				3DA5A07921DF7EE80014D7F1 /* PlayerViewDefaultControlView.swift in Sources */,
 				3DD8323D215A315C003B2C19 /* PopViewController.swift in Sources */,
 				3DD832A3215A315C003B2C19 /* LocationPicker.swift in Sources */,
+				3DDAEF2522EFDBE700039573 /* RichTextView.swift in Sources */,
 				3DD83248215A315C003B2C19 /* EZPlayerFloatView.swift in Sources */,
 				3DD8329A215A315C003B2C19 /* GenderPicker.swift in Sources */,
 				3DD83251215A315C003B2C19 /* EZPlayerLoading.swift in Sources */,

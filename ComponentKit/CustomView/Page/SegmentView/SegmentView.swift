@@ -41,7 +41,7 @@ public class SegmentView: UIView {
   ///
   /// 若遵循SegmentViewCellBadgable，则可以进行角标设置
   public var segmentCell: ReuseItem = ReuseItem(SegmentViewCell.self) {
-    didSet { self.collectionView.register(cells: [self.segmentCell])}
+    didSet { collectionView.register(cells: [segmentCell])}
   }
   /// 设置最大可见Segment个数，默认为4，该值会计算单个Segment的宽度，若计算所得的宽度小于minVisibleWidth，则使用minVisibleWidth的值
   public var maxVisibleCount: CGFloat = 4
@@ -50,24 +50,24 @@ public class SegmentView: UIView {
   /// 是否可以翻页
   public var isPageEnable: Bool = true {
     
-    didSet { self.collectionView.isScrollEnabled = self.isPageEnable }
+    didSet { collectionView.isScrollEnabled = isPageEnable }
   }
   /// 翻页观察者
   public weak var pageObserver: Pagable?
   /// 滑块宽度
   public var indicatorWidth: CGFloat = 50 {
     
-    didSet { self.indicatorView.frame.size.width = self.indicatorWidth }
+    didSet { indicatorView.frame.size.width = indicatorWidth }
   }
   /// 滑块Y方向向下偏移的修正量，默认为0，通过计算后会向上偏移5个pt单位
   public var indicatorYOffset: CGFloat = 0 {
     
-    didSet { self.indicatorView.frame.origin.y += self.indicatorYOffset }
+    didSet { indicatorView.frame.origin.y += indicatorYOffset }
   }
   /// 滑块颜色
   public var indicatorColor: UIColor = .blue {
     
-    didSet { self.indicatorView.backgroundColor = self.indicatorColor }
+    didSet { indicatorView.backgroundColor = indicatorColor }
   }
   /// 滑动动画时长
   public var animationDuration: TimeInterval = 0.25
@@ -76,7 +76,7 @@ public class SegmentView: UIView {
   
   // MARK: ********** Private **********
   private let flowLayout = UICollectionViewFlowLayout()
-  private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+  private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
   private let indicatorView = UIView()
   
   /// 段选数据源，对文字，角标，图标进行封装
@@ -85,7 +85,7 @@ public class SegmentView: UIView {
   public override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.setupUI()
+    setupUI()
   }
   
   public required init?(coder aDecoder: NSCoder) {
@@ -95,15 +95,17 @@ public class SegmentView: UIView {
   public override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.flowLayout.itemSize.width = self.bounds.width / (CGFloat(self.segments.count) > self.maxVisibleCount ? self.maxVisibleCount : CGFloat(self.segments.count))
-    if self.flowLayout.itemSize.width < self.minSegmentWidth {
-      self.flowLayout.itemSize.width = self.minSegmentWidth
+    /// 根据元素个数及最大显示个数来计算宽度
+    flowLayout.itemSize.width = bounds.width / min(CGFloat(segments.count), CGFloat(maxVisibleCount))
+    /// 若计算的宽度小于最小宽度，则使用最小宽度
+    if flowLayout.itemSize.width < minSegmentWidth {
+      flowLayout.itemSize.width = minSegmentWidth
     }
-    self.flowLayout.itemSize.height = self.bounds.height
+    flowLayout.itemSize.height = bounds.height
     
-    self.indicatorView.frame.origin.y = self.bounds.height - 7 + self.indicatorYOffset
+    indicatorView.frame.origin.y = (bounds.height - 7 + indicatorYOffset)
     
-    self.select(at: self.selectedIndex, isAnimated: false)
+    select(at: selectedIndex, isAnimated: false)
   }
   
 }
@@ -118,10 +120,10 @@ public extension SegmentView {
   ///   - index: 位置索引
   func updateSegment(with item: SegmentViewItemSourcable, at index: Int) {
     
-    guard index < self.segments.count else { return }
-    self.segments.remove(at: index)
-    self.segments.insert(item, at: index)
-    (self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentViewCellable)?.update(with: item)
+    guard index < segments.count else { return }
+    segments.remove(at: index)
+    segments.insert(item, at: index)
+    (collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentViewCellable)?.update(with: item)
   }
   
   /// 使用数据源更新SegmentView
@@ -130,10 +132,10 @@ public extension SegmentView {
   func update(with segments: [SegmentViewItemSourcable]) {
     
     self.segments = segments
-    self.flowLayout.itemSize.width = self.bounds.width / (CGFloat(self.segments.count) > self.maxVisibleCount ? self.maxVisibleCount : CGFloat(self.segments.count))
-    self.collectionView.reloadData()
-    self.select(at: self.selectedIndex, isAnimated: false)
-    self.indicatorView.isHidden = !(self.segments.count > 0)
+    flowLayout.itemSize.width = bounds.width / (CGFloat(segments.count) > maxVisibleCount ? maxVisibleCount : CGFloat(segments.count))
+    collectionView.reloadData()
+    select(at: selectedIndex, isAnimated: false)
+    indicatorView.isHidden = !(segments.count > 0)
   }
   
   /// 更新指定位置的角标，如果使用自定义的SegmentViewCell，则需要遵循SegmentViewCellBadgable，才可以设置角标
@@ -143,8 +145,8 @@ public extension SegmentView {
   ///   - index: 要更新的Segment索引
   func updateBadge(_ count: Int?, at index: Int) {
     
-    guard index < self.segments.count else { return }
-    (self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentViewCellBadgable)?.updateBadge(count)
+    guard index < segments.count else { return }
+    (collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SegmentViewCellBadgable)?.updateBadge(count)
   }
   
 }
@@ -154,7 +156,7 @@ extension SegmentView: Pagable {
   
   public func page(to index: Int, withSource source: Pagable) {
     
-    self.select(at: index, isAnimated: true)
+    select(at: index, isAnimated: true)
   }
   
 }
@@ -164,29 +166,29 @@ private extension SegmentView {
   
   func setupUI() {
     
-    self.backgroundColor = .white
+    backgroundColor = .white
     
-    self.flowLayout.scrollDirection = .horizontal
-    self.flowLayout.minimumLineSpacing = 0
-    self.flowLayout.minimumInteritemSpacing = 0
+    flowLayout.scrollDirection = .horizontal
+    flowLayout.minimumLineSpacing = 0
+    flowLayout.minimumInteritemSpacing = 0
     
-    self.collectionView.delegate = self
-    self.collectionView.dataSource = self
-    self.collectionView.showsHorizontalScrollIndicator = false
-    self.collectionView.showsVerticalScrollIndicator = false
-    self.collectionView.backgroundColor = .clear
-    self.collectionView.register(cells: [ReuseItem(SegmentViewCell.self)])
-    self.addSubview(self.collectionView)
-    self.collectionView.layout.add { (make) in
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.showsHorizontalScrollIndicator = false
+    collectionView.showsVerticalScrollIndicator = false
+    collectionView.backgroundColor = .clear
+    collectionView.register(cells: [ReuseItem(SegmentViewCell.self)])
+    addSubview(collectionView)
+    collectionView.layout.add { (make) in
       make.top().bottom().leading().trailing().equal(self)
     }
     
-    self.indicatorView.frame = .zero
-    self.indicatorView.frame.size.height = 2
-    self.indicatorView.frame.size.width = self.indicatorWidth
-    self.indicatorView.backgroundColor = self.indicatorColor
-    self.collectionView.addSubview(self.indicatorView)
-    self.indicatorView.isHidden = true
+    indicatorView.frame = .zero
+    indicatorView.frame.size.height = 2
+    indicatorView.frame.size.width = indicatorWidth
+    indicatorView.backgroundColor = indicatorColor
+    collectionView.addSubview(indicatorView)
+    indicatorView.isHidden = true
   }
   
 }
@@ -196,14 +198,14 @@ extension SegmentView: UICollectionViewDelegate {
   
   public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
     
-    self.pageObserver?.pageWillPage(at: self.selectedIndex, withSource: self)
+    pageObserver?.pageWillPage(at: selectedIndex, withSource: self)
     return true
   }
   
   public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    self.select(at: indexPath.item, isAnimated: true)
-    self.pageObserver?.page(to: indexPath.item, withSource: self)
+    select(at: indexPath.item, isAnimated: true)
+    pageObserver?.page(to: indexPath.item, withSource: self)
   }
   
 }
@@ -218,14 +220,14 @@ extension SegmentView: UICollectionViewDataSource {
   
   public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
-    return self.segments.count
+    return segments.count
   }
   
   public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.segmentCell.id, for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: segmentCell.id, for: indexPath)
     
-    (cell as? SegmentViewCellable)?.update(with: self.segments[indexPath.item])
+    (cell as? SegmentViewCellable)?.update(with: segments[indexPath.item])
     
     return cell
   }
@@ -238,28 +240,28 @@ private extension SegmentView {
   /// 手动选择
   func select(at index: Int, isAnimated: Bool) {
     
-    guard self.segments.count > 0 else { return }
+    guard segments.count > 0 else { return }
     
-    self.collectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-    self.selectedIndex = index
+    collectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+    selectedIndex = index
     
-    self.updateIndicator(at: index, isAnimated: isAnimated)
+    updateIndicator(at: index, isAnimated: isAnimated)
   }
   
   func updateIndicator(at index: Int, isAnimated: Bool) {
     
     // 获取偏移后的中心点X
-    let centerX = self.flowLayout.itemSize.width * CGFloat(index) + self.flowLayout.itemSize.width * 0.5
+    let centerX = flowLayout.itemSize.width * CGFloat(index) + flowLayout.itemSize.width * 0.5
     
     // 无动画
     if isAnimated == false {
       
-      self.indicatorView.center.x = centerX
+      indicatorView.center.x = centerX
       return
     }
     
     // 有动画
-    UIView.animate(withDuration: self.animationDuration, animations: {
+    UIView.animate(withDuration: animationDuration, animations: {
       
       self.indicatorView.center.x = centerX
       

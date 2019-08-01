@@ -130,7 +130,7 @@ public extension Presenter {
   /// - Parameter handle: 加载视图显示后执行
   static func showLoading(_ handle: (() -> Void)? = nil) {
     
-    self.currentPresentedController?.hud.showLoading(handle)
+    currentPresentedController?.hud.showLoading(handle)
   }
   
   /// 隐藏加载视图
@@ -138,7 +138,7 @@ public extension Presenter {
   /// - Parameter handle: 加载视图隐藏后执行
   static func hideLoading(_ handle: (() -> Void)? = nil) {
     
-    self.currentPresentedController?.hud.hideLoading(handle)
+    currentPresentedController?.hud.hideLoading(handle)
   }
   
   /// 显示消息视图
@@ -150,7 +150,8 @@ public extension Presenter {
   ///   - completion: 消息视图隐藏后执行
   static func showMessage(title: String? = nil, message: String?, duration: TimeInterval = 1, completion: (() -> Void)? = nil ) {
     
-    self.currentPresentedController?.hud.showMessage(title: title, message: message, duration: duration, completion: completion)
+    /// 优先使用导航栏显示消息，避免Push或者Pop时消息提醒显示异常
+    (currentNavigationController ?? currentPresentedController)?.hud.showMessage(title: title, message: message, duration: duration, completion: completion)
   }
   
 }

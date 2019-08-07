@@ -173,6 +173,8 @@
 		3DDAEF2522EFDBE700039573 /* RichTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDAEF2422EFDBE700039573 /* RichTextView.swift */; };
 		3DE7FAB2216CB26E0089F110 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FAB1216CB26E0089F110 /* Project.swift */; };
 		3DE7FABD216CB60B0089F110 /* ImageKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE7FABC216CB60B0089F110 /* ImageKit.swift */; };
+		3DF3D70E22F99C270062DD57 /* AnimateTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3D70D22F99C260062DD57 /* AnimateTransitioning.swift */; };
+		3DF3D71622FAAC000062DD57 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3D71322FAAC000062DD57 /* DatePickerViewController.swift */; };
 		3DFD7D6122CFA0E700B5C99A /* jpush-ios-3.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD7D5D22CFA0E600B5C99A /* jpush-ios-3.2.1.a */; };
 		3DFD7D6222CFA0E700B5C99A /* jcore-ios-2.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD7D6022CFA0E600B5C99A /* jcore-ios-2.1.1.a */; };
 		3DFD7D6422CFA10D00B5C99A /* JPUSHService.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DFD7D6322CFA10D00B5C99A /* JPUSHService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -415,6 +417,8 @@
 		3DE6BBC021772EF000A3BE08 /* CollectionSectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSectionItem.swift; sourceTree = "<group>"; };
 		3DE7FAB1216CB26E0089F110 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		3DE7FABC216CB60B0089F110 /* ImageKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKit.swift; sourceTree = "<group>"; };
+		3DF3D70D22F99C260062DD57 /* AnimateTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimateTransitioning.swift; sourceTree = "<group>"; };
+		3DF3D71322FAAC000062DD57 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		3DFD7D5D22CFA0E600B5C99A /* jpush-ios-3.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.2.1.a"; sourceTree = "<group>"; };
 		3DFD7D6022CFA0E600B5C99A /* jcore-ios-2.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.1.1.a"; sourceTree = "<group>"; };
 		3DFD7D6322CFA10D00B5C99A /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
@@ -793,6 +797,7 @@
 			isa = PBXGroup;
 			children = (
 				3DD831A1215A3130003B2C19 /* ComponentKit.h */,
+				3DF3D70A22F99C160062DD57 /* AnimateTransitioning */,
 				3DBEA79422D09A5F00083F2D /* Form */,
 				3DD831F3215A315B003B2C19 /* CustomView */,
 				3DD831B2215A315A003B2C19 /* Controller */,
@@ -1023,6 +1028,7 @@
 		3DD83229215A315C003B2C19 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
+				3DF3D71322FAAC000062DD57 /* DatePickerViewController.swift */,
 				3DD8322A215A315C003B2C19 /* DatePicker.swift */,
 				3DD8322B215A315C003B2C19 /* GenderPicker.swift */,
 				3DD8322C215A315C003B2C19 /* ImagePicker */,
@@ -1102,6 +1108,14 @@
 				3DDC0C91218956980035A84F /* PlaceholderView.swift */,
 			);
 			path = PlaceholderView;
+			sourceTree = "<group>";
+		};
+		3DF3D70A22F99C160062DD57 /* AnimateTransitioning */ = {
+			isa = PBXGroup;
+			children = (
+				3DF3D70D22F99C260062DD57 /* AnimateTransitioning.swift */,
+			);
+			path = AnimateTransitioning;
 			sourceTree = "<group>";
 		};
 		BB5CB9F22121290A001701CC /* Squence */ = {
@@ -1796,6 +1810,7 @@
 				3D2FDC1821E49DE400C1C639 /* CountingLabel.swift in Sources */,
 				3DB3983B2194028700507F2C /* CodeInputView.swift in Sources */,
 				3DD83274215A315C003B2C19 /* SegmentViewCell.swift in Sources */,
+				3DF3D71622FAAC000062DD57 /* DatePickerViewController.swift in Sources */,
 				3DD8329D215A315C003B2C19 /* ImagePickerPreviewView.swift in Sources */,
 				3DD83282215A315C003B2C19 /* BarrageInterface.swift in Sources */,
 				3DD83256215A315C003B2C19 /* EZPlayerTransport.swift in Sources */,
@@ -1832,6 +1847,7 @@
 				3DD8324A215A315C003B2C19 /* EZPlayerFloatContainerRootViewController.swift in Sources */,
 				3DA5A07821DF7EE80014D7F1 /* PlayerViewControllable.swift in Sources */,
 				3DD832A2215A315C003B2C19 /* ImageAlbumTableViewCell.swift in Sources */,
+				3DF3D70E22F99C270062DD57 /* AnimateTransitioning.swift in Sources */,
 				3DD83257215A315C003B2C19 /* EZPlayerAVAssetResourceLoaderDelegate.swift in Sources */,
 				3DD8324F215A315C003B2C19 /* EZPlayerContentItem.swift in Sources */,
 				3DD83280215A315C003B2C19 /* BarrageCell.swift in Sources */,

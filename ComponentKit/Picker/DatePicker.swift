@@ -8,6 +8,7 @@
 
 import ApplicationKit
 
+@available(iOS, deprecated: 8.0, message: "请使用DatePickerViewController代替")
 public class DatePicker: NSObject {
   
   private static let shared: DatePicker = DatePicker()

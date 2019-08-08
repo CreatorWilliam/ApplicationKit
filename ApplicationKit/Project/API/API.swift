@@ -165,9 +165,9 @@ private extension API {
     #if DEBUG
     let api = self
     DebugLog(api.path)
-    if let header = api.headerFieldParameters { DebugLog(header)}
-    if let query = api.queryParameters { DebugLog(query) }
-    if let body = api.bodyParameters { DebugLog(body) }
+    if let header = api.headerFieldParameters { DebugLog(JSON(header))}
+    if let query = api.queryParameters { DebugLog(JSON(query)) }
+    if let body = api.bodyParameters { DebugLog(JSON(body)) }
     DebugLog(json)
     #endif
   }

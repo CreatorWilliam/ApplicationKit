@@ -155,7 +155,6 @@
 		3DD8328B215A315C003B2C19 /* ImageBrowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD83219215A315B003B2C19 /* ImageBrowerController.swift */; };
 		3DD8328C215A315C003B2C19 /* ImageBrowerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8321A215A315B003B2C19 /* ImageBrowerCollectionViewCell.swift */; };
 		3DD8328D215A315C003B2C19 /* ImageBrowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8321B215A315B003B2C19 /* ImageBrowerView.swift */; };
-		3DD83299215A315C003B2C19 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8322A215A315C003B2C19 /* DatePicker.swift */; };
 		3DD8329A215A315C003B2C19 /* GenderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8322B215A315C003B2C19 /* GenderPicker.swift */; };
 		3DD8329B215A315C003B2C19 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8322D215A315C003B2C19 /* ImagePicker.swift */; };
 		3DD8329C215A315C003B2C19 /* ImagePickerAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD8322F215A315C003B2C19 /* ImagePickerAssetViewController.swift */; };
@@ -396,7 +395,6 @@
 		3DD83226215A315B003B2C19 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		3DD83227215A315B003B2C19 /* UIView+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Keyboard.swift"; sourceTree = "<group>"; };
 		3DD83228215A315B003B2C19 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		3DD8322A215A315C003B2C19 /* DatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		3DD8322B215A315C003B2C19 /* GenderPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderPicker.swift; sourceTree = "<group>"; };
 		3DD8322D215A315C003B2C19 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		3DD8322F215A315C003B2C19 /* ImagePickerAssetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAssetViewController.swift; sourceTree = "<group>"; };
@@ -1029,7 +1027,6 @@
 			isa = PBXGroup;
 			children = (
 				3DF3D71322FAAC000062DD57 /* DatePickerViewController.swift */,
-				3DD8322A215A315C003B2C19 /* DatePicker.swift */,
 				3DD8322B215A315C003B2C19 /* GenderPicker.swift */,
 				3DD8322C215A315C003B2C19 /* ImagePicker */,
 				3D64951F2188833A0046165A /* Location */,
@@ -1815,7 +1812,6 @@
 				3DD83282215A315C003B2C19 /* BarrageInterface.swift in Sources */,
 				3DD83256215A315C003B2C19 /* EZPlayerTransport.swift in Sources */,
 				3DD8329F215A315C003B2C19 /* AlbumItem.swift in Sources */,
-				3DD83299215A315C003B2C19 /* DatePicker.swift in Sources */,
 				3DD83259215A315C003B2C19 /* EZPlayerFloatContainer.swift in Sources */,
 				3DD83277215A315C003B2C19 /* PageView.swift in Sources */,
 				3DD8329B215A315C003B2C19 /* ImagePicker.swift in Sources */,

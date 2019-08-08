@@ -37,7 +37,7 @@ public class DatePickerViewController: UIViewController {
   private let titleLabel = UILabel()
   private let cancelButton = UIButton(type: .custom)
   private let confirmButton = UIButton(type: .custom)
-  private let pickerView = UIPickerView()
+  private let customizeDatePickerView = UIPickerView()
   
   private var sortedCalendarComponents: [Calendar.Component] = []
   private lazy var dateComponents = Calendar.current.dateComponents(Set(sortedCalendarComponents), from: date)
@@ -92,10 +92,12 @@ public extension DatePickerViewController {
   enum Mode {
     /// 显示年、月、日
     case date
-    /// 显示、时、分、秒
+    /// 显示时、分、秒
     case time
     /// 显示年、月、日、时
     case dateAndHour
+    /// 显示年、月、日、时、分、秒
+    //case dateAndTime
   }
   
 }
@@ -259,13 +261,13 @@ private extension DatePickerViewController {
       make.height(50)
     }
     
-    pickerView.delegate = self
-    pickerView.dataSource = self
-    view.addSubview(pickerView)
-    pickerView.layout.add { (make) in
+    customizeDatePickerView.delegate = self
+    customizeDatePickerView.dataSource = self
+    contentView.addSubview(customizeDatePickerView)
+    customizeDatePickerView.layout.add { (make) in
       make.top().equal(topToolView).bottom()
       make.leading().trailing().equal(contentView)
-      make.bottom().equal(view).safeBottom()
+      make.bottom().equal(contentView).safeBottom()
     }
   }
   
@@ -351,18 +353,18 @@ private extension DatePickerViewController {
     dateComponents = dateComponents(from: date)
     self.date = self.date(from: dateComponents) ?? Date()
     
-    pickerView.reloadAllComponents()
+    customizeDatePickerView.reloadAllComponents()
     
-    /// 选中时间对应的行
+    /// 自定义选择视图选中对应日期时间的行
     sortedCalendarComponents.enumerated().forEach({ (index, mode) in
       
       switch mode {
-      case .year: pickerView.selectRow((dateComponents.year ?? 1) - 1, inComponent: index, animated: animated)
-      case .month: pickerView.selectRow((dateComponents.month ?? 1) - 1, inComponent: index, animated: animated)
-      case .day: pickerView.selectRow((dateComponents.day ?? 1) - 1, inComponent: index, animated: animated)
-      case .hour: pickerView.selectRow((dateComponents.hour ?? 0), inComponent: index, animated: animated)
-      case .minute: pickerView.selectRow((dateComponents.minute ?? 0), inComponent: index, animated: animated)
-      case .second: pickerView.selectRow((dateComponents.second ?? 0), inComponent: index, animated: animated)
+      case .year: customizeDatePickerView.selectRow((dateComponents.year ?? 1) - 1, inComponent: index, animated: animated)
+      case .month: customizeDatePickerView.selectRow((dateComponents.month ?? 1) - 1, inComponent: index, animated: animated)
+      case .day: customizeDatePickerView.selectRow((dateComponents.day ?? 1) - 1, inComponent: index, animated: animated)
+      case .hour: customizeDatePickerView.selectRow((dateComponents.hour ?? 0), inComponent: index, animated: animated)
+      case .minute: customizeDatePickerView.selectRow((dateComponents.minute ?? 0), inComponent: index, animated: animated)
+      case .second: customizeDatePickerView.selectRow((dateComponents.second ?? 0), inComponent: index, animated: animated)
       default: break
       }
     })

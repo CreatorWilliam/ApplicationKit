@@ -27,7 +27,7 @@ public class MenuItem {
   /// 参数，在input和selection模式下，由内部维护
   /// 输入模式下，保存inputValue
   /// 选择模式下，保存selectedIndex对应selectionDatas中的parameter
-  public var parameter: Any?
+  public var parameter: AnyHashable?
   /// 用于传递代理
   public weak var delegate: AnyObject?
   /// 用于传递附加的数据
@@ -98,9 +98,7 @@ public class MenuItem {
       /// 保证只有设置不同的新值，才会继续执行
       if selectedIndex == oldValue { return }
       
-      defer {
-        changedAction?()
-      }
+      defer { changedAction?() }
       
       /// 验证是否有选择的值，否则同步置空
       guard let index = selectedIndex else {

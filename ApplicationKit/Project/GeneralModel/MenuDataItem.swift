@@ -17,7 +17,7 @@ public struct MenuDataItem {
   /// 选项图标
   public var imageURL: URL?
   /// 选项参数
-  public var parameter: Any?
+  public var parameter: AnyHashable?
   /// 扩展数据
   public var accessoryData: Any?
   
@@ -36,7 +36,7 @@ public struct MenuDataItem {
     
     self.title = title
     guard let url = string else { return }
-    guard url.isEmpty == false else { return }
+    if url.isEmpty == true { return }
     self.imageURL = URL(string: url)
   }
   

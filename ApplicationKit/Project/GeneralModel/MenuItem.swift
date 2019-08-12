@@ -24,9 +24,9 @@ public class MenuItem {
   /// 输入模式下，显示的为inputValue
   /// 选择模式下，保存selectedIndex对应selectionDatas中的title
   public var visibleValue: String?
-  /// 参数，在input和selection模式下，由内部维护
-  /// 输入模式下，保存inputValue
-  /// 选择模式下，保存selectedIndex对应selectionDatas中的parameter
+  /// 参数，在input和selection模式下，由内部维护.
+  /// 输入模式下，保存inputValue;
+  /// 选择模式下，保存selectedIndex对应selectionDatas中的parameter.
   public var parameter: AnyHashable?
   /// 用于传递代理
   public weak var delegate: AnyObject?
@@ -38,7 +38,8 @@ public class MenuItem {
   /// 子节点
   public var childrenItem: MenuItem? { didSet { self.childrenItem?.fatherItem = self } }
   
-  /// 用于保存数据变更后执行的一个回调，注意弱引用
+  /// 用于保存数据变更后执行的一个回调，注意弱引用。
+  /// 仅在输入模式或者选择模式下执行
   public var changedAction: (() -> Void)?
   
   // MARK: - 输入模式下使用的相关参数
@@ -161,20 +162,33 @@ public extension MenuItem {
 // MARK: - Public
 public extension MenuItem {
   
+  /// 清除所有内容。
+  /// 输入模式下：清除输入的数据；
+  /// 选择模式下：清除选择的索引及选择的数据源，若不需要清除数据源，外部只需要设置选中索引为nil即可。
   func clear() {
     
-    visibleValue = nil
-    parameter = nil
+    switch mode {
+    case .input:
+      
+      inputValue = nil
+      
+    case .selection:
+      
+      selectedIndex = nil
+      selectionDatas.removeAll()
+      
+    case .none:
+      
+      visibleValue = nil
+      parameter = nil
+    }
     
-    selectedIndex = nil
-    selectionDatas.removeAll()
   }
   
-  /// 验证是否录入了数据，对于设置了
-  ///
-  /// - Parameter hasMessage: 是否显示提示（待完善），默认不显示
-  /// - Returns: 验证结果：true为通过，false为不通过
-  func verify(hasMessage: Bool = false) -> Bool {
+  /// 是否为有效参数，常规模式无意义。
+  /// 输入模式下，验证输入的数据是否符合预设的正则表达式；
+  /// 选择模式下，验证是否选择了数据。
+  var isValid: Bool {
     
     /// 非编辑选项，则只验证是否选中了选项
     guard self.isEditable == true else { return parameter != nil }

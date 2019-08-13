@@ -239,11 +239,11 @@ extension TableServer: UITableViewDelegate {
   // MARK: ---------- Header
   
   // Estimated Height Of Header
-    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-      
-      // 必须保证返回值大于0
-      return self.cachedHeaderHeights[section] ?? 44//UITableView.automaticDimension
-    }
+  public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    
+    // 必须保证返回值大于0
+    return self.cachedHeaderHeights[section] ?? 44//UITableView.automaticDimension
+  }
   
   // Height Of Header
   public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

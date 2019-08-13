@@ -12,7 +12,7 @@ import UIKit
 public class MenuItem {
   
   /// 数据源模式
-  public var mode: DataSourceMode = .none
+  public var mode: DataSourceMode = .custom
   
   /// 表单选项名称
   public var title: String?
@@ -133,7 +133,7 @@ public class MenuItem {
   ///   - style: 数据源模式
   ///   - title: 标题
   ///   - isRequired: 是否为必选
-  public init(mode: DataSourceMode = .none,
+  public init(mode: DataSourceMode = .custom,
               title: String? = nil,
               isRequired: Bool = false) {
     
@@ -149,8 +149,8 @@ public extension MenuItem {
   
   /// 数据源模式
   enum DataSourceMode {
-    /// 无
-    case none
+    /// 自定义
+    case custom
     /// 输入模式
     case input
     /// 选择模式
@@ -177,7 +177,7 @@ public extension MenuItem {
       selectedIndex = nil
       selectionDatas.removeAll()
       
-    case .none:
+    case .custom:
       
       visibleValue = nil
       parameter = nil

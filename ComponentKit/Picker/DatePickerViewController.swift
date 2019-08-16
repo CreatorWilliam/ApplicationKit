@@ -329,6 +329,7 @@ private extension DatePickerViewController {
   @objc func clickConfirm(_ sender: Any) {
     
     completionHandle?(date, dateFormatter.string(from: date))
+    completionHandle = nil
     dismiss(animated: true, completion: nil)
   }
   

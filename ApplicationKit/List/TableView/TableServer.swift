@@ -16,9 +16,11 @@ public class TableServer: NSObject {
     
     didSet {
       
-      self.tableView.delegate = self
-      self.tableView.dataSource = self
-      self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
+      tableView.delegate = self
+      tableView.dataSource = self
+      tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
+      guard tableView.style == .plain else { return }
+      tableView.tableFooterView = UIView()
     }
   }
   /// 空视图
@@ -26,8 +28,8 @@ public class TableServer: NSObject {
     
     didSet {
       
-      self.tableView.backgroundView = self.emptyContentView
-      self.emptyContentView?.isHidden = true
+      tableView.backgroundView = emptyContentView
+      emptyContentView?.isHidden = true
     }
   }
   
@@ -60,12 +62,15 @@ public class TableServer: NSObject {
 
   public init(tableStyle style: UITableView.Style = .grouped) {
 
-    self.tableView = UITableView(frame: .zero, style: style)
+    tableView = UITableView(frame: .zero, style: style)
+    
     super.init()
     
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
-    self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
+    guard tableView.style == .plain else { return }
+    tableView.tableFooterView = UIView()
   }
   
 }
@@ -75,16 +80,22 @@ public extension TableServer {
   
   /// 使用数据源全部更新
   ///
-  /// - Parameter groups: 所有Section的数据源
-  func update(_ groups: [TableSectionGroup]) {
+  /// - Parameter newGroups: 所有Section的数据源
+  func update(_ newGroups: [TableSectionGroup]) {
     
-    self.groups = groups
+    groups = newGroups
     
-    self.registerNewViews(with: groups)
+    registerNewViews(with: newGroups)
     
-    self.tableView.reloadData()
+    tableView.reloadData()
     
-    self.emptyContentView?.isHidden = (self.groups.reduce(0, { $0 + $1.items.count }) > 0)
+    for group in groups {
+      
+      guard group.items.isEmpty == false else { continue }
+      emptyContentView?.isHidden = true
+      return
+    }
+    emptyContentView?.isHidden = false
   }
  
   /// 使用数据源局部更新
@@ -97,11 +108,17 @@ public extension TableServer {
     
     sections.forEach({ self.groups[$0] = groups[$0] })
 
-    self.registerNewViews(with: groups)
+    registerNewViews(with: groups)
     
-    self.tableView.reloadSections(sections, with: animation)
+    tableView.reloadSections(sections, with: animation)
     
-    self.emptyContentView?.isHidden = (self.groups.reduce(0, { $0 + $1.items.count }) > 0)
+    for group in groups {
+      
+      guard group.items.isEmpty == false else { continue }
+      emptyContentView?.isHidden = true
+      return
+    }
+    emptyContentView?.isHidden = false
   }
   
   /// 下拉操作
@@ -136,13 +153,13 @@ extension TableServer: UITableViewDelegate {
   // Will Highlight
   public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
     
-    return self.groups[indexPath.section].items[indexPath.row].selectedHandle != nil
+    return groups[indexPath.section].items[indexPath.row].selectedHandle != nil
   }
   
   // Will Select
   public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     
-    if self.groups[indexPath.section].items[indexPath.row].selectedHandle == nil { return nil }
+    if groups[indexPath.section].items[indexPath.row].selectedHandle == nil { return nil }
     if tableView.cellForRow(at: indexPath)?.isSelected == true { return nil }
     return indexPath
   }
@@ -150,54 +167,54 @@ extension TableServer: UITableViewDelegate {
   // Did Select
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    if self.isDeselectAutomatically {
+    if isDeselectAutomatically == true {
       
       tableView.deselectRow(at: indexPath, animated: true)
     }
-    self.groups[indexPath.section].items[indexPath.row].selectedHandle?()
+    groups[indexPath.section].items[indexPath.row].selectedHandle?()
   }
   
   // Will Deselect
   public func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
     
-    //if self.groups[indexPath.section].items[indexPath.row].deselectedHandle == nil { return nil }
+    //if groups[indexPath.section].items[indexPath.row].deselectedHandle == nil { return nil }
     return indexPath
   }
   
   // Did Deselect
   public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     
-    self.groups[indexPath.section].items[indexPath.row].deselectedHandle?()
+    groups[indexPath.section].items[indexPath.row].deselectedHandle?()
   }
   
   /// Can Move
   public func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
     
-    return self.canMoveRow
+    return canMoveRow
   }
   
   public func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     
-    self.moveHandle?(sourceIndexPath, destinationIndexPath)
+    moveHandle?(sourceIndexPath, destinationIndexPath)
   }
   
   // Will Display Cell
   public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
     cell.preservesSuperviewLayoutMargins = false
-    cell.separatorInset = self.groups[indexPath.section].items[indexPath.row].seperatorInsets ?? self.tableView.separatorInset
+    cell.separatorInset = groups[indexPath.section].items[indexPath.row].seperatorInsets ?? tableView.separatorInset
   }
   
   // Did Display Cell
   public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     
-    self.cachedRowHeights[indexPath] = cell.bounds.height
+    cachedRowHeights[indexPath] = cell.bounds.height
   }
   
   // Estimated Height Cell
   public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     
-    return self.cachedRowHeights[indexPath] ?? tableView.estimatedRowHeight
+    return cachedRowHeights[indexPath] ?? tableView.estimatedRowHeight
   }
   
   // Height Cell
@@ -207,19 +224,19 @@ extension TableServer: UITableViewDelegate {
       
       return tableView.rowHeight
     }
-    return self.groups[indexPath.section].items[indexPath.row].height
+    return groups[indexPath.section].items[indexPath.row].height
   }
   
   // Editable Cell
   public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     
-    return self.groups[indexPath.section].items[indexPath.row].deleteHandle != nil
+    return groups[indexPath.section].items[indexPath.row].deleteHandle != nil
   }
   
   // EditStyle Cell
   public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
     
-    if self.groups[indexPath.section].items[indexPath.row].deleteHandle != nil { return .delete }
+    if groups[indexPath.section].items[indexPath.row].deleteHandle != nil { return .delete }
     
     return .none
   }
@@ -229,10 +246,10 @@ extension TableServer: UITableViewDelegate {
     
     if editingStyle == .delete {
       
-      self.groups[indexPath.section].items[indexPath.row].deleteHandle?()
-      self.groups[indexPath.section].items.remove(at: indexPath.row)
+      groups[indexPath.section].items[indexPath.row].deleteHandle?()
+      groups[indexPath.section].items.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
-      self.cachedRowHeights[indexPath] = nil
+      cachedRowHeights[indexPath] = nil
     }
   }
   
@@ -242,23 +259,20 @@ extension TableServer: UITableViewDelegate {
   public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
     
     // 必须保证返回值大于0
-    return self.cachedHeaderHeights[section] ?? 44//UITableView.automaticDimension
+    return cachedHeaderHeights[section] ?? 44//UITableView.automaticDimension
   }
   
   // Height Of Header
   public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     
-    if tableView.sectionHeaderHeight > 0 {
-      
-      return tableView.sectionHeaderHeight
-    }
-    return self.groups[section].header.height
+    if tableView.sectionHeaderHeight > 0 { return tableView.sectionHeaderHeight }
+    return groups[section].header.height
   }
   
   // View Of Section Header
   public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     
-    let item = self.groups[section].header
+    let item = groups[section].header
     
     var sectionView: UIView? = item.view
     
@@ -278,7 +292,7 @@ extension TableServer: UITableViewDelegate {
   // Did Display Header
   public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
     
-    self.cachedHeaderHeights[section] = view.bounds.height
+    cachedHeaderHeights[section] = view.bounds.height
   }
   
   // MARK: ---------- Footer
@@ -287,7 +301,7 @@ extension TableServer: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
       
       // 必须保证返回值大于0
-      return self.cachedFooterHeights[section] ?? 44//UITableView.automaticDimension
+      return cachedFooterHeights[section] ?? 44//UITableView.automaticDimension
     }
   
   // Height Of Footer
@@ -297,13 +311,13 @@ extension TableServer: UITableViewDelegate {
       
       return tableView.sectionFooterHeight
     }
-    return self.groups[section].footer.height
+    return groups[section].footer.height
   }
   
   // View Of Section Footer
   public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     
-    let item = self.groups[section].footer
+    let item = groups[section].footer
     
     var sectionView: UIView? = item.view
     
@@ -323,7 +337,7 @@ extension TableServer: UITableViewDelegate {
   // Did Display Footer
   public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
     
-    self.cachedFooterHeights[section] = view.bounds.height
+    cachedFooterHeights[section] = view.bounds.height
   }
   
 }
@@ -333,17 +347,17 @@ extension TableServer: UITableViewDataSource {
   
   public func numberOfSections(in tableView: UITableView) -> Int {
     
-    return self.groups.count
+    return groups.count
   }
   
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    return self.groups[section].items.count
+    return groups[section].items.count
   }
   
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let item = self.groups[indexPath.section].items[indexPath.row]
+    let item = groups[indexPath.section].items[indexPath.row]
     
     // 若设置了静态Cell，则使用静态Cell
     var cell: UITableViewCell
@@ -366,67 +380,67 @@ extension TableServer: UIScrollViewDelegate {
  
   public func scrollViewDidScroll(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    scrollViewDelegate?.scrollViewDidScroll?(scrollView)
   }
   
   public func scrollViewDidZoom(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewDidZoom?(scrollView)
+    scrollViewDelegate?.scrollViewDidZoom?(scrollView)
   }
   
   public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
+    scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
   }
   
   public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
     
-    self.scrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+    scrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
   }
   
   public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     
-    self.scrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
+    scrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
   }
   
   public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
+    scrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
   }
   
   public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
+    scrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
   }
   
   public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
+    scrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
   }
   
   public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
     
-    return self.scrollViewDelegate?.viewForZooming?(in: scrollView)
+    return scrollViewDelegate?.viewForZooming?(in: scrollView)
   }
   
   public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
     
-    self.scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
+    scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
   }
   
   public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
     
-    self.scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
+    scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
   }
   
   public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
     
-    return self.scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
+    return scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
   }
   
   public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewDidScrollToTop?(scrollView)
+    scrollViewDelegate?.scrollViewDidScrollToTop?(scrollView)
   }
   
   
@@ -435,7 +449,7 @@ extension TableServer: UIScrollViewDelegate {
   @available(iOS 11.0, *)
   public func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
     
-    self.scrollViewDelegate?.scrollViewDidChangeAdjustedContentInset?(scrollView)
+    scrollViewDelegate?.scrollViewDidChangeAdjustedContentInset?(scrollView)
   }
   
   
@@ -450,24 +464,24 @@ private extension TableServer {
     var newCells: [ReuseItem] = []
     groups.forEach({ (group) in
       
-      if let reuseItem = group.header.reuseItem, !self.reusedSectionViews.contains(reuseItem.id) {
+      if let reuseItem = group.header.reuseItem, !reusedSectionViews.contains(reuseItem.id) {
         
         newSectionViews.append(reuseItem)
-        self.reusedSectionViews.insert(reuseItem.id)
+        reusedSectionViews.insert(reuseItem.id)
       }
       
-      if let reuseItem = group.footer.reuseItem, !self.reusedSectionViews.contains(reuseItem.id) {
+      if let reuseItem = group.footer.reuseItem, !reusedSectionViews.contains(reuseItem.id) {
         
         newSectionViews.append(reuseItem)
-        self.reusedSectionViews.insert(reuseItem.id)
+        reusedSectionViews.insert(reuseItem.id)
       }
       
       group.items.forEach({ (cell) in
         
-        if let reuseItem = cell.reuseItem, !self.reusedCells.contains(reuseItem.id) {
+        if let reuseItem = cell.reuseItem, !reusedCells.contains(reuseItem.id) {
           
           newCells.append(reuseItem)
-          self.reusedCells.insert(reuseItem.id)
+          reusedCells.insert(reuseItem.id)
         }
         
       })
@@ -476,12 +490,12 @@ private extension TableServer {
     
     if newSectionViews.count > 0 {
       
-      self.tableView.register(sectionViews: newSectionViews)
+      tableView.register(sectionViews: newSectionViews)
     }
     
     if newCells.count > 0 {
       
-      self.tableView.register(cells: newCells)
+      tableView.register(cells: newCells)
     }
     
   }

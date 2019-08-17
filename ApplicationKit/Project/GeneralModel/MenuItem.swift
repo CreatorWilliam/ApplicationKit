@@ -12,7 +12,15 @@ import UIKit
 public class MenuItem {
   
   /// 数据源模式
-  public var mode: DataSourceMode = .custom
+  public var mode: DataSourceMode = .custom {
+    didSet {
+      switch mode {
+      case .input: placeholder = "请输入"
+      case .selection: placeholder = "请选择"
+      case .custom: placeholder = nil
+      }
+    }
+  }
   
   /// 表单选项名称
   public var title: String?
@@ -90,6 +98,7 @@ public class MenuItem {
   /// 选择模式下，保存选中的索引, 会同步数据给visibleValue和parameter，其他模式下无效
   public var selectedIndex: Int? {
     didSet {
+      
       /// 保证只有在选择模式下才有效
       guard mode == .selection else {
         selectedIndex = nil
@@ -118,6 +127,34 @@ public class MenuItem {
       parameter = selectionDatas[index].parameter
     }
   }
+  
+  /// 选择模式下，保存选中的索引数组，不会同步数据给visibleValue和parameter，其他模式下无效
+  public var selectedIndexs: [Int] = [] {
+    didSet {
+      
+      /// 保证只有在选择模式下才有效
+      guard mode == .selection else {
+        selectedIndexs = []
+        return
+      }
+      
+      /// 保证只有设置不同的新值，才会继续执行
+      if selectedIndexs == oldValue { return }
+      
+      defer { changedAction?() }
+      
+      var tempValue = selectedIndexs
+      for value in tempValue {
+        
+        guard let index = tempValue.firstIndex(where: { $0 == value }) else { continue }
+        guard index < selectionDatas.count else { return }
+        tempValue.remove(at: index)
+      }
+      
+      selectedIndexs = tempValue
+      
+    }
+  }
   /// 选择模式下，用于保存选项数据源，其他模式下无效
   public var selectionDatas: [MenuDataItem] = [] {
     didSet {
@@ -140,6 +177,12 @@ public class MenuItem {
     self.mode = mode
     self.title = title
     self.isRequired = isRequired
+    
+    switch mode {
+    case .input: placeholder = "请输入"
+    case .selection: placeholder = "请选择"
+    case .custom: placeholder = nil
+    }
   }
   
 }
@@ -175,6 +218,7 @@ public extension MenuItem {
     case .selection:
       
       selectedIndex = nil
+      selectedIndexs = []
       selectionDatas.removeAll()
       
     case .custom:

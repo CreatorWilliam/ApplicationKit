@@ -147,7 +147,7 @@ public class MenuItem {
       for value in tempValue {
         
         guard let index = tempValue.firstIndex(where: { $0 == value }) else { continue }
-        guard index < selectionDatas.count else { return }
+        if index < selectionDatas.count { continue }
         tempValue.remove(at: index)
       }
       
@@ -219,7 +219,6 @@ public extension MenuItem {
       
       selectedIndex = nil
       selectedIndexs = []
-      selectionDatas.removeAll()
       
     case .custom:
       

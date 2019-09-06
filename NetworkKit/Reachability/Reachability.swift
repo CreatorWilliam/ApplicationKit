@@ -7,6 +7,7 @@
 //
 
 import SystemConfiguration
+import Foundation
 
 public class Reachability: NSObject {
   

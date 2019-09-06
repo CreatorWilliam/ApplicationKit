@@ -6,7 +6,7 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // 遵循该协议后的SectionView，Server才可以更新SectionView
 public protocol CollectionSectionItemUpdatable {

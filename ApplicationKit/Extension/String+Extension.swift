@@ -52,9 +52,9 @@ public extension String  {
   
   private func stringFromBytes(bytes: UnsafeMutablePointer<CUnsignedChar>, length: Int) -> String {
     
-    let hash = NSMutableString()
+    var hash: String = ""
     for i in 0..<length {
-      hash.appendFormat("%02x", bytes[i])
+      hash.append(String(format: "%02x", bytes[i]))
     }
     bytes.deallocate()
     return String(format: hash as String)
@@ -80,9 +80,9 @@ public extension String  {
   
   private func stringFromResult(result: UnsafeMutablePointer<CUnsignedChar>, length: Int) -> String {
     
-    let hash = NSMutableString()
+    var hash: String = ""
     for i in 0..<length {
-      hash.appendFormat("%02x", result[i])
+      hash.append(String(format: "%02x", result[i]))
     }
     return String(hash)
   }

@@ -8,6 +8,7 @@
 
 import ApplicationKit
 import Photos
+import UIKit
 
 public class ImagePicker: NSObject {
   

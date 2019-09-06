@@ -6,11 +6,11 @@
 //  Copyright © 2016年 yangjun zhu. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import AVFoundation
 
-
 protocol EZPlayerDelegate : class {
+  
     func player(_ player: EZPlayer ,playerStateDidChange state: EZPlayerState)
     func player(_ player: EZPlayer ,playerDisplayModeDidChange displayMode: EZPlayerDisplayMode)
 

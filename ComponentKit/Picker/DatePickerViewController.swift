@@ -7,9 +7,14 @@
 //
 
 import ApplicationKit
+import UIKit
 
 public class DatePickerViewController: UIViewController {
   
+  public override var title: String? {
+    set { titleLabel.text = newValue }
+    get { return titleLabel.text }
+  }
   /// 设置显示的模式
   public var mode: Mode = .date {
     didSet {

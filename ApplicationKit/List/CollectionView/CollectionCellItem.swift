@@ -6,6 +6,8 @@
 //  Copyright © 2018 William Lee. All rights reserved.
 //
 
+import UIKit
+
 // 遵循该协议后的UICollectionViewCell及其子类，Server才可以更新Cell
 public protocol CollectionCellItemUpdatable {
   

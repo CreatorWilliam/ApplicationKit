@@ -7,6 +7,7 @@
 //
 
 import Photos
+import UIKit
 
 class ImagePickerAssetViewController: UIViewController {
   

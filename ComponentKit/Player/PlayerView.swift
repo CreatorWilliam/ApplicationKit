@@ -8,6 +8,7 @@
 
 import ApplicationKit
 import AVFoundation
+import UIKit
 
 public class PlayerView: UIView {
   

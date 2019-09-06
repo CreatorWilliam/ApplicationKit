@@ -7,6 +7,7 @@
 //
 
 import ApplicationKit
+import UIKit
 
 public protocol PopupMenuDelegate: class {
   

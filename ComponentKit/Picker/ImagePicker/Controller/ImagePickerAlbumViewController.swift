@@ -7,6 +7,7 @@
 //
 
 import ApplicationKit
+import UIKit
 import Photos
 
 typealias AssetSelectionHandle = ([PHAsset], [UIImage]) -> Void

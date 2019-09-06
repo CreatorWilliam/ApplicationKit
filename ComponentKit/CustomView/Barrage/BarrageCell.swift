@@ -7,6 +7,7 @@
 //
 
 import ApplicationKit
+import UIKit
 
 class BarrageCell: UIView {
   

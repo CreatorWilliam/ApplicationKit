@@ -7,6 +7,7 @@
 //
 
 import ApplicationKit
+import UIKit
 
 /// 遵循了该协议的UICollectionViewCell，SegmentView中自定义的Cell才会接收更新数据源的事件
 public protocol SegmentViewCellable {

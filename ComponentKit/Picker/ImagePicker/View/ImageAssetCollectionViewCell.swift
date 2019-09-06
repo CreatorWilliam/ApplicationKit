@@ -8,6 +8,7 @@
 
 import ApplicationKit
 import Photos
+import UIKit
 
 protocol ImageAssetCollectionViewCellDelegate: class {
   

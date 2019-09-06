@@ -6,7 +6,7 @@
 //  Copyright © 2016年 yangjun zhu. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol EZPlayerHorizontalPan: class {
   func player(_ player: EZPlayer ,progressWillChange value: TimeInterval)

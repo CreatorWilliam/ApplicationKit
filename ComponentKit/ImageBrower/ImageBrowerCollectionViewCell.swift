@@ -7,8 +7,9 @@
 //
 
 import ApplicationKit
-import Photos
 import ImageKit
+import Photos
+import UIKit
 
 class ImageBrowerCollectionViewCell: UICollectionViewCell {
 

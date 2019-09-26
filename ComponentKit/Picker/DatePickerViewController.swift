@@ -23,6 +23,9 @@ public class DatePickerViewController: UIViewController {
       case .date: dateFormatter.dateFormat = "yyyy-MM-dd"
       case .time: dateFormatter.dateFormat = "HH:mm:ss"
       case .dateAndHour: dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+      case .dateAndHourAndMinute: dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+      case .dateAndTime: dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+      case .countDownTimer: break
       }
     }
   }
@@ -43,6 +46,7 @@ public class DatePickerViewController: UIViewController {
   private let cancelButton = UIButton(type: .custom)
   private let confirmButton = UIButton(type: .custom)
   private let customizeDatePickerView = UIPickerView()
+  private let systemDatePickerView = UIDatePicker()
   
   private var sortedCalendarComponents: [Calendar.Component] = []
   private lazy var dateComponents = Calendar.current.dateComponents(Set(sortedCalendarComponents), from: date)
@@ -70,6 +74,9 @@ public class DatePickerViewController: UIViewController {
     case .date: sortedCalendarComponents = [.year, .month, .day]
     case .time: sortedCalendarComponents = [.hour, .minute, .second]
     case .dateAndHour: sortedCalendarComponents = [.year, .month, .day, .hour]
+    case .dateAndHourAndMinute: sortedCalendarComponents = [.year, .month, .day, .hour, .minute]
+    case .dateAndTime: sortedCalendarComponents = [.year, .month, .day, .hour, .minute, .second]
+    case .countDownTimer: sortedCalendarComponents = []
     }
     
     /// 时间对齐
@@ -101,8 +108,202 @@ public extension DatePickerViewController {
     case time
     /// 显示年、月、日、时
     case dateAndHour
+    /// 显示年、月、日、时、分
+    case dateAndHourAndMinute
     /// 显示年、月、日、时、分、秒
-    //case dateAndTime
+    case dateAndTime
+    /// 倒计时
+    case countDownTimer
+  }
+  
+}
+
+// MARK: - Setup
+private extension DatePickerViewController {
+  
+  func setupUI() {
+    
+    switch mode {
+    case .date:
+      
+      systemDatePickerView.datePickerMode = .date
+      systemDatePickerView.isHidden = true
+      customizeDatePickerView.isHidden = false
+      
+    case .time:
+      
+      systemDatePickerView.datePickerMode = .time
+      systemDatePickerView.isHidden = true
+      customizeDatePickerView.isHidden = false
+      
+    case .dateAndHour,
+         .dateAndHourAndMinute:
+      
+      systemDatePickerView.datePickerMode = .dateAndTime
+      systemDatePickerView.isHidden = true
+      customizeDatePickerView.isHidden = false
+      
+    case .dateAndTime:
+      
+      systemDatePickerView.datePickerMode = .dateAndTime
+      systemDatePickerView.isHidden = false
+      customizeDatePickerView.isHidden = true
+      
+    case .countDownTimer:
+      
+      systemDatePickerView.datePickerMode = .countDownTimer
+      systemDatePickerView.isHidden = false
+      customizeDatePickerView.isHidden = true
+    }
+    
+    contentView.backgroundColor = .white
+    view.addSubview(contentView)
+    contentView.layout.add { (make) in
+      make.leading().trailing().bottom().equal(view)
+    }
+    
+    setupTopToolView()
+    contentView.addSubview(topToolView)
+    topToolView.layout.add { (make) in
+      make.top().leading().trailing().equal(contentView)
+      make.height(50)
+    }
+    
+    customizeDatePickerView.delegate = self
+    customizeDatePickerView.dataSource = self
+    contentView.addSubview(customizeDatePickerView)
+    customizeDatePickerView.layout.add { (make) in
+      make.top().equal(topToolView).bottom()
+      make.leading().trailing().equal(contentView)
+      make.bottom().equal(contentView).safeBottom()
+    }
+    
+    contentView.addSubview(systemDatePickerView)
+    systemDatePickerView.layout.add { (make) in
+      make.top().equal(topToolView).bottom()
+      make.leading().trailing().equal(contentView)
+      make.bottom().equal(contentView).safeBottom()
+    }
+  }
+  
+  func setupTopToolView() {
+    
+    topToolView.backgroundColor = UIColor(0xf8f8f8)
+    
+    cancelButton.setTitle("取消", for: .normal)
+    cancelButton.setTitleColor(UIColor(0x383e5a), for: .normal)
+    cancelButton.titleLabel?.font = Font.system(14)
+    cancelButton.addTarget(self, action: #selector(clickCancel(_:)), for: .touchUpInside)
+    topToolView.addSubview(cancelButton)
+    cancelButton.layout.add { (make) in
+      make.leading().top().bottom().equal(topToolView)
+      make.width(44)
+    }
+    
+    confirmButton.setTitle("确定", for: .normal)
+    confirmButton.setTitleColor(UIColor(0x1c8bfc), for: .normal)
+    confirmButton.titleLabel?.font = Font.system(14)
+    confirmButton.addTarget(self, action: #selector(clickConfirm(_:)), for: .touchUpInside)
+    topToolView.addSubview(confirmButton)
+    confirmButton.layout.add { (make) in
+      make.trailing().top().bottom().equal(topToolView)
+      make.width(44)
+    }
+    
+    titleLabel.text = "请选择日期"
+    titleLabel.font = Font.system(12)
+    titleLabel.textAlignment = .center
+    titleLabel.textColor = UIColor(0xbbc3d1)
+    topToolView.addSubview(titleLabel)
+    titleLabel.layout.add { (make) in
+      make.leading(10).equal(cancelButton).trailing()
+      make.trailing(-10).equal(confirmButton).leading()
+      make.top().bottom().equal(topToolView)
+    }
+    
+    let lineView = UIView()
+    lineView.backgroundColor = UIColor(0xeeeeee)
+    topToolView.addSubview(lineView)
+    lineView.layout.add { (make) in
+      make.leading().trailing().top().equal(topToolView)
+      make.height(0.5)
+    }
+    
+  }
+  
+}
+
+// MARK: - Action
+private extension DatePickerViewController {
+  
+  @objc func clickCancel(_ sender: Any) {
+    
+    dismiss(animated: true, completion: nil)
+  }
+  
+  @objc func clickConfirm(_ sender: Any) {
+    
+    switch mode {
+    case .dateAndTime, .countDownTimer:
+      
+      completionHandle?(systemDatePickerView.date, dateFormatter.string(from: systemDatePickerView.date))
+      
+    default:
+      
+      completionHandle?(date, dateFormatter.string(from: date))
+    }
+    completionHandle = nil
+    dismiss(animated: true, completion: nil)
+  }
+  
+}
+
+// MARK: - Utiltiy
+private extension DatePickerViewController {
+  
+  func dateComponents(from date: Date) -> DateComponents {
+    
+    return Calendar.current.dateComponents(Set(sortedCalendarComponents), from: date)
+  }
+  
+  func date(from dateComponents: DateComponents) -> Date? {
+    
+    return Calendar.current.date(from: dateComponents)
+  }
+  
+  func set(_ date: Date, animated: Bool) {
+    
+    /// Date与DateComponents进行同步
+    dateComponents = dateComponents(from: date)
+    self.date = self.date(from: dateComponents) ?? Date()
+    
+    customizeDatePickerView.reloadAllComponents()
+    
+    /// 自定义选择视图选中对应日期时间的行
+    sortedCalendarComponents.enumerated().forEach({ (index, mode) in
+      
+      switch mode {
+      case .year: customizeDatePickerView.selectRow((dateComponents.year ?? 1) - 1, inComponent: index, animated: animated)
+      case .month: customizeDatePickerView.selectRow((dateComponents.month ?? 1) - 1, inComponent: index, animated: animated)
+      case .day: customizeDatePickerView.selectRow((dateComponents.day ?? 1) - 1, inComponent: index, animated: animated)
+      case .hour: customizeDatePickerView.selectRow((dateComponents.hour ?? 0), inComponent: index, animated: animated)
+      case .minute: customizeDatePickerView.selectRow((dateComponents.minute ?? 0), inComponent: index, animated: animated)
+      case .second: customizeDatePickerView.selectRow((dateComponents.second ?? 0), inComponent: index, animated: animated)
+      default: break
+      }
+    })
+    
+    systemDatePickerView.date = self.date
+  }
+  
+  var dayCount: Int {
+    
+    var dateComponents = Calendar.current.dateComponents(Set(sortedCalendarComponents), from: Date())
+    dateComponents.year = self.dateComponents.year
+    dateComponents.month = self.dateComponents.month
+    
+    guard let date = Calendar.current.date(from: dateComponents) else { return 0 }
+    return Calendar.current.range(of: .day, in: .month, for: date)?.count ?? 0
   }
   
 }
@@ -244,146 +445,6 @@ extension DatePickerViewController: UIPickerViewDataSource {
     case .second: return 60
     default: return 0
     }
-  }
-  
-}
-
-// MARK: - Setup
-private extension DatePickerViewController {
-  
-  func setupUI() {
-    
-    contentView.backgroundColor = .white
-    view.addSubview(contentView)
-    contentView.layout.add { (make) in
-      make.leading().trailing().bottom().equal(view)
-    }
-    
-    setupTopToolView()
-    contentView.addSubview(topToolView)
-    topToolView.layout.add { (make) in
-      make.top().leading().trailing().equal(contentView)
-      make.height(50)
-    }
-    
-    customizeDatePickerView.delegate = self
-    customizeDatePickerView.dataSource = self
-    contentView.addSubview(customizeDatePickerView)
-    customizeDatePickerView.layout.add { (make) in
-      make.top().equal(topToolView).bottom()
-      make.leading().trailing().equal(contentView)
-      make.bottom().equal(contentView).safeBottom()
-    }
-  }
-  
-  func setupTopToolView() {
-    
-    topToolView.backgroundColor = UIColor(0xf8f8f8)
-    
-    cancelButton.setTitle("取消", for: .normal)
-    cancelButton.setTitleColor(UIColor(0x383e5a), for: .normal)
-    cancelButton.titleLabel?.font = Font.system(14)
-    cancelButton.addTarget(self, action: #selector(clickCancel(_:)), for: .touchUpInside)
-    topToolView.addSubview(cancelButton)
-    cancelButton.layout.add { (make) in
-      make.leading().top().bottom().equal(topToolView)
-      make.width(44)
-    }
-    
-    confirmButton.setTitle("确定", for: .normal)
-    confirmButton.setTitleColor(UIColor(0x1c8bfc), for: .normal)
-    confirmButton.titleLabel?.font = Font.system(14)
-    confirmButton.addTarget(self, action: #selector(clickConfirm(_:)), for: .touchUpInside)
-    topToolView.addSubview(confirmButton)
-    confirmButton.layout.add { (make) in
-      make.trailing().top().bottom().equal(topToolView)
-      make.width(44)
-    }
-    
-    titleLabel.text = "请选择日期"
-    titleLabel.font = Font.system(12)
-    titleLabel.textAlignment = .center
-    titleLabel.textColor = UIColor(0xbbc3d1)
-    topToolView.addSubview(titleLabel)
-    titleLabel.layout.add { (make) in
-      make.leading(10).equal(cancelButton).trailing()
-      make.trailing(-10).equal(confirmButton).leading()
-      make.top().bottom().equal(topToolView)
-    }
-    
-    let lineView = UIView()
-    lineView.backgroundColor = UIColor(0xeeeeee)
-    topToolView.addSubview(lineView)
-    lineView.layout.add { (make) in
-      make.leading().trailing().top().equal(topToolView)
-      make.height(0.5)
-    }
-    
-  }
-  
-}
-
-// MARK: - Action
-private extension DatePickerViewController {
-  
-  @objc func clickCancel(_ sender: Any) {
-    
-    dismiss(animated: true, completion: nil)
-  }
-  
-  @objc func clickConfirm(_ sender: Any) {
-    
-    completionHandle?(date, dateFormatter.string(from: date))
-    completionHandle = nil
-    dismiss(animated: true, completion: nil)
-  }
-  
-}
-
-// MARK: - Utiltiy
-private extension DatePickerViewController {
-  
-  func dateComponents(from date: Date) -> DateComponents {
-    
-    return Calendar.current.dateComponents(Set(sortedCalendarComponents), from: date)
-  }
-  
-  func date(from dateComponents: DateComponents) -> Date? {
-    
-    return Calendar.current.date(from: dateComponents)
-  }
-  
-  func set(_ date: Date, animated: Bool) {
-    
-    /// Date与DateComponents进行同步
-    dateComponents = dateComponents(from: date)
-    self.date = self.date(from: dateComponents) ?? Date()
-    
-    customizeDatePickerView.reloadAllComponents()
-    
-    /// 自定义选择视图选中对应日期时间的行
-    sortedCalendarComponents.enumerated().forEach({ (index, mode) in
-      
-      switch mode {
-      case .year: customizeDatePickerView.selectRow((dateComponents.year ?? 1) - 1, inComponent: index, animated: animated)
-      case .month: customizeDatePickerView.selectRow((dateComponents.month ?? 1) - 1, inComponent: index, animated: animated)
-      case .day: customizeDatePickerView.selectRow((dateComponents.day ?? 1) - 1, inComponent: index, animated: animated)
-      case .hour: customizeDatePickerView.selectRow((dateComponents.hour ?? 0), inComponent: index, animated: animated)
-      case .minute: customizeDatePickerView.selectRow((dateComponents.minute ?? 0), inComponent: index, animated: animated)
-      case .second: customizeDatePickerView.selectRow((dateComponents.second ?? 0), inComponent: index, animated: animated)
-      default: break
-      }
-    })
-  }
-  
-  var dayCount: Int {
-    
-    var dateComponents = Calendar.current.dateComponents(Set(sortedCalendarComponents), from: Date())
-    dateComponents.year = self.dateComponents.year
-    dateComponents.month = self.dateComponents.month
-    
-    guard let date = Calendar.current.date(from: dateComponents) else { return 0 }
-    return Calendar.current.range(of: .day, in: .month, for: date)?.count ?? 0
   }
   
 }

@@ -7,7 +7,6 @@
 //
 
 import ApplicationKit
-import UIKit
 
 class ImageBrowerView: UIView {
   
@@ -65,7 +64,7 @@ extension ImageBrowerView: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    Presenter.currentPresentedController?.dismiss(animated: false)
+    Presenter.dismiss()
   }
   
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

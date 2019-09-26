@@ -7,7 +7,6 @@
 //
 
 import ApplicationKit
-import UIKit
 
 public class LocationPicker: UIViewController {
   
@@ -243,6 +242,7 @@ private extension LocationPicker {
     // Province
     self.setupCustom(area: self.provinceAreaButton)
     self.provinceAreaButton.addTarget(self, action: #selector(clickProvince(_:)), for: .touchUpInside)
+    self.provinceAreaButton.setTitle("请选择", for: .normal)
     self.contentView.addSubview(self.provinceAreaButton)
     self.provinceAreaButton.layout.add { (make) in
       make.leading(15).centerY().equal(self.areaContainer)
@@ -320,7 +320,7 @@ private extension LocationPicker {
   
   @objc func clickProvince(_ sender: UIButton) {
     
-    self.provinceAreaButton.isSelected = true
+//    self.provinceAreaButton.isSelected = true
     self.cityActionButton.isSelected = false
     self.districtActionButton.isSelected = false
     self.state = .province
@@ -375,7 +375,7 @@ private extension LocationPicker {
     switch self.state {
     case .province:
       
-      self.provinceAreaButton.isSelected = true
+//      self.provinceAreaButton.isSelected = true
       self.cityActionButton.isSelected = false
       self.districtActionButton.isSelected = false
       

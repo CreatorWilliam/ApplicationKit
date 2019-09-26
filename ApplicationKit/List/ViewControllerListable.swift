@@ -108,17 +108,17 @@ public extension ViewControllerListable {
         self.listController.hud.hideLoading()
       }
       self.listView.es.stopPullToRefresh()
-      
-    } else {
-      
-      if self.listDataModel.hasNextPage == true {
-        
-        self.listView.es.stopLoadingMore()
-        
-      } else {
-        
-        self.listView.es.noticeNoMoreData()
-      }
     }
+    
+    if isNext == true && self.listDataModel.hasNextPage == true {
+      
+        self.listView.es.stopLoadingMore()
+    }
+    
+    if self.listDataModel.hasNextPage == false {
+      
+      self.listView.es.noticeNoMoreData()
+    }
+    
   }
 }

@@ -7,7 +7,6 @@
 //
 
 import ApplicationKit
-import UIKit
 
 public class ImageBrowerController: UIViewController {
   
@@ -40,7 +39,8 @@ public extension ImageBrowerController {
     let controller = ImageBrowerController()
     controller.initIndex = index
     controller.images = images
-    Presenter.present(controller, animated: false)
+    controller.modalPresentationStyle = .custom
+    Presenter.present(controller)
   }
   
 }

@@ -10,8 +10,7 @@ import UIKit
 
 class MessageView: UIView {
   
-  private let titleLabel: UILabel = UILabel()
-  private let messageLabel: UILabel = UILabel()
+  private let contentButton = UIButton(type: .custom)
   private let contentView: UIView = UIView()
   
   private static var foreground: UIColor = UIColor.white
@@ -20,7 +19,7 @@ class MessageView: UIView {
   public override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.setupUI()
+    setupUI()
   }
   
   public required init?(coder aDecoder: NSCoder) {
@@ -32,7 +31,8 @@ class MessageView: UIView {
 // MARK: - Appearance
 extension MessageView {
   
-  class func `default`(foreground: UIColor = UIColor.white, background: UIColor = UIColor.black.withAlphaComponent(0.6)) {
+  class func `default`(foreground: UIColor = UIColor.white,
+                       background: UIColor = UIColor.black.withAlphaComponent(0.6)) {
     
     self.foreground = foreground
     self.background = background
@@ -45,18 +45,44 @@ extension MessageView {
   
   func setup(title: String?, message: String?) {
     
-    self.titleLabel.text = title
-    self.messageLabel.text = message
+    let style = NSMutableParagraphStyle()
+    style.alignment = .center
+    style.paragraphSpacing = 15
+    style.lineSpacing = 5
+    
+    let attributedText = NSMutableAttributedString()
+    if let title = title {
+      
+      attributedText.append(NSAttributedString(string: title,
+                                               attributes: [.font: UIFont.systemFont(ofSize: 17),
+                                                            .foregroundColor: MessageView.foreground,
+                                                            .paragraphStyle: style]))
+    }
+    
+    if var message = message {
+      
+      if title != nil {
+        
+        message = "\n\(message)"
+      }
+      
+      attributedText.append(NSAttributedString(string: message,
+                                               attributes: [.font: UIFont.systemFont(ofSize: 14),
+                                                            .foregroundColor: MessageView.foreground,
+                                                            .paragraphStyle: style]))
+    }
+    
+    contentButton.setAttributedTitle(attributedText, for: .normal)
   }
   
   func show() {
     
-    self.isHidden = false
+    isHidden = false
   }
   
   func hide() {
     
-    self.isHidden = true
+    isHidden = true
   }
   
 }
@@ -67,39 +93,27 @@ private extension MessageView {
   func setupUI() -> Void {
     
     //ContentView
-    self.contentView.backgroundColor = MessageView.background
-    self.contentView.layer.cornerRadius = 5
-    self.contentView.layer.shadowColor = UIColor.black.cgColor
-    self.contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
-    self.contentView.layer.shadowRadius = 3
-    self.contentView.layer.shadowOpacity = 0.5    
-    self.addSubview(self.contentView)
-    self.contentView.layout.add { (make) in
-      
-      make.leading(60).trailing(-60).centerY().equal(self)
+    contentView.backgroundColor = MessageView.background
+    contentView.layer.cornerRadius = 5
+    contentView.layer.shadowColor = UIColor.black.cgColor
+    contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
+    contentView.layer.shadowRadius = 3
+    contentView.layer.shadowOpacity = 0.5
+    addSubview(contentView)
+    contentView.layout.add { (make) in
+      make.centerX().centerY().equal(self)
+      make.leading(60).greaterThanOrEqual(self)
+      make.trailing(-60).lessThanOrEqual(self)
     }
     
-    //Title
-    self.titleLabel.textAlignment = .center
-    self.titleLabel.font = UIFont.systemFont(ofSize: 17)
-    self.titleLabel.textColor = MessageView.foreground
-    self.contentView.addSubview(self.titleLabel)
-    self.titleLabel.layout.add { (make) in
-      
-      make.top(30).leading().trailing().equal(self.contentView)
+    //
+    contentButton.isUserInteractionEnabled = false
+    contentButton.setTitleColor(MessageView.foreground, for: .normal)
+    addSubview(contentButton)
+    contentButton.layout.add { (make) in
+      make.top(5).bottom(-5).leading(8).trailing(-8).equal(contentView)
     }
     
-    //MessageLabel
-    self.messageLabel.textAlignment = .center
-    self.messageLabel.numberOfLines = 0
-    self.messageLabel.font = UIFont.systemFont(ofSize: 14)
-    self.messageLabel.textColor = MessageView.foreground
-    self.contentView.addSubview(self.messageLabel)
-    self.messageLabel.layout.add { (make) in
-      
-      make.top(8).equal(self.titleLabel).bottom()
-      make.leading(13).trailing(-13).bottom(-30).equal(self.contentView)
-    }
   }
   
 }

@@ -59,8 +59,8 @@ public class MenuItem {
         inputValue = nil
         return
       }
-      /// 保证只有设置不同的新值，才会继续执行
-      if inputValue == oldValue { return }
+      /// 保证只有设置不同的新值，才会继续执行，第二个条件是保证设置空的时候能够执行相应的回调
+      if inputValue == oldValue && inputValue != nil { return }
       
       defer { changedAction?() }
       
@@ -105,8 +105,8 @@ public class MenuItem {
         return
       }
       
-      /// 保证只有设置不同的新值，才会继续执行
-      if selectedIndex == oldValue { return }
+      /// 保证只有设置不同的新值，才会继续执行，第二个条件是保证设置空的时候能够执行相应的回调
+      if selectedIndex == oldValue && selectedIndex != nil { return }
       
       defer { changedAction?() }
       
@@ -138,8 +138,8 @@ public class MenuItem {
         return
       }
       
-      /// 保证只有设置不同的新值，才会继续执行
-      if selectedIndexs == oldValue { return }
+      /// 保证只有设置不同的新值，才会继续执行，第二个条件是保证设置空的时候能够执行相应的回调
+      if selectedIndexs == oldValue && selectedIndexs.isEmpty == false { return }
       
       defer { changedAction?() }
       

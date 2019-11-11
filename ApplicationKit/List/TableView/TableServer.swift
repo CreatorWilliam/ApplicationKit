@@ -214,17 +214,38 @@ extension TableServer: UITableViewDelegate {
   // Estimated Height Cell
   public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     
-    return cachedRowHeights[indexPath] ?? tableView.estimatedRowHeight
+    var estimatedHeight: CGFloat = UITableView.automaticDimension
+    
+    if let height = cachedRowHeights[indexPath], height > 1 {
+      
+      estimatedHeight = height
+      
+    } else if groups[indexPath.section].items[indexPath.row].height > 1 {
+      
+      estimatedHeight = groups[indexPath.section].items[indexPath.row].height
+      
+    } else {
+      
+      estimatedHeight = tableView.estimatedRowHeight
+    }
+    
+    return estimatedHeight
   }
   
   // Height Cell
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
+    var height = UITableView.automaticDimension
+    
     if tableView.rowHeight > 0 {
       
-      return tableView.rowHeight
+      height = tableView.rowHeight
+      
+    } else {
+      
+      height = groups[indexPath.section].items[indexPath.row].height
     }
-    return groups[indexPath.section].items[indexPath.row].height
+    return height
   }
   
   // Editable Cell
@@ -258,8 +279,21 @@ extension TableServer: UITableViewDelegate {
   // Estimated Height Of Header
   public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
     
-    // 必须保证返回值大于0
-    return cachedHeaderHeights[section] ?? 44//UITableView.automaticDimension
+    var estimatedHeight = UITableView.automaticDimension
+    if let height = cachedHeaderHeights[section], height > 1 {
+      
+      estimatedHeight = height
+      
+    } else if groups[section].header.height > 1 {
+      
+      estimatedHeight = groups[section].header.height
+      
+    } else {
+      
+      estimatedHeight = tableView.estimatedSectionHeaderHeight
+    }
+    // 必须保证返回值不在(0, 1]区间内
+    return estimatedHeight
   }
   
   // Height Of Header
@@ -300,8 +334,21 @@ extension TableServer: UITableViewDelegate {
   // Estimated Height Of Footer
     public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
       
-      // 必须保证返回值大于0
-      return cachedFooterHeights[section] ?? 44//UITableView.automaticDimension
+      var estimatedHeight = UITableView.automaticDimension
+      if let height = cachedFooterHeights[section], height > 1 {
+        
+        estimatedHeight = height
+        
+      } else if groups[section].footer.height > 1 {
+        
+        estimatedHeight = groups[section].footer.height
+        
+      } else {
+        
+        estimatedHeight = tableView.estimatedSectionFooterHeight
+      }
+      // 必须保证返回值不在(0, 1]区间内
+      return estimatedHeight
     }
   
   // Height Of Footer

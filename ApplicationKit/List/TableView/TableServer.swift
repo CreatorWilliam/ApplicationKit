@@ -19,6 +19,8 @@ public class TableServer: NSObject {
       tableView.delegate = self
       tableView.dataSource = self
       tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
+      tableView.sectionHeaderHeight = 0
+      tableView.sectionFooterHeight = 0
       guard tableView.style == .plain else { return }
       tableView.tableFooterView = UIView()
     }
@@ -69,6 +71,8 @@ public class TableServer: NSObject {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorInset = UIEdgeInsets(top: 0, left: 0.01, bottom: 0, right: 0.01)
+    tableView.sectionHeaderHeight = 0
+    tableView.sectionFooterHeight = 0
     guard tableView.style == .plain else { return }
     tableView.tableFooterView = UIView()
   }
